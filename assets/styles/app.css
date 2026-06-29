@@ -412,6 +412,20 @@ wa-button[variant="primary"]::part(label) {
     flex-wrap: wrap;
 }
 
+/* Hero always has a dark bg — force the outline button to be always white */
+.hero-buttons wa-button[variant="neutral"]::part(base) {
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    background-color: transparent !important;
+}
+.hero-buttons wa-button[variant="neutral"]:hover::part(base) {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    border-color: #ffffff !important;
+}
+.hero-buttons wa-button[variant="neutral"]::part(label) {
+    color: #ffffff !important;
+}
+
 .hero-visual {
     display: flex;
     justify-content: center;
