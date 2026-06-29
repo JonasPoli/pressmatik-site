@@ -209,6 +209,9 @@ product_detail:
   subproducts_tag: "Models & Variations"
   subproducts_title: "PMC Series Subproducts"
   subproducts_desc: "The PMC series is available in several structural and dimensional configurations customized for different industrial processes of metal forming, deflashing, and assembly."
+  models_tag: "Models"
+  models_title: "Available Models"
+  models_desc: "See all structural variations and press models developed under this product line."
   subproducts:
     st:
       name: "PMC-ST Stander"
@@ -236,7 +239,7 @@ product_detail:
       desc: "100% custom-tailored projects with dimensions, stroke lengths, and automation customized to customer needs."
 
 news:
-  tag: "News & Events"
+  tag: "Latest News & Events"
   title: "Pressmatik Latest News"
   desc: "Stay updated with our participation in major global industrial exhibitions and technology launches."
   read_more: "Read Full Article"
@@ -253,4 +256,293 @@ news:
       title: "Export Partnerships at Hannover Messe"
       desc: "Strengthening our global footprint by establishing strategic agreements to export custom industrial presses to the European market."
       date: "March, 2026"
+
+catalog:
+  common:
+    special_project:
+      name: "Custom Tailored Special Project"
+      desc: "Full engineering and manufacturing development of custom industrial systems to meet unique demands."
+  applications:
+    corte: "Cutting"
+    dobra: "Bending"
+    duplo_efeito: "Double Action"
+    estampagem: "Stamping"
+    montagem: "Assembly"
+    progressivo: "Progressive Stamping"
+    rebarbacao: "Trimming"
+    repuxo: "Drawing"
+  hydraulic:
+    tipo_c:
+      name: "C-Frame Hydraulic Presses"
+      desc: "Deep throat C-frame stamping and forming presses engineered for high stability and accessibility."
+      sub:
+        pmc_st:
+          name: "PMC-ST Standard"
+          desc: "Standard base model ideal for general stamping, bending, and cutting, mounted on rigid bolster."
+        pmc_bc:
+          name: "PMC-BC Benchtop"
+          desc: "Compact frame designed for bench mounting, optimized for precision small-component tooling."
+        pmc_gt:
+          name: "PMC-GT Rotary Table"
+          desc: "Equipped with automatic rotary indexing tables for high-speed automated loading and unloading."
+        pmc_tr:
+          name: "PMC-TR Trimming & Calibration"
+          desc: "Rigid structure designed specifically for die casting trimming and fine calibration processes."
+        pmc_mt:
+          name: "PMC-MT Moving Bed"
+          desc: "Features a motorized moving bolster to facilitate heavy die setup and quick changeovers."
+        pmc_al:
+          name: "PMC-AL Axis Alignment"
+          desc: "Extended bed specialized press with manual or automatic precision control for shaft straightening."
+        pmc_hz:
+          name: "PMC-HZ Horizontal"
+          desc: "Operates in the horizontal plane, ideal for press-fitting, assembly, bushings, and extrusion."
+        pmc_es:
+          name: "PMC-ES Special"
+          desc: "100% custom-tailored projects with user-specified dimensions, strokes, and integrated automations."
+    tipo_c_duplo:
+      name: "Double Cylinder C-Frame Presses"
+      desc: "Robust C-frame design with dual hydraulic cylinders for enhanced stability and off-center loading precision."
+      sub:
+        pmcd_st:
+          name: "PMCD-ST Standard"
+          desc: "Dual cylinder model mounted on a heavy stable base, ideal for medium-duty forming."
+        pmcd_gt:
+          name: "PMCD-GT Rotary Table"
+          desc: "Equipped with indexable rotary table for high-volume automated cell assembly."
+        pmcd_tr:
+          name: "PMCD-TR Trimming"
+          desc: "Excellent choice for clean flash trimming of forged or cast pieces in rapid cycles."
+        pmcd_mt:
+          name: "PMCD-MT Moving Bed"
+          desc: "Optimal for heavy dies requiring fast setup times and shuttle table integration."
+        pmcd_bc:
+          name: "PMCD-BC Benchtop"
+          desc: "Compact dual-cylinder version for high accuracy on workspace assembly benches."
+        pmcd_es:
+          name: "PMCD-ES Special"
+          desc: "Tailored stroke, bed dimensions, and pressure curves according to custom factory layouts."
+    colunas:
+      name: "4-Column Hydraulic Presses"
+      desc: "Ultimate guidance accuracy and uniform load distribution for heavy, high-precision industrial forming."
+      sub:
+        pm4c_st:
+          name: "PM4C-ST Single & Double Action"
+          desc: "Versatile four-column press for deep drawing, stamping, and general heavy forming."
+        pm4c_rp:
+          name: "PM4C-RP Double & Triple Action"
+          desc: "Specifically configured with drawing cushions for deep kitchenware and pan manufacturing."
+        pm4c_tr:
+          name: "PM4C-TR Trimming & Calibration"
+          desc: "Superior structural rigidity for fine calibration of automotive safety components."
+        pm4c_ty:
+          name: "PM4C-TY Mold Tryout & Die Spotting"
+          desc: "Tryout press equipped with active parallelism control and micro-metric mold alignment."
+        pm4c_pd:
+          name: "PM4C-PD Tableting Press"
+          desc: "High density powder compaction for metallurgy, ceramics, or chemical components."
+        pmh4_ct:
+          name: "PMH4-CT Non-Metallic Cutting"
+          desc: "High speed stroke with specialized cutting guides for rubber, plastics, and composites."
+        pm4c_es:
+          name: "PM4C-ES Special"
+          desc: "Gigantic dimension and high tonnage custom projects built to strict customer requirements."
+    tipo_h:
+      name: "H-Frame Hydraulic Presses"
+      desc: "Welded portal H-frame structure offering maximum resistance to deflection under high tonnage loads."
+      sub:
+        pmh_st:
+          name: "PMH-ST Floating Hammer"
+          desc: "Active damping of heavy stamping shocks to prolong tool life and reduce floor vibration."
+        pmh_pr:
+          name: "PMH-PR 4 & 8 Points"
+          desc: "Reinforced prismatic slide guiding system for progressive heavy-duty stamping dies."
+        pmh_wk:
+          name: "PMH-WK Workshop Press"
+          desc: "Versatile shop press for general maintenance, bearing press-fits, and minor straightening."
+        pmh_wp:
+          name: "PMH-WP Gantry Press"
+          desc: "Features a traveling portal and moving cylinder for easy loading of extra-large steel plates."
+        pmh_vb:
+          name: "PMH-VB Vulcanizing Press"
+          desc: "Equipped with heated platens, pressure timers, and custom heat profiles for rubber molding."
+        pmh_wt:
+          name: "PMH-WT Tire Assembly"
+          desc: "Specialized hydraulic press for rapid assembly/disassembly of super-elastic industrial tires."
+        pmh_es:
+          name: "PMH-ES Special"
+          desc: "Tailor-made portal presses for hot forging, drawing, and high capacity heavy stamping."
+    especiais:
+      name: "Special Hydraulic Presses"
+      desc: "Complete development of custom heavy-duty hydraulic machinery for bespoke applications."
+  servo_hydraulic:
+    bombas:
+      name: "Servo-Hydraulic Presses"
+      desc: "Superior energy efficiency and precise digital control of speed and pressure using servo-pump technology."
+      sub:
+        servobombas:
+          name: "Integrated Servo-Pumps"
+          desc: "Reduces energy usage by up to 60% with optimized pressure curves and near-silent operation."
+  mechanical:
+    mecanicas:
+      name: "Eccentric Mechanical Presses"
+      desc: "High rigidity eccentric mechanical presses for rapid stamping, progressive blanking, and forming."
+      sub:
+        st_c_frame:
+          name: "ST Series C-Frame"
+          desc: "Highly robust and accurate single-crank C-frame mechanical stamping presses."
+        st_deep_throat:
+          name: "ST Series Deep Throat"
+          desc: "C-frame press with extended throat depth for stamping extra-wide sheet metal."
+        stc:
+          name: "STC Series Double Crank"
+          desc: "Double-crank C-frame press providing wide beds for progressive multi-stage dies."
+        stb:
+          name: "STB Series D-Frame"
+          desc: "Semi-closed D-frame structure reducing angular deflection and maximizing die durability."
+        stv:
+          name: "STV Series H-Frame"
+          desc: "Single-crank H-frame stamping press for precision structural parts."
+        std:
+          name: "STD Series Straight Side"
+          desc: "Straight-side single-point H-frame press for heavy high-accuracy stamping."
+        ste:
+          name: "STE Series Double Crank Straight Side"
+          desc: "Equipped with dual connection rods for balancing heavy off-center progressive loads."
+        stf:
+          name: "STF Series Link Motion"
+          desc: "Link motion mechanism decelerating slide near BDC for improved stamping finish."
+        stn:
+          name: "STN Series Eccentric Gear"
+          desc: "Eccentric gear drive for extra-long stroke lengths and uniform draw pressure."
+    servo:
+      name: "Servo Mechanical Presses"
+      desc: "Direct-drive servo technology allowing complete programming of slide stroke, speed profile, and dwell times."
+      sub:
+        sta:
+          name: "STA Series C-Frame Servo"
+          desc: "Compact C-frame servo press offering extreme programming flexibility."
+        stc:
+          name: "STC Series Double Crank Servo"
+          desc: "Double-crank drive with wide bed size for progressive servo stamping."
+        std:
+          name: "STD Series H-Frame Servo"
+          desc: "Heavy straight-side structure driven by high-torque servo motor."
+        ste:
+          name: "STE Series Double H-Frame Servo"
+          desc: "Dual biela configuration for large scale complex progressive forming."
+    alta_velocidade:
+      name: "High-Speed Stamping Presses"
+      desc: "Ultra-fast mechanical presses optimized for electric motor laminations, connector terminals, and high productivity."
+      sub:
+        sts:
+          name: "STS Series C-Frame High Speed"
+          desc: "Reaches up to 400 SPM for high-speed stamping of small terminals and brackets."
+        marx:
+          name: "MARX Series Knuckle Joint"
+          desc: "Knuckle joint mechanical link system providing extended coin/press dwell times."
+        mdh:
+          name: "MDH Series H-Frame"
+          desc: "Ultra-precise dynamic guiding system for extremely fast progressive die runs."
+        ddh:
+          name: "DDH Series Motor Lamination"
+          desc: "Specifically built for high speed motor rotor and stator lamination stamping."
+  equipments:
+    yokes:
+      name: "Equipment — Hydraulic Yokes"
+      desc: "Portable hydraulic units and customized yokes for structural cold riveting and localized punching."
+      sub:
+        rebitagem:
+          name: "Riveting Yokes"
+          desc: "Compact devices for hot or cold structural riveting on chassis and frame structures."
+        puncionamento:
+          name: "Punching Yokes"
+          desc: "Fast portable hydraulic punch yokes for precise on-site steel plate holes."
+        especiais:
+          name: "Special Yokes"
+          desc: "Custom geometry configurations to access tight spots and special metal profiles."
+    unidades:
+      name: "Equipment — Hydraulic Power Units"
+      desc: "Complete design of custom hydraulic power packs for industrial machinery and systems."
+      sub:
+        mini:
+          name: "Mini Power Packs"
+          desc: "Compact central units for low-flow requirements and limited-space envelopes."
+        stander:
+          name: "Standard Power Units"
+          desc: "Industrial hydraulic power packs with standard reservoirs and modular manifolds."
+        especiais:
+          name: "Special Custom Units"
+          desc: "Highly complex power units with integrated safety controls and instrumentation."
+    cilindros:
+      name: "Equipment — Hydraulic Cylinders"
+      desc: "Standard and custom-engineered heavy-duty hydraulic cylinders for high reliability."
+      sub:
+        normatizado:
+          name: "Standard Cylinder"
+          desc: "Built to ISO 6020 and NFPA standards for fast replacement and universal mounting."
+        especial:
+          name: "Custom Cylinder"
+          desc: "Telescopic, long stroke, high pressure, or integrated position transducer cylinders."
+    transferencia:
+      name: "Equipment — Oil Transfer & Filtration"
+      desc: "Mobile filtration carts and dialysis systems for proactive oil condition monitoring."
+      sub:
+        filtracao:
+          name: "Off-line Filtration Systems"
+          desc: "Compact carts providing absolute particulate filtration and water removal."
+    plataformas:
+      name: "Equipment — Lift Platforms"
+      desc: "Heavy-duty hydraulic scissor lift tables and platforms for factory logistics."
+      sub:
+        plataformas:
+          name: "Scissor Lift Platforms"
+          desc: "Equipped with safety valves and perimeter guards to safely handle heavy loads."
+    tombadores:
+      name: "Equipment — Die & Coil Tilters"
+      desc: "Hydraulic mold up-enders and coil tilters designed to guarantee maximum safety during tool changeovers."
+      sub:
+        tombadores:
+          name: "90-Degree Mold Tilters"
+          desc: "Eliminates crane handling hazards when rotating heavy injection molds or stamping dies."
+    especiais:
+      name: "Special Equipment"
+      desc: "Full engineering and commissioning of automated cells and specialized custom machinery."
+  parts:
+    hidraulica:
+      name: "Parts — Industrial Hydraulics"
+      desc: "Premium hydraulic components for maintenance and high-pressure system replacement."
+      sub:
+        bombas:
+          name: "Hydraulic Pumps"
+          desc: "Axial piston, vane, and gear pumps from world-leading brands."
+        valvulas:
+          name: "Pressure, Flow & Directional Valves"
+          desc: "Certified proportional, directional, and safety hydraulic control valves."
+        vedacoes:
+          name: "Premium Sealing Systems"
+          desc: "Polyurethane and elastomer seals for long life and zero-leak cylinder performance."
+        filtros:
+          name: "Filter Elements"
+          desc: "High efficiency return, pressure, and suction filter elements."
+    eletro:
+      name: "Parts — Electro-Electronics"
+      desc: "Electro-electronic components and automation equipment for industrial press controls."
+      sub:
+        automacao:
+          name: "Automation & PLCs"
+          desc: "Safety control modules, CPU processors, and I/O cards from global platforms."
+        potencia:
+          name: "Power & Control"
+          desc: "Contactors, motor circuit breakers, power supplies, and pre-built electrical control panels."
+    acessorios:
+      name: "Parts — Industrial Accessories"
+      desc: "Safety accessories and general industrial catalog items."
+      sub:
+        nr12:
+          name: "Safety Accessories"
+          desc: "Dual-monitored safety valves, safety relays, and optical barriers."
+        diversos:
+          name: "Miscellaneous Accessories"
+          desc: "Pressure gauges, pressure switches, temperature controls, and anti-vibration mount pads."
 

@@ -7,7 +7,7 @@
     <!-- Hero Banner Section (Polished Two-Column Industrial Layout) -->
     <section class="hero-section">
         <div class="container hero-grid">
-            <div class="hero-content scroll-animate">
+            <div class="hero-content scroll-animate slide-left">
                 <span class="section-title-tag">{{ 'banner.tag'|trans }}</span>
                 <h1 class="hero-title">{{ 'banner.title'|trans }}</h1>
                 <p class="hero-subtitle">{{ 'banner.subtitle'|trans }}</p>
@@ -21,9 +21,9 @@
                 </div>
             </div>
             
-            <div class="hero-visual scroll-animate">
+            <div class="hero-visual scroll-animate slide-right">
                 <div class="hero-image-frame">
-                    <img src="/images/pmc-st.png" alt="C-Frame Stamping Press" class="hero-main-img">
+                    <img src="/images/prensa-hidraulica-tipo-c-linha-st.png" alt="C-Frame Stamping Press" class="hero-main-img">
                     <div class="hero-badge badge-top">
                         <span class="badge-num">25-315</span>
                         <span class="badge-lbl">Toneladas</span>
@@ -40,23 +40,16 @@
     <!-- Quem Somos (About Us) Section with Image Collage and Bullet Grid -->
     <section id="about" class="section-padding about-section">
         <div class="container about-grid">
-            <div class="about-collage scroll-animate">
+            <div class="about-collage scroll-animate slide-left">
                 <div class="collage-container">
                     <div class="collage-shape"></div>
                     <div class="collage-img-main-frame">
-                        <img src="/images/about-press.png" alt="Premium Hydraulic Press Manufacturing" class="collage-img-main">
-                    </div>
-                    <div class="collage-img-sub-frame">
-                        <img src="/images/c-frame-press.png" alt="C-Frame Press Detail" class="collage-img-sub">
-                    </div>
-                    <div class="collage-badge">
-                        <span class="badge-years">15+</span>
-                        <span class="badge-text">Anos de Mercado</span>
+                        <img src="/images/about-img.png" alt="Premium Hydraulic Press Manufacturing" class="collage-img-main">
                     </div>
                 </div>
             </div>
 
-            <div class="about-content scroll-animate">
+            <div class="about-content scroll-animate slide-right">
                 <span class="section-title-tag">{{ 'about.tag'|trans }}</span>
                 <h2>{{ 'about.title'|trans }}</h2>
                 <p>{{ 'about.text'|trans }}</p>
@@ -92,14 +85,14 @@
     <!-- Diferenciais Técnicos Section -->
     <section class="section-padding">
         <div class="container">
-            <div class="section-header scroll-animate">
+            <div class="section-header scroll-animate slide-top">
                 <span class="section-title-tag">{{ 'differentials.tag'|trans }}</span>
                 <h2 class="section-title">{{ 'differentials.title'|trans }}</h2>
             </div>
             
             <div class="diff-grid">
                 <!-- Safety card -->
-                <div class="diff-card scroll-animate">
+                <div class="diff-card scroll-animate slide-left">
                     <div class="diff-card-icon-wrapper">
                         <i class="bi bi-shield-check"></i>
                     </div>
@@ -107,7 +100,7 @@
                     <p>{{ 'differentials.safety.desc'|trans }}</p>
                 </div>
                 
-                <div class="diff-card scroll-animate">
+                <div class="diff-card scroll-animate slide-top">
                     <div class="diff-card-icon-wrapper">
                         <i class="bi bi-cpu"></i>
                     </div>
@@ -115,7 +108,7 @@
                     <p>{{ 'differentials.components.desc'|trans }}</p>
                 </div>
                 
-                <div class="diff-card scroll-animate">
+                <div class="diff-card scroll-animate slide-right">
                     <div class="diff-card-icon-wrapper">
                         <i class="bi bi-lightning-charge"></i>
                     </div>
@@ -129,69 +122,48 @@
     <!-- Grade de Destaque de Produtos Section -->
     <section id="products" class="section-padding products-section">
         <div class="container">
-            <div class="section-header scroll-animate">
+            <div class="section-header scroll-animate slide-top">
                 <span class="section-title-tag">{{ 'products_sec.tag'|trans }}</span>
                 <h2 class="section-title">{{ 'products_sec.title'|trans }}</h2>
             </div>
 
-            <div class="products-grid">
-                <!-- Product Card: Fictional PMC-ST deep throat press -->
-                <div class="product-card scroll-animate">
-                    <div class="product-image-container">
-                        <img src="/images/pmc-st.png" alt="C-Frame Single Crank Deep Throat Press" loading="lazy">
-                    </div>
-                    <div class="product-info">
-                        <h3>{{ 'product_detail.title'|trans }}</h3>
-                        <p>{{ 'product_detail.short_desc'|trans }}</p>
-                        <div class="product-footer">
-                            <span class="product-specs-badge">25 ~ 160 {{ 'product_detail.tons'|trans }}</span>
-                            <wa-button variant="brand" size="small" href="{{ path('app_product_detail', {'_locale': app.request.locale, 'slug': 'c-frame-single-crank-deep-throat-press'}) }}">
-                                {{ 'cta.learn_more'|trans }}
-                            </wa-button>
+            <wa-tab-group class="products-tab-group scroll-animate slide-top">
+                <wa-tab slot="nav" panel="hydraulic">{{ 'products_sec.hydraulic_presses'|trans }}</wa-tab>
+                <wa-tab slot="nav" panel="servo_hydraulic">{{ 'products_sec.servo_presses'|trans }}</wa-tab>
+                <wa-tab slot="nav" panel="mechanical">Prensas Mecânicas</wa-tab>
+                <wa-tab slot="nav" panel="equipments">{{ 'products_sec.equipments'|trans }}</wa-tab>
+                <wa-tab slot="nav" panel="parts">{{ 'products_sec.parts'|trans }}</wa-tab>
+
+                {% for cat in ['hydraulic', 'servo_hydraulic', 'mechanical', 'equipments', 'parts'] %}
+                    <wa-tab-panel name="{{ cat }}">
+                        <div class="products-tab-grid">
+                            {% for key, prod in catalog %}
+                                {% if prod.category == cat %}
+                                    <div class="product-tab-card">
+                                        <div class="product-tab-img-wrapper">
+                                            <img src="{{ prod.img }}" alt="{{ prod.name_key|trans }}" loading="lazy">
+                                        </div>
+                                        <div class="product-tab-info">
+                                            <h3>{{ prod.name_key|trans }}</h3>
+                                            <p>{{ prod.desc_key|trans }}</p>
+                                            <div class="product-tab-footer">
+                                                {% if prod.tonnage %}
+                                                    <span class="product-specs-badge">{{ prod.tonnage }}</span>
+                                                {% else %}
+                                                    <span class="product-specs-badge">{{ 'product_detail.tag'|trans }}</span>
+                                                {% endif %}
+                                                <wa-button variant="brand" size="small" href="{{ path('app_product_detail', {'_locale': app.request.locale, 'slug': prod.slug}) }}">
+                                                    {{ 'cta.learn_more'|trans }}
+                                                </wa-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
-                    </div>
-                </div>
-
-                <!-- Product Card: Servo Presses -->
-                <div class="product-card scroll-animate">
-                    <div class="product-image-container">
-                        <img src="/images/pmc-es.png" alt="Servo-Hydraulic Press" loading="lazy">
-                    </div>
-                    <div class="product-info">
-                        <h3>{{ 'products_sec.servo_presses'|trans }}</h3>
-                        <p>{{ 'products_sec.servo_presses_desc'|trans }}</p>
-                        <div class="product-footer">
-                            <span class="product-specs-badge">50 ~ 1000 {{ 'product_detail.tons'|trans }}</span>
-                            <wa-button variant="brand" size="small" href="#contact">
-                                {{ 'cta.quote_now'|trans }}
-                            </wa-button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grade Secundária (Secondary Products) -->
-            <div class="secondary-products-grid">
-                <div class="secondary-product-card scroll-animate">
-                    <div class="sec-prod-icon">
-                        <i class="bi bi-gear-wide-connected"></i>
-                    </div>
-                    <div class="sec-prod-info">
-                        <h4>{{ 'products_sec.equipments'|trans }}</h4>
-                        <p>{{ 'products_sec.equipments_desc'|trans }}</p>
-                    </div>
-                </div>
-
-                <div class="secondary-product-card scroll-animate">
-                    <div class="sec-prod-icon">
-                        <i class="bi bi-database"></i>
-                    </div>
-                    <div class="sec-prod-info">
-                        <h4>{{ 'products_sec.parts'|trans }}</h4>
-                        <p>{{ 'products_sec.parts_desc'|trans }}</p>
-                    </div>
-                </div>
-            </div>
+                    </wa-tab-panel>
+                {% endfor %}
+            </wa-tab-group>
         </div>
     </section>
 
@@ -205,13 +177,13 @@
         </div>
 
         <div class="container" style="position: relative; z-index: 2;">
-            <div class="section-header scroll-animate">
+            <div class="section-header scroll-animate slide-top">
                 <span class="section-title-tag" style="color: var(--color-accent-red);">{{ 'services_sec.tag'|trans }}</span>
                 <h2 class="section-title" style="color: #ffffff;">{{ 'services_sec.title'|trans }}</h2>
             </div>
 
             <div class="services-grid">
-                <div class="service-card scroll-animate">
+                <div class="service-card scroll-animate slide-left">
                     <div class="service-img-container">
                         <img src="/images/service-maintenance.png" alt="Manutenção de Prensas" class="service-img" loading="lazy">
                         <div class="service-icon-floating">
@@ -225,7 +197,7 @@
                     </div>
                 </div>
 
-                <div class="service-card scroll-animate">
+                <div class="service-card scroll-animate slide-top">
                     <div class="service-img-container">
                         <img src="/images/service-retrofit.png" alt="Retrofit de Prensas" class="service-img" loading="lazy">
                         <div class="service-icon-floating">
@@ -239,7 +211,7 @@
                     </div>
                 </div>
 
-                <div class="service-card scroll-animate">
+                <div class="service-card scroll-animate slide-right">
                     <div class="service-img-container">
                         <img src="/images/service-safety.png" alt="Adequação NR12" class="service-img" loading="lazy">
                         <div class="service-icon-floating">
@@ -259,7 +231,7 @@
     <!-- Seção de Notícias & Eventos (Blog) -->
     <section id="news" class="section-padding news-section">
         <div class="container">
-            <div class="section-header scroll-animate">
+            <div class="section-header scroll-animate slide-top">
                 <span class="section-title-tag">{{ 'news.tag'|trans }}</span>
                 <h2 class="section-title">{{ 'news.title'|trans }}</h2>
                 <p class="section-desc" style="max-width: 700px; color: var(--color-text-secondary); margin-bottom: 3.5rem;">
@@ -269,7 +241,7 @@
             
             <div class="news-grid">
                 <!-- Card 1 -->
-                <div class="news-card scroll-animate">
+                <div class="news-card scroll-animate slide-left">
                     <div class="news-img-container">
                         <img src="/images/news-exhibition1.png" alt="{{ 'news.items.0.title'|trans }}" class="news-img" loading="lazy">
                         <div class="news-date-badge">
@@ -284,7 +256,7 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="news-card scroll-animate">
+                <div class="news-card scroll-animate slide-top">
                     <div class="news-img-container">
                         <img src="/images/news-seminar.png" alt="{{ 'news.items.1.title'|trans }}" class="news-img" loading="lazy">
                         <div class="news-date-badge">
@@ -299,7 +271,7 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="news-card scroll-animate">
+                <div class="news-card scroll-animate slide-right">
                     <div class="news-img-container">
                         <img src="/images/news-hannover.png" alt="{{ 'news.items.2.title'|trans }}" class="news-img" loading="lazy">
                         <div class="news-date-badge">
@@ -319,13 +291,13 @@
     <!-- Depoimentos (Testimonials) Section -->
     <section class="section-padding testimonials-section">
         <div class="container">
-            <div class="section-header scroll-animate">
+            <div class="section-header scroll-animate slide-top">
                 <span class="section-title-tag">{{ 'testimonials.tag'|trans }}</span>
                 <h2 class="section-title">{{ 'testimonials.title'|trans }}</h2>
             </div>
 
             <div class="testimonials-carousel">
-                <div class="testimonial-card scroll-animate">
+                <div class="testimonial-card scroll-animate slide-left">
                     <div class="testimonial-rating">
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-fill"></i>
@@ -343,7 +315,7 @@
                     </div>
                 </div>
 
-                <div class="testimonial-card scroll-animate">
+                <div class="testimonial-card scroll-animate slide-top">
                     <div class="testimonial-rating">
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-fill"></i>
@@ -361,7 +333,7 @@
                     </div>
                 </div>
 
-                <div class="testimonial-card scroll-animate">
+                <div class="testimonial-card scroll-animate slide-right">
                     <div class="testimonial-rating">
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-fill"></i>
@@ -385,7 +357,7 @@
     <!-- Clientes (Logos) Section -->
     <section class="clients-section">
         <div class="container">
-            <div class="clients-grid scroll-animate">
+            <div class="clients-grid scroll-animate slide-top">
                 <span class="client-logo-item" aria-label="Schuler">
                     <svg viewBox="0 0 140 30" xmlns="http://www.w3.org/2000/svg" style="height: 30px;">
                         <path d="M5 16.5 C5 13.5 8 12.5 12 12.5 C16 12.5 18.5 13.5 18.5 16.5 H14 C14 15.5 13 15 11.5 15 C10 15 9 15.5 9 16.5 C9 17.5 10 18 12.5 18.5 C15.5 19 19 20 19 23 C19 26 15.5 27.5 11.5 27.5 C7.5 27.5 5 26 5 23 H9.5 C9.5 24 11 25 12.5 25 C14 25 14.5 24.5 14.5 23.5 C14.5 22.5 13.5 22 11 21.5 C8 21 5 19.5 5 16.5 Z M23 6 H27.5 V12 H36 V6 H40.5 V20 H36 V15.5 H27.5 V20 H23 V6 Z M45 6 H49.5 V15 C49.5 17 50.5 18 52.5 18 C54.5 18 55.5 17 55.5 15 V6 H60 V15 C60 19 57.5 20.5 52.5 20.5 C47.5 20.5 45 19 45 15 V6 Z M64 6 H68.5 V16.5 H76 V20 H64 V6 Z M80 6 H91 V9.5 H84.5 V11.2 H90 V14.2 H84.5 V16.5 H91 V20 H80 V6 Z M95 6 H103.5 C107.5 6 109.5 7.5 109.5 10 C109.5 12 108.5 13.2 106.5 13.5 L110.5 20 H105.5 L102 14.5 H99.5 V20 H95 V6 Z M99.5 9.5 H103 C104 9.5 105 10 105 10.8 C105 11.6 104 12 103 12 H99.5 V9.5 Z" />
@@ -423,7 +395,7 @@
     <!-- Contato (Contact & Form) Section -->
     <section id="contact" class="section-padding contact-section">
         <div class="container contact-grid">
-            <div class="contact-info-column scroll-animate">
+            <div class="contact-info-column scroll-animate slide-left">
                 <span class="section-title-tag">{{ 'contact_form.tag'|trans }}</span>
                 <h2>{{ 'contact_form.title'|trans }}</h2>
                 <p>{{ 'contact_form.request_quote_desc'|trans }}</p>
@@ -460,7 +432,7 @@
                 </div>
             </div>
 
-            <div class="contact-form-column scroll-animate">
+            <div class="contact-form-column scroll-animate slide-right">
                 <h3>{{ 'cta.quote_now'|trans }}</h3>
                 <form id="quote-form" onsubmit="event.preventDefault(); alert('{{ 'contact_form.success'|trans }}'); this.reset();">
                     <div class="form-group">

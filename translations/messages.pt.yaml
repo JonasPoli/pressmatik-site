@@ -209,6 +209,9 @@ product_detail:
   subproducts_tag: "Modelos e Variações"
   subproducts_title: "Subprodutos da Série PMC"
   subproducts_desc: "A série PMC possui diversas configurações estruturais e dimensionais customizadas para diferentes processos industriais de conformação, rebarbação e montagem."
+  models_tag: "Modelos"
+  models_title: "Modelos Disponíveis"
+  models_desc: "Veja todas as variações construtivas e modelos de prensas desenvolvidos sob esta linha de produtos."
   subproducts:
     st:
       name: "PMC-ST Stander"
@@ -253,4 +256,294 @@ news:
       title: "Expansão de Exportações na Hannover Messe"
       desc: "Fortalecemos nossa presença global ao fechar parcerias estratégicas para fornecimento de prensas customizadas para o mercado europeu e norte-americano."
       date: "Março, 2026"
+
+catalog:
+  common:
+    special_project:
+      name: "Projeto Especial Sob Medida"
+      desc: "Desenvolvimento completo de projeto customizado para atender demandas específicas de fabricação."
+  applications:
+    corte: "Corte"
+    dobra: "Dobra"
+    duplo_efeito: "Duplo Efeito"
+    estampagem: "Estampagem"
+    montagem: "Montagem"
+    progressivo: "Estampagem Progressiva"
+    rebarbacao: "Rebarbação"
+    repuxo: "Repuxo"
+  hydraulic:
+    tipo_c:
+      name: "Prensas Hidráulicas Tipo C"
+      desc: "Prensas de garganta profunda projetadas especialmente para estampagem, corte e conformação de chapas metálicas."
+      sub:
+        pmc_st:
+          name: "PMC-ST Stander"
+          desc: "Modelo padrão ideal para operações gerais de estampagem, dobra e corte, montado sobre sapata rígida."
+        pmc_bc:
+          name: "PMC-BC Bancada"
+          desc: "Estrutura compacta para montagem sobre bancadas de trabalho, focada em operações de precisão em peças menores."
+        pmc_gt:
+          name: "PMC-GT Mesa Giratória"
+          desc: "Equipada com mesa indexadora giratória para processos automatizados de alta velocidade de carga e descarga de peças."
+        pmc_tr:
+          name: "PMC-TR Rebarbação e Calibração"
+          desc: "Projetada especificamente para a rebarbação de peças fundidas e calibração fina de componentes metálicos."
+        pmc_mt:
+          name: "PMC-MT Mesa Móvel"
+          desc: "Possui mesa de trabalho móvel/extraível para facilitar o setup e a carga de estampos e moldes pesados de forma segura."
+        pmc_al:
+          name: "PMC-AL Alinhamento de Eixos"
+          desc: "Modelo especializado com mesa estendida e sistema de controle de precisão para endireitamento e alinhamento de barras e eixos."
+        pmc_hz:
+          name: "PMC-HZ Horizontal"
+          desc: "Prensa que opera no plano horizontal, ideal para processos de montagem por interferência, buchas e extrusão."
+        pmc_es:
+          name: "PMC-ES Especial"
+          desc: "Projetos 100% sob medida com dimensões, cursos e automações personalizadas de acordo com as necessidades do cliente."
+    tipo_c_duplo:
+      name: "Prensas Hidráulicas Tipo C Duplo"
+      desc: "Estrutura robusta com cilindro duplo para maior estabilidade e precisão em grandes áreas de estampagem."
+      sub:
+        pmcd_st:
+          name: "PMCD-ST Stander"
+          desc: "Modelo com cilindro duplo montado sobre base estável, ideal para estampagem média."
+        pmcd_gt:
+          name: "PMCD-GT Mesa Giratória"
+          desc: "Equipada com mesa giratória para alta produtividade em linhas de montagem."
+        pmcd_tr:
+          name: "PMCD-TR Rebarbação"
+          desc: "Excelente para acabamento de peças forjadas ou fundidas em ciclos repetitivos."
+        pmcd_mt:
+          name: "PMCD-MT Mesa Móvel"
+          desc: "Ideal para moldes pesados que exigem setup rápido e mesa de alimentação móvel."
+        pmcd_bc:
+          name: "PMCD-BC Bancada"
+          desc: "Versão compacta de cilindro duplo para maior precisão em bancadas industriais."
+        pmcd_es:
+          name: "PMCD-ES Especial"
+          desc: "Customizações de curso, mesa e velocidade conforme projeto específico."
+    colunas:
+      name: "Prensas Hidráulicas 4 Colunas"
+      desc: "Máxima precisão de guiamento e distribuição uniforme de força para processos pesados e complexos."
+      sub:
+        pm4c_st:
+          name: "PM4C-ST Simples e Duplo Efeito"
+          desc: "Prensa de 4 colunas versátil para estampagem profunda e conformação geral."
+        pm4c_rp:
+          name: "PM4C-RP Duplo e Triplo Efeito"
+          desc: "Especialmente projetada para fabricação de panelas e utensílios domésticos complexos."
+        pm4c_tr:
+          name: "PM4C-TR Rebarbação e Calibração"
+          desc: "Alta rigidez para calibração precisa de peças de segurança automotivas."
+        pm4c_ty:
+          name: "PM4C-TY Teste e Ajuste de Moldes"
+          desc: "Prensa de tryout equipada com controle micro-métrico de paralelismo e inclinação."
+        pm4c_pd:
+          name: "PM4C-PD Pastilhadeira"
+          desc: "Compactação de pós metálicos, cerâmicos ou químicos de alta densidade."
+        pmh4_ct:
+          name: "PMH4-CT Corte de Não Metálicos"
+          desc: "Alta velocidade com guias especiais para corte de borrachas, plásticos e compósitos."
+        pm4c_es:
+          name: "PM4C-ES Especial"
+          desc: "Projeto customizado com dimensões gigantescas e alta tonelagem sob demanda."
+    tipo_h:
+      name: "Prensas Hidráulicas Tipo H"
+      desc: "Estrutura fechada em pórtico soldada com alta rigidez contra deflexão, ideal para conformação de alta tonelagem."
+      sub:
+        pmh_st:
+          name: "PMH-ST Martelo Flutuante"
+          desc: "Amortecimento ativo de impacto de estampagem para maior vida útil das ferramentas."
+        pmh_pr:
+          name: "PMH-PR 4 e 8 Pontos"
+          desc: "Guiamento prismático reforçado de alta precisão para estampos progressivos complexos."
+        pmh_wk:
+          name: "PMH-WK Oficina"
+          desc: "Prensa versátil para manutenção geral, desmontagem de rolamentos e montagens diversas."
+        pmh_wp:
+          name: "PMH-WP Pórtico"
+          desc: "Mesa móvel com pórtico móvel para carregamento fácil de chapas de grandes dimensões."
+        pmh_vb:
+          name: "PMH-VB Vulcanização"
+          desc: "Placas aquecidas controladas e ciclos de prensagem temporizados para borracha e polímeros."
+        pmh_wt:
+          name: "PMH-WT Montagem de Pneus"
+          desc: "Projeto especializado para montagem e desmontagem rápida de pneus superelásticos industriais."
+        pmh_es:
+          name: "PMH-ES Especial"
+          desc: "Modelos sob medida para forjamento a quente, trefilação e grandes tonelagens."
+    especiais:
+      name: "Prensas Hidráulicas Especiais"
+      desc: "Desenvolvimento completo de prensas hidráulicas customizadas para qualquer aplicação industrial."
+  servo_hydraulic:
+    bombas:
+      name: "Prensas Servo-Hidráulicas"
+      desc: "Eficiência energética superior e controle preciso de velocidade e pressão com tecnologia de servo bombas."
+      sub:
+        servobombas:
+          name: "Servo Bombas Integradas"
+          desc: "Redução de até 60% no consumo de energia e ciclos otimizados para máxima produtividade."
+  mechanical:
+    mecanicas:
+      name: "Prensas Mecânicas Excêntricas"
+      desc: "Prensas mecânicas de alta rigidez para estampagem rápida, corte progressivo e conformação geral."
+      sub:
+        st_c_frame:
+          name: "Série ST C-Frame"
+          desc: "Prensas mecânicas C-Frame de manivela única altamente robustas e precisas."
+        st_deep_throat:
+          name: "Série ST Garganta Profunda"
+          desc: "Prensas C-Frame com profundidade de garganta estendida para chapas largas."
+        stc:
+          name: "Série STC Duplo Martelo"
+          desc: "Prensas C-Frame de manivela dupla para estampos progressivos longos."
+        stb:
+          name: "Série STB D-Frame"
+          desc: "Estrutura em pórtico D-Frame que reduz a deflexão angular e prolonga a vida útil do molde."
+        stv:
+          name: "Série STV H-Frame"
+          desc: "Prensas H-Frame robustas de manivela única para estampagem de alta precisão."
+        std:
+          name: "Série STD Straight Side"
+          desc: "Prensas H-Frame Straight Side de um ponto de pressão para cargas pesadas."
+        ste:
+          name: "Série STE Straight Side Dupla Manivela"
+          desc: "Prensas H-Frame com duas bielas de compressão para cargas excêntricas."
+        stf:
+          name: "Série STF Straight Side Link Motion"
+          desc: "Mecanismo link motion que desacelera o martelo na zona de trabalho para melhor acabamento."
+        stn:
+          name: "Série STN Excêntrica"
+          desc: "Transmissão por engrenagens excêntricas para cursos longos e alta tonelagem constante."
+    servo:
+      name: "Prensas Mecânicas Servo"
+      desc: "Tecnologia de servo acionamento direto que permite controle total da curva de curso, velocidade e tempo de parada."
+      sub:
+        sta:
+          name: "Série STA Servo C-Frame"
+          desc: "Servo prensa compacta tipo C para operações de flexibilidade extrema."
+        stc:
+          name: "Série STC Servo Dupla Manivela"
+          desc: "Mesa ampla com dupla biela servo-acionada para estampos complexos."
+        std:
+          name: "Série STD Servo H-Frame"
+          desc: "Estrutura fechada com servo motor de alto torque para estampagem de precisão."
+        ste:
+          name: "Série STE Servo H-Frame Duplo"
+          desc: "Máxima rigidez e versatilidade em curvas de conformação programáveis."
+    alta_velocidade:
+      name: "Prensas Mecânicas de Alta Velocidade"
+      desc: "Prensas ultra rápidas para laminação de motores elétricos, terminais eletrônicos e estampagem de alta produtividade."
+      sub:
+        sts:
+          name: "Série STS Alta Velocidade Tipo C"
+          desc: "Alta velocidade de até 400 SPM para pequenas peças estampadas e terminais."
+        marx:
+          name: "Série MARX Knuckle Joint"
+          desc: "Mecanismo knuckle joint para alta velocidade com tempo de compressão estendido."
+        mdh:
+          name: "Série MDH H-Frame"
+          desc: "Guiamento dinâmico superpreciso para estampos progressivos rápidos."
+        ddh:
+          name: "Série DDH Laminação de Motores"
+          desc: "Projetada especificamente para produção rápida de rotores e estatores com paralelismo dinâmico."
+  equipments:
+    yokes:
+      name: "Equipamentos — Yokes"
+      desc: "Unidades hidráulicas portáteis e Yokes sob medida para rebitagem estrutural e puncionamento localizado."
+      sub:
+        rebitagem:
+          name: "Yokes de Rebitagem"
+          desc: "Dispositivos compactos para rebitagem a frio e a quente de chassis e estruturas metálicas."
+        puncionamento:
+          name: "Yokes de Puncionamento"
+          desc: "Puncionamento hidráulico portátil rápido para perfurações de alta precisão em campo."
+        especiais:
+          name: "Yokes Especiais"
+          desc: "Configurações geométricas customizadas sob demanda para acesso a geometrias difíceis."
+    unidades:
+      name: "Equipamentos — Unidades de Força"
+      desc: "Projetos completos de centrais hidráulicas sob medida de alto desempenho e confiabilidade."
+      sub:
+        mini:
+          name: "Unidades Mini"
+          desc: "Centrais compactas para aplicações de baixo fluxo e espaço reduzido."
+        stander:
+          name: "Unidades Stander"
+          desc: "Centrais hidráulicas industriais padrão com reservatório e blocos coletores normatizados."
+        especiais:
+          name: "Unidades Especiais"
+          desc: "Projetos sob medida de alta complexidade com sistemas de controle integrados."
+    cilindros:
+      name: "Equipamentos — Cilindros Hidráulicos"
+      desc: "Cilindros hidráulicos normatizados e especiais de alta durabilidade e estanqueidade."
+      sub:
+        normatizado:
+          name: "Cilindro Normatizado"
+          desc: "Fabricação sob normas ISO 6020 e NFPA para fácil intercambiabilidade e reposição rápida."
+        especial:
+          name: "Cilindro Especial"
+          desc: "Cilindros telescópicos, de grande curso, alta pressão ou com transdutores de posição integrados."
+    transferencia:
+      name: "Equipamentos — Transferência e Filtração"
+      desc: "Carrinhos e unidades de filtração móveis para manutenção preventiva da qualidade do óleo."
+      sub:
+        filtracao:
+          name: "Sistemas de Filtração Off-line"
+          desc: "Carrinhos compactos de diálise para filtragem absoluta de partículas e remoção de água do óleo."
+    plataformas:
+      name: "Equipamentos — Plataformas"
+      desc: "Plataformas de carga e elevação hidráulica robustas para logística interna e alimentação de linhas."
+      sub:
+        plataformas:
+          name: "Plataformas Elevatórias Rígidas"
+          desc: "Sistemas pantográficos com válvulas de segurança antiqueda para movimentação segura de materiais pesados."
+    tombadores:
+      name: "Equipamentos — Tombadores"
+      desc: "Tombadores de moldes e bobinas hidráulicos projetados para garantir segurança máxima no setup."
+      sub:
+        tombadores:
+          name: "Tombadores de Moldes 90°"
+          desc: "Equipamento seguro que elimina o risco de queda durante a rotação de moldes pesados de injeção ou estampos."
+    especiais:
+      name: "Equipamentos Especiais"
+      desc: "Desenvolvimento completo de maquinários especiais e células automatizadas sob demanda."
+  parts:
+    hidraulica:
+      name: "Peças — Hidráulica Industrial"
+      desc: "Componentes hidráulicos premium para reposição e manutenção de sistemas de alta pressão."
+      sub:
+        bombas:
+          name: "Bombas Hidráulicas"
+          desc: "Bombas de pistão axial, palhetas e engrenagens de marcas mundiais líderes."
+        valvulas:
+          name: "Válvulas de Pressão, Fluxo e Direcionais"
+          desc: "Válvulas eletrônicas proporcionais, direcionais e de segurança certificadas."
+        vedacoes:
+          name: "Sistemas de Vedação Premium"
+          desc: "Kits de vedações de poliuretano e elastômeros para alta durabilidade e vazamento zero."
+        filtros:
+          name: "Elementos Filtrantes"
+          desc: "Filtros de retorno, pressão e sucção de alta eficiência absoluta."
+    eletro:
+      name: "Peças — Eletroeletrônica"
+      desc: "Componentes eletroeletrônicos e de automação para controle preciso de prensas."
+      sub:
+        automacao:
+          name: "Automação e CLPs"
+          desc: "Módulos de segurança, CPUs e cartões de I/O de última geração."
+        potencia:
+          name: "Potência e Comando"
+          desc: "Contatores, disjuntores motor, fontes de alimentação e painéis elétricos completos."
+    acessorios:
+      name: "Peças — Acessórios Industriais"
+      desc: "Acessórios diversos para conformidade com normas e segurança industrial."
+      sub:
+        nr12:
+          name: "Acessórios NR12"
+          desc: "Válvulas de segurança de duplo corpo monitoradas, relés de segurança e sinalizadores."
+        diversos:
+          name: "Acessórios Diversos"
+          desc: "Manômetros, pressostatos, termostatos e sapatas antivibratórias."
+
 
