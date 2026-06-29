@@ -1,0 +1,256 @@
+# translations/messages.en.yaml
+menu:
+  home: "Home"
+  company: "Company"
+  products: "Products"
+  services: "Services"
+  applications: "Applications"
+  blog: "Blog"
+  contact: "Contact"
+  quote: "Request a Quote"
+
+cta:
+  whatsapp: "Chat on WhatsApp"
+  quote_now: "Quick Quote"
+  learn_more: "Learn More"
+  download_catalog: "Download Technical Catalog (PDF)"
+  send_email: "Send Email"
+  submit: "Submit Request"
+
+banner:
+  tag: "Leader in Industrial Presses"
+  title: "High Performance Hydraulic Presses & Industrial Technology"
+  subtitle: "Robust, safe (NR12 compliant) and high-productivity solutions for modern metalworking industries."
+
+about:
+  tag: "Trusted Engineering"
+  title: "About Us"
+  text: "Pressmatik is a leader in developing heavy-duty industrial hydraulic and servo-hydraulic presses. Our solutions combine advanced engineering, strict safety compliance with NR10 and NR12 regulations, and the integration of top-tier global components to deliver maximum energy efficiency and high productivity without oil leaks or slowdowns."
+
+differentials:
+  tag: "Differentials"
+  title: "Technical Advantages"
+  safety:
+    title: "Total Safety (NR10 & NR12)"
+    desc: "Systems designed from the ground up under strict safety compliance for complete operator protection."
+  components:
+    title: "Premium Components"
+    desc: "Seamless integration with technology from global leaders such as Bosch Rexroth, Siemens, and Weg."
+  performance:
+    title: "High Performance & Durability"
+    desc: "Efficient replacement of legacy mechanical technology with fast-setup servo-hydraulic systems."
+
+products_sec:
+  tag: "Catalog"
+  title: "Our Products"
+  hydraulic_presses: "Hydraulic Presses"
+  hydraulic_presses_desc: "C-Frame, Double C-Frame, 4-Column and H-Frame models for demanding operations."
+  servo_presses: "Servo-Hydraulic Presses"
+  servo_presses_desc: "Servo-pump technology offering maximum precision and energy efficiency."
+  equipments: "Equipment"
+  equipments_desc: "Power units, standard cylinders, and customized production platforms."
+  parts: "Parts & Accessories"
+  parts_desc: "High-quality hydraulic and electro-electronic replacement parts."
+
+services_sec:
+  tag: "Solutions"
+  title: "Services & Solutions"
+  maintenance:
+    title: "Corrective & Preventive Maintenance"
+    desc: "Specialized field engineers ready to ensure maximum uptime of your production line."
+  refit:
+    title: "Refurbishment & Modernization (Retrofit)"
+    desc: "Technological upgrades for older presses, optimization of speeds and automation."
+  nr12:
+    title: "NR12 Regulatory Adequacy"
+    desc: "Comprehensive safety projects and technical reports for full legal compliance."
+
+testimonials:
+  tag: "Proven Success"
+  title: "What Our Customers Say"
+  client1:
+    name: "Eng. Richard M. Souza"
+    role: "Operations Director"
+    company: "Metalúrgica Paulista S.A."
+    text: "Pressmatik's servo-hydraulic presses have completely revolutionized our production lines. Setup times were cut in half and energy consumption fell dramatically. Outstanding technical support!"
+  client2:
+    name: "Mariana Silva"
+    role: "Engineering Manager"
+    company: "AutoParts Brasil"
+    text: "Extremely robust equipment with absolute precision. The NR12 compliance safety layout project gave us total peace of mind. Highly recommended."
+  client3:
+    name: "Carlos H. Ferreira"
+    role: "Production Coordinator"
+    company: "Fundição Sul Ltda."
+    text: "Pressmatik's technical assistance is top-notch. We needed emergency maintenance on a 160-ton press and the team resolved it within hours. Outstanding dedication!"
+
+clients:
+  title: "Trusted by Industry Leaders"
+
+contact_form:
+  tag: "Channels of Assistance"
+  title: "Talk to Our Specialists"
+  name: "Full Name"
+  email: "Corporate Email"
+  phone: "Phone Number"
+  message: "How can we help your business?"
+  success: "Your message has been sent successfully! We will get back to you within 24 hours."
+  product_interest: "Product of Interest"
+  commercial_heading: "Commercial"
+  request_quote_heading: "Request a Quote for PMC-ST"
+  request_quote_desc: "Fill out the fields below and our responsible sales engineer will send the proposal with the selected specifications."
+  selected_model: "Selected Model"
+  ton_unit: "Tons"
+
+footer:
+  about: "Pressmatik is a national benchmark in heavy-duty high-performance industrial presses, focusing on safety, reliability, and continuous innovation."
+  address_title: "Our Facilities"
+  address_factory: "Factory: Av. Industrial, 1500 - Distrito Industrial - Araraquara/SP, Brazil"
+  address_office: "Office: Av. Paulista, 2000 - Cj 101 - São Paulo/SP, Brazil"
+  phone: "Phone: +55 (16) 3301-9000"
+  email: "Email: sales@pressmatik.com.br"
+  rights: "© Copyright 2010-2026 Pressmatik. All Rights Reserved."
+
+product_detail:
+  tag: "Heavy Equipment"
+  breadcrumbs: "Products > Hydraulic Presses > C-Frame > Model PMC-ST"
+  title: "C-Frame Single Crank Deep Throat Press"
+  subtitle: "PMC-ST Series - Capacity 25 to 160 Tons"
+  short_desc: "The PMC-ST deep throat series presses are specially designed for sheet metal and screen mesh punching applications. The throat depth (distance from slide center to frame) can be fully customized based on factory requirements. They can be linked to servo roll feeders to realize automatic feeding and stamping, improving production efficiency."
+  specs_title: "Technical Parameters"
+  features_title: "Technical Features"
+  config_title: "Standard & Optional Configuration"
+  videos_title: "Videos in Operation"
+  quote_product: "Request a Quote for this Model"
+  spec_name: "Specification"
+  spec_unit: "Unit"
+  spec_capacity: "Press Capacity"
+  spec_stroke: "Slide Stroke Length"
+  spec_speed: "Strokes Per Minute (SPM)"
+  spec_die_height: "Max Die Height"
+  spec_motor: "Main Motor Power"
+  spec_weight: "Press Weight"
+  tons: "Tons"
+  bolster_size: "Bolster Size"
+  throat_depth: "Throat Depth"
+  footnote: "* Note: Values in parentheses indicate specifications for short stroke (high speed). The throat depth (distance from slide center to frame) is fully customizable per customer requirement."
+  std_items: "Standard Items"
+  opt_items: "Optional Items"
+  features_list:
+    - "Heavy one-piece steel frame, minimizing deflection and securing high precision."
+    - "OMPI pneumatic dry clutch brake, ensuring longer service life and high torque output."
+    - "6-point slide guiding with Quenching & Grinding process, lowering wear and increasing tool life."
+    - "Forged 42CrMo alloy material crankshaft, with strength 1.3 times higher than standard carbon steel and longer life."
+    - "Copper sleeve made of tin phosphorus bronze ZQSn10-1, with strength 1.5 times higher than ordinary BC6 brass."
+    - "Highly sensitive hydraulic overload protection device protecting press and tooling service life."
+    - "Built to meet and exceed JIS Class 1 accuracy standards."
+    - "Optional Die Cushion for advanced metalforming capabilities."
+  std:
+    - "Hydraulic overload protection device"
+    - "Manual slide adjustment device (below PMC-60)"
+    - "Electric slide adjustment device (above PMC-80)"
+    - "Variable frequency variable speed motor (adjustable speed)"
+    - "Mechanical die height indicator (below PMC-60)"
+    - "Digital die height indicator (above PMC-80)"
+    - "Slider and stamping tools balance device"
+    - "Rotating cam controller"
+    - "Crankshaft angle indicator"
+    - "Electromagnetic counter"
+    - "Air source connector"
+    - "Second degree falling protecting device"
+    - "Air blowing device"
+    - "Mechanical shockproof feet"
+    - "Mis-feeding detection device reserved interface"
+    - "Maintenance tools and toolbox"
+    - "Main motor reversing device"
+    - "Light Curtain (Safety Guarding)"
+    - "Power outlet"
+    - "Electric grease lubrication device"
+    - "Touch screen (pre-break, pre-load interface)"
+    - "T-type movable two handed console"
+    - "LED die lighting"
+  opt:
+    - "Customization per customer requirements"
+    - "Die Cushion (stamping cushion)"
+    - "PMC-60 die height electric adjusting device"
+    - "Quick Die Change System (QDC)"
+    - "Slide knock out device (parts extractor)"
+    - "Turnkey system with coil feedline and automation integration"
+    - "Fixed two-handed operating console"
+    - "Re-circulating oil lubrication system (above PMC-80)"
+    - "Wet clutch pneumatic system"
+    - "Anti-vibration isolator mounts"
+    - "Real-time Tonnage Monitor"
+    - "Safety Foot Switch"
+  spec_mode: "Mode"
+  spec_rated_tonnage_point: "Rated Tonnage Point"
+  spec_slide_adjustment: "Slide Adjustment Amount"
+  spec_slide_size: "Slide Size"
+  spec_platform_floor: "Platform to Floor Distance"
+  spec_shank_hole: "Shank Hole Diameter"
+  spec_adjust_device: "Slide Adjust Device Type"
+  spec_air_pressure: "Air Pressure"
+  spec_accuracy_grade: "Press Accuracy Grade"
+  spec_dimension: "Press Dimensions (L*W*H)"
+  spec_die_cushion_capacity: "Die Cushion Capacity"
+  spec_die_cushion_stroke: "Die Cushion Stroke"
+  spec_die_cushion_area: "Die Cushion Active Area"
+  overview_heading: "Technological Highlights & Precision Engineering"
+  overview_text: "The PMC-ST deep throat mechanical press series is engineered to meet the most demanding requirements of sheet metal forming, bending, and punching, specifically optimized for screen mesh perforation. Incorporating advanced design principles and high-grade components, the PMC-ST combines high productivity, low wear, and absolute reliability on the production floor."
+  key_features_heading: "Key Design Advantages"
+  feature_detail_1_title: "Heavy One-Piece Steel Frame"
+  feature_detail_1_desc: "High-tensile steel plates welded into a robust monobloc frame and stress-relieved to minimize deflection. This construction secures high accuracy, minimizes tool wear, and protects the structural integrity under full capacity loads."
+  feature_detail_2_title: "Forged 42CrMo Crankshaft"
+  feature_detail_2_desc: "Crankshaft forged from high-strength 42CrMo chrome-moly alloy material, precision-machined for smooth power transmission. Offers 1.3 times the strength of standard #45 carbon steel, securing exceptional fatigue resistance."
+  feature_detail_3_title: "6-Point Slide Guiding System"
+  feature_detail_3_desc: "Uses a 6-point linear slide-guiding system finished with a proprietary Quenching & Grinding process. This ensures maximum alignment, minimal friction, low wear, and meets JIS Class 1 high-precision standards."
+  feature_detail_4_title: "Siemens Automation Platform"
+  feature_detail_4_desc: "Standardized Siemens-based PLC control with a user-friendly color touchscreen HMI. Provides expandable capabilities for seamless integration with servo feeders, coil lines, and other peripheral automation systems."
+  subproducts_tag: "Models & Variations"
+  subproducts_title: "PMC Series Subproducts"
+  subproducts_desc: "The PMC series is available in several structural and dimensional configurations customized for different industrial processes of metal forming, deflashing, and assembly."
+  subproducts:
+    st:
+      name: "PMC-ST Stander"
+      desc: "Standard model ideal for general stamping, bending and cutting operations, mounted on a heavy rigid bolster base."
+    bc:
+      name: "PMC-BC Benchtop"
+      desc: "Compact structure designed for mounting on workbenches, focusing on high precision operations for smaller parts."
+    gt:
+      name: "PMC-GT Rotary Table"
+      desc: "Equipped with a rotary indexing table for automated processes requiring fast loading and unloading speeds."
+    tr:
+      name: "PMC-TR Deflashing & Calibration"
+      desc: "Specifically engineered for deflashing cast parts and precise calibration of metal workpieces."
+    mt:
+      name: "PMC-MT Movable Table"
+      desc: "Features a movable or roll-out bolster table to facilitate setup and heavy mold/die loading safely and easily."
+    al:
+      name: "PMC-AL Axis Alignment"
+      desc: "Specialized model with an extended bed and high-precision control system for straightening shafts and alignment."
+    hz:
+      name: "PMC-HZ Horizontal"
+      desc: "Operates in the horizontal plane, ideal for interference press fitting, assembly, bushing and extrusion."
+    es:
+      name: "PMC-ES Special Custom"
+      desc: "100% custom-tailored projects with dimensions, stroke lengths, and automation customized to customer needs."
+
+news:
+  tag: "News & Events"
+  title: "Pressmatik Latest News"
+  desc: "Stay updated with our participation in major global industrial exhibitions and technology launches."
+  read_more: "Read Full Article"
+  items:
+    0:
+      title: "Pressmatik at Feira Mecânica 2026"
+      desc: "We showcased our new high-precision industrial press catalog at Latin America's largest metallurgy trade fair, with live operation demos."
+      date: "May, 2026"
+    1:
+      title: "Servo-Hydraulic Launch at ExpoMetal 2026"
+      desc: "Demonstrating innovative energy-saving and safety-compliant solutions. The new technology reduces electricity consumption by up to 55%."
+      date: "April, 2026"
+    2:
+      title: "Export Partnerships at Hannover Messe"
+      desc: "Strengthening our global footprint by establishing strategic agreements to export custom industrial presses to the European market."
+      date: "March, 2026"
+

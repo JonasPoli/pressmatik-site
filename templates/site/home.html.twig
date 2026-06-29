@@ -1,0 +1,488 @@
+{# templates/site/home.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Pressmatik - {{ 'banner.title'|trans }}{% endblock %}
+
+{% block body %}
+    <!-- Hero Banner Section (Polished Two-Column Industrial Layout) -->
+    <section class="hero-section">
+        <div class="container hero-grid">
+            <div class="hero-content scroll-animate">
+                <span class="section-title-tag">{{ 'banner.tag'|trans }}</span>
+                <h1 class="hero-title">{{ 'banner.title'|trans }}</h1>
+                <p class="hero-subtitle">{{ 'banner.subtitle'|trans }}</p>
+                <div class="hero-buttons">
+                    <wa-button variant="brand" size="large" href="#contact">
+                        {{ 'cta.quote_now'|trans }}
+                    </wa-button>
+                    <wa-button variant="neutral" size="large" outline href="#about">
+                        {{ 'cta.learn_more'|trans }}
+                    </wa-button>
+                </div>
+            </div>
+            
+            <div class="hero-visual scroll-animate">
+                <div class="hero-image-frame">
+                    <img src="/images/pmc-st.png" alt="C-Frame Stamping Press" class="hero-main-img">
+                    <div class="hero-badge badge-top">
+                        <span class="badge-num">25-315</span>
+                        <span class="badge-lbl">Toneladas</span>
+                    </div>
+                    <div class="hero-badge badge-bottom">
+                        <span class="badge-num">JIS Classe 1</span>
+                        <span class="badge-lbl">Alta Precisão</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quem Somos (About Us) Section with Image Collage and Bullet Grid -->
+    <section id="about" class="section-padding about-section">
+        <div class="container about-grid">
+            <div class="about-collage scroll-animate">
+                <div class="collage-container">
+                    <div class="collage-shape"></div>
+                    <div class="collage-img-main-frame">
+                        <img src="/images/about-press.png" alt="Premium Hydraulic Press Manufacturing" class="collage-img-main">
+                    </div>
+                    <div class="collage-img-sub-frame">
+                        <img src="/images/c-frame-press.png" alt="C-Frame Press Detail" class="collage-img-sub">
+                    </div>
+                    <div class="collage-badge">
+                        <span class="badge-years">15+</span>
+                        <span class="badge-text">Anos de Mercado</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-content scroll-animate">
+                <span class="section-title-tag">{{ 'about.tag'|trans }}</span>
+                <h2>{{ 'about.title'|trans }}</h2>
+                <p>{{ 'about.text'|trans }}</p>
+                
+                <div class="about-bullets">
+                    <div class="about-bullet-item">
+                        <div class="bullet-icon-wrapper">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <div class="bullet-text">
+                            <h4>Segurança Avançada (NR12)</h4>
+                            <p>Sistemas eletro-hidráulicos monitorados redundantes e cortinas ópticas integradas.</p>
+                        </div>
+                    </div>
+                    <div class="about-bullet-item">
+                        <div class="bullet-icon-wrapper">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <div class="bullet-text">
+                            <h4>Engenharia e Tecnologia Siemens</h4>
+                            <p>CLPs de segurança, painéis de operação IHM Touch e acionamentos robustos de última geração.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <wa-button variant="neutral" outline href="#contact" style="margin-top: 1.5rem;">
+                    {{ 'menu.contact'|trans }}
+                </wa-button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais Técnicos Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <span class="section-title-tag">{{ 'differentials.tag'|trans }}</span>
+                <h2 class="section-title">{{ 'differentials.title'|trans }}</h2>
+            </div>
+            
+            <div class="diff-grid">
+                <!-- Safety card -->
+                <div class="diff-card scroll-animate">
+                    <div class="diff-card-icon-wrapper">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h3>{{ 'differentials.safety.title'|trans }}</h3>
+                    <p>{{ 'differentials.safety.desc'|trans }}</p>
+                </div>
+                
+                <div class="diff-card scroll-animate">
+                    <div class="diff-card-icon-wrapper">
+                        <i class="bi bi-cpu"></i>
+                    </div>
+                    <h3>{{ 'differentials.components.title'|trans }}</h3>
+                    <p>{{ 'differentials.components.desc'|trans }}</p>
+                </div>
+                
+                <div class="diff-card scroll-animate">
+                    <div class="diff-card-icon-wrapper">
+                        <i class="bi bi-lightning-charge"></i>
+                    </div>
+                    <h3>{{ 'differentials.performance.title'|trans }}</h3>
+                    <p>{{ 'differentials.performance.desc'|trans }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grade de Destaque de Produtos Section -->
+    <section id="products" class="section-padding products-section">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <span class="section-title-tag">{{ 'products_sec.tag'|trans }}</span>
+                <h2 class="section-title">{{ 'products_sec.title'|trans }}</h2>
+            </div>
+
+            <div class="products-grid">
+                <!-- Product Card: Fictional PMC-ST deep throat press -->
+                <div class="product-card scroll-animate">
+                    <div class="product-image-container">
+                        <img src="/images/pmc-st.png" alt="C-Frame Single Crank Deep Throat Press" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3>{{ 'product_detail.title'|trans }}</h3>
+                        <p>{{ 'product_detail.short_desc'|trans }}</p>
+                        <div class="product-footer">
+                            <span class="product-specs-badge">25 ~ 160 {{ 'product_detail.tons'|trans }}</span>
+                            <wa-button variant="brand" size="small" href="{{ path('app_product_detail', {'_locale': app.request.locale, 'slug': 'c-frame-single-crank-deep-throat-press'}) }}">
+                                {{ 'cta.learn_more'|trans }}
+                            </wa-button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card: Servo Presses -->
+                <div class="product-card scroll-animate">
+                    <div class="product-image-container">
+                        <img src="/images/pmc-es.png" alt="Servo-Hydraulic Press" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3>{{ 'products_sec.servo_presses'|trans }}</h3>
+                        <p>{{ 'products_sec.servo_presses_desc'|trans }}</p>
+                        <div class="product-footer">
+                            <span class="product-specs-badge">50 ~ 1000 {{ 'product_detail.tons'|trans }}</span>
+                            <wa-button variant="brand" size="small" href="#contact">
+                                {{ 'cta.quote_now'|trans }}
+                            </wa-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade Secundária (Secondary Products) -->
+            <div class="secondary-products-grid">
+                <div class="secondary-product-card scroll-animate">
+                    <div class="sec-prod-icon">
+                        <i class="bi bi-gear-wide-connected"></i>
+                    </div>
+                    <div class="sec-prod-info">
+                        <h4>{{ 'products_sec.equipments'|trans }}</h4>
+                        <p>{{ 'products_sec.equipments_desc'|trans }}</p>
+                    </div>
+                </div>
+
+                <div class="secondary-product-card scroll-animate">
+                    <div class="sec-prod-icon">
+                        <i class="bi bi-database"></i>
+                    </div>
+                    <div class="sec-prod-info">
+                        <h4>{{ 'products_sec.parts'|trans }}</h4>
+                        <p>{{ 'products_sec.parts_desc'|trans }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Serviços Section with Video Background -->
+    <section id="services" class="section-padding services-video-section">
+        <div class="video-bg-container">
+            <video autoplay loop muted playsinline class="video-bg">
+                <source src="/images/service-bg.mp4" type="video/mp4">
+            </video>
+            <div class="video-bg-overlay"></div>
+        </div>
+
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="section-header scroll-animate">
+                <span class="section-title-tag" style="color: var(--color-accent-red);">{{ 'services_sec.tag'|trans }}</span>
+                <h2 class="section-title" style="color: #ffffff;">{{ 'services_sec.title'|trans }}</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card scroll-animate">
+                    <div class="service-img-container">
+                        <img src="/images/service-maintenance.png" alt="Manutenção de Prensas" class="service-img" loading="lazy">
+                        <div class="service-icon-floating">
+                            <i class="bi bi-wrench"></i>
+                        </div>
+                    </div>
+                    <div class="service-card-content">
+                        <h3>{{ 'services_sec.maintenance.title'|trans }}</h3>
+                        <p>{{ 'services_sec.maintenance.desc'|trans }}</p>
+                        <wa-button variant="text" href="#contact" style="padding: 0; display: inline-block; color: #ffffff;">{{ 'cta.quote_now'|trans }} →</wa-button>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <div class="service-img-container">
+                        <img src="/images/service-retrofit.png" alt="Retrofit de Prensas" class="service-img" loading="lazy">
+                        <div class="service-icon-floating">
+                            <i class="bi bi-arrow-repeat"></i>
+                        </div>
+                    </div>
+                    <div class="service-card-content">
+                        <h3>{{ 'services_sec.refit.title'|trans }}</h3>
+                        <p>{{ 'services_sec.refit.desc'|trans }}</p>
+                        <wa-button variant="text" href="#contact" style="padding: 0; display: inline-block; color: #ffffff;">{{ 'cta.quote_now'|trans }} →</wa-button>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <div class="service-img-container">
+                        <img src="/images/service-safety.png" alt="Adequação NR12" class="service-img" loading="lazy">
+                        <div class="service-icon-floating">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                    </div>
+                    <div class="service-card-content">
+                        <h3>{{ 'services_sec.nr12.title'|trans }}</h3>
+                        <p>{{ 'services_sec.nr12.desc'|trans }}</p>
+                        <wa-button variant="text" href="#contact" style="padding: 0; display: inline-block; color: #ffffff;">{{ 'cta.quote_now'|trans }} →</wa-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Notícias & Eventos (Blog) -->
+    <section id="news" class="section-padding news-section">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <span class="section-title-tag">{{ 'news.tag'|trans }}</span>
+                <h2 class="section-title">{{ 'news.title'|trans }}</h2>
+                <p class="section-desc" style="max-width: 700px; color: var(--color-text-secondary); margin-bottom: 3.5rem;">
+                    {{ 'news.desc'|trans }}
+                </p>
+            </div>
+            
+            <div class="news-grid">
+                <!-- Card 1 -->
+                <div class="news-card scroll-animate">
+                    <div class="news-img-container">
+                        <img src="/images/news-exhibition1.png" alt="{{ 'news.items.0.title'|trans }}" class="news-img" loading="lazy">
+                        <div class="news-date-badge">
+                            {{ 'news.items.0.date'|trans }}
+                        </div>
+                    </div>
+                    <div class="news-card-content">
+                        <h3>{{ 'news.items.0.title'|trans }}</h3>
+                        <p>{{ 'news.items.0.desc'|trans }}</p>
+                        <a href="#contact" class="news-readmore-btn">{{ 'news.read_more'|trans }} <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="news-card scroll-animate">
+                    <div class="news-img-container">
+                        <img src="/images/news-seminar.png" alt="{{ 'news.items.1.title'|trans }}" class="news-img" loading="lazy">
+                        <div class="news-date-badge">
+                            {{ 'news.items.1.date'|trans }}
+                        </div>
+                    </div>
+                    <div class="news-card-content">
+                        <h3>{{ 'news.items.1.title'|trans }}</h3>
+                        <p>{{ 'news.items.1.desc'|trans }}</p>
+                        <a href="#contact" class="news-readmore-btn">{{ 'news.read_more'|trans }} <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="news-card scroll-animate">
+                    <div class="news-img-container">
+                        <img src="/images/news-hannover.png" alt="{{ 'news.items.2.title'|trans }}" class="news-img" loading="lazy">
+                        <div class="news-date-badge">
+                            {{ 'news.items.2.date'|trans }}
+                        </div>
+                    </div>
+                    <div class="news-card-content">
+                        <h3>{{ 'news.items.2.title'|trans }}</h3>
+                        <p>{{ 'news.items.2.desc'|trans }}</p>
+                        <a href="#contact" class="news-readmore-btn">{{ 'news.read_more'|trans }} <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos (Testimonials) Section -->
+    <section class="section-padding testimonials-section">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <span class="section-title-tag">{{ 'testimonials.tag'|trans }}</span>
+                <h2 class="section-title">{{ 'testimonials.title'|trans }}</h2>
+            </div>
+
+            <div class="testimonials-carousel">
+                <div class="testimonial-card scroll-animate">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-quote">"{{ 'testimonials.client1.text'|trans }}"</p>
+                    <div class="testimonial-client">
+                        <img src="/images/client1.jpg" alt="{{ 'testimonials.client1.name'|trans }}" class="client-avatar">
+                        <div class="client-meta">
+                            <h4>{{ 'testimonials.client1.name'|trans }}</h4>
+                            <p>{{ 'testimonials.client1.role'|trans }} - {{ 'testimonials.client1.company'|trans }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-quote">"{{ 'testimonials.client2.text'|trans }}"</p>
+                    <div class="testimonial-client">
+                        <img src="/images/client2.jpg" alt="{{ 'testimonials.client2.name'|trans }}" class="client-avatar">
+                        <div class="client-meta">
+                            <h4>{{ 'testimonials.client2.name'|trans }}</h4>
+                            <p>{{ 'testimonials.client2.role'|trans }} - {{ 'testimonials.client2.company'|trans }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-quote">"{{ 'testimonials.client3.text'|trans }}"</p>
+                    <div class="testimonial-client">
+                        <img src="/images/client3.jpg" alt="{{ 'testimonials.client3.name'|trans }}" class="client-avatar">
+                        <div class="client-meta">
+                            <h4>{{ 'testimonials.client3.name'|trans }}</h4>
+                            <p>{{ 'testimonials.client3.role'|trans }} - {{ 'testimonials.client3.company'|trans }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clientes (Logos) Section -->
+    <section class="clients-section">
+        <div class="container">
+            <div class="clients-grid scroll-animate">
+                <span class="client-logo-item" aria-label="Schuler">
+                    <svg viewBox="0 0 140 30" xmlns="http://www.w3.org/2000/svg" style="height: 30px;">
+                        <path d="M5 16.5 C5 13.5 8 12.5 12 12.5 C16 12.5 18.5 13.5 18.5 16.5 H14 C14 15.5 13 15 11.5 15 C10 15 9 15.5 9 16.5 C9 17.5 10 18 12.5 18.5 C15.5 19 19 20 19 23 C19 26 15.5 27.5 11.5 27.5 C7.5 27.5 5 26 5 23 H9.5 C9.5 24 11 25 12.5 25 C14 25 14.5 24.5 14.5 23.5 C14.5 22.5 13.5 22 11 21.5 C8 21 5 19.5 5 16.5 Z M23 6 H27.5 V12 H36 V6 H40.5 V20 H36 V15.5 H27.5 V20 H23 V6 Z M45 6 H49.5 V15 C49.5 17 50.5 18 52.5 18 C54.5 18 55.5 17 55.5 15 V6 H60 V15 C60 19 57.5 20.5 52.5 20.5 C47.5 20.5 45 19 45 15 V6 Z M64 6 H68.5 V16.5 H76 V20 H64 V6 Z M80 6 H91 V9.5 H84.5 V11.2 H90 V14.2 H84.5 V16.5 H91 V20 H80 V6 Z M95 6 H103.5 C107.5 6 109.5 7.5 109.5 10 C109.5 12 108.5 13.2 106.5 13.5 L110.5 20 H105.5 L102 14.5 H99.5 V20 H95 V6 Z M99.5 9.5 H103 C104 9.5 105 10 105 10.8 C105 11.6 104 12 103 12 H99.5 V9.5 Z" />
+                    </svg>
+                </span>
+                <span class="client-logo-item" aria-label="Qiaosen">
+                    <svg viewBox="0 0 130 30" xmlns="http://www.w3.org/2000/svg" style="height: 30px;">
+                        <path d="M5 13 C5 7 9.5 3.5 15.5 3.5 C21.5 3.5 26 7 26 13 C26 17.5 23.5 21 19 22 L23.5 26.5 L20.5 26.5 L16.5 22.5 C16 22.5 15.5 22.5 15.5 22.5 C9.5 22.5 5 19 5 13 Z M9.5 13 C9.5 16.5 11.5 18.5 15.5 18.5 C19.5 18.5 21.5 16.5 21.5 13 C21.5 9.5 19.5 7.5 15.5 7.5 C11.5 7.5 9.5 9.5 9.5 13 Z M30 6 H34.5 V20 H30 V6 Z M39 6 H43.5 L48 16.5 V6 H52.5 V20 H48 L43.5 9.5 V20 H39 V6 Z M57 6 H68 V9.5 H61.5 V11.2 H67 V14.2 H61.5 V16.5 H68 V20 H57 V6 Z M72 16.5 C72 13.5 75 12.5 79 12.5 C83 12.5 85.5 13.5 85.5 16.5 H81 C81 15.5 80 15 78.5 15 C77 15 76 15.5 76 16.5 C76 17.5 77 18 79.5 18.5 C82.5 19 86 20 86 23 C86 26 82.5 27.5 78.5 27.5 C74.5 27.5 72 26 72 23 H76.5 C76.5 24 78 25 79.5 25 C81 25 81.5 24.5 81.5 23.5 C81.5 22.5 80.5 22 78 21.5 C75 21 72 19.5 72 16.5 Z M90 13 C90 7 94.5 3.5 100.5 3.5 C106.5 3.5 111 7 111 13 Z M94.5 13 C94.5 16.5 96.5 18.5 100.5 18.5 C104.5 18.5 106.5 16.5 106.5 13 C106.5 9.5 104.5 7.5 100.5 7.5 C96.5 7.5 94.5 9.5 94.5 13 Z M115 6 H119.5 L124 13.5 L128.5 6 H133 V20 H128.5 V11.5 L124.5 18 H123.5 L119.5 11.5 V20 H115 V6 Z" />
+                    </svg>
+                </span>
+                <span class="client-logo-item" aria-label="Siemens">
+                    <svg viewBox="0 0 140 30" xmlns="http://www.w3.org/2000/svg" style="height: 30px;">
+                        <path d="M5 9.5 C5 6.5 8 5.5 12 5.5 C16 5.5 18.5 6.5 18.5 9.5 H14 C14 8.5 13 8 11.5 8 C10 8 9 8.5 9 9.5 C9 10.5 10 11 12.5 11.5 C15.5 12 19 13 19 16 C19 19 15.5 20.5 11.5 20.5 C7.5 20.5 5 19 5 16 H9.5 C9.5 17 11 18 12.5 18 C14 18 14.5 17.5 14.5 16.5 C14.5 15.5 13.5 15 11 14.5 C8 14 5 12.5 5 9.5 Z M23 6 H27.5 V20 H23 V6 Z M32 6 H44 V9.5 H36.5 V11 H43 V14 H36.5 V16.5 H44 V20 H32 V6 Z M48 6 H52.5 L57 13.5 L61.5 6 H66 V20 H61.5 V11.5 L57.5 18 H56.5 L52.5 11.5 V20 H48 V6 Z M70 6 H82 V9.5 H74.5 V11 H81 V14 H74.5 V16.5 H82 V20 H70 V6 Z M86 6 H90.5 L97 14.5 V6 H101 V20 H96.5 L90 11.5 V20 H86 V6 Z M105 16.5 C105 13.5 108 12.5 112 12.5 C116 12.5 118.5 13.5 118.5 16.5 H114 C114 15.5 113 15 111.5 15 C110 15 109 15.5 109 16.5 C109 17.5 110 18 112.5 18.5 C115.5 19 119 20 119 23 C119 26 115.5 27.5 111.5 27.5 C107.5 27.5 105 26 105 23 H109.5 C109.5 24 111 25 112.5 25 C114 25 114.5 24.5 114.5 23.5 C114.5 22.5 113.5 22 111 21.5 C108 21 105 19.5 105 16.5 Z" />
+                    </svg>
+                </span>
+                <span class="client-logo-item" aria-label="Bosch Rexroth">
+                    <svg viewBox="0 0 160 30" xmlns="http://www.w3.org/2000/svg" style="height: 30px;">
+                        <path d="M4 15 C4 12.5 5 10.5 6.5 9.2 L5.2 7.7 C3.2 9.5 2 12.1 2 15 C2 17.9 3.2 20.5 5.2 22.3 L6.5 20.8 C5 19.5 4 17.5 4 15 Z M26 15 C26 17.5 25 19.5 23.5 20.8 L24.8 22.3 C26.8 20.5 28 17.9 28 15 C28 12.1 26.8 9.5 24.8 7.7 L23.5 9.2 C25 10.5 26 12.5 26 15 Z M15 5 C17.5 5 19.5 6 20.8 7.5 L22.3 6.2 C20.5 4.2 17.9 3 15 3 C12.1 3 9.5 4.2 7.7 6.2 L9.2 7.5 C10.5 6 12.5 5 15 5 Z M15 25 C12.5 25 10.5 24 9.2 22.5 L7.7 23.8 C9.5 25.8 12.1 27 15 27 C17.9 27 20.5 25.8 22.3 23.8 L20.8 22.5 C19.5 24 17.5 25 15 25 Z" />
+                        <circle cx="15" cy="15" r="5" />
+                        <path d="M35 6 H41 C43.5 6 44.8 7 44.8 8.8 C44.8 10 44 11 42.5 11.2 C44.2 11.5 45.2 12.5 45.2 14.2 C45.2 16.5 43.5 17.5 41 17.5 H35 V6 Z M39.5 9.5 H41 C41.5 9.5 42 9.8 42 10.2 C42 10.7 41.5 11 41 11 H39.5 V9.5 Z M39.5 13 H41 C41.5 13 42 13.3 42 13.8 C42 14.2 41.5 14.5 41 14.5 H39.5 V13 Z M48 11.5 C48 8.5 50.2 6.5 53.2 6.5 C56.2 6.5 58.5 8.5 58.5 11.5 C58.5 14.5 56.2 16.5 53.2 16.5 C50.2 16.5 48 14.5 48 11.5 Z M52.5 11.5 C52.5 13 53 14 53.2 14 C53.5 14 54 13 54 11.5 C54 10 53.5 9 53.2 9 C53 9 52.5 10 52.5 11.5 Z" />
+                        <text x="63" y="17.5" font-family="system-ui, sans-serif" font-weight="900" font-size="12" letter-spacing="0.5">REXROTH</text>
+                    </svg>
+                </span>
+                <span class="client-logo-item" aria-label="WEG">
+                    <svg viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg" style="height: 30px;">
+                        <path d="M5 15 C5 8.5 10 3.5 16.5 3.5 C23 3.5 28 8.5 28 15 C28 21.5 23 26.5 16.5 26.5 C10 26.5 5 21.5 5 15 Z M7.5 15 C7.5 20 11.5 24 16.5 24 C21.5 24 25.5 20 25.5 15 C25.5 10 21.5 6 16.5 6 C11.5 6 7.5 10 7.5 15 Z" />
+                        <path d="M11 11 L14 19 L16.5 13.5 L19 19 L22 11 H19.5 L18 16 L16.5 12.5 L15 16 L13.5 11 H11 Z" />
+                        <path d="M35 6 H40 L42.5 15.5 L45 6 H50 L52.5 15.5 L55 6 H60 L56 20 H51.5 L49 10.5 L46.5 20 H42 L35 6 Z M64 6 H75 V9.5 H68.5 V11 H74 V14 H68.5 V16.5 H75 V20 H64 V6 Z M79 13 H88 V20 H83.5 V17.5 H80 V9.5 H87 V6 H79 V13 Z" />
+                    </svg>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato (Contact & Form) Section -->
+    <section id="contact" class="section-padding contact-section">
+        <div class="container contact-grid">
+            <div class="contact-info-column scroll-animate">
+                <span class="section-title-tag">{{ 'contact_form.tag'|trans }}</span>
+                <h2>{{ 'contact_form.title'|trans }}</h2>
+                <p>{{ 'contact_form.request_quote_desc'|trans }}</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="bi bi-geo-alt contact-item-icon"></i>
+                        <div class="contact-item-text">
+                            <h4>{{ 'footer.address_title'|trans }}</h4>
+                            <p>{{ 'footer.address_factory'|trans }}</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="bi bi-telephone contact-item-icon"></i>
+                        <div class="contact-item-text">
+                            <h4>{{ 'menu.contact'|trans }}</h4>
+                            <p>{{ 'footer.phone'|trans }}</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="bi bi-envelope contact-item-icon"></i>
+                        <div class="contact-item-text">
+                            <h4>E-mail Comercial</h4>
+                            <p>{{ 'footer.email'|trans }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Map -->
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3704.126178620653!2d-48.15148342472135!3d-21.814055180039055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8f3ca207bffe5%3A0x8f549c30f9c2e200!2sPressmatik%20Prensas%20e%20Equipamentos%20Hidr%C3%A1ulicos!5e0!3m2!1spt-BR!2sbr!4v1782507981053!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+            </div>
+
+            <div class="contact-form-column scroll-animate">
+                <h3>{{ 'cta.quote_now'|trans }}</h3>
+                <form id="quote-form" onsubmit="event.preventDefault(); alert('{{ 'contact_form.success'|trans }}'); this.reset();">
+                    <div class="form-group">
+                        <wa-input id="form-name" type="text" label="{{ 'contact_form.name'|trans }}" placeholder="Ex: João Silva" required></wa-input>
+                    </div>
+                    <div class="form-group">
+                        <wa-input id="form-email" type="email" label="{{ 'contact_form.email'|trans }}" placeholder="nome@suaempresa.com.br" required></wa-input>
+                    </div>
+                    <div class="form-group">
+                        <wa-input id="form-phone" type="tel" label="{{ 'contact_form.phone'|trans }}" placeholder="(16) 99999-9999" required></wa-input>
+                    </div>
+                    <div class="form-group">
+                        <wa-input id="form-product" type="text" label="{{ 'contact_form.product_interest'|trans }}" placeholder="Ex: PMC-ST 60 Toneladas"></wa-input>
+                    </div>
+                    <div class="form-group">
+                        <wa-textarea id="form-message" label="{{ 'contact_form.message'|trans }}" placeholder="Descreva os requisitos técnicos da prensa..."></wa-textarea>
+                    </div>
+                    <wa-button type="submit" variant="brand" style="width: 100%;">
+                        {{ 'cta.submit'|trans }}
+                    </wa-button>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

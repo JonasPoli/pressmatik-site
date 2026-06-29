@@ -1,0 +1,207 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Pressmatik - Prensas Hidráulicas{% endblock %}</title>
+        <link rel="icon" href="/images/logo.png">
+        
+        {# Web Awesome CDN Stylesheet #}
+        <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css" />
+
+        {# Bootstrap Icons CDN (100% Reliable Icon Solution) #}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+        {# Global CSS Variables and Styles #}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        {% endblock %}
+
+        {# Web Awesome Loader Script #}
+        <script type="module" src="https://ka-f.webawesome.com/webawesome@3.9.0/webawesome.loader.js"></script>
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        {% set locale = app.request.locale %}
+        
+        <!-- Header (Cabeçalho) -->
+        <header class="site-header">
+            <div class="container header-container">
+                <a href="{{ path('app_home', {'_locale': locale}) }}" class="logo-link">
+                    <img src="/images/logo02.png" alt="Pressmatik Logo" class="logo-image">
+                </a>
+                
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="{{ path('app_home', {'_locale': locale}) }}" class="nav-link">{{ 'menu.home'|trans }}</a></li>
+                        <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#about' }}" class="nav-link">{{ 'menu.company'|trans }}</a></li>
+                        <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'c-frame-single-crank-deep-throat-press'}) }}" class="nav-link">{{ 'menu.products'|trans }}</a></li>
+                        <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#services' }}" class="nav-link">{{ 'menu.services'|trans }}</a></li>
+                        <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}" class="nav-link">{{ 'menu.contact'|trans }}</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <!-- Seletor de Idioma (Language switcher) using custom CSS dropdown -->
+                    <div class="lang-selector">
+                        <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="bi bi-globe" style="color: var(--color-accent-red); margin-right: 4px;"></i>
+                            <span>{{ locale|upper }}</span>
+                            <span class="dropdown-caret">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge({'_locale': 'pt'})) }}">Português (PT)</a></li>
+                            <li><a href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge({'_locale': 'en'})) }}">English (EN)</a></li>
+                            <li><a href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge({'_locale': 'es'})) }}">Español (ES)</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Theme Toggle Button -->
+                    <wa-button id="theme-toggle" variant="text" size="medium" style="color: var(--color-text-primary); margin-right: 8px;">
+                        <i id="theme-toggle-icon" class="bi bi-moon" style="color: var(--color-accent-red); font-size: 1.2rem;"></i>
+                    </wa-button>
+                    
+                    <wa-button variant="brand" href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}">
+                        {{ 'menu.quote'|trans }}
+                    </wa-button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        <!-- Floating WhatsApp Button -->
+        <a href="https://wa.me/551633019000" class="whatsapp-float" target="_blank" aria-label="WhatsApp Link">
+            <i class="bi bi-whatsapp"></i>
+        </a>
+
+        <!-- Footer (Rodapé Premium "Estilo Americano") -->
+        <footer class="site-footer">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <h3>PRESSMATIK</h3>
+                    <p>{{ 'footer.about'|trans }}</p>
+                    <div class="footer-social-links">
+                        <a href="https://linkedin.com" target="_blank" class="footer-social-btn" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://instagram.com" target="_blank" class="footer-social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://youtube.com" target="_blank" class="footer-social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-col">
+                    <h4>{{ 'menu.products'|trans }}</h4>
+                    <ul>
+                        <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'c-frame-single-crank-deep-throat-press'}) }}">{{ 'product_detail.title'|trans }}</a></li>
+                        <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#products' }}">Prensas Hidráulicas Tipo C</a></li>
+                        <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#products' }}">Prensas 4 Colunas</a></li>
+                        <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#products' }}">Prensas Servo-Hidráulicas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-col">
+                    <h4>{{ 'menu.services'|trans }}</h4>
+                    <ul>
+                        <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#services' }}">{{ 'services_sec.maintenance.title'|trans }}</a></li>
+                        <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#services' }}">{{ 'services_sec.refit.title'|trans }}</a></li>
+                        <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#services' }}">{{ 'services_sec.nr12.title'|trans }}</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-col">
+                    <h4>{{ 'footer.address_title'|trans }}</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.5rem; color: var(--color-text-secondary);">
+                        {{ 'footer.address_factory'|trans }}
+                    </p>
+                    <p style="font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem; color: var(--color-text-secondary);">
+                        {{ 'footer.address_office'|trans }}
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--color-text-primary); font-weight: 500;">
+                        {{ 'footer.phone'|trans }}
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--color-accent-red); font-weight: 500;">
+                        {{ 'footer.email'|trans }}
+                    </p>
+                </div>
+            </div>
+            
+            <div class="container footer-bottom">
+                <div>
+                    {{ 'footer.rights'|trans }}
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            // Inline theme detection to prevent flash of wrong theme
+            (function() {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.documentElement.classList.add('dark-theme');
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark-theme');
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            })();
+
+            document.addEventListener('DOMContentLoaded', () => {
+                // Theme toggle implementation
+                const toggle = document.getElementById('theme-toggle');
+                const icon = document.getElementById('theme-toggle-icon');
+                
+                // Initialize icon state
+                if (document.documentElement.classList.contains('dark-theme')) {
+                    icon.className = 'bi bi-sun';
+                } else {
+                    icon.className = 'bi bi-moon';
+                }
+                
+                if (toggle && icon) {
+                    toggle.addEventListener('click', () => {
+                        if (document.documentElement.classList.contains('dark-theme')) {
+                            document.documentElement.classList.remove('dark-theme');
+                            document.documentElement.setAttribute('data-theme', 'light');
+                            localStorage.setItem('theme', 'light');
+                            icon.className = 'bi bi-moon';
+                        } else {
+                            document.documentElement.classList.add('dark-theme');
+                            document.documentElement.setAttribute('data-theme', 'dark');
+                            localStorage.setItem('theme', 'dark');
+                            icon.className = 'bi bi-sun';
+                        }
+                    });
+                }
+
+                // Global IntersectionObserver scroll-animate script
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        for (const entry of entries) {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('animated');
+                            }
+                        }
+                    },
+                    {
+                        threshold: 0.15,
+                        rootMargin: '0px 0px -55px 0px'
+                    }
+                );
+
+                document.querySelectorAll('.scroll-animate').forEach((el) => {
+                    observer.observe(el);
+                });
+            });
+        </script>
+    </body>
+</html>

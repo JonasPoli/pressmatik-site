@@ -1,0 +1,256 @@
+# translations/messages.es.yaml
+menu:
+  home: "Inicio"
+  company: "Empresa"
+  products: "Productos"
+  services: "Servicios"
+  applications: "Aplicaciones"
+  blog: "Blog"
+  contact: "Contacto"
+  quote: "Solicitar Presupuesto"
+
+cta:
+  whatsapp: "Hablar por WhatsApp"
+  quote_now: "Presupuesto Rápido"
+  learn_more: "Saber Más"
+  download_catalog: "Descargar Catálogo Técnico (PDF)"
+  send_email: "Enviar Correo"
+  submit: "Enviar Solicitud"
+
+banner:
+  tag: "Líder en Prensas Industriales"
+  title: "Prensas Hidráulicas de Alto Rendimiento y Tecnología Industrial"
+  subtitle: "Soluciones robustas, seguras (cumplen NR12) y de alta productividad para la industria metalmecánica moderna."
+
+about:
+  tag: "Ingeniería de Confianza"
+  title: "Quiénes Somos"
+  text: "Pressmatik es líder en el desarrollo de prensas hidráulicas y servo-hidráulicas industriales pesadas. Nuestras soluciones combinan ingeniería avanzada, estricto cumplimiento de las normas de seguridad NR10 y NR12, e integración de componentes globales de primera calidad para ofrecer la máxima eficiencia energética y productividad sin fugas de aceite ni lentitud."
+
+differentials:
+  tag: "Diferenciales"
+  title: "Ventajas Técnicas"
+  safety:
+    title: "Seguridad Total (NR10 y NR12)"
+    desc: "Sistemas diseñados desde la fábrica bajo estricto cumplimiento de seguridad para la protección total del operador."
+  components:
+    title: "Componentes Premium"
+    desc: "Integración perfecta con tecnología de líderes globales como Bosch Rexroth, Siemens y Weg."
+  performance:
+    title: "Alto Rendimiento y Durabilidad"
+    desc: "Sustitución eficiente de la tecnología mecánica antigua por sistemas servo-hidráulicos de configuración rápida."
+
+products_sec:
+  tag: "Catálogo"
+  title: "Nuestros Productos"
+  hydraulic_presses: "Prensas Hidráulicas"
+  hydraulic_presses_desc: "Modelos Tipo C, Tipo C Doble, 4 Columnas y Tipo H para operaciones exigentes."
+  servo_presses: "Prensas Servo-Hidráulicas"
+  servo_presses_desc: "Tecnología con servo-bombas, máxima precisión y ahorro de energía."
+  equipments: "Equipos"
+  equipments_desc: "Unidades de fuerza, cilindros estandarizados y plataformas de producción a medida."
+  parts: "Repuestos y Accesorios"
+  parts_desc: "Componentes de repuesto hidráulicos y electroelectrónicos de alta calidad."
+
+services_sec:
+  tag: "Soluciones"
+  title: "Servicios y Soluciones"
+  maintenance:
+    title: "Mantenimiento Correctivo y Preventivo"
+    desc: "Ingenieros de campo especializados listos para asegurar el máximo tiempo de actividad de su planta."
+  refit:
+    title: "Reforma y Modernización (Retrofit)"
+    desc: "Actualización tecnológica de prensas antiguas, optimizando velocidad y automatización."
+  nr12:
+    title: "Adequación Técnica a la NR12"
+    desc: "Proyectos integrales de seguridad y dictámenes técnicos para cumplimiento legal completo."
+
+testimonials:
+  tag: "Éxito Comprobado"
+  title: "Lo que dicen nuestros clientes"
+  client1:
+    name: "Ing. Ricardo M. Souza"
+    role: "Director de Operaciones"
+    company: "Metalúrgica Paulista S.A."
+    text: "Las prensas servo-hidráulicas de Pressmatik han revolucionado nuestras líneas de producción. El tiempo de preparación se redujo a la mitad y el consumo de energía cayó drásticamente. ¡Soporte técnico sobresaliente!"
+  client2:
+    name: "Mariana Silva"
+    role: "Gerente de Ingeniería"
+    company: "AutoParts Brasil"
+    text: "Equipo extremadamente robusto y con absoluta precisión. El proyecto de seguridad NR12 nos dio total tranquilidad. Altamente recomendado."
+  client3:
+    name: "Carlos H. Ferreira"
+    role: "Coordinador de Producción"
+    company: "Fundição Sul Ltda."
+    text: "La asistencia técnica de Pressmatik es excelente. Necesitamos un mantenimiento de emergencia en una prensa de 160 toneladas y el equipo lo resolvió en pocas horas. ¡Excelente compromiso!"
+
+clients:
+  title: "Empresas Líderes que Confían en Nosotros"
+
+contact_form:
+  tag: "Canales de Atención"
+  title: "Hable con nuestros especialistas"
+  name: "Nombre Completo"
+  email: "Correo Corporativo"
+  phone: "Teléfono de Contacto"
+  message: "¿Cómo podemos ayudar a su empresa?"
+  success: "¡Mensaje enviado con éxito! Nos pondremos en contacto en un plazo de 24 horas."
+  product_interest: "Producto de Interés"
+  commercial_heading: "Comercial"
+  request_quote_heading: "Solicitar Presupuesto para PMC-ST"
+  request_quote_desc: "Complete los datos a continuación y nuestro ingeniero de ventas responsable enviará la propuesta con las especificaciones seleccionadas."
+  selected_model: "Modelo Seleccionado"
+  ton_unit: "Toneladas"
+
+footer:
+  about: "Pressmatik es una referencia nacional en la fabricación de prensas industriales pesadas de alto rendimiento, con enfoque en seguridad, fiabilidad e innovación continua."
+  address_title: "Nuestras Instalaciones"
+  address_factory: "Fábrica: Av. Industrial, 1500 - Distrito Industrial - Araraquara/SP, Brasil"
+  address_office: "Oficina: Av. Paulista, 2000 - Cj 101 - São Paulo/SP, Brasil"
+  phone: "Teléfono: +55 (16) 3301-9000"
+  email: "Correo: ventas@pressmatik.com.br"
+  rights: "© Copyright 2010-2026 Pressmatik. Todos los derechos reservados."
+
+product_detail:
+  tag: "Equipo Pesado"
+  breadcrumbs: "Productos > Prensas Hidráulicas > Tipo C > Modelo PMC-ST"
+  title: "Prensa de Garganta Profunda de Manivela Única con Estructura en C"
+  subtitle: "Serie PMC-ST - Capacidad de 25 a 160 Toneladas"
+  short_desc: "La serie de prensas de garganta profunda PMC-ST está diseñada especialmente para aplicaciones de punzonado de mallas metálicas. La distancia desde el centro del martillo hasta la estructura (profundidad de garganta) se puede personalizar completamente según los requisitos de la fábrica. Se puede vincular a alimentadores servo para automatización y alta productividad."
+  specs_title: "Parámetros Técnicos"
+  features_title: "Características Técnicas"
+  config_title: "Configuración Estándar y Opcional"
+  videos_title: "Videos en Operación"
+  quote_product: "Solicitar Presupuesto para este Modelo"
+  spec_name: "Especificación"
+  spec_unit: "Unidad"
+  spec_capacity: "Capacidad de la Prensa"
+  spec_stroke: "Carrera del Martelo"
+  spec_speed: "Golpes por Minuto (SPM)"
+  spec_die_height: "Altura Máxima de Molde"
+  spec_motor: "Potencia del Motor Principal"
+  spec_weight: "Peso de la Prensa"
+  tons: "Toneladas"
+  bolster_size: "Mesa de Trabajo"
+  throat_depth: "Profundidad de Garganta"
+  footnote: "* Nota: Los valores entre paréntesis indican las especificaciones para carrera reducida (alta velocidad). La profundidad de la garganta (distancia desde el centro del martillo hasta la estructura) es totalmente personalizable según los requisitos del cliente."
+  std_items: "Artículos de Serie"
+  opt_items: "Artículos Opcionales"
+  features_list:
+    - "Estructura robusta de acero de una sola pieza, que minimiza la deflexión y asegura alta precisión."
+    - "Freno y embrague neumático seco OMPI para mayor vida útil y par constante."
+    - "Guía de martillo de 6 puntos con proceso de templado y rectificado, reduciendo el desgaste y aumentando la vida útil."
+    - "Cigüeñal forjado en aleación 42CrMo con resistencia 1.3 veces superior al acero común y mayor durabilidad."
+    - "Buje de cobre fabricado en bronce de fósforo y estaño ZQSn10-1, con una resistencia 1.5 veces mayor que el latón BC6 común."
+    - "Dispositivo de protección contra sobrecarga hidráulica altamente sensible para proteger la prensa y el utillaje."
+    - "Construida bajo las normas de precisión JIS Clase 1."
+    - "Cojín de matriz opcional (Die Cushion) para mayor flexibilidad de formado."
+  std:
+    - "Dispositivo de protección contra sobrecarga hidráulica"
+    - "Dispositivo de ajuste manual del martillo (debajo de PMC-60)"
+    - "Dispositivo de ajuste motorizado del martillo (PMC-80+)"
+    - "Motor de velocidad variable con convertidor de frecuencia"
+    - "Indicador mecánico de altura del molde (debajo de PMC-60)"
+    - "Indicador digital de altura del molde (PMC-80+)"
+    - "Dispositivo equilibrador del martillo y troqueles"
+    - "Controlador de leva giratoria"
+    - "Indicador de ángulo del cigüeñal"
+    - "Contador electromagnético"
+    - "Conector de fuente de aire"
+    - "Dispositivo de protección anticaída de segundo grado"
+    - "Dispositivo de soplado de aire"
+    - "Soportes amortiguadores mecánicos antivibración"
+    - "Interfaz reservada para detección de fallas de alimentación"
+    - "Herramientas de mantenimiento y caja de herramientas"
+    - "Dispositivo de reversión del motor principal"
+    - "Cortina de luz (Protección de seguridad)"
+    - "Toma de corriente auxiliar"
+    - "Dispositivo de lubricación automática de grasa eléctrica"
+    - "Pantalla táctil con panel de pre-diagnóstico y carga"
+    - "Consola de control de dos manos móvil tipo T"
+    - "Iluminación LED de la zona de matriz"
+  opt:
+    - "Personalización total según los requisitos del cliente"
+    - "Cojín de matriz integrado (Die Cushion)"
+    - "Dispositivo eléctrico de ajuste de altura de matriz para PMC-60"
+    - "Sistema de Cambio Rápido de Matriz (QDC)"
+    - "Dispositivo extractor de piezas en el martillo (Knockout)"
+    - "Sistema Turnkey llave en mano con alimentador de bobina y automatización"
+    - "Consola fija de operación a dos manos"
+    - "Lubricación por circulación continua de aceite (PMC-80+)"
+    - "Embrague húmedo neumático (Wet Clutch)"
+    - "Soportes aisladores antivibratorios especiales"
+    - "Monitor de tonelaje digital en tiempo real"
+    - "Interruptor de pedal de seguridad auxiliar"
+  spec_mode: "Modo"
+  spec_rated_tonnage_point: "Punto de Tonelaje Nominal"
+  spec_slide_adjustment: "Cantidad de Ajuste del Martillo"
+  spec_slide_size: "Dimensiones del Martillo"
+  spec_platform_floor: "Distancia de Mesa al Suelo"
+  spec_shank_hole: "Diámetro del Agujero del Vástago"
+  spec_adjust_device: "Tipo de Ajuste del Martillo"
+  spec_air_pressure: "Presión de Aire"
+  spec_accuracy_grade: "Grado de Precisión"
+  spec_dimension: "Dimensiones de la Prensa (L*W*H)"
+  spec_die_cushion_capacity: "Capacidad del Cojín de Matriz"
+  spec_die_cushion_stroke: "Carrera del Cojín de Matriz"
+  spec_die_cushion_area: "Área Activa del Cojín de Matriz"
+  overview_heading: "Aspectos Tecnológicos Destacados e Ingeniería de Precisión"
+  overview_text: "La serie de prensas mecánicas de garganta profunda PMC-ST está diseñada para cumplir con los requisitos más exigentes de conformado, doblado y punzonado de chapas metálicas, optimizada específicamente para la perforación de mallas. Con principios de diseño avanzados y componentes certificados, la serie PMC-ST combina alta productividad, bajo desgaste y confiabilidad absoluta."
+  key_features_heading: "Ventajas Clave del Diseño"
+  feature_detail_1_title: "Estructura Monobloque Pesada"
+  feature_detail_1_desc: "Placas de acero de alta resistencia soldadas en un chasis monobloque rígido con alivio térmico de tensión para minimizar la flexión. Garantiza una alta precisión de conformado, menos desgaste del utillaje y larga vida operativa."
+  feature_detail_2_title: "Cigüeñal Forjado en Aleación 42CrMo"
+  feature_detail_2_desc: "Cigüeñal forjado en aleación especial 42CrMo de alta resistencia, mecanizado con la máxima precisión. Ofrece una resistencia mecánica 1.3 veces superior al acero #45 común, soportando altas cargas de torsión."
+  feature_detail_3_title: "Guía de Deslizamiento de 6 Puntos"
+  feature_detail_3_desc: "Sistema de guías lineales de 6 puntos con proceso exclusivo de templado y rectificado (Quenching & Grinding). Reduce drásticamente la fricción y el desgaste lateral, operando bajo las estrictas normas de precisión JIS Clase 1."
+  feature_detail_4_title: "Automatización con Base Siemens"
+  feature_detail_4_desc: "Panel HMI de pantalla táctil y PLC basados en tecnología de automatización industrial Siemens. Facilita el diagnóstico de fallas en pantalla y la integración turnkey con líneas de alimentación automática."
+  subproducts_tag: "Modelos y Variaciones"
+  subproducts_title: "Subproductos de la Serie PMC"
+  subproducts_desc: "La serie PMC dispone de diversas configuraciones estructurales y de dimensiones personalizadas para diferentes procesos industriales de conformado, rebabado y montaje."
+  subproducts:
+    st:
+      name: "PMC-ST Stander"
+      desc: "Modelo estándar ideal para operaciones generales de estampado, doblado y corte, montado sobre una zapata rígida."
+    bc:
+      name: "PMC-BC Bancada"
+      desc: "Estructura compacta diseñada para montaje en bancos de trabajo, ideal para operaciones de precisión en piezas pequeñas."
+    gt:
+      name: "PMC-GT Mesa Giratoria"
+      desc: "Equipada con mesa de indexación giratoria para procesos automatizados con alta velocidad de carga y descarga de piezas."
+    tr:
+      name: "PMC-TR Rebabado y Calibración"
+      desc: "Diseñada específicamente para la eliminación de rebabas en piezas de fundición y la calibración fina de componentes metálicos."
+    mt:
+      name: "PMC-MT Mesa Móvil"
+      desc: "Cuenta con mesa de trabajo móvil/extraíble para facilitar el setup y la carga de troqueles y moldes pesados de forma segura."
+    al:
+      name: "PMC-AL Alineación de Ejes"
+      desc: "Modelo especializado con mesa extendida y sistema de control de alta precisión para el enderezado y alineación de barras y ejes."
+    hz:
+      name: "PMC-HZ Horizontal"
+      desc: "Opera en el plano horizontal, ideal para procesos de montaje por interferencia, casquillos, ajuste y extrusión."
+    es:
+      name: "PMC-ES Especial"
+      desc: "Proyectos 100% a medida con dimensiones, recorridos y automatizaciones personalizadas según las necesidades del cliente."
+
+news:
+  tag: "Novedades y Eventos"
+  title: "Noticias de Pressmatik"
+  desc: "Siga nuestra participación en las principales ferias industriales internacionales y lanzamientos de tecnología."
+  read_more: "Leer Artículo Completo"
+  items:
+    0:
+      title: "Pressmatik en la Feira Mecânica 2026"
+      desc: "Presentamos nuestro nuevo catálogo de prensas industriales de alta precisión en la mayor feria de metalurgia de América Latina, con demostraciones en vivo."
+      date: "Mayo, 2026"
+    1:
+      title: "Lanzamiento Servo-Hidráulico en ExpoMetal"
+      desc: "Demostración de soluciones innovadoras de ahorro de energía y cumplimiento de la norma NR12. La nueva tecnología reduce el consumo eléctrico hasta un 55%."
+      date: "Abril, 2026"
+    2:
+      title: "Alianzas de Exportación en Hannover Messe"
+      desc: "Fortalecemos nuestra presencia global al cerrar acuerdos estratégicos para exportar prensas industriales a medida al mercado europeo."
+      date: "Marzo, 2026"
+
