@@ -253,8 +253,8 @@
         </div>
 
         <!-- Modelos Section -->
-        <section class="subproducts-section scroll-animate slide-top">
-            <div class="section-header">
+        <section class="subproducts-section">
+            <div class="section-header scroll-animate slide-top">
                 <span class="section-title-tag">{{ 'product_detail.models_tag'|trans }}</span>
                 <h2 class="section-title">{{ 'product_detail.models_title'|trans }}</h2>
                 <p class="section-desc">{{ 'product_detail.models_desc'|trans }}</p>
@@ -262,7 +262,7 @@
             
             <div class="subproducts-grid">
                 {% for sub in product.subproducts %}
-                    <div class="subproduct-card">
+                    <div class="subproduct-card scroll-animate slide-top">
                         <div class="product-image-container" style="aspect-ratio: 16/11; border-radius: 8px; margin-bottom: 1.5rem; overflow: hidden; border: 1px solid var(--color-border);">
                             <img src="{{ sub.img }}" alt="{{ sub.name_key|trans }}" loading="lazy" style="width: 100%; height: 100%; object-fit: contain; background: var(--color-surface-dark); padding: 0.5rem;">
                         </div>

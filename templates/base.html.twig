@@ -144,44 +144,55 @@
                     </wa-button>
 
                     <!-- Mobile Menu Button -->
-                    <wa-button id="mobile-menu-toggle" variant="text" size="medium" class="mobile-menu-btn" style="color: var(--color-text-primary);">
-                        <i class="bi bi-list" style="color: var(--color-accent-red); font-size: 1.5rem;"></i>
-                    </wa-button>
+                    <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Abrir menu">
+                        <i class="bi bi-list"></i>
+                    </button>
                 </div>
             </div>
         </header>
 
-        <!-- Mobile Navigation Drawer -->
-        <wa-drawer id="mobile-menu-drawer" label="Menu" placement="right" style="--size: 280px;">
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu-overlay" onclick="closeMobileMenu();"></div>
+
+        <!-- Mobile Navigation Panel -->
+        <div id="mobile-menu-drawer">
+            <div class="mobile-nav-header">
+                <span>Menu</span>
+                <button onclick="closeMobileMenu();" aria-label="Fechar menu">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
             <div class="mobile-nav-container">
-                <ul class="mobile-nav-menu" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.25rem;">
-                    <li><a href="{{ path('app_home', {'_locale': locale}) }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="closeMobileMenu();">{{ 'menu.home'|trans }}</a></li>
-                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#about' }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="closeMobileMenu();">{{ 'menu.company'|trans }}</a></li>
-                    <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-tipo-c'}) }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="closeMobileMenu();">Prensas Tipo "C"</a></li>
-                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#services' }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="closeMobileMenu();">{{ 'menu.services'|trans }}</a></li>
-                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="closeMobileMenu();">{{ 'menu.contact'|trans }}</a></li>
+                <ul class="mobile-nav-menu">
+                    <li><a href="{{ path('app_home', {'_locale': locale}) }}" class="mobile-nav-link" onclick="closeMobileMenu();">{{ 'menu.home'|trans }}</a></li>
+                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#about' }}" class="mobile-nav-link" onclick="closeMobileMenu();">{{ 'menu.company'|trans }}</a></li>
+                    <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-tipo-c'}) }}" class="mobile-nav-link" onclick="closeMobileMenu();">Prensas Tipo "C"</a></li>
+                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#services' }}" class="mobile-nav-link" onclick="closeMobileMenu();">{{ 'menu.services'|trans }}</a></li>
+                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}" class="mobile-nav-link" onclick="closeMobileMenu();">{{ 'menu.contact'|trans }}</a></li>
                 </ul>
-                
-                <div class="mobile-nav-divider" style="height: 1px; background-color: var(--color-border); margin: 1.5rem 0;"></div>
-                
+
+                <div class="mobile-nav-divider"></div>
+
                 <div class="mobile-nav-actions">
-                    <div class="lang-selector-mobile">
-                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--color-text-primary);">Idioma:</p>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <wa-button size="small" variant="neutral" href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge({'_locale': 'pt'})) }}">PT</wa-button>
-                            <wa-button size="small" variant="neutral" href="#">EN</wa-button>
-                            <wa-button size="small" variant="neutral" href="#">ES</wa-button>
-                        </div>
+                    <p class="mobile-lang-label">Idioma:</p>
+                    <div class="mobile-lang-btns">
+                        <a href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge({'_locale': 'pt'})) }}" class="mobile-lang-btn">PT</a>
+                        <a href="#" class="mobile-lang-btn">EN</a>
+                        <a href="#" class="mobile-lang-btn">ES</a>
                     </div>
-                    
-                    <div style="margin-top: 2rem;">
-                        <wa-button variant="brand" style="width: 100%;" href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}" onclick="closeMobileMenu();">
-                            {{ 'menu.quote'|trans }}
-                        </wa-button>
-                    </div>
+                    <a href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}" class="mobile-cta-btn" onclick="closeMobileMenu();">
+                        {{ 'menu.quote'|trans }}
+                    </a>
+
+                    <div class="mobile-nav-divider"></div>
+
+                    <button id="mobile-theme-toggle" class="mobile-theme-btn" aria-label="Alternar tema">
+                        <i id="mobile-theme-icon" class="bi bi-moon"></i>
+                        <span id="mobile-theme-label">Tema escuro</span>
+                    </button>
                 </div>
             </div>
-        </wa-drawer>
+        </div>
 
         <!-- Main Content -->
         <main>
@@ -270,48 +281,57 @@
                 // Theme toggle implementation
                 const toggle = document.getElementById('theme-toggle');
                 const icon = document.getElementById('theme-toggle-icon');
-                
+                const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+                const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+                const mobileThemeLabel = document.getElementById('mobile-theme-label');
+
+                // Shared function to apply theme state to icons
+                function applyThemeIcons(isDark) {
+                    if (icon) icon.className = isDark ? 'bi bi-sun' : 'bi bi-moon';
+                    if (mobileThemeIcon) mobileThemeIcon.className = isDark ? 'bi bi-sun' : 'bi bi-moon';
+                    if (mobileThemeLabel) mobileThemeLabel.textContent = isDark ? 'Tema claro' : 'Tema escuro';
+                }
+
+                // Shared function to toggle theme
+                function toggleTheme() {
+                    const isDark = document.documentElement.classList.contains('dark-theme');
+                    if (isDark) {
+                        document.documentElement.classList.remove('dark-theme');
+                        document.documentElement.setAttribute('data-theme', 'light');
+                        localStorage.setItem('theme', 'light');
+                        applyThemeIcons(false);
+                    } else {
+                        document.documentElement.classList.add('dark-theme');
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                        applyThemeIcons(true);
+                    }
+                }
+
                 // Initialize icon state
-                if (document.documentElement.classList.contains('dark-theme')) {
-                    icon.className = 'bi bi-sun';
-                } else {
-                    icon.className = 'bi bi-moon';
-                }
-                
-                if (toggle && icon) {
-                    toggle.addEventListener('click', () => {
-                        if (document.documentElement.classList.contains('dark-theme')) {
-                            document.documentElement.classList.remove('dark-theme');
-                            document.documentElement.setAttribute('data-theme', 'light');
-                            localStorage.setItem('theme', 'light');
-                            icon.className = 'bi bi-moon';
-                        } else {
-                            document.documentElement.classList.add('dark-theme');
-                            document.documentElement.setAttribute('data-theme', 'dark');
-                            localStorage.setItem('theme', 'dark');
-                            icon.className = 'bi bi-sun';
-                        }
-                    });
-                }
+                applyThemeIcons(document.documentElement.classList.contains('dark-theme'));
+
+                if (toggle) toggle.addEventListener('click', toggleTheme);
+                if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
 
                 // Mobile Menu Toggle logic
                 const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
                 const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
+                const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
                 if (mobileMenuToggle && mobileMenuDrawer) {
                     mobileMenuToggle.addEventListener('click', () => {
-                        mobileMenuDrawer.setAttribute('open', '');
-                        if (typeof mobileMenuDrawer.show === 'function') {
-                            mobileMenuDrawer.show();
-                        }
+                        mobileMenuDrawer.classList.add('open');
+                        if (mobileMenuOverlay) mobileMenuOverlay.classList.add('open');
+                        document.body.style.overflow = 'hidden';
                     });
                 }
 
                 window.closeMobileMenu = function() {
                     if (mobileMenuDrawer) {
-                        mobileMenuDrawer.removeAttribute('open');
-                        if (typeof mobileMenuDrawer.hide === 'function') {
-                            mobileMenuDrawer.hide();
-                        }
+                        mobileMenuDrawer.classList.remove('open');
+                        if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('open');
+                        document.body.style.overflow = '';
                     }
                 };
 
@@ -325,7 +345,7 @@
                         }
                     },
                     {
-                        threshold: 0.15,
+                        threshold: 0.05,
                         rootMargin: '0px 0px -55px 0px'
                     }
                 );
