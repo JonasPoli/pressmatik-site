@@ -1,0 +1,34 @@
+DirectoryIndex index.php
+
+# Uncomment the following line if you install assets as symlinks
+# Options +FollowSymlinks
+
+# Disabling MultiViews prevents unwanted negotiation
+<IfModule mod_negotiation.c>
+    Options -MultiViews
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Determine the RewriteBase automatically
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+
+    # Sets the HTTP_AUTHORIZATION header removed by Apache
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect to front controller if the requested file/directory does not exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ %{ENV:BASE}/index.php [QSA,L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        # When mod_rewrite is not available, we instruct a temporary redirect
+        # of the start page to the front controller instead of letting the 
+        # server show a 404 error.
+        RedirectMatch 302 ^/$ /index.php/
+    </IfModule>
+</IfModule>
