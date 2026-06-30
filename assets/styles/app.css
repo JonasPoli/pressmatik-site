@@ -2151,7 +2151,7 @@ wa-tab[active]::part(base) {
         gap: 4rem;
     }
     
-    .diff-grid, .services-grid, .testimonials-carousel, .subproducts-grid {
+    .diff-grid, .services-grid, .testimonials-carousel, .subproducts-grid, .news-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
@@ -2185,7 +2185,7 @@ wa-tab[active]::part(base) {
         display: none;
     }
     
-    .diff-grid, .services-grid, .testimonials-carousel, .products-grid, .secondary-products-grid, .config-grid, .subproducts-grid {
+    .diff-grid, .services-grid, .testimonials-carousel, .products-grid, .secondary-products-grid, .config-grid, .subproducts-grid, .news-grid {
         grid-template-columns: 1fr;
     }
     
@@ -2243,6 +2243,11 @@ wa-tab[active]::part(base) {
     
     .container {
         padding: 0 1.5rem;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
     }
     
     .footer-bottom {

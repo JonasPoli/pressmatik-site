@@ -155,11 +155,11 @@
         <wa-drawer id="mobile-menu-drawer" label="Menu" placement="right" style="--size: 280px;">
             <div class="mobile-nav-container">
                 <ul class="mobile-nav-menu" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.25rem;">
-                    <li><a href="{{ path('app_home', {'_locale': locale}) }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="document.getElementById('mobile-menu-drawer').hide();">{{ 'menu.home'|trans }}</a></li>
-                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#about' }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="document.getElementById('mobile-menu-drawer').hide();">{{ 'menu.company'|trans }}</a></li>
-                    <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-tipo-c'}) }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="document.getElementById('mobile-menu-drawer').hide();">Prensas Tipo "C"</a></li>
-                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#services' }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="document.getElementById('mobile-menu-drawer').hide();">{{ 'menu.services'|trans }}</a></li>
-                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="document.getElementById('mobile-menu-drawer').hide();">{{ 'menu.contact'|trans }}</a></li>
+                    <li><a href="{{ path('app_home', {'_locale': locale}) }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="closeMobileMenu();">{{ 'menu.home'|trans }}</a></li>
+                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#about' }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="closeMobileMenu();">{{ 'menu.company'|trans }}</a></li>
+                    <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-tipo-c'}) }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="closeMobileMenu();">Prensas Tipo "C"</a></li>
+                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#services' }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="closeMobileMenu();">{{ 'menu.services'|trans }}</a></li>
+                    <li><a href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}" class="mobile-nav-link" style="font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary);" onclick="closeMobileMenu();">{{ 'menu.contact'|trans }}</a></li>
                 </ul>
                 
                 <div class="mobile-nav-divider" style="height: 1px; background-color: var(--color-border); margin: 1.5rem 0;"></div>
@@ -175,7 +175,7 @@
                     </div>
                     
                     <div style="margin-top: 2rem;">
-                        <wa-button variant="brand" style="width: 100%;" href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}" onclick="document.getElementById('mobile-menu-drawer').hide();">
+                        <wa-button variant="brand" style="width: 100%;" href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}" onclick="closeMobileMenu();">
                             {{ 'menu.quote'|trans }}
                         </wa-button>
                     </div>
@@ -299,9 +299,21 @@
                 const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
                 if (mobileMenuToggle && mobileMenuDrawer) {
                     mobileMenuToggle.addEventListener('click', () => {
-                        mobileMenuDrawer.show();
+                        mobileMenuDrawer.setAttribute('open', '');
+                        if (typeof mobileMenuDrawer.show === 'function') {
+                            mobileMenuDrawer.show();
+                        }
                     });
                 }
+
+                window.closeMobileMenu = function() {
+                    if (mobileMenuDrawer) {
+                        mobileMenuDrawer.removeAttribute('open');
+                        if (typeof mobileMenuDrawer.hide === 'function') {
+                            mobileMenuDrawer.hide();
+                        }
+                    }
+                };
 
                 // Global IntersectionObserver scroll-animate script
                 const observer = new IntersectionObserver(
