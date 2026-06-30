@@ -54,10 +54,10 @@
                                             <span class="megamenu-title">{{ 'products_sec.hydraulic_presses'|trans }}</span>
                                             <ul class="megamenu-links">
                                                 <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-tipo-c'}) }}">Tipo "C"</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-tipo-c-duplo'}) }}">Tipo "C Duplo"</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-4-colunas'}) }}">4 Colunas</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-tipo-h'}) }}">Tipo "H"</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-especiais'}) }}">Especiais</a></li>
+                                                <li><a href="#">Tipo "C Duplo"</a></li>
+                                                <li><a href="#">4 Colunas</a></li>
+                                                <li><a href="#">Tipo "H"</a></li>
+                                                <li><a href="#">Especiais</a></li>
                                             </ul>
                                         </div>
                                         <!-- Col 2: Prensas Servo-Hidráulicas -->
@@ -67,7 +67,7 @@
                                             </div>
                                             <span class="megamenu-title">{{ 'products_sec.servo_presses'|trans }}</span>
                                             <ul class="megamenu-links">
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-servo-hidraulicas-servo-bombas'}) }}">Servo Bombas</a></li>
+                                                <li><a href="#">Servo Bombas</a></li>
                                             </ul>
                                         </div>
                                         <!-- Col 3: Prensas Mecânicas -->
@@ -77,9 +77,9 @@
                                             </div>
                                             <span class="megamenu-title">Prensas Mecânicas</span>
                                             <ul class="megamenu-links">
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-mecanicas-mecanicas'}) }}">Mecânicas</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-mecanicas-servo'}) }}">Servo</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-mecanicas-alta-velocidade'}) }}">Alta Velocidade</a></li>
+                                                <li><a href="#">Mecânicas</a></li>
+                                                <li><a href="#">Servo</a></li>
+                                                <li><a href="#">Alta Velocidade</a></li>
                                             </ul>
                                         </div>
                                         <!-- Col 4: Equipamentos -->
@@ -89,13 +89,13 @@
                                             </div>
                                             <span class="megamenu-title">{{ 'products_sec.equipments'|trans }}</span>
                                             <ul class="megamenu-links">
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'equipamentos-yokes'}) }}">Yokes</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'equipamentos-unidades-de-forca'}) }}">Unidades de Força</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'equipamentos-cilindros'}) }}">Cilindros</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'equipamentos-transferencia-e-filtracao'}) }}">Transf. e Filtração</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'equipamentos-plataformas'}) }}">Plataformas</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'equipamentos-tombadores'}) }}">Tombadores</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'equipamentos-especiais'}) }}">Especiais</a></li>
+                                                <li><a href="#">Yokes</a></li>
+                                                <li><a href="#">Unidades de Força</a></li>
+                                                <li><a href="#">Cilindros</a></li>
+                                                <li><a href="#">Transf. e Filtração</a></li>
+                                                <li><a href="#">Plataformas</a></li>
+                                                <li><a href="#">Tombadores</a></li>
+                                                <li><a href="#">Especiais</a></li>
                                             </ul>
                                         </div>
                                         <!-- Col 5: Peças e Acessórios -->
@@ -105,9 +105,9 @@
                                             </div>
                                             <span class="megamenu-title">{{ 'products_sec.parts'|trans }}</span>
                                             <ul class="megamenu-links">
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'pecas-e-acessorios-hidraulica'}) }}">Hidráulica</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'pecas-e-acessorios-eletroeletronica'}) }}">Eletroeletrônica</a></li>
-                                                <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'pecas-e-acessorios-acessorios'}) }}">Acessórios</a></li>
+                                                <li><a href="#">Hidráulica</a></li>
+                                                <li><a href="#">Eletroeletrônica</a></li>
+                                                <li><a href="#">Acessórios</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -129,8 +129,8 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge({'_locale': 'pt'})) }}">Português (PT)</a></li>
-                            <li><a href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge({'_locale': 'en'})) }}">English (EN)</a></li>
-                            <li><a href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge({'_locale': 'es'})) }}">Español (ES)</a></li>
+                            <li><a href="#">English (EN)</a></li>
+                            <li><a href="#">Español (ES)</a></li>
                         </ul>
                     </div>
 
@@ -173,9 +173,9 @@
                     <h4>{{ 'menu.products'|trans }}</h4>
                     <ul>
                         <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-tipo-c'}) }}">{{ 'catalog.hydraulic.tipo_c.name'|trans }}</a></li>
-                        <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-4-colunas'}) }}">{{ 'catalog.hydraulic.colunas.name'|trans }}</a></li>
-                        <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-servo-hidraulicas-servo-bombas'}) }}">{{ 'catalog.servo_hydraulic.bombas.name'|trans }}</a></li>
-                        <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-mecanicas-mecanicas'}) }}">Prensas Mecânicas</a></li>
+                        <li><a href="#">{{ 'catalog.hydraulic.colunas.name'|trans }}</a></li>
+                        <li><a href="#">{{ 'catalog.servo_hydraulic.bombas.name'|trans }}</a></li>
+                        <li><a href="#">Prensas Mecânicas</a></li>
                     </ul>
                 </div>
                 

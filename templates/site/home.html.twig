@@ -152,9 +152,15 @@
                                                 {% else %}
                                                     <span class="product-specs-badge">{{ 'product_detail.tag'|trans }}</span>
                                                 {% endif %}
-                                                <wa-button variant="brand" size="small" href="{{ path('app_product_detail', {'_locale': app.request.locale, 'slug': prod.slug}) }}">
-                                                    {{ 'cta.learn_more'|trans }}
-                                                </wa-button>
+                                                {% if prod.slug == 'prensas-hidraulicas-tipo-c' %}
+                                                    <wa-button variant="brand" size="small" href="{{ path('app_product_detail', {'_locale': app.request.locale, 'slug': prod.slug}) }}">
+                                                        {{ 'cta.learn_more'|trans }}
+                                                    </wa-button>
+                                                {% else %}
+                                                    <wa-button variant="brand" size="small" href="#">
+                                                        {{ 'cta.learn_more'|trans }}
+                                                    </wa-button>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>

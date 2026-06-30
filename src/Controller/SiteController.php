@@ -16,7 +16,7 @@ class SiteController extends AbstractController
         $this->catalogService = $catalogService;
     }
 
-    #[Route('/{_locale}/', name: 'app_home', requirements: ['_locale' => 'pt|en|es'])]
+    #[Route('/{_locale}/', name: 'app_home', requirements: ['_locale' => 'pt'])]
     public function home(string $_locale): Response
     {
         return $this->render('site/home.html.twig', [
@@ -25,9 +25,13 @@ class SiteController extends AbstractController
         ]);
     }
 
-    #[Route('/{_locale}/produtos/{slug}', name: 'app_product_detail', requirements: ['_locale' => 'pt|en|es'])]
+    #[Route('/{_locale}/produtos/{slug}', name: 'app_product_detail', requirements: ['_locale' => 'pt'])]
     public function productDetail(string $_locale, string $slug): Response
     {
+        if ($slug !== 'prensas-hidraulicas-tipo-c') {
+            throw $this->createNotFoundException('Produto não encontrado');
+        }
+
         $product = $this->catalogService->getProductBySlug($slug);
 
         if (!$product) {
