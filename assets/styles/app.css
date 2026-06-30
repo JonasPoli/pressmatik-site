@@ -2159,8 +2159,28 @@ wa-tab[active]::part(base) {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+.mobile-menu-btn {
+    display: none;
+}
 
 @media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: inline-flex;
+    }
+
+    .header-actions wa-button[variant="brand"],
+    .header-actions .lang-selector {
+        display: none !important;
+    }
+    
+    .header-container {
+        height: 70px;
+    }
+    
+    .logo-image {
+        height: 34px;
+    }
+
     .nav-menu {
         display: none;
     }
@@ -2169,8 +2189,56 @@ wa-tab[active]::part(base) {
         grid-template-columns: 1fr;
     }
     
+    .hero-section {
+        padding: 6rem 0 3rem 0;
+        min-height: auto;
+    }
+    
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+    
     .hero-title {
-        font-size: 2.75rem;
+        font-size: 2.25rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 2.25rem;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .hero-badge {
+        padding: 0.5rem 0.85rem;
+    }
+    
+    .badge-top {
+        top: 5%;
+        left: 5px;
+    }
+    
+    .badge-bottom {
+        bottom: 5%;
+        right: 5px;
+    }
+    
+    .badge-num {
+        font-size: 1.15rem;
+    }
+    
+    .badge-lbl {
+        font-size: 0.75rem;
+    }
+
+    .collage-shape {
+        left: 0;
+        width: 260px;
+        height: 260px;
     }
     
     .container {
