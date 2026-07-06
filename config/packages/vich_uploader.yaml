@@ -1,0 +1,39 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+        type: attribute
+
+    mappings:
+        products:
+            uri_prefix: /uploads/products
+            upload_destination: '%kernel.project_dir%/public/uploads/products'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        about:
+            uri_prefix: /uploads/about
+            upload_destination: '%kernel.project_dir%/public/uploads/about'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        history:
+            uri_prefix: /uploads/history
+            upload_destination: '%kernel.project_dir%/public/uploads/history'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        gallery:
+            uri_prefix: /uploads/gallery
+            upload_destination: '%kernel.project_dir%/public/uploads/gallery'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        testimonies:
+            uri_prefix: /uploads/testimonies
+            upload_destination: '%kernel.project_dir%/public/uploads/testimonies'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        clients:
+            uri_prefix: /uploads/clients
+            upload_destination: '%kernel.project_dir%/public/uploads/clients'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        news:
+            uri_prefix: /uploads/news
+            upload_destination: '%kernel.project_dir%/public/uploads/news'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        services:
+            uri_prefix: /uploads/services
+            upload_destination: '%kernel.project_dir%/public/uploads/services'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

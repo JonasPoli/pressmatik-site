@@ -1,0 +1,24 @@
+liip_imagine:
+    driver: "gd"
+    twig:
+        mode: lazy
+    webp:
+        generate: true
+    filter_sets:
+        cache: ~
+        about_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [400, 300], mode: outbound }
+        gallery_thumb:
+            quality: 80
+            filters:
+                thumbnail: { size: [600, 400], mode: outbound }
+        history_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [400, 250], mode: outbound }
+        product_list:
+            quality: 100
+            filters:
+                thumbnail: { size: [400, 500], mode: inset }

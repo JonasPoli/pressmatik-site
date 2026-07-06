@@ -1,0 +1,89 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Logos dos Clientes{% endblock %}
+
+{% block body %}
+<div class="page-header flex items-center justify-between">
+    <div>
+        <h1 class="page-title">Logos dos Clientes</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400">Gerenciamento dos logotipos exibidos no site</p>
+    </div>
+    <a href="{{ path('app_admin_client_logo_new') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+        <i class="fa-solid fa-plus"></i> Adicionar Logo
+    </a>
+</div>
+
+<div class="admin-card">
+    {% if items|length == 0 %}
+        <p class="text-sm text-slate-500 dark:text-slate-400 py-8 text-center">Nenhum logotipo cadastrado ainda.</p>
+    {% else %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Pos.</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Imagem</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Nome / Identificação</th>
+                    <th class="text-right py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="client-logo-tbody">
+                {% for item in items %}
+                <tr class="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" data-id="{{ item.id }}">
+                    <td class="py-3 px-4 text-slate-500 cursor-move"><i class="fa-solid fa-grip-vertical mr-2 text-slate-400"></i>{{ item.position }}</td>
+                    <td class="py-3 px-4">
+                        {% if item.imageName %}
+                            <img src="/uploads/clients/{{ item.imageName }}" alt="" class="max-h-12 max-w-[120px] object-contain rounded bg-slate-100 p-1 dark:bg-slate-800">
+                        {% else %}
+                            <span class="text-slate-400">—</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-3 px-4 font-medium text-slate-800 dark:text-white">{{ item.name ?: 'Sem identificação' }}</td>
+                    <td class="py-3 px-4 text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <a href="{{ path('app_admin_client_logo_edit', {id: item.id}) }}" class="text-primary hover:text-primary-dark" title="Editar">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <form method="post" action="{{ path('app_admin_client_logo_delete', {id: item.id}) }}" onsubmit="return confirm('Tem certeza?')" class="inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+                                <button type="submit" class="text-red-500 hover:text-red-700" title="Excluir">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script>
+function initSortable() {
+    const el = document.getElementById('client-logo-tbody');
+    if (el && !el.dataset.sortableInitialized) {
+        el.dataset.sortableInitialized = 'true';
+        new Sortable(el, {
+            animation: 150,
+            handle: '.cursor-move',
+            onEnd: function () {
+                const ids = Array.from(el.children).map(tr => tr.dataset.id);
+                fetch('{{ path("app_admin_client_logo_reorder") }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ids })
+                });
+            }
+        });
+    }
+}
+initSortable();
+document.addEventListener('turbo:load', initSortable);
+document.addEventListener('DOMContentLoaded', initSortable);
+</script>
+{% endblock %}

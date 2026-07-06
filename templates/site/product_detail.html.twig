@@ -1,7 +1,7 @@
 {# templates/site/product_detail.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Pressmatik - {{ product.name_key|trans }}{% endblock %}
+{% block title %}Pressmatik - {% if activeSubproduct %}{{ activeSubproduct.model }} {{ activeSubproduct.name_key|trans }}{% else %}{{ product.name_key|trans }}{% endif %}{% endblock %}
 
 {% block body %}
     <div class="container product-detail-layout">
@@ -11,31 +11,31 @@
             <span>/</span>
             <a href="{{ path('app_home', {'_locale': locale}) ~ '#products' }}">{{ 'menu.products'|trans }}</a>
             <span>/</span>
-            <span style="color: var(--color-accent-red);">{{ product.name_key|trans }}</span>
+            {% if activeSubproduct %}
+                <a href="{{ path('app_product_detail', {'_locale': locale, 'slug': product.slug}) }}">{{ product.name_key|trans }}</a>
+                <span>/</span>
+                <span style="color: var(--color-accent-red);">{{ activeSubproduct.model }} {{ activeSubproduct.name_key|trans }}</span>
+            {% else %}
+                <span style="color: var(--color-accent-red);">{{ product.name_key|trans }}</span>
+            {% endif %}
         </div>
 
         <!-- Product Introduction (Above the Fold) -->
         <div class="product-intro-grid">
-            <div class="product-gallery scroll-animate slide-left">
-                <wa-carousel navigation pagination loop mouse-dragging autoplay style="width: 100%; height: 100%;">
-                    {% for sub in product.subproducts %}
-                        <wa-carousel-item>
-                            <img src="{{ sub.img }}" alt="{{ sub.name_key|trans }}" style="width: 100%; height: 100%; object-fit: contain; display: block;">
-                        </wa-carousel-item>
-                    {% endfor %}
-                </wa-carousel>
+            <div class="product-gallery scroll-animate slide-left" style="display: flex; align-items: center; justify-content: center; background: var(--color-surface-dark); border-radius: 12px; border: 1px solid var(--color-border); padding: 2rem;">
+                <img src="{% if activeSubproduct %}{{ activeSubproduct.img }}{% else %}{{ product.img }}{% endif %}" alt="{% if activeSubproduct %}{{ activeSubproduct.name_key|trans }}{% else %}{{ product.name_key|trans }}{% endif %}" style="max-width: 100%; max-height: 400px; object-fit: contain; display: block; margin: auto;">
             </div>
             
             <div class="product-meta-panel scroll-animate slide-right">
                 <span class="product-tag">{{ 'product_detail.tag'|trans }}</span>
-                <h1>{{ product.name_key|trans }}</h1>
+                <h1>{% if activeSubproduct %}{{ activeSubproduct.model }} - {{ activeSubproduct.name_key|trans }}{% else %}{{ product.name_key|trans }}{% endif %}</h1>
                 {% if product.tonnage %}
                     <div class="product-tonnage">
                         {{ 'product_detail.spec_capacity'|trans }}: {{ product.tonnage }}
                     </div>
                 {% endif %}
                 <p class="product-description">
-                    {{ product.desc_key|trans }}
+                    {% if activeSubproduct %}{{ activeSubproduct.desc_key|trans }}{% else %}{{ product.desc_key|trans }}{% endif %}
                 </p>
                 <div class="product-action-buttons">
                     <wa-button variant="brand" size="large" href="#quote-product-form">
@@ -138,55 +138,93 @@
         <!-- Tabs Component (Especificações, Características, Opcionais, Vídeos) -->
         <div class="product-tabs-section scroll-animate slide-top">
             <wa-tab-group>
-                {% if product.specs_table is defined and product.specs_table is not null %}
+                {% if productSizes is not empty or (product.specs_table is defined and product.specs_table is not null) %}
                     <wa-tab slot="nav" panel="specs">{{ 'product_detail.specs_title'|trans }}</wa-tab>
                 {% endif %}
                 {% if product.features is not empty %}
                     <wa-tab slot="nav" panel="features">{{ 'product_detail.features_title'|trans }}</wa-tab>
                 {% endif %}
-                {% if product.std_configs is not empty or product.opt_configs is not empty %}
+                {% if (productSizes is not empty and (standardItems is not empty or optionalItems is not empty)) or product.std_configs is not empty or product.opt_configs is not empty %}
                     <wa-tab slot="nav" panel="config">{{ 'product_detail.config_title'|trans }}</wa-tab>
                 {% endif %}
                 <wa-tab slot="nav" panel="videos">{{ 'product_detail.videos_title'|trans }}</wa-tab>
 
                 <!-- Technical Specification Table Panel -->
-                {% if product.specs_table is defined and product.specs_table is not null %}
+                {% if productSizes is not empty or (product.specs_table is defined and product.specs_table is not null) %}
                     <wa-tab-panel name="specs">
                         <div class="specs-table-wrapper">
                             <table class="specs-table">
-                                <thead>
-                                    <tr>
-                                        <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_name'|trans }}</th>
-                                        <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_unit'|trans }}</th>
-                                        {% for modelName in product.specs_table.models %}
-                                            <th colspan="2" style="text-align: center;">{{ modelName }}</th>
-                                        {% endfor %}
-                                    </tr>
-                                    <tr>
-                                        {% for modelName in product.specs_table.models %}
-                                            {% for subhead in product.specs_table.headers %}
-                                                <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">{{ subhead }}</th>
-                                            {% endfor %}
-                                        {% endfor %}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for row in product.specs_table.rows %}
+                                {% if productSizes is not empty %}
+                                    <thead>
                                         <tr>
-                                            <td>{{ row.label_key|trans }}</td>
-                                            <td>{{ row.unit }}</td>
-                                            {% for val in row.values %}
-                                                {% if val is iterable %}
-                                                    {% for subval in val %}
-                                                        <td style="text-align: center;">{{ subval }}</td>
-                                                    {% endfor %}
-                                                {% else %}
-                                                    <td colspan="2" style="text-align: center;">{{ val }}</td>
+                                            <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_name'|trans }}</th>
+                                            <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_unit'|trans }}</th>
+                                            {% for size in productSizes %}
+                                                <th colspan="{{ (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) }}" style="text-align: center;">{{ size.name }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                        <tr>
+                                            {% for size in productSizes %}
+                                                {% if size.hasVType %}
+                                                    <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">V-type</th>
+                                                {% endif %}
+                                                {% if size.hasHType %}
+                                                    <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">H-type</th>
                                                 {% endif %}
                                             {% endfor %}
                                         </tr>
-                                    {% endfor %}
-                                </tbody>
+                                    </thead>
+                                    <tbody>
+                                        {% for row in specsTableRows %}
+                                            <tr>
+                                                <td>{{ row.specification.getName(locale) }}</td>
+                                                <td>{{ row.specification.getUnit(locale) }}</td>
+                                                {% for size in productSizes %}
+                                                    {% if size.hasVType %}
+                                                        <td style="text-align: center;">{{ row.values[size.id].v ?? '—' }}</td>
+                                                    {% endif %}
+                                                    {% if size.hasHType %}
+                                                        <td style="text-align: center;">{{ row.values[size.id].h ?? '—' }}</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                {% else %}
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_name'|trans }}</th>
+                                            <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_unit'|trans }}</th>
+                                            {% for modelName in product.specs_table.models %}
+                                                <th colspan="2" style="text-align: center;">{{ modelName }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                        <tr>
+                                            {% for modelName in product.specs_table.models %}
+                                                {% for subhead in product.specs_table.headers %}
+                                                    <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">{{ subhead }}</th>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for row in product.specs_table.rows %}
+                                            <tr>
+                                                <td>{{ row.label_key|trans }}</td>
+                                                <td>{{ row.unit }}</td>
+                                                {% for val in row.values %}
+                                                    {% if val is iterable %}
+                                                        {% for subval in val %}
+                                                            <td style="text-align: center;">{{ subval }}</td>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <td colspan="2" style="text-align: center;">{{ val }}</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                {% endif %}
                             </table>
                         </div>
                         <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic;">
@@ -212,27 +250,39 @@
                 {% endif %}
 
                 <!-- Standard / Optional Configurations Panel -->
-                {% if product.std_configs is not empty or product.opt_configs is not empty %}
+                {% if (productSizes is not empty and (standardItems is not empty or optionalItems is not empty)) or product.std_configs is not empty or product.opt_configs is not empty %}
                     <wa-tab-panel name="config">
                         <div class="config-grid">
-                            {% if product.std_configs is not empty %}
+                            {% if (productSizes is not empty and standardItems is not empty) or product.std_configs is not empty %}
                                 <div class="config-col">
                                     <h3>{{ 'product_detail.std_items'|trans }}</h3>
                                     <ul class="config-list">
-                                        {% for std in product.std_configs %}
-                                            <li><i class="bi bi-check-circle-fill" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ std|trans }}</li>
-                                        {% endfor %}
+                                        {% if productSizes is not empty and standardItems is not empty %}
+                                            {% for std in standardItems %}
+                                                <li><i class="bi bi-check-circle-fill" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ std.getName(locale) }}</li>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for std in product.std_configs %}
+                                                <li><i class="bi bi-check-circle-fill" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ std|trans }}</li>
+                                            {% endfor %}
+                                        {% endif %}
                                     </ul>
                                 </div>
                             {% endif %}
                             
-                            {% if product.opt_configs is not empty %}
+                            {% if (productSizes is not empty and optionalItems is not empty) or product.opt_configs is not empty %}
                                 <div class="config-col">
                                     <h3>{{ 'product_detail.opt_items'|trans }}</h3>
                                     <ul class="config-list">
-                                        {% for opt in product.opt_configs %}
-                                            <li><i class="bi bi-plus-circle-fill" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ opt|trans }}</li>
-                                        {% endfor %}
+                                        {% if productSizes is not empty and optionalItems is not empty %}
+                                            {% for opt in optionalItems %}
+                                                <li><i class="bi bi-plus-circle-fill" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ opt.getName(locale) }}</li>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for opt in product.opt_configs %}
+                                                <li><i class="bi bi-plus-circle-fill" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ opt|trans }}</li>
+                                            {% endfor %}
+                                        {% endif %}
                                     </ul>
                                 </div>
                             {% endif %}
@@ -242,11 +292,41 @@
 
                 <!-- Videos Showcase Panel -->
                 <wa-tab-panel name="videos">
-                    <div class="video-container" style="display: flex; justify-content: center; padding: 2rem 0;">
-                        <video controls style="width: 100%; max-width: 800px; border-radius: 12px; border: 1px solid var(--color-border); box-shadow: var(--shadow-card-subtle);">
-                            <source src="https://www.qiaosenpresses.com/uploads/Deep-Throat-Presses.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                    <div class="video-container" style="display: flex; flex-direction: column; align-items: center; gap: 2rem; padding: 2rem 0; width: 100%;">
+                        {% if productSizes is not empty and productVideos is not empty %}
+                            {% for video in productVideos %}
+                                <div style="width: 100%; max-width: 800px; text-align: left;">
+                                    {% if video.getTitle(locale) %}
+                                        <h4 style="margin-bottom: 0.5rem; font-family: var(--font-heading); color: var(--color-text-primary);">{{ video.getTitle(locale) }}</h4>
+                                    {% endif %}
+                                    {% if 'youtube.com' in video.url or 'youtu.be' in video.url %}
+                                        {% set ytId = '' %}
+                                        {% if 'youtu.be/' in video.url %}
+                                            {% set ytId = video.url|split('youtu.be/')[1]|split('?')[0] %}
+                                        {% elseif 'v=' in video.url %}
+                                            {% set ytId = video.url|split('v=')[1]|split('&')[0] %}
+                                        {% elseif 'embed/' in video.url %}
+                                            {% set ytId = video.url|split('embed/')[1]|split('?')[0] %}
+                                        {% endif %}
+                                        {% if ytId %}
+                                            <iframe width="100%" height="450" src="https://www.youtube.com/embed/{{ ytId }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px; border: 1px solid var(--color-border); box-shadow: var(--shadow-card-subtle); min-height: 450px;"></iframe>
+                                        {% else %}
+                                            <a href="{{ video.url }}" target="_blank" style="color: var(--color-accent-red);">{{ video.url }}</a>
+                                        {% endif %}
+                                    {% else %}
+                                        <video controls style="width: 100%; border-radius: 12px; border: 1px solid var(--color-border); box-shadow: var(--shadow-card-subtle);">
+                                            <source src="{{ video.url }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <video controls style="width: 100%; max-width: 800px; border-radius: 12px; border: 1px solid var(--color-border); box-shadow: var(--shadow-card-subtle);">
+                                <source src="https://www.qiaosenpresses.com/uploads/Deep-Throat-Presses.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        {% endif %}
                     </div>
                 </wa-tab-panel>
             </wa-tab-group>
@@ -262,17 +342,39 @@
             
             <div class="subproducts-grid">
                 {% for sub in product.subproducts %}
-                    <div class="subproduct-card scroll-animate slide-top">
+                    {% set is_active = (activeSubproduct and sub.model == activeSubproduct.model) %}
+                    <div class="subproduct-card scroll-animate slide-top {% if is_active %}active-subproduct{% endif %}"
+                         style="{% if is_active %}border: 2px solid var(--color-accent-red); box-shadow: 0 10px 25px rgba(213, 28, 35, 0.15); transform: translateY(-4px);{% endif %}">
+                        
+                        {% if not is_active %}
+                            <a href="{{ path('app_product_detail', {'_locale': locale, 'slug': product.slug, 'model': sub.model}) }}" class="subproduct-card-link" style="text-decoration: none; color: inherit; display: block;">
+                        {% endif %}
+                        
                         <div class="product-image-container" style="aspect-ratio: 16/11; border-radius: 8px; margin-bottom: 1.5rem; overflow: hidden; border: 1px solid var(--color-border);">
                             <img src="{{ sub.img }}" alt="{{ sub.name_key|trans }}" loading="lazy" style="width: 100%; height: 100%; object-fit: contain; background: var(--color-surface-dark); padding: 0.5rem;">
                         </div>
                         <span class="subproduct-model">{{ sub.model }}</span>
-                        <h4>{{ sub.name_key|trans }}</h4>
-                        <p>{{ sub.desc_key|trans }}</p>
+                        <h4 style="margin-top: 0.5rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-text-primary);">{{ sub.name_key|trans }}</h4>
+                        
+                        {% if not is_active %}
+                            </a>
+                        {% endif %}
+                        
+                        <p style="margin-top: 0.5rem; margin-bottom: 1rem; color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5;">{{ sub.desc_key|trans }}</p>
                         <span class="subproduct-tag-detail">{{ sub.tag }}</span>
-                        <wa-button variant="brand" size="small" href="#quote-product-form" style="margin-top: 1.5rem;" onclick="document.getElementById('p-model').value = '{{ sub.model|lower }}';">
-                            {{ 'cta.quote_now'|trans }}
-                        </wa-button>
+                        
+                        <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; align-items: center;">
+                            {% if is_active %}
+                                <wa-button variant="brand" size="small" href="#quote-product-form" onclick="document.getElementById('p-model').value = '{{ sub.model|lower }}';">
+                                    {{ 'cta.quote_now'|trans }}
+                                </wa-button>
+                                <span style="font-size: 0.75rem; color: var(--color-accent-red); font-weight: 700; text-transform: uppercase; margin-left: auto; letter-spacing: 0.5px;">Atual</span>
+                            {% else %}
+                                <wa-button variant="neutral" size="small" outline href="{{ path('app_product_detail', {'_locale': locale, 'slug': product.slug, 'model': sub.model}) }}">
+                                    {{ 'cta.learn_more'|trans }}
+                                </wa-button>
+                            {% endif %}
+                        </div>
                     </div>
                 {% endfor %}
             </div>
@@ -297,7 +399,7 @@
                     <wa-input id="p-phone" type="tel" label="{{ 'contact_form.phone'|trans }}" placeholder="(16) 99999-9999" required></wa-input>
                 </div>
                 <div class="form-group">
-                    <wa-select id="p-model" label="{{ 'contact_form.selected_model'|trans }}" value="{{ product.subproducts|first ? (product.subproducts|first).model|lower : '' }}">
+                    <wa-select id="p-model" label="{{ 'contact_form.selected_model'|trans }}" value="{{ activeSubproduct ? activeSubproduct.model|lower : '' }}">
                         {% for sub in product.subproducts %}
                             <wa-option value="{{ sub.model|lower }}">{{ sub.model }} ({{ sub.name_key|trans }})</wa-option>
                         {% endfor %}

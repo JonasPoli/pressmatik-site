@@ -1,0 +1,48 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}{{ formTitle }}{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1 class="page-title">{{ formTitle }}</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400">
+        <a href="{{ path('app_admin_tech_spec_index') }}" class="text-primary hover:underline">← Voltar</a>
+    </p>
+</div>
+
+<form method="post" class="space-y-6" x-data="{ tab: 'pt' }">
+    <div class="admin-card">
+        <div class="flex gap-2 mb-6 border-b border-slate-200 dark:border-slate-700 pb-2">
+            <button type="button" @click="tab='pt'" :class="tab==='pt' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇧🇷 PT</button>
+            <button type="button" @click="tab='en'" :class="tab==='en' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇺🇸 EN</button>
+            <button type="button" @click="tab='es'" :class="tab==='es' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇪🇸 ES</button>
+        </div>
+
+        {% for lang in ['pt', 'en', 'es'] %}
+        <div x-show="tab==='{{ lang }}'" class="space-y-4">
+            <div class="wab-field">
+                <label class="wab-label">Nome ({{ lang|upper }})</label>
+                <input type="text" name="name{{ lang|capitalize }}" value="{{ spec ? attribute(spec, 'name' ~ lang|capitalize) : '' }}" class="wab-input" {{ lang == 'pt' ? 'required' : '' }}>
+            </div>
+            <div class="wab-field">
+                <label class="wab-label">Unidade ({{ lang|upper }})</label>
+                <input type="text" name="unit{{ lang|capitalize }}" value="{{ spec ? attribute(spec, 'unit' ~ lang|capitalize) : '' }}" class="wab-input" placeholder="Ex: Ton, mm, S.P.M">
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="wab-field mt-4">
+            <label class="wab-label">Posição</label>
+            <input type="number" name="position" value="{{ spec ? spec.position : 0 }}" class="wab-input" min="0">
+        </div>
+    </div>
+
+    <div class="flex justify-end gap-3">
+        <a href="{{ path('app_admin_tech_spec_index') }}" class="px-4 py-2 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">Cancelar</a>
+        <button type="submit" class="inline-flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+            <i class="fa-solid fa-save"></i> Salvar
+        </button>
+    </div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+{% endblock %}

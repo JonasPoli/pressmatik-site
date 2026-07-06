@@ -1,0 +1,203 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block body %}
+
+{# ── Page Header ───────────────────────────────────────────────────────────── #}
+<div class="page-header flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+    <div>
+        <h1 class="page-title text-2xl font-bold text-slate-800 dark:text-white">Painel Administrativo</h1>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            Olá, <strong>{{ app.user.userIdentifier }}</strong> · Gerenciamento global de conteúdo da Pressmatik.
+        </p>
+    </div>
+    <div class="text-xs font-semibold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-white/5 px-3 py-1.5 rounded-lg border border-slate-200/50 dark:border-white/5">
+        <i class="fa-regular fa-clock mr-1"></i> {{ 'now'|date('d/m/Y H:i') }}
+    </div>
+</div>
+
+{# ── Stat Cards ────────────────────────────────────────────────────────────── #}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+
+    {# Produtos #}
+    <div class="stat-card p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/5 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
+        <div class="stat-card-icon w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light flex items-center justify-center text-lg">
+            <i class="fa-solid fa-industry"></i>
+        </div>
+        <div>
+            <p class="text-2xl font-bold text-slate-800 dark:text-white">{{ stats.products_total }}</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Categorias de Produtos</p>
+        </div>
+    </div>
+
+    {# Modelos/Tamanhos #}
+    <div class="stat-card p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/5 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
+        <div class="stat-card-icon w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-ruler-combined"></i>
+        </div>
+        <div>
+            <p class="text-2xl font-bold text-slate-800 dark:text-white">{{ stats.sizes_total }}</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Tamanhos Cadastrados</p>
+        </div>
+    </div>
+
+    {# Parâmetros Técnicos #}
+    <div class="stat-card p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/5 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
+        <div class="stat-card-icon w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-list-check"></i>
+        </div>
+        <div>
+            <p class="text-2xl font-bold text-slate-800 dark:text-white">{{ stats.specs_total }}</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Especificações Globais</p>
+        </div>
+    </div>
+
+    {# Marcos Históricos #}
+    <div class="stat-card p-5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/5 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
+        <div class="stat-card-icon w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <div>
+            <p class="text-2xl font-bold text-slate-800 dark:text-white">{{ stats.timeline_total }}</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Milestones da Timeline</p>
+        </div>
+    </div>
+
+</div>
+
+{# ── Dashboard Content ─────────────────────────────────────────────────────────── #}
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    {# Left Column: Gerenciamento Rápido de Produtos #}
+    <div class="lg:col-span-2 flex flex-col gap-6">
+        <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/5 rounded-xl p-5 shadow-sm">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-white/5 mb-5">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-boxes-stacked text-primary dark:text-primary-light"></i>
+                    <h2 class="text-base font-bold text-slate-800 dark:text-white">Gerenciamento de Produtos</h2>
+                </div>
+                <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400 bg-slate-100 dark:bg-white/5 px-2 py-0.5 rounded">
+                    Catálogo Dinâmico
+                </span>
+            </div>
+
+            <div class="space-y-6">
+                {% for cat in catalog %}
+                    {% if cat.products is not empty %}
+                        <div class="border-b last:border-b-0 border-slate-100 dark:border-white/5 pb-5 last:pb-0">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="w-1.5 h-3.5 bg-primary dark:bg-primary-light rounded-sm"></span>
+                                <h3 class="text-xs uppercase font-extrabold text-slate-400 dark:text-slate-500 tracking-wider">
+                                    {{ cat.name }}
+                                </h3>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                {% for prod in cat.products %}
+                                    <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all border border-slate-100 dark:border-white/5 group">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary dark:text-primary-light group-hover:scale-105 transition-transform">
+                                                <i class="fa-solid fa-industry text-xs"></i>
+                                            </div>
+                                            <div>
+                                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 block">
+                                                    {{ prod.name_key|trans }}
+                                                </span>
+                                                <span class="text-[10px] text-slate-400 dark:text-slate-500">
+                                                    {{ prod.slug }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <a href="{{ path('app_admin_product_manage_detail', {'slug': prod.slug}) }}" 
+                                           class="text-xs font-bold text-primary dark:text-primary-light hover:text-red-700 dark:hover:text-red-400 flex items-center gap-1 transition-colors">
+                                            Editar <i class="fa-solid fa-chevron-right text-[9px] group-hover:translate-x-0.5 transition-transform"></i>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {# Right Column: Ações Rápidas & Geral #}
+    <div class="lg:col-span-1 flex flex-col gap-6">
+        
+        {# Ações Rápidas #}
+        <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/5 rounded-xl p-5 shadow-sm">
+            <h2 class="text-base font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-bolt text-primary dark:text-primary-light"></i>
+                Institucional & Site
+            </h2>
+            <nav aria-label="Ações rápidas" class="space-y-2.5">
+                <a href="{{ path('app_admin_about_edit') }}"
+                   class="flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-800/50 border border-slate-100 dark:border-white/5 transition-all">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-primary dark:text-primary-light text-sm w-4"></i>
+                        Quem Somos & Vantagens
+                    </span>
+                    <i class="fa-solid fa-angle-right text-slate-400"></i>
+                </a>
+                
+                <a href="{{ path('app_admin_history_index') }}"
+                   class="flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-800/50 border border-slate-100 dark:border-white/5 transition-all">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-clock-rotate-left text-primary dark:text-primary-light text-sm w-4"></i>
+                        Linha do Tempo (Timeline)
+                    </span>
+                    <i class="fa-solid fa-angle-right text-slate-400"></i>
+                </a>
+                
+                <a href="{{ path('app_admin_tech_spec_index') }}"
+                   class="flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-800/50 border border-slate-100 dark:border-white/5 transition-all">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-primary dark:text-primary-light text-sm w-4"></i>
+                        Especificações Globais
+                    </span>
+                    <i class="fa-solid fa-angle-right text-slate-400"></i>
+                </a>
+                
+                <a href="{{ path('app_admin_user_index') }}"
+                   class="flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-800/50 border border-slate-100 dark:border-white/5 transition-all">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-user-gear text-primary dark:text-primary-light text-sm w-4"></i>
+                        Usuários do Sistema
+                    </span>
+                    <i class="fa-solid fa-angle-right text-slate-400"></i>
+                </a>
+            </nav>
+        </div>
+
+        {# Usuário Conectado #}
+        <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/5 rounded-xl p-5 shadow-sm">
+            <h2 class="text-xs uppercase font-extrabold text-slate-400 dark:text-slate-500 tracking-wider mb-3">
+                Administrador Logado
+            </h2>
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300 text-sm font-bold border border-slate-200/50 dark:border-white/5">
+                    {{ app.user.userIdentifier|slice(0, 2)|upper }}
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-slate-700 dark:text-slate-300 block">
+                        {{ app.user.userIdentifier }}
+                    </span>
+                    <span class="text-[10px] bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded font-bold uppercase">
+                        Role Admin
+                    </span>
+                </div>
+            </div>
+            <a href="{{ path('app_logout') }}" 
+               class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-white/5 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 dark:hover:text-white border border-slate-200/50 dark:border-white/5 transition-all">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Sair do Sistema
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

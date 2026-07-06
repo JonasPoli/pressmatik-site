@@ -26,6 +26,15 @@ about:
   tag: "Trusted Engineering"
   title: "About Us"
   text: "Pressmatik is a leader in developing heavy-duty industrial hydraulic and servo-hydraulic presses. Our solutions combine advanced engineering, strict safety compliance with NR10 and NR12 regulations, and the integration of top-tier global components to deliver maximum energy efficiency and high productivity without oil leaks or slowdowns."
+  advantages_tag: "Differentials"
+  advantages_title: "Why Choose Pressmatik?"
+  mission: "Mission"
+  vision: "Vision"
+  values: "Values"
+  gallery_tag: "Gallery"
+  gallery_title: "Our Facilities"
+  timeline_tag: "Journey"
+  timeline_title: "Our History"
 
 differentials:
   tag: "Differentials"

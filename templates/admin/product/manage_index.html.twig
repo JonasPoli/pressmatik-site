@@ -1,0 +1,22 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Gerenciar Produtos{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1 class="page-title">Gerenciar Produtos</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400">Selecione um produto para gerenciar seus parâmetros técnicos, configurações e vídeos</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    {% for product in products %}
+    <a href="{{ path('app_admin_product_manage_detail', {slug: product.slug}) }}"
+       class="admin-card hover:shadow-lg transition-shadow group cursor-pointer">
+        <h3 class="text-base font-semibold text-slate-800 dark:text-white group-hover:text-primary transition-colors">
+            <i class="fa-solid fa-gears mr-2 text-slate-400 group-hover:text-primary"></i>
+            {{ product.name }}
+        </h3>
+        <p class="text-xs text-slate-500 mt-1">{{ product.slug }}</p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

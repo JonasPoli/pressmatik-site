@@ -1,0 +1,91 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Notícias{% endblock %}
+
+{% block body %}
+<div class="page-header flex items-center justify-between">
+    <div>
+        <h1 class="page-title">Notícias</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400">Publicação de novidades e posts no blog</p>
+    </div>
+    <div class="flex gap-2">
+        <a href="{{ path('app_admin_news_category_index') }}" class="inline-flex items-center gap-2 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm font-medium">
+            <i class="fa-solid fa-list"></i> Categorias
+        </a>
+        <a href="{{ path('app_admin_news_new') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+            <i class="fa-solid fa-plus"></i> Nova Notícia
+        </a>
+    </div>
+</div>
+
+<div class="admin-card">
+    {% if items|length == 0 %}
+        <p class="text-sm text-slate-500 dark:text-slate-400 py-8 text-center">Nenhuma notícia cadastrada ainda.</p>
+    {% else %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Data</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Capa</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Título (PT)</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Categorias</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Destaque</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Ativa</th>
+                    <th class="text-right py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr class="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="py-3 px-4 text-slate-500 font-medium">{{ item.date ? item.date|date('d/m/Y') : '—' }}</td>
+                    <td class="py-3 px-4">
+                        {% if item.imageName %}
+                            <img src="/uploads/news/{{ item.imageName }}" alt="" class="w-16 h-10 object-cover rounded">
+                        {% else %}
+                            <span class="text-slate-400">—</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-3 px-4 font-medium text-slate-800 dark:text-white">{{ item.titlePt }}</td>
+                    <td class="py-3 px-4 text-slate-500">
+                        {% for cat in item.categories %}
+                            <span class="inline-block px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-xs rounded text-slate-600 dark:text-slate-400 mr-1">{{ cat.namePt }}</span>
+                        {% else %}
+                            <span class="text-slate-400">—</span>
+                        {% endfor %}
+                    </td>
+                    <td class="py-3 px-4">
+                        {% if item.isHighlighted %}
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">Sim</span>
+                        {% else %}
+                            <span class="text-slate-400">Não</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-3 px-4">
+                        {% if item.isActive %}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Sim</span>
+                        {% else %}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">Não</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-3 px-4 text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <a href="{{ path('app_admin_news_edit', {id: item.id}) }}" class="text-primary hover:text-primary-dark" title="Editar / Galeria">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <form method="post" action="{{ path('app_admin_news_delete', {id: item.id}) }}" onsubmit="return confirm('Tem certeza?')" class="inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+                                <button type="submit" class="text-red-500 hover:text-red-700" title="Excluir">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

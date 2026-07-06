@@ -1,0 +1,205 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Quem Somos{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1 class="page-title">Quem Somos</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400">Edite o conteúdo institucional em 3 idiomas</p>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="space-y-8">
+
+    {# ── Tabs de idioma ──────────────────────────────────────────────── #}
+    <div x-data="{ tab: 'pt' }" class="admin-card">
+        <div class="flex gap-2 mb-6 border-b border-slate-200 dark:border-slate-700 pb-2">
+            <button type="button" @click="tab='pt'" :class="tab==='pt' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇧🇷 Português</button>
+            <button type="button" @click="tab='en'" :class="tab==='en' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇺🇸 English</button>
+            <button type="button" @click="tab='es'" :class="tab==='es' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇪🇸 Español</button>
+        </div>
+
+        <h2 class="admin-card-title mb-4"><i class="fa-solid fa-heading mr-2"></i>Título & Subtítulo</h2>
+        {% for lang in ['pt', 'en', 'es'] %}
+        <div x-show="tab==='{{ lang }}'" class="space-y-4">
+            <div class="wab-field">
+                <label class="wab-label">Título ({{ lang|upper }})</label>
+                <input type="text" name="title{{ lang|capitalize }}" value="{{ attribute(about, 'title' ~ lang|capitalize) }}" class="wab-input">
+            </div>
+            <div class="wab-field">
+                <label class="wab-label">Subtítulo ({{ lang|upper }})</label>
+                <input type="text" name="subtitle{{ lang|capitalize }}" value="{{ attribute(about, 'subtitle' ~ lang|capitalize) }}" class="wab-input">
+            </div>
+            <div class="wab-field">
+                <label class="wab-label">Descrição ({{ lang|upper }})</label>
+                <textarea name="description{{ lang|capitalize }}" class="wab-input" rows="5">{{ attribute(about, 'description' ~ lang|capitalize) }}</textarea>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {# ── Missão / Visão / Valores ────────────────────────────────────── #}
+    <div x-data="{ tab: 'pt' }" class="admin-card">
+        <h2 class="admin-card-title mb-4"><i class="fa-solid fa-compass mr-2"></i>Missão, Visão & Valores</h2>
+        <div class="flex gap-2 mb-6 border-b border-slate-200 dark:border-slate-700 pb-2">
+            <button type="button" @click="tab='pt'" :class="tab==='pt' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇧🇷 PT</button>
+            <button type="button" @click="tab='en'" :class="tab==='en' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇺🇸 EN</button>
+            <button type="button" @click="tab='es'" :class="tab==='es' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇪🇸 ES</button>
+        </div>
+        {% for lang in ['pt', 'en', 'es'] %}
+        <div x-show="tab==='{{ lang }}'" class="space-y-4">
+            <div class="wab-field">
+                <label class="wab-label">Missão ({{ lang|upper }})</label>
+                <textarea name="mission{{ lang|capitalize }}" class="wab-input" rows="4">{{ attribute(about, 'mission' ~ lang|capitalize) }}</textarea>
+            </div>
+            <div class="wab-field">
+                <label class="wab-label">Visão ({{ lang|upper }})</label>
+                <textarea name="vision{{ lang|capitalize }}" class="wab-input" rows="4">{{ attribute(about, 'vision' ~ lang|capitalize) }}</textarea>
+            </div>
+            <div class="wab-field">
+                <label class="wab-label">Valores ({{ lang|upper }})</label>
+                <textarea name="values{{ lang|capitalize }}" class="wab-input" rows="4">{{ attribute(about, 'values' ~ lang|capitalize) }}</textarea>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {# ── Vantagens ───────────────────────────────────────────────────── #}
+    <div x-data="{ tab: 'pt' }" class="admin-card">
+        <h2 class="admin-card-title mb-4"><i class="fa-solid fa-star mr-2"></i>Vantagens (4 blocos)</h2>
+        <div class="flex gap-2 mb-6 border-b border-slate-200 dark:border-slate-700 pb-2">
+            <button type="button" @click="tab='pt'" :class="tab==='pt' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇧🇷 PT</button>
+            <button type="button" @click="tab='en'" :class="tab==='en' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇺🇸 EN</button>
+            <button type="button" @click="tab='es'" :class="tab==='es' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇪🇸 ES</button>
+        </div>
+
+        {% for i in 1..4 %}
+        <fieldset class="border border-slate-200 dark:border-slate-700 rounded-lg p-4 mb-4">
+            <legend class="text-sm font-semibold text-slate-600 dark:text-slate-300 px-2">Vantagem {{ i }}</legend>
+            <div class="wab-field mb-3">
+                <label class="wab-label">Ícone (FontAwesome class)</label>
+                <div class="icon-picker-wrap">
+                    <div class="icon-preview" id="adv{{ i }}-prev">
+                        <i class="{{ attribute(about, 'advantage' ~ i ~ 'Icon')|default('fa-solid fa-star') }}"></i>
+                    </div>
+                    <input type="text" name="advantage{{ i }}Icon" id="adv{{ i }}-input" value="{{ attribute(about, 'advantage' ~ i ~ 'Icon') }}" class="wab-input" style="flex: 1;" placeholder="fa-solid fa-cogs" readonly>
+                    <button type="button" class="inline-flex items-center justify-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-xs font-semibold" onclick="openIconPicker('adv{{ i }}-input','adv{{ i }}-prev')">
+                        Escolher
+                    </button>
+                </div>
+            </div>
+            {% for lang in ['pt', 'en', 'es'] %}
+            <div x-show="tab==='{{ lang }}'" class="space-y-3">
+                <div class="wab-field">
+                    <label class="wab-label">Título ({{ lang|upper }})</label>
+                    <input type="text" name="advantage{{ i }}Title{{ lang|capitalize }}" value="{{ attribute(about, 'advantage' ~ i ~ 'Title' ~ lang|capitalize) }}" class="wab-input">
+                </div>
+                <div class="wab-field">
+                    <label class="wab-label">Descrição ({{ lang|upper }})</label>
+                    <textarea name="advantage{{ i }}Desc{{ lang|capitalize }}" class="wab-input" rows="3">{{ attribute(about, 'advantage' ~ i ~ 'Desc' ~ lang|capitalize) }}</textarea>
+                </div>
+            </div>
+            {% endfor %}
+        </fieldset>
+        {% endfor %}
+    </div>
+
+    {# ── Banner Image ────────────────────────────────────────────────── #}
+    <div class="admin-card">
+        <h2 class="admin-card-title mb-4"><i class="fa-solid fa-image mr-2"></i>Imagem de Banner</h2>
+        {% if about.bannerImageName %}
+        <div class="mb-4">
+            <img src="/uploads/about/{{ about.bannerImageName }}" alt="Banner" class="max-h-48 rounded-lg">
+        </div>
+        {% endif %}
+        <div class="wab-field">
+            <label class="wab-label">Upload nova imagem</label>
+            <input type="file" name="bannerImageFile" accept="image/*" class="wab-input">
+        </div>
+    </div>
+
+    {# ── Save Button ─────────────────────────────────────────────────── #}
+    <div class="flex justify-end">
+        <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium">
+            <i class="fa-solid fa-save"></i>
+            Salvar Alterações
+        </button>
+    </div>
+</form>
+
+{# ── Galeria de Imagens ──────────────────────────────────────────── #}
+<div class="admin-card mt-8">
+    <h2 class="admin-card-title mb-4"><i class="fa-solid fa-images mr-2"></i>Galeria de Imagens</h2>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Arraste para reordenar. Clique no X para remover.</p>
+
+    <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+        {% for img in galleryImages %}
+        <div class="relative group rounded-lg overflow-hidden" data-id="{{ img.id }}">
+            <img src="/uploads/gallery/{{ img.imageName }}" alt="" class="w-full h-32 object-cover">
+            <button type="button"
+                    onclick="deleteGalleryImage({{ img.id }})"
+                    class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-xs">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="wab-field">
+        <label class="wab-label">Adicionar imagem à galeria</label>
+        <input type="file" id="gallery-upload" accept="image/*" class="wab-input" onchange="uploadGalleryImage(this)">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script>
+function initSortable() {
+    const el = document.getElementById('gallery-grid');
+    if (el && !el.dataset.sortableInitialized) {
+        el.dataset.sortableInitialized = 'true';
+        new Sortable(el, {
+            animation: 150,
+            onEnd: function () {
+                const ids = Array.from(el.children).map(div => div.dataset.id);
+                fetch('{{ path("app_admin_about_gallery_reorder") }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ids })
+                });
+            }
+        });
+    }
+}
+initSortable();
+document.addEventListener('turbo:load', initSortable);
+document.addEventListener('DOMContentLoaded', initSortable);
+
+function uploadGalleryImage(input) {
+    if (!input.files.length) return;
+    const formData = new FormData();
+    formData.append('file', input.files[0]);
+
+    fetch('{{ path("app_admin_about_gallery_upload") }}', {
+        method: 'POST',
+        body: formData
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.url) {
+            location.reload();
+        }
+    });
+}
+
+function deleteGalleryImage(id) {
+    if (!confirm('Remover esta imagem?')) return;
+
+    fetch('/admin/about-us/gallery/' + id + '/delete', {
+        method: 'POST'
+    })
+    .then(r => r.json())
+    .then(() => location.reload());
+}
+</script>
+
+{% endblock %}

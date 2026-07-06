@@ -1,0 +1,58 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Categorias de Notícias{% endblock %}
+
+{% block body %}
+<div class="page-header flex items-center justify-between">
+    <div>
+        <h1 class="page-title">Categorias de Notícias</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400">Classificação para notícias do site</p>
+    </div>
+    <a href="{{ path('app_admin_news_category_new') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+        <i class="fa-solid fa-plus"></i> Nova Categoria
+    </a>
+</div>
+
+<div class="admin-card">
+    {% if items|length == 0 %}
+        <p class="text-sm text-slate-500 dark:text-slate-400 py-8 text-center">Nenhuma categoria cadastrada ainda.</p>
+    {% else %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">ID</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Nome (PT)</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Nome (EN)</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Nome (ES)</th>
+                    <th class="text-right py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr class="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="py-3 px-4 text-slate-500">{{ item.id }}</td>
+                    <td class="py-3 px-4 font-medium text-slate-800 dark:text-white">{{ item.namePt }}</td>
+                    <td class="py-3 px-4 text-slate-500">{{ item.nameEn ?: '—' }}</td>
+                    <td class="py-3 px-4 text-slate-500">{{ item.nameEs ?: '—' }}</td>
+                    <td class="py-3 px-4 text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <a href="{{ path('app_admin_news_category_edit', {id: item.id}) }}" class="text-primary hover:text-primary-dark" title="Editar">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <form method="post" action="{{ path('app_admin_news_category_delete', {id: item.id}) }}" onsubmit="return confirm('Tem certeza?')" class="inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+                                <button type="submit" class="text-red-500 hover:text-red-700" title="Excluir">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

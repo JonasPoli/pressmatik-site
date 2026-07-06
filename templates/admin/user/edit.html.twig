@@ -1,0 +1,91 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Editar Usuário{% endblock %}
+{% block page_title %}Editar Usuário{% endblock %}
+
+{% block breadcrumbs %}
+    {% set breadcrumbs = [
+        { label: 'Dashboard', route: 'admin_dash' },
+        { label: 'Usuários',  route: 'app_admin_user_index' },
+        { label: 'Editar: ' ~ (user.name ?? user.username), route: null }
+    ] %}
+    {{ include('admin/_partials/breadcrumbs.html.twig', { breadcrumbs: breadcrumbs }) }}
+{% endblock %}
+
+{% block body %}
+
+<div class="page-header">
+    <h1 class="page-title">Editar Usuário</h1>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    {# Form Card #}
+    <div class="lg:col-span-2 admin-card">
+        {{ include('admin/user/_form.html.twig', { button_label: 'Salvar alterações' }) }}
+    </div>
+
+    {# Actions sidebar #}
+    <div class="space-y-4">
+        <div class="admin-card">
+            <h2 class="admin-card-title">Informações</h2>
+            <dl class="text-sm space-y-2">
+                <div class="flex justify-between">
+                    <dt class="text-slate-500 dark:text-slate-400">ID</dt>
+                    <dd class="font-mono font-medium">{{ user.id }}</dd>
+                </div>
+                {% if user.createdAt %}
+                <div class="flex justify-between">
+                    <dt class="text-slate-500 dark:text-slate-400">Criado em</dt>
+                    <dd>
+                        <time datetime="{{ user.createdAt|date('Y-m-d') }}">
+                            {{ user.createdAt|date('d/m/Y') }}
+                        </time>
+                    </dd>
+                </div>
+                {% endif %}
+                {% if user.updatedAt %}
+                <div class="flex justify-between">
+                    <dt class="text-slate-500 dark:text-slate-400">Atualizado em</dt>
+                    <dd>
+                        <time datetime="{{ user.updatedAt|date('Y-m-d') }}">
+                            {{ user.updatedAt|date('d/m/Y H:i') }}
+                        </time>
+                    </dd>
+                </div>
+                {% endif %}
+            </dl>
+        </div>
+
+        <div class="admin-card border border-red-100 dark:border-red-900/30">
+            <h2 class="admin-card-title text-red-600 dark:text-red-400">
+                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true" class="mr-1"></i>
+                Zona de perigo
+            </h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">
+                Esta ação é irreversível. O usuário será removido permanentemente.
+            </p>
+            <form method="post"
+                  action="{{ path('app_admin_user_delete', {'id': user.id}) }}"
+                  onsubmit="return confirm('Tem certeza que deseja remover o usuário \'{{ user.name ?? user.username }}\'? Esta ação não pode ser desfeita.');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                <button type="submit"
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                        aria-label="Remover permanentemente o usuário {{ user.name ?? user.username }}">
+                    <i class="fa-regular fa-trash-can" aria-hidden="true"></i>
+                    Remover usuário
+                </button>
+            </form>
+        </div>
+
+        <a href="{{ path('app_admin_user_index') }}"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-sm transition-colors"
+           aria-label="Voltar para a lista de usuários">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            Voltar
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

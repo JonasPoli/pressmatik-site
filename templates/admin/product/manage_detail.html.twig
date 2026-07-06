@@ -1,0 +1,341 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Gerenciar: {{ slug }}{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1 class="page-title">Gerenciar: {{ slug }}</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400">
+        <a href="{{ path('app_admin_product_manage_index') }}" class="text-primary hover:underline">← Voltar</a>
+    </p>
+</div>
+
+{# ═══════════════════════════════════════════════════════════════════════
+   TAMANHOS (Sizes)
+   ═══════════════════════════════════════════════════════════════════════ #}
+<div class="admin-card mb-6">
+    <h2 class="admin-card-title mb-4"><i class="fa-solid fa-ruler mr-2"></i>Tamanhos (Sub-modelos)</h2>
+
+    {% if sizes|length > 0 %}
+    <div class="overflow-x-auto mb-4">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                    <th class="text-left py-2 px-3">Nome</th>
+                    <th class="text-center py-2 px-3">V-Type</th>
+                    <th class="text-center py-2 px-3">H-Type</th>
+                    <th class="text-right py-2 px-3">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for size in sizes %}
+                <tr class="border-b border-slate-100 dark:border-slate-800">
+                    <td class="py-2 px-3 font-medium">{{ size.name }}</td>
+                    <td class="py-2 px-3 text-center">{{ size.hasVType ? '✓' : '—' }}</td>
+                    <td class="py-2 px-3 text-center">{{ size.hasHType ? '✓' : '—' }}</td>
+                    <td class="py-2 px-3 text-right">
+                        <form method="post" action="{{ path('app_admin_product_size_delete', {slug: slug, id: size.id}) }}" onsubmit="return confirm('Remover?')" class="inline">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_size' ~ size.id) }}">
+                            <button type="submit" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <form method="post" action="{{ path('app_admin_product_size_add', {slug: slug}) }}" class="flex items-end gap-3 flex-wrap">
+        <div class="wab-field flex-1">
+            <label class="wab-label">Nome do tamanho</label>
+            <input type="text" name="name" class="wab-input" placeholder="Ex: PMC-25" required>
+        </div>
+        <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" name="hasVType" value="1" checked> V-Type
+        </label>
+        <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" name="hasHType" value="1" checked> H-Type
+        </label>
+        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg text-sm hover:bg-primary-dark transition-colors">
+            <i class="fa-solid fa-plus"></i> Adicionar
+        </button>
+    </form>
+</div>
+
+{# ═══════════════════════════════════════════════════════════════════════
+   PARÂMETROS TÉCNICOS (Spec Values Table)
+   ═══════════════════════════════════════════════════════════════════════ #}
+<div class="admin-card mb-6" x-data="specTable()">
+    <h2 class="admin-card-title mb-4"><i class="fa-solid fa-table mr-2"></i>Parâmetros Técnicos</h2>
+
+    {% if sizes|length == 0 %}
+        <p class="text-sm text-slate-500 py-4 text-center">Cadastre os tamanhos primeiro.</p>
+    {% else %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-xs border-collapse">
+            <thead>
+                <tr class="bg-slate-50 dark:bg-slate-800">
+                    <th class="py-2 px-2 text-center border border-slate-200 dark:border-slate-700" rowspan="2" style="width: 40px;"></th>
+                    <th class="py-2 px-2 text-left font-semibold border border-slate-200 dark:border-slate-700" rowspan="2">Especificação</th>
+                    <th class="py-2 px-2 text-left font-semibold border border-slate-200 dark:border-slate-700" rowspan="2">Unidade</th>
+                    {% for size in sizes %}
+                    <th class="py-2 px-2 text-center font-semibold border border-slate-200 dark:border-slate-700"
+                        colspan="{{ (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) }}">
+                        {{ size.name }}
+                    </th>
+                    {% endfor %}
+                    <th class="py-2 px-2 border border-slate-200 dark:border-slate-700" rowspan="2">Ações</th>
+                </tr>
+                <tr class="bg-slate-50 dark:bg-slate-800">
+                    {% for size in sizes %}
+                        {% if size.hasVType %}
+                        <th class="py-1 px-2 text-center text-xs font-normal border border-slate-200 dark:border-slate-700">V-type</th>
+                        {% endif %}
+                        {% if size.hasHType %}
+                        <th class="py-1 px-2 text-center text-xs font-normal border border-slate-200 dark:border-slate-700">H-type</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="(row, rowIdx) in rows" :key="rowIdx">
+                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50"
+                        draggable="true"
+                        @dragstart="draggedIdx = rowIdx"
+                        @dragover.prevent
+                        @drop="moveRow(draggedIdx, rowIdx)">
+                        <td class="py-1 px-2 border border-slate-200 dark:border-slate-700 text-center cursor-move text-slate-400">
+                            <i class="fa-solid fa-grip-vertical"></i>
+                        </td>
+                        <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
+                            <select x-model="row.specId" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0">
+                                <option value="">-- Selecionar --</option>
+                                {% for spec in allSpecs %}
+                                <option value="{{ spec.id }}">{{ spec.namePt }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td class="py-1 px-2 border border-slate-200 dark:border-slate-700 text-slate-500" x-text="getUnit(row.specId)"></td>
+                        {% for size in sizes %}
+                            {% if size.hasVType %}
+                            <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
+                                <input type="text" x-model="row.values['{{ size.id }}'].v" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0 text-center">
+                            </td>
+                            {% endif %}
+                            {% if size.hasHType %}
+                            <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
+                                <input type="text" x-model="row.values['{{ size.id }}'].h" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0 text-center">
+                            </td>
+                            {% endif %}
+                        {% endfor %}
+                        <td class="py-1 px-2 border border-slate-200 dark:border-slate-700 text-center">
+                            <button type="button" @click="removeRow(rowIdx)" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-times"></i></button>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex items-center justify-between mt-4">
+        <button type="button" @click="addRow()" class="inline-flex items-center gap-2 px-3 py-2 text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+            <i class="fa-solid fa-plus"></i> Adicionar Linha
+        </button>
+        <button type="button" @click="saveAll()" class="inline-flex items-center gap-2 px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium">
+            <i class="fa-solid fa-save"></i> Salvar Parâmetros
+        </button>
+    </div>
+    {% endif %}
+</div>
+
+{# ═══════════════════════════════════════════════════════════════════════
+   CONFIGURAÇÕES (Standard / Optional)
+   ═══════════════════════════════════════════════════════════════════════ #}
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    {% for type, label in {standard: 'Equipamentos Standard', optional: 'Equipamentos Opcionais'} %}
+    <div class="admin-card">
+        <h2 class="admin-card-title mb-4"><i class="fa-solid fa-{{ type == 'standard' ? 'check-circle' : 'circle-plus' }} mr-2"></i>{{ label }}</h2>
+
+        {% set items = type == 'standard' ? standardItems : optionalItems %}
+        {% if items|length > 0 %}
+        <ul id="config-list-{{ type }}" class="space-y-2 mb-4 config-sortable-list" data-reorder-url="{{ path('app_admin_product_config_reorder', {slug: slug}) }}">
+            {% for item in items %}
+            <li data-id="{{ item.id }}" class="flex items-center justify-between px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-sm cursor-move">
+                <span><i class="fa-solid fa-grip-vertical text-slate-400 mr-2"></i>{{ item.namePt }}</span>
+                <form method="post" action="{{ path('app_admin_product_config_delete', {slug: slug, id: item.id}) }}" class="inline" onsubmit="return confirm('Remover?')">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete_config' ~ item.id) }}">
+                    <button type="submit" class="text-red-500 hover:text-red-700 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form method="post" action="{{ path('app_admin_product_config_add', {slug: slug}) }}" class="space-y-2" x-data="{ tab: 'pt' }">
+            <input type="hidden" name="type" value="{{ type }}">
+            <div class="flex gap-1 mb-2">
+                <button type="button" @click="tab='pt'" :class="tab==='pt' ? 'text-primary font-semibold' : 'text-slate-400'" class="text-xs px-2 py-1">PT</button>
+                <button type="button" @click="tab='en'" :class="tab==='en' ? 'text-primary font-semibold' : 'text-slate-400'" class="text-xs px-2 py-1">EN</button>
+                <button type="button" @click="tab='es'" :class="tab==='es' ? 'text-primary font-semibold' : 'text-slate-400'" class="text-xs px-2 py-1">ES</button>
+            </div>
+            {% for lang in ['pt', 'en', 'es'] %}
+            <div x-show="tab==='{{ lang }}'">
+                <input type="text" name="name{{ lang|capitalize }}" class="wab-input text-sm" placeholder="Nome ({{ lang|upper }})" {{ lang == 'pt' ? 'required' : '' }}>
+            </div>
+            {% endfor %}
+            <button type="submit" class="px-3 py-1.5 bg-primary text-white rounded text-xs hover:bg-primary-dark transition-colors">
+                <i class="fa-solid fa-plus"></i> Adicionar
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+{# ═══════════════════════════════════════════════════════════════════════
+   VÍDEOS
+   ═══════════════════════════════════════════════════════════════════════ #}
+<div class="admin-card mb-6">
+    <h2 class="admin-card-title mb-4"><i class="fa-solid fa-video mr-2"></i>Vídeos</h2>
+
+    {% if videos|length > 0 %}
+    <div class="space-y-2 mb-4">
+        {% for video in videos %}
+        <div class="flex items-center justify-between px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-sm">
+            <div>
+                <span class="font-medium">{{ video.titlePt ?: 'Sem título' }}</span>
+                <span class="text-slate-400 text-xs ml-2">{{ video.url|length > 50 ? video.url[:50] ~ '...' : video.url }}</span>
+            </div>
+            <form method="post" action="{{ path('app_admin_product_video_delete', {slug: slug, id: video.id}) }}" class="inline" onsubmit="return confirm('Remover?')">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete_video' ~ video.id) }}">
+                <button type="submit" class="text-red-500 hover:text-red-700 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" action="{{ path('app_admin_product_video_add', {slug: slug}) }}" class="space-y-3" x-data="{ tab: 'pt' }">
+        <div class="flex gap-1 mb-2">
+            <button type="button" @click="tab='pt'" :class="tab==='pt' ? 'text-primary font-semibold' : 'text-slate-400'" class="text-xs px-2 py-1">PT</button>
+            <button type="button" @click="tab='en'" :class="tab==='en' ? 'text-primary font-semibold' : 'text-slate-400'" class="text-xs px-2 py-1">EN</button>
+            <button type="button" @click="tab='es'" :class="tab==='es' ? 'text-primary font-semibold' : 'text-slate-400'" class="text-xs px-2 py-1">ES</button>
+        </div>
+        {% for lang in ['pt', 'en', 'es'] %}
+        <div x-show="tab==='{{ lang }}'">
+            <input type="text" name="title{{ lang|capitalize }}" class="wab-input text-sm" placeholder="Título ({{ lang|upper }})">
+        </div>
+        {% endfor %}
+        <div class="wab-field">
+            <input type="url" name="url" class="wab-input text-sm" placeholder="URL do vídeo (YouTube, etc.)" required>
+        </div>
+        <button type="submit" class="px-3 py-1.5 bg-primary text-white rounded text-xs hover:bg-primary-dark transition-colors">
+            <i class="fa-solid fa-plus"></i> Adicionar Vídeo
+        </button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.config-sortable-list').forEach(el => {
+        new Sortable(el, {
+            animation: 150,
+            handle: '.fa-grip-vertical',
+            onEnd: async function () {
+                const ids = Array.from(el.children).map(li => li.dataset.id);
+                await fetch(el.dataset.reorderUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ids })
+                });
+            }
+        });
+    });
+});
+
+const specsMap = {
+    {% for spec in allSpecs %}
+    '{{ spec.id }}': { name: '{{ spec.namePt|e('js') }}', unit: '{{ spec.unitPt|e('js') }}' },
+    {% endfor %}
+};
+
+const sizesData = [
+    {% for size in sizes %}
+    { id: '{{ size.id }}', name: '{{ size.name|e('js') }}', hasV: {{ size.hasVType ? 'true' : 'false' }}, hasH: {{ size.hasHType ? 'true' : 'false' }} },
+    {% endfor %}
+];
+
+function specTable() {
+    // Build initial rows from existing data
+    const existingRows = {};
+    {% for val in specValues %}
+    const key_{{ val.id }} = '{{ val.specification.id }}_{{ val.position }}';
+    if (!existingRows[key_{{ val.id }}]) {
+        existingRows[key_{{ val.id }}] = {
+            specId: '{{ val.specification.id }}',
+            position: {{ val.position }},
+            values: {}
+        };
+        sizesData.forEach(s => { existingRows[key_{{ val.id }}].values[s.id] = { v: '', h: '' }; });
+    }
+    existingRows[key_{{ val.id }}].values['{{ val.productSize.id }}'] = {
+        v: '{{ val.vTypeValue|e('js') }}',
+        h: '{{ val.hTypeValue|e('js') }}'
+    };
+    {% endfor %}
+
+    let initialRows = Object.values(existingRows).sort((a, b) => a.position - b.position);
+    if (initialRows.length === 0) {
+        initialRows = [createEmptyRow()];
+    }
+
+    return {
+        rows: initialRows,
+        draggedIdx: null,
+
+        addRow() {
+            this.rows.push(createEmptyRow());
+        },
+
+        removeRow(idx) {
+            this.rows.splice(idx, 1);
+        },
+
+        moveRow(from, to) {
+            if (from === null || from === undefined || from === to) return;
+            const item = this.rows.splice(from, 1)[0];
+            this.rows.splice(to, 0, item);
+        },
+
+        getUnit(specId) {
+            return specsMap[specId]?.unit || '';
+        },
+
+        async saveAll() {
+            // Update row positions before saving
+            this.rows.forEach((row, idx) => {
+                row.position = idx;
+            });
+
+            const resp = await fetch('{{ path("app_admin_product_specs_save", {slug: slug}) }}', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ rows: this.rows })
+            });
+            const data = await resp.json();
+            if (data.success) {
+                alert('Parâmetros salvos com sucesso!');
+                location.reload();
+            }
+        }
+    };
+}
+
+function createEmptyRow() {
+    const values = {};
+    sizesData.forEach(s => { values[s.id] = { v: '', h: '' }; });
+    return { specId: '', values, position: 999 };
+}
+</script>
+{% endblock %}

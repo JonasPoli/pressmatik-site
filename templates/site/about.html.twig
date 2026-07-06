@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ about.getTitle(locale) ?: 'Quem Somos' }} - Pressmatik{% endblock %}
+
+{% block body %}
+{% set locale = app.request.locale %}
+
+{# ═══════════════════════════════════════════════════════════════════════
+   HERO / BANNER
+   ═══════════════════════════════════════════════════════════════════════ #}
+<section class="about-hero" {% if about.bannerImageName %}style="background-image: url('/uploads/about/{{ about.bannerImageName }}');"{% endif %}>
+    <div class="about-hero-overlay"></div>
+    <div class="container about-hero-content">
+        <span class="about-hero-tag">{{ 'about.tag'|trans }}</span>
+        <h1 class="about-hero-title">{{ about.getTitle(locale) ?: 'about.title'|trans }}</h1>
+        <p class="about-hero-subtitle">{{ about.getSubtitle(locale) }}</p>
+    </div>
+</section>
+
+{# ═══════════════════════════════════════════════════════════════════════
+   DESCRIÇÃO
+   ═══════════════════════════════════════════════════════════════════════ #}
+{% if about.getDescription(locale) %}
+<section class="about-description section-padding">
+    <div class="container">
+        <div class="about-description-content">
+            {{ about.getDescription(locale)|nl2br }}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# ═══════════════════════════════════════════════════════════════════════
+   VANTAGENS
+   ═══════════════════════════════════════════════════════════════════════ #}
+<section class="about-advantages section-padding">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">{{ 'about.advantages_tag'|trans({}, 'messages', locale) }}</span>
+            <h2 class="section-title">{{ 'about.advantages_title'|trans({}, 'messages', locale) }}</h2>
+        </div>
+        <div class="advantages-grid">
+            {% for i in 1..4 %}
+                {% set title = about.getAdvantageTitle(i, locale) %}
+                {% if title %}
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="{{ about.getAdvantageIcon(i) ?: 'bi bi-gear-fill' }}"></i>
+                    </div>
+                    <h3 class="advantage-title">{{ title }}</h3>
+                    <p class="advantage-desc">{{ about.getAdvantageDesc(i, locale) }}</p>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{# ═══════════════════════════════════════════════════════════════════════
+   MISSÃO / VISÃO / VALORES
+   ═══════════════════════════════════════════════════════════════════════ #}
+<section class="about-mvv section-padding">
+    <div class="container">
+        <div class="mvv-grid">
+            {% if about.getMission(locale) %}
+            <div class="mvv-card">
+                <div class="mvv-icon"><i class="bi bi-bullseye"></i></div>
+                <h3 class="mvv-title">{{ 'about.mission'|trans({}, 'messages', locale) }}</h3>
+                <p class="mvv-text">{{ about.getMission(locale)|nl2br }}</p>
+            </div>
+            {% endif %}
+            {% if about.getVision(locale) %}
+            <div class="mvv-card">
+                <div class="mvv-icon"><i class="bi bi-eye"></i></div>
+                <h3 class="mvv-title">{{ 'about.vision'|trans({}, 'messages', locale) }}</h3>
+                <p class="mvv-text">{{ about.getVision(locale)|nl2br }}</p>
+            </div>
+            {% endif %}
+            {% if about.getValues(locale) %}
+            <div class="mvv-card">
+                <div class="mvv-icon"><i class="bi bi-heart"></i></div>
+                <h3 class="mvv-title">{{ 'about.values'|trans({}, 'messages', locale) }}</h3>
+                <p class="mvv-text">{{ about.getValues(locale)|nl2br }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{# ═══════════════════════════════════════════════════════════════════════
+   GALERIA DE IMAGENS
+   ═══════════════════════════════════════════════════════════════════════ #}
+{% if about.galleryImages|length > 0 %}
+<section class="about-gallery section-padding">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">{{ 'about.gallery_tag'|trans({}, 'messages', locale) }}</span>
+            <h2 class="section-title">{{ 'about.gallery_title'|trans({}, 'messages', locale) }}</h2>
+        </div>
+        <div class="gallery-grid">
+            {% for img in about.galleryImages %}
+            <div class="gallery-item">
+                <img src="/uploads/gallery/{{ img.imageName }}" alt="{{ img.getCaption(locale) }}" loading="lazy">
+                {% if img.getCaption(locale) %}
+                <span class="gallery-caption">{{ img.getCaption(locale) }}</span>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# ═══════════════════════════════════════════════════════════════════════
+   LINHA DO TEMPO
+   ═══════════════════════════════════════════════════════════════════════ #}
+{% if timeline|length > 0 %}
+<section class="about-timeline section-padding">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">{{ 'about.timeline_tag'|trans({}, 'messages', locale) }}</span>
+            <h2 class="section-title">{{ 'about.timeline_title'|trans({}, 'messages', locale) }}</h2>
+        </div>
+        <div class="timeline">
+            {% for item in timeline %}
+            <div class="timeline-item {{ loop.index is odd ? 'timeline-left' : 'timeline-right' }}">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    {% if item.imageName %}
+                    <div class="timeline-image">
+                        <img src="/uploads/history/{{ item.imageName }}" alt="{{ item.getTitle(locale) }}" loading="lazy">
+                    </div>
+                    {% endif %}
+                    <div class="timeline-text">
+                        {% if item.eventDate %}
+                        <span class="timeline-date">{{ item.eventDate|date('Y') }}</span>
+                        {% endif %}
+                        <h3 class="timeline-title">{{ item.getTitle(locale) }}</h3>
+                        {% if item.getDescription(locale) %}
+                        <p class="timeline-desc">{{ item.getDescription(locale)|nl2br }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}

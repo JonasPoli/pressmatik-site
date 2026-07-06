@@ -1,0 +1,33 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Novo Usuário{% endblock %}
+{% block page_title %}Novo Usuário{% endblock %}
+
+{% block breadcrumbs %}
+    {% set breadcrumbs = [
+        { label: 'Dashboard', route: 'admin_dash' },
+        { label: 'Usuários',  route: 'app_admin_user_index' },
+        { label: 'Novo',      route: null }
+    ] %}
+    {{ include('admin/_partials/breadcrumbs.html.twig', { breadcrumbs: breadcrumbs }) }}
+{% endblock %}
+
+{% block body %}
+
+<div class="page-header">
+    <h1 class="page-title">Novo Usuário</h1>
+    <a href="{{ path('app_admin_user_index') }}"
+       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-sm transition-colors"
+       aria-label="Voltar para a lista de usuários">
+        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        Voltar
+    </a>
+</div>
+
+<div class="max-w-2xl">
+    <div class="admin-card">
+        {{ include('admin/user/_form.html.twig', { button_label: 'Criar usuário' }) }}
+    </div>
+</div>
+
+{% endblock %}

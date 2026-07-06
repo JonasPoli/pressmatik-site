@@ -1,0 +1,77 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ formTitle }}{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1 class="page-title">{{ formTitle }}</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400">
+        <a href="{{ path('app_admin_testimony_index') }}" class="text-primary hover:underline">← Voltar para listagem</a>
+    </p>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="space-y-6" x-data="{ tab: 'pt' }">
+    <div class="admin-card">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="wab-field">
+                <label class="wab-label">Nome do Cliente</label>
+                <input type="text" name="name" value="{{ item ? item.name : '' }}" class="wab-input" required placeholder="Ex: João da Silva">
+            </div>
+            <div class="wab-field">
+                <label class="wab-label">Empresa</label>
+                <input type="text" name="company" value="{{ item ? item.company : '' }}" class="wab-input" placeholder="Ex: Metalúrgica ABC">
+            </div>
+        </div>
+
+        <div class="flex gap-2 mb-6 border-b border-slate-200 dark:border-slate-700 pb-2">
+            <button type="button" @click="tab='pt'" :class="tab==='pt' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇧🇷 PT</button>
+            <button type="button" @click="tab='en'" :class="tab==='en' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇺🇸 EN</button>
+            <button type="button" @click="tab='es'" :class="tab==='es' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇪🇸 ES</button>
+        </div>
+
+        {% for lang in ['pt', 'en', 'es'] %}
+        <div x-show="tab==='{{ lang }}'" class="space-y-4">
+            <div class="wab-field">
+                <label class="wab-label">Cargo ({{ lang|upper }})</label>
+                <input type="text" name="role{{ lang|capitalize }}" value="{{ item ? attribute(item, 'role' ~ lang|capitalize) : '' }}" class="wab-input" placeholder="Ex: Diretor Industrial">
+            </div>
+            <div class="wab-field">
+                <label class="wab-label">Depoimento/Texto ({{ lang|upper }})</label>
+                <textarea name="text{{ lang|capitalize }}" class="wab-input" rows="5" placeholder="Texto do depoimento...">{{ item ? attribute(item, 'text' ~ lang|capitalize) : '' }}</textarea>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+            <div class="wab-field">
+                <label class="wab-label">Foto do Cliente</label>
+                {% if item and item.imageName %}
+                <div class="mb-2">
+                    <img src="/uploads/testimonies/{{ item.imageName }}" alt="" class="max-h-24 rounded-full w-24 h-24 object-cover">
+                </div>
+                {% endif %}
+                <input type="file" name="imageFile" accept="image/*" class="wab-input">
+            </div>
+            <div class="wab-field space-y-4">
+                <div>
+                    <label class="wab-label">Posição (ordem)</label>
+                    <input type="number" name="position" value="{{ item ? item.position : 0 }}" class="wab-input" min="0">
+                </div>
+                <div class="flex items-center gap-2 pt-2">
+                    <input type="checkbox" id="isActive" name="isActive" value="1" {% if item is null or item.isActive %}checked{% endif %} class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4">
+                    <label for="isActive" class="text-sm font-medium text-slate-700 dark:text-slate-300">Ativo (exibe no site)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-end gap-3">
+        <a href="{{ path('app_admin_testimony_index') }}" class="px-4 py-2 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">Cancelar</a>
+        <button type="submit" class="inline-flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+            <i class="fa-solid fa-save"></i> Salvar
+        </button>
+    </div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+{% endblock %}

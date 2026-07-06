@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ formTitle }}{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1 class="page-title">{{ formTitle }}</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400">
+        <a href="{{ path('app_admin_client_logo_index') }}" class="text-primary hover:underline">← Voltar para listagem</a>
+    </p>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="space-y-6">
+    <div class="admin-card">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="wab-field">
+                <label class="wab-label">Nome / Identificação</label>
+                <input type="text" name="name" value="{{ item ? item.name : '' }}" class="wab-input" placeholder="Ex: Nome da Empresa Cliente">
+            </div>
+            <div class="wab-field">
+                <label class="wab-label">Posição (ordem)</label>
+                <input type="number" name="position" value="{{ item ? item.position : 0 }}" class="wab-input" min="0">
+            </div>
+        </div>
+
+        <div class="wab-field mt-6">
+            <label class="wab-label">Logotipo (Imagem)</label>
+            {% if item and item.imageName %}
+            <div class="mb-2">
+                <img src="/uploads/clients/{{ item.imageName }}" alt="" class="max-h-24 rounded bg-slate-100 p-2 border border-slate-200">
+            </div>
+            {% endif %}
+            <input type="file" name="imageFile" accept="image/*" class="wab-input" {% if item is null %}required{% endif %}>
+        </div>
+    </div>
+
+    <div class="flex justify-end gap-3">
+        <a href="{{ path('app_admin_client_logo_index') }}" class="px-4 py-2 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">Cancelar</a>
+        <button type="submit" class="inline-flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+            <i class="fa-solid fa-save"></i> Salvar
+        </button>
+    </div>
+</form>
+{% endblock %}

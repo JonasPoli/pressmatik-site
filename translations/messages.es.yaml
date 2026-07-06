@@ -26,6 +26,15 @@ about:
   tag: "Ingeniería de Confianza"
   title: "Quiénes Somos"
   text: "Pressmatik es líder en el desarrollo de prensas hidráulicas y servo-hidráulicas industriales pesadas. Nuestras soluciones combinan ingeniería avanzada, estricto cumplimiento de las normas de seguridad NR10 y NR12, e integración de componentes globales de primera calidad para ofrecer la máxima eficiencia energética y productividad sin fugas de aceite ni lentitud."
+  advantages_tag: "Diferenciales"
+  advantages_title: "¿Por qué elegir Pressmatik?"
+  mission: "Misión"
+  vision: "Visión"
+  values: "Valores"
+  gallery_tag: "Galería"
+  gallery_title: "Nuestras Instalaciones"
+  timeline_tag: "Trayectoria"
+  timeline_title: "Nuestra Historia"
 
 differentials:
   tag: "Diferenciales"

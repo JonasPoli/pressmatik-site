@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ item.getTitle(locale) }} - Serviços - Pressmatik{% endblock %}
+
+{% block body %}
+    <div class="container product-detail-layout" style="margin-top: 3rem; margin-bottom: 6rem; max-width: 900px;">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs scroll-animate slide-left" style="margin-bottom: 2rem;">
+            <a href="{{ path('app_home', {'_locale': locale}) }}">{{ 'menu.home'|trans }}</a>
+            <span>/</span>
+            <a href="{{ path('app_home', {'_locale': locale}) ~ '#services' }}">Serviços</a>
+            <span>/</span>
+            <span style="color: var(--color-accent-red); max-width: 300px; display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom;">{{ item.getTitle(locale) }}</span>
+        </div>
+
+        <!-- Service Header Area -->
+        <div class="service-detail-header scroll-animate slide-top" style="margin-bottom: 2.5rem;">
+            <span class="section-title-tag" style="color: var(--color-accent-red); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Serviço Industrial</span>
+            <h1 style="font-size: 2.5rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-text-primary); line-height: 1.25; margin-top: 0.5rem; margin-bottom: 1rem;">
+                {{ item.getTitle(locale) }}
+            </h1>
+            <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;"></div>
+        </div>
+
+        <!-- Main Featured Image -->
+        {% if item.imageName %}
+        <div class="service-detail-featured-img scroll-animate slide-top" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--color-border); margin-bottom: 3rem; background: var(--color-surface-dark); padding: 2rem; display: flex; align-items: center; justify-content: center; max-height: 450px;">
+            <img src="/uploads/services/{{ item.imageName }}" alt="{{ item.getTitle(locale) }}" style="max-width: 100%; max-height: 400px; display: block; object-fit: contain; margin: auto;">
+        </div>
+        {% endif %}
+
+        <!-- Body Content -->
+        <div class="service-detail-body scroll-animate slide-top" style="color: var(--color-text-primary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 4rem;">
+            {% if item.getShortDescription(locale) %}
+            <p style="font-size: 1.25rem; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2rem; border-left: 4px solid var(--color-accent-red); padding-left: 1.5rem; line-height: 1.6;">
+                {{ item.getShortDescription(locale) }}
+            </p>
+            {% endif %}
+            
+            <div style="text-align: justify; white-space: pre-line;">
+                {{ item.getDescription(locale) }}
+            </div>
+        </div>
+
+        <!-- Gallery / Photo Slider (only if there are images) -->
+        {% if item.images|length > 0 %}
+        <section class="service-gallery-section scroll-animate slide-top" style="margin-bottom: 4rem; border-top: 1px solid var(--color-border); padding-top: 3rem;">
+            <h2 style="font-size: 1.75rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-text-primary); text-align: center; margin-bottom: 2rem;">
+                Galeria de Fotos do Serviço
+            </h2>
+            
+            <div style="position: relative; max-width: 800px; margin: 0 auto;">
+                <wa-carousel navigation pagination loop mouse-dragging style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--color-border);">
+                    {% for img in item.images|sort((a, b) => a.position <=> b.position) %}
+                        <wa-carousel-item style="display: flex; flex-direction: column; background: var(--color-surface-dark);">
+                            <div style="aspect-ratio: 16/10; width: 100%; display: flex; align-items: center; justify-content: center; background: #0a0e17;">
+                                <img src="/uploads/gallery/{{ img.imageName }}" alt="{{ img.getCaption(locale) }}" style="max-width: 100%; max-height: 100%; object-fit: contain; display: block;">
+                            </div>
+                            {% if img.getCaption(locale) %}
+                                <div style="background: rgba(11, 15, 23, 0.95); color: var(--color-text-secondary); padding: 1rem; font-size: 0.9rem; text-align: center; border-top: 1px solid var(--color-border);">
+                                    {{ img.getCaption(locale) }}
+                                </div>
+                            {% endif %}
+                        </wa-carousel-item>
+                    {% endfor %}
+                </wa-carousel>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- CTA Form Redirect -->
+        <div class="scroll-animate slide-top" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); padding: 3rem; border-radius: 16px; text-align: center; margin-top: 4rem;">
+            <h3 style="font-size: 1.5rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-text-primary); margin-bottom: 1rem;">Solicite um Orçamento para este Serviço</h3>
+            <p style="color: var(--color-text-secondary); max-width: 600px; margin: 0 auto 2rem auto; font-size: 0.95rem; line-height: 1.6;">
+                Nossa equipe de engenharia e assistência técnica especializada está à disposição para atender à sua demanda industrial com agilidade e máxima competência.
+            </p>
+            <wa-button variant="brand" size="large" href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}">
+                Entrar em Contato
+            </wa-button>
+        </div>
+    </div>
+{% endblock %}

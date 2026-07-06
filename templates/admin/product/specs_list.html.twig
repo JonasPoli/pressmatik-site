@@ -1,0 +1,102 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Especificações Técnicas{% endblock %}
+
+{% block body %}
+<div class="page-header flex items-center justify-between">
+    <div>
+        <h1 class="page-title">Especificações Técnicas</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400">Definições reutilizáveis de especificações</p>
+    </div>
+    <a href="{{ path('app_admin_tech_spec_new') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+        <i class="fa-solid fa-plus"></i> Nova Especificação
+    </a>
+</div>
+
+<div class="admin-card">
+    {% if specs|length == 0 %}
+        <p class="text-sm text-slate-500 py-8 text-center">Nenhuma especificação cadastrada.</p>
+    {% else %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Pos.</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Nome (PT)</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Unidade (PT)</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Nome (EN)</th>
+                    <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Nome (ES)</th>
+                    <th class="text-right py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="specs-tbody">
+                {% for spec in specs %}
+                <tr class="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50" data-id="{{ spec.id }}">
+                    <td class="py-3 px-4 text-slate-500 cursor-move"><i class="fa-solid fa-grip-vertical mr-2 text-slate-400"></i>{{ spec.position }}</td>
+                    <td class="py-3 px-4 font-medium">{{ spec.namePt }}</td>
+                    <td class="py-3 px-4 text-slate-500">{{ spec.unitPt }}</td>
+                    <td class="py-3 px-4 text-slate-500">{{ spec.nameEn }}</td>
+                    <td class="py-3 px-4 text-slate-500">{{ spec.nameEs }}</td>
+                    <td class="py-3 px-4 text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <a href="{{ path('app_admin_tech_spec_edit', {id: spec.id}) }}" class="text-primary hover:text-primary-dark"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <form method="post" action="{{ path('app_admin_tech_spec_delete', {id: spec.id}) }}" onsubmit="return confirm('Remover?')" class="inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ spec.id) }}">
+                                <button type="submit" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+<script>
+function initSortable() {
+    var el = document.getElementById('specs-tbody');
+    if (el && !el.dataset.sortableInitialized) {
+        el.dataset.sortableInitialized = 'true';
+        Sortable.create(el, {
+            handle: 'td:first-child, td:first-child *',
+            animation: 150,
+            ghostClass: 'sortable-ghost',
+            onEnd: function () {
+                var rows = el.querySelectorAll('tr');
+                var ids = Array.from(rows).map(function(r) {
+                    return parseInt(r.dataset.id, 10);
+                });
+                
+                // Feedback visual imediato nos badges da posição
+                rows.forEach(function(r, i) {
+                    var badge = r.querySelector('td:first-child');
+                    if (badge) {
+                        badge.innerHTML = '<i class="fa-solid fa-grip-vertical mr-2 text-slate-400"></i>' + (i + 1);
+                    }
+                });
+
+                fetch('{{ path("app_admin_tech_spec_reorder") }}', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({ ids: ids })
+                });
+            }
+        });
+    }
+}
+initSortable();
+document.addEventListener('turbo:load', initSortable);
+document.addEventListener('DOMContentLoaded', initSortable);
+</script>
+<style>
+.sortable-ghost { opacity: 0.4; background: rgba(79, 110, 247, 0.1); }
+</style>
+{% endblock %}
+

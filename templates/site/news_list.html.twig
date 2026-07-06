@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notícias & Eventos - Pressmatik{% endblock %}
+
+{% block body %}
+    <div class="container product-detail-layout" style="margin-top: 3rem; margin-bottom: 6rem;">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs scroll-animate slide-left" style="margin-bottom: 2rem;">
+            <a href="{{ path('app_home', {'_locale': locale}) }}">{{ 'menu.home'|trans }}</a>
+            <span>/</span>
+            <span style="color: var(--color-accent-red);">{{ 'news.tag'|trans }}</span>
+        </div>
+
+        <div class="section-header scroll-animate slide-top" style="margin-bottom: 3rem;">
+            <span class="section-title-tag">{{ 'news.tag'|trans }}</span>
+            <h1 class="section-title" style="font-size: 2.5rem; margin-top: 0.5rem; color: var(--color-text-primary);">{{ 'news.title'|trans }}</h1>
+            <p class="section-desc" style="max-width: 700px; color: var(--color-text-secondary); margin-top: 1rem;">
+                Acompanhe as últimas inovações tecnológicas, feiras industriais e novidades da Pressmatik.
+            </p>
+        </div>
+
+        <!-- Categories Filter -->
+        {% if categories|length > 0 %}
+        <div class="categories-filter scroll-animate slide-top" style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 3rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem;">
+            <a href="{{ path('app_news_list', {'_locale': locale}) }}" 
+               class="filter-badge {% if activeCategory is null %}active{% endif %}"
+               style="text-decoration: none; padding: 0.5rem 1.25rem; border-radius: 30px; font-size: 0.85rem; font-weight: 600; transition: all 0.3s ease;
+                      {% if activeCategory is null %}background: var(--color-accent-red); color: #fff;{% else %}background: var(--color-surface-dark); color: var(--color-text-secondary); border: 1px solid var(--color-border);{% endif %}">
+                Todas
+            </a>
+            {% for cat in categories %}
+                {% set is_active = (activeCategory and activeCategory.id == cat.id) %}
+                <a href="{{ path('app_news_list', {'_locale': locale, 'category': cat.id}) }}" 
+                   class="filter-badge {% if is_active %}active{% endif %}"
+                   style="text-decoration: none; padding: 0.5rem 1.25rem; border-radius: 30px; font-size: 0.85rem; font-weight: 600; transition: all 0.3s ease;
+                          {% if is_active %}background: var(--color-accent-red); color: #fff;{% else %}background: var(--color-surface-dark); color: var(--color-text-secondary); border: 1px solid var(--color-border);{% endif %}">
+                    {{ cat.getName(locale) }}
+                </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- News Grid -->
+        {% if newsItems|length == 0 %}
+            <div class="scroll-animate slide-top" style="text-align: center; padding: 4rem 2rem; background: var(--color-surface-dark); border-radius: 16px; border: 1px solid var(--color-border);">
+                <i class="bi bi-newspaper" style="font-size: 3rem; color: var(--color-text-secondary); display: block; margin-bottom: 1.5rem;"></i>
+                <p style="color: var(--color-text-secondary); font-size: 1.1rem;">Nenhuma notícia encontrada para esta seleção.</p>
+            </div>
+        {% else %}
+            <div class="news-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;">
+                {% for item in newsItems %}
+                    <div class="news-card scroll-animate slide-top" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; height: 100%;">
+                        <div class="news-img-container" style="position: relative; aspect-ratio: 16/10; overflow: hidden; background: #000;">
+                            {% if item.imageName %}
+                                <img src="/uploads/news/{{ item.imageName }}" alt="{{ item.getImageAlt(locale) ?: item.getTitle(locale) }}" class="news-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy">
+                            {% else %}
+                                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #1a1f2c; color: var(--color-text-secondary);">
+                                    <i class="bi bi-image" style="font-size: 2.5rem;"></i>
+                                </div>
+                            {% endif %}
+                            <div class="news-date-badge" style="position: absolute; bottom: 1rem; left: 1rem; background: var(--color-accent-red); color: #fff; padding: 0.35rem 0.85rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; z-index: 10;">
+                                {{ item.date ? item.date|date('d/m/Y') : '' }}
+                            </div>
+                        </div>
+                        <div class="news-card-content" style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; gap: 1rem;">
+                            <div>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                                    {% for cat in item.categories %}
+                                        <span style="font-size: 0.7rem; font-weight: 700; color: var(--color-accent-red); text-transform: uppercase;">{{ cat.getName(locale) }}</span>
+                                    {% endfor %}
+                                </div>
+                                <h3 style="font-size: 1.25rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-text-primary); line-height: 1.4; margin-bottom: 0.75rem;">
+                                    {{ item.getTitle(locale) }}
+                                </h3>
+                                <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                    {{ item.getShortDescription(locale) }}
+                                </p>
+                            </div>
+                            <a href="{{ path('app_news_detail', {'_locale': locale, 'slug': item.getSlug(locale)}) }}" class="news-readmore-btn" style="color: var(--color-accent-red); text-decoration: none; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 0.5rem; width: fit-content;">
+                                {{ 'news.read_more'|trans }} <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <style>
+        .news-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(213, 28, 35, 0.4) !important;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+        .news-card:hover .news-img {
+            transform: scale(1.05);
+        }
+        .filter-badge:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+    </style>
+{% endblock %}
