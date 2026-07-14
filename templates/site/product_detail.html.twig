@@ -42,9 +42,14 @@
                     {% if active_pdf %}
                         <wa-button variant="brand" size="large" href="/uploads/products/{{ active_pdf }}" download target="_blank">
                             <i class="fa-solid fa-file-pdf" style="margin-right: 8px;"></i>
-                            {{ 'product_detail.quote_product'|trans }}
+                            {{ 'cta.download_catalog'|trans }}
                         </wa-button>
                     {% endif %}
+                    
+                    <wa-button variant="neutral" outline size="large" href="#quote-product-form" onclick="document.getElementById('p-model').value = '{{ activeSubproduct ? activeSubproduct.model|lower : '' }}';">
+                        <i class="fa-solid fa-envelope" style="margin-right: 8px;"></i>
+                        {{ 'product_detail.quote_product'|trans }}
+                    </wa-button>
                 </div>
             </div>
         </div>
