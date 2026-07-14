@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Entity\Subproduct;
-use App\Entity\SubproductApplication;
+use App\Entity\Application;
 use App\Entity\ProductSize;
 use App\Entity\ProductSpecValue;
 use App\Entity\ProductConfigItem;
@@ -54,59 +54,73 @@ final class ProductManageController extends AbstractController
         return $this->render('admin/product/manage_detail.html.twig', [
             'slug' => $slug,
             'product' => $product,
-            'sizes' => $this->sizeRepo->findBySlugOrdered($slug),
-            'specValues' => $this->specValueRepo->findBySlugOrdered($slug),
             'standardItems' => $this->configRepo->findBySlugAndType($slug, 'standard'),
             'optionalItems' => $this->configRepo->findBySlugAndType($slug, 'optional'),
             'videos' => $this->videoRepo->findBySlugOrdered($slug),
             'allSpecs' => $this->techSpecRepo->findAllOrdered(),
+            'allApplications' => $this->em->getRepository(Application::class)->findAllOrdered(),
         ]);
     }
 
     // ═══════════════════════════════════════════════════════════════════════
-    //  SIZES
+    //  SIZES (Subproduct level)
     // ═══════════════════════════════════════════════════════════════════════
 
-    #[Route('/{slug}/size/add', name: 'app_admin_product_size_add', methods: ['POST'])]
-    public function addSize(Request $request, string $slug): Response
+    #[Route('/subproduct/{subproductId}/size/add', name: 'app_admin_subproduct_size_add', methods: ['POST'])]
+    public function addSubproductSize(Request $request, int $subproductId): Response
     {
+        $subproduct = $this->em->getRepository(Subproduct::class)->find($subproductId);
+        if (!$subproduct) {
+            throw $this->createNotFoundException('Subproduto não encontrado');
+        }
+
         $size = new ProductSize();
-        $size->setProductSlug($slug);
+        $size->setSubproduct($subproduct);
         $size->setName($request->request->get('name'));
         $size->setHasVType($request->request->getBoolean('hasVType', true));
         $size->setHasHType($request->request->getBoolean('hasHType', true));
-        $size->setPosition(count($this->sizeRepo->findBySlugOrdered($slug)));
+        $size->setPosition(count($subproduct->getSizes()));
 
         $this->em->persist($size);
         $this->em->flush();
 
-        $this->addFlash('success', "Tamanho \"{$size->getName()}\" adicionado!");
-        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
+        $this->addFlash('success', "Tamanho \"{$size->getName()}\" adicionado ao subproduto!");
+        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $subproduct->getProduct()->getSlug()]);
     }
 
-    #[Route('/{slug}/size/{id}/delete', name: 'app_admin_product_size_delete', methods: ['POST'])]
-    public function deleteSize(Request $request, string $slug, ProductSize $size): Response
+    #[Route('/subproduct/{subproductId}/size/{id}/delete', name: 'app_admin_subproduct_size_delete', methods: ['POST'])]
+    public function deleteSubproductSize(Request $request, int $subproductId, ProductSize $size): Response
     {
+        $subproduct = $this->em->getRepository(Subproduct::class)->find($subproductId);
+        if (!$subproduct) {
+            throw $this->createNotFoundException('Subproduto não encontrado');
+        }
+
         if ($this->isCsrfTokenValid('delete_size' . $size->getId(), $request->request->get('_token'))) {
             $this->em->remove($size);
             $this->em->flush();
             $this->addFlash('success', 'Tamanho removido!');
         }
-        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
+        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $subproduct->getProduct()->getSlug()]);
     }
 
     // ═══════════════════════════════════════════════════════════════════════
-    //  SPEC VALUES (the big table)
+    //  SPEC VALUES (Subproduct level)
     // ═══════════════════════════════════════════════════════════════════════
 
-    #[Route('/{slug}/specs/save', name: 'app_admin_product_specs_save', methods: ['POST'])]
-    public function saveSpecs(Request $request, string $slug): Response
+    #[Route('/subproduct/{subproductId}/specs/save', name: 'app_admin_subproduct_specs_save', methods: ['POST'])]
+    public function saveSubproductSpecs(Request $request, int $subproductId): Response
     {
+        $subproduct = $this->em->getRepository(Subproduct::class)->find($subproductId);
+        if (!$subproduct) {
+            return new JsonResponse(['success' => false, 'message' => 'Subproduct not found'], 404);
+        }
+
         $data = json_decode($request->getContent(), true);
         $rows = $data['rows'] ?? [];
 
-        // Remove existing values for this slug
-        $existing = $this->specValueRepo->findBySlugOrdered($slug);
+        // Clear existing values for this subproduct
+        $existing = $this->specValueRepo->findBySubproductOrdered($subproductId);
         foreach ($existing as $val) {
             $this->em->remove($val);
         }
@@ -123,7 +137,7 @@ final class ProductManageController extends AbstractController
                 if (!$size) continue;
 
                 $val = new ProductSpecValue();
-                $val->setProductSlug($slug);
+                $val->setSubproduct($subproduct);
                 $val->setSpecification($spec);
                 $val->setProductSize($size);
                 $val->setVTypeValue($typeValues['v'] ?? null);
@@ -217,58 +231,7 @@ final class ProductManageController extends AbstractController
         return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
     }
 
-    // ═══════════════════════════════════════════════════════════════════════
-    //  SUBPRODUCT APPLICATIONS
-    // ═══════════════════════════════════════════════════════════════════════
 
-    #[Route('/{slug}/subproduct/{subproductId}/application/add', name: 'app_admin_subproduct_application_add', methods: ['POST'])]
-    public function addApplication(Request $request, string $slug, int $subproductId): Response
-    {
-        $subproduct = $this->em->getRepository(Subproduct::class)->find($subproductId);
-        if (!$subproduct) {
-            throw $this->createNotFoundException('Subproduto não encontrado');
-        }
-
-        $app = new SubproductApplication();
-        $app->setSubproduct($subproduct);
-        $app->setNamePt($request->request->get('namePt'));
-        $app->setNameEn($request->request->get('nameEn'));
-        $app->setNameEs($request->request->get('nameEs'));
-        $app->setIcon($request->request->get('icon'));
-        $app->setPosition(count($subproduct->getApplications()));
-
-        $this->em->persist($app);
-        $this->em->flush();
-
-        $this->addFlash('success', 'Aplicação adicionada com sucesso ao subproduto!');
-        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
-    }
-
-    #[Route('/{slug}/subproduct-application/{id}/delete', name: 'app_admin_subproduct_application_delete', methods: ['POST'])]
-    public function deleteApplication(Request $request, string $slug, SubproductApplication $app): Response
-    {
-        if ($this->isCsrfTokenValid('delete_app' . $app->getId(), $request->request->get('_token'))) {
-            $this->em->remove($app);
-            $this->em->flush();
-            $this->addFlash('success', 'Aplicação removida!');
-        }
-        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
-    }
-
-    #[Route('/{slug}/subproduct-application/reorder', name: 'app_admin_subproduct_application_reorder', methods: ['POST'])]
-    public function reorderApplications(Request $request, string $slug): JsonResponse
-    {
-        $ids = json_decode($request->getContent(), true)['ids'] ?? [];
-        $repo = $this->em->getRepository(SubproductApplication::class);
-        foreach ($ids as $pos => $id) {
-            $app = $repo->find($id);
-            if ($app) {
-                $app->setPosition($pos);
-            }
-        }
-        $this->em->flush();
-        return new JsonResponse(['success' => true]);
-    }
 
     // ═══════════════════════════════════════════════════════════════════════
     //  SUBPRODUCTS (Basic CRUD & PDF Catalog Uploads)
@@ -313,6 +276,15 @@ final class ProductManageController extends AbstractController
             $sub->setPdfFileEs($pdfFileEs);
         }
 
+        // ManyToMany applications association
+        $appIds = $request->request->all('applications') ?? [];
+        foreach ($appIds as $appId) {
+            $app = $this->em->getRepository(Application::class)->find($appId);
+            if ($app) {
+                $sub->addApplication($app);
+            }
+        }
+
         $this->em->persist($sub);
         $this->em->flush();
 
@@ -352,6 +324,16 @@ final class ProductManageController extends AbstractController
         $pdfFileEs = $request->files->get('pdfFileEs');
         if ($pdfFileEs instanceof UploadedFile) {
             $subproduct->setPdfFileEs($pdfFileEs);
+        }
+
+        // ManyToMany applications sync
+        $subproduct->getApplications()->clear();
+        $appIds = $request->request->all('applications') ?? [];
+        foreach ($appIds as $appId) {
+            $app = $this->em->getRepository(Application::class)->find($appId);
+            if ($app) {
+                $subproduct->addApplication($app);
+            }
         }
 
         $this->em->flush();

@@ -10,11 +10,11 @@ class ProductSpecValueRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry) { parent::__construct($registry, ProductSpecValue::class); }
 
     /** @return ProductSpecValue[] */
-    public function findBySlugOrdered(string $slug): array
+    public function findBySubproductOrdered(int $subproductId): array
     {
         return $this->createQueryBuilder('v')
-            ->andWhere('v.productSlug = :slug')
-            ->setParameter('slug', $slug)
+            ->andWhere('v.subproduct = :subId')
+            ->setParameter('subId', $subproductId)
             ->orderBy('v.position', 'ASC')
             ->getQuery()
             ->getResult();

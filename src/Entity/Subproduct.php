@@ -14,10 +14,16 @@ use Symfony\Component\HttpFoundation\File\File;
 #[Vich\Uploadable]
 class Subproduct
 {
-    /** @var Collection<int, SubproductApplication> */
-    #[ORM\OneToMany(targetEntity: SubproductApplication::class, mappedBy: 'subproduct', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    /** @var Collection<int, Application> */
+    #[ORM\ManyToMany(targetEntity: Application::class)]
+    #[ORM\JoinTable(name: 'subproduct_applications_map')]
     #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $applications;
+
+    /** @var Collection<int, ProductSize> */
+    #[ORM\OneToMany(targetEntity: ProductSize::class, mappedBy: 'subproduct', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['position' => 'ASC'])]
+    private Collection $sizes;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -153,27 +159,23 @@ class Subproduct
     public function __construct()
     {
         $this->applications = new ArrayCollection();
+        $this->sizes = new ArrayCollection();
     }
 
-    /** @return Collection<int, SubproductApplication> */
+    /** @return Collection<int, Application> */
     public function getApplications(): Collection { return $this->applications; }
 
-    public function addApplication(SubproductApplication $a): static
+    public function addApplication(Application $a): static
     {
         if (!$this->applications->contains($a)) {
             $this->applications->add($a);
-            $a->setSubproduct($this);
         }
         return $this;
     }
 
-    public function removeApplication(SubproductApplication $a): static
+    public function removeApplication(Application $a): static
     {
-        if ($this->applications->removeElement($a)) {
-            if ($a->getSubproduct() === $this) {
-                $a->setSubproduct(null);
-            }
-        }
+        $this->applications->removeElement($a);
         return $this;
     }
 
@@ -246,4 +248,26 @@ class Subproduct
 
     public function isIsActive(): bool { return $this->isActive; }
     public function setIsActive(bool $v): static { $this->isActive = $v; return $this; }
+
+    /** @return Collection<int, ProductSize> */
+    public function getSizes(): Collection { return $this->sizes; }
+
+    public function addSize(ProductSize $s): static
+    {
+        if (!$this->sizes->contains($s)) {
+            $this->sizes->add($s);
+            $s->setSubproduct($this);
+        }
+        return $this;
+    }
+
+    public function removeSize(ProductSize $s): static
+    {
+        if ($this->sizes->removeElement($s)) {
+            if ($s->getSubproduct() === $this) {
+                $s->setSubproduct(null);
+            }
+        }
+        return $this;
+    }
 }

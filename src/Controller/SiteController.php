@@ -109,8 +109,12 @@ class SiteController extends AbstractController
         }
 
         // Fetch dynamic data from database
-        $sizes = $this->sizeRepo->findBySlugOrdered($slug);
-        $specValues = $this->specValueRepo->findBySlugOrdered($slug);
+        $sizes = [];
+        $specValues = [];
+        if ($activeSubproduct) {
+            $sizes = $this->sizeRepo->findBySubproductOrdered($activeSubproduct->getId());
+            $specValues = $this->specValueRepo->findBySubproductOrdered($activeSubproduct->getId());
+        }
         $standardItems = $this->configRepo->findBySlugAndType($slug, 'standard');
         $optionalItems = $this->configRepo->findBySlugAndType($slug, 'optional');
         $videos = $this->videoRepo->findBySlugOrdered($slug);

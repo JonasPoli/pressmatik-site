@@ -14,7 +14,7 @@ use App\Entity\ProductSpecValue;
 use App\Entity\ProductVideo;
 use App\Entity\QualityCertification;
 use App\Entity\Subproduct;
-use App\Entity\SubproductApplication;
+use App\Entity\Application;
 use App\Entity\SuccessCase;
 use App\Entity\Supplier;
 use App\Entity\TechnicalSpecification;
@@ -73,17 +73,17 @@ class SeedDataCommand extends Command
         // 2. Limpar dados anteriores
         $io->section('2. Limpando dados anteriores');
         
+        $this->em->createQuery('DELETE FROM App\Entity\ProductSpecValue')->execute();
+        $this->em->createQuery('DELETE FROM App\Entity\ProductSize')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\Subproduct')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\Product')->execute();
+        $this->em->createQuery('DELETE FROM App\Entity\Application')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\Banner')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\Differential')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\Supplier')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\QualityCertification')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\SuccessCase')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\OrgChartItem')->execute();
-        
-        $this->em->createQuery('DELETE FROM App\Entity\ProductSpecValue')->execute();
-        $this->em->createQuery('DELETE FROM App\Entity\ProductSize')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\TechnicalSpecification')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\ProductConfigItem')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\ProductVideo')->execute();
@@ -98,13 +98,13 @@ class SeedDataCommand extends Command
         
         $io->text('Tabelas limpas com sucesso.');
 
-        // 3. PRODUCTS & SUBPRODUCTS
-        $io->section('3. Cadastrando Produtos e Subprodutos');
-        $this->seedProducts($io);
+        // 3. APPLICATIONS
+        $io->section('3. Cadastrando Aplicações Globais');
+        $this->seedApplications($io);
 
-        // 3b. COPY APPLICATION IMAGES
-        $io->section('3b. Copiando Imagens das Aplicações');
-        $this->copyApplicationImages($io);
+        // 3b. PRODUCTS & SUBPRODUCTS
+        $io->section('3b. Cadastrando Produtos e Subprodutos');
+        $this->seedProducts($io);
 
         // 4. TECHNICAL SPECS & SIZES
         $io->section('4. Cadastrando Especificações Técnicas');
@@ -395,81 +395,6 @@ class SeedDataCommand extends Command
             $this->em->flush(); // need ID for subproducts
 
             $firstSub = null;
-            $appsData = [
-                'PMC-ST' => [
-                    ['pt' => 'Corte de Chapas', 'en' => 'Sheet Metal Cutting', 'es' => 'Corte de Chapas', 'icon' => 'corte'],
-                    ['pt' => 'Dobra e Conformação', 'en' => 'Bending and Forming', 'es' => 'Doblado y Conformado', 'icon' => 'dobra'],
-                    ['pt' => 'Estampagem Rápida', 'en' => 'High-Speed Stamping', 'es' => 'Estampado Rápido', 'icon' => 'estampagem'],
-                    ['pt' => 'Substituição de Prensas Excêntricas', 'en' => 'Replacing Eccentric Presses', 'es' => 'Reemplazo de Prensas Excéntricas', 'icon' => 'duplo-efeito'],
-                ],
-                'PMC-BC' => [
-                    ['pt' => 'Corte de Chapas', 'en' => 'Sheet Metal Cutting', 'es' => 'Corte de Chapas', 'icon' => 'corte'],
-                    ['pt' => 'Dobra e Conformação', 'en' => 'Bending and Forming', 'es' => 'Doblado y Conformado', 'icon' => 'dobra'],
-                    ['pt' => 'Montagem de Componentes', 'en' => 'Component Assembly', 'es' => 'Montaje de Componentes', 'icon' => 'montagem'],
-                ],
-                'PMC-GT' => [
-                    ['pt' => 'Rebarbação de Fundidos', 'en' => 'Castings Deburring', 'es' => 'Desbarbado de Fundidos', 'icon' => 'rebarbacao'],
-                    ['pt' => 'Calibração de Peças', 'en' => 'Parts Calibration', 'es' => 'Calibración de Piezas', 'icon' => 'progressivo'],
-                ],
-                'PMC-TR' => [
-                    ['pt' => 'Rebarbação de Fundidos', 'en' => 'Castings Deburring', 'es' => 'Desbarbado de Fundidos', 'icon' => 'rebarbacao'],
-                    ['pt' => 'Corte de Rebarbas', 'en' => 'Flash Cutting', 'es' => 'Corte de Rebaba', 'icon' => 'corte'],
-                ],
-                'PMC-MT' => [
-                    ['pt' => 'Troca Rápida de Ferramentas', 'en' => 'Quick Tool Change', 'es' => 'Cambio Rápido de Herramientas', 'icon' => 'duplo-efeito'],
-                    ['pt' => 'Estampagem de Lotes', 'en' => 'Batch Stamping', 'es' => 'Estampado por Lotes', 'icon' => 'estampagem'],
-                ],
-                'PMC-AL' => [
-                    ['pt' => 'Alinhamento de Eixos', 'en' => 'Shaft Alignment', 'es' => 'Alineamiento de Ejes', 'icon' => 'progressivo'],
-                    ['pt' => 'Endireitamento de Vigas', 'en' => 'Beams Straightening', 'es' => 'Enderezado de Vigas', 'icon' => 'dobra'],
-                ],
-                'PMC-HZ' => [
-                    ['pt' => 'Montagem Horizontal', 'en' => 'Horizontal Assembly', 'es' => 'Montaje Horizontal', 'icon' => 'montagem'],
-                    ['pt' => 'Buchamento de Eixos', 'en' => 'Shaft Bushing', 'es' => 'Bujado de Ejes', 'icon' => 'repuxo'],
-                ],
-                'PMCD-ST' => [
-                    ['pt' => 'Corte de Chapas', 'en' => 'Sheet Metal Cutting', 'es' => 'Corte de Chapas', 'icon' => 'corte'],
-                    ['pt' => 'Dobra e Conformação', 'en' => 'Bending and Forming', 'es' => 'Doblado y Conformado', 'icon' => 'dobra'],
-                    ['pt' => 'Estampagem Rápida', 'en' => 'High-Speed Stamping', 'es' => 'Estampado Rápido', 'icon' => 'estampagem'],
-                ],
-                'PMCD-GT' => [
-                    ['pt' => 'Rebarbação de Fundidos', 'en' => 'Castings Deburring', 'es' => 'Desbarbado de Fundidos', 'icon' => 'rebarbacao'],
-                    ['pt' => 'Calibração de Peças', 'en' => 'Parts Calibration', 'es' => 'Calibración de Piezas', 'icon' => 'progressivo'],
-                ],
-                'PMCD-TR' => [
-                    ['pt' => 'Rebarbação de Fundidos', 'en' => 'Castings Deburring', 'es' => 'Desbarbado de Fundidos', 'icon' => 'rebarbacao'],
-                    ['pt' => 'Corte de Rebarbas', 'en' => 'Flash Cutting', 'es' => 'Corte de Rebaba', 'icon' => 'corte'],
-                ],
-                'PMCD-MT' => [
-                    ['pt' => 'Troca Rápida de Ferramentas', 'en' => 'Quick Tool Change', 'es' => 'Cambio Rápido de Herramientas', 'icon' => 'duplo-efeito'],
-                    ['pt' => 'Estampagem de Lotes', 'en' => 'Batch Stamping', 'es' => 'Estampado por Lotes', 'icon' => 'estampagem'],
-                ],
-                'PMH-ST' => [
-                    ['pt' => 'Repuxo Profundo', 'en' => 'Deep Drawing', 'es' => 'Embutición Profunda', 'icon' => 'repuxo'],
-                    ['pt' => 'Conformação Pesada', 'en' => 'Heavy Forming', 'es' => 'Conformado Pesado', 'icon' => 'dobra'],
-                ],
-                'PMH-PR' => [
-                    ['pt' => 'Repuxo Profundo de Chapas', 'en' => 'Deep Sheet Drawing', 'es' => 'Embutición Profunda de Chapa', 'icon' => 'repuxo'],
-                    ['pt' => 'Estampagem Progressiva', 'en' => 'Progressive Stamping', 'es' => 'Estampado Progresivo', 'icon' => 'progressivo'],
-                ],
-                'PMH-WP' => [
-                    ['pt' => 'Montagem de Redutores e Motores', 'en' => 'Gearbox & Motor Assembly', 'es' => 'Montaje de Reductores y Motores', 'icon' => 'montagem'],
-                    ['pt' => 'Desmontagem de Eixos', 'en' => 'Shaft Disassembly', 'es' => 'Desmontaje de Ejes', 'icon' => 'duplo-efeito'],
-                    ['pt' => 'Endireitamento de Chapas', 'en' => 'Plate Straightening', 'es' => 'Enderezado de Chapas', 'icon' => 'dobra'],
-                ],
-                'PMH-WK' => [
-                    ['pt' => 'Manutenção Geral', 'en' => 'General Maintenance', 'es' => 'Mantenimiento General', 'icon' => 'duplo-efeito'],
-                    ['pt' => 'Montagem em Linha', 'en' => 'Assembly Line', 'es' => 'Montaje en Línea', 'icon' => 'montagem'],
-                ],
-                'PMH-VB' => [
-                    ['pt' => 'Moldagem de Coxins e Borracha', 'en' => 'Rubber & Mount Molding', 'es' => 'Moldeo de Goma y Soporte', 'icon' => 'progressivo'],
-                    ['pt' => 'Vulcanização de Peças', 'en' => 'Parts Vulcanization', 'es' => 'Vulcanización de Piezas', 'icon' => 'estampagem'],
-                ],
-                'PM4C-ST' => [
-                    ['pt' => 'Repuxo de Metais', 'en' => 'Metal Deep Drawing', 'es' => 'Embutición de Metal', 'icon' => 'repuxo'],
-                    ['pt' => 'Estampagem e Corte', 'en' => 'Stamping and Cutting', 'es' => 'Estampado y Corte', 'icon' => 'corte'],
-                ],
-            ];
 
             foreach ($p['subs'] as $sIdx => $s) {
                 $sub = new Subproduct();
@@ -538,21 +463,50 @@ class SeedDataCommand extends Command
                     }
                 }
 
-                // Seed applications for this subproduct
-                $apps = $appsData[$sub->getModel()] ?? [
-                    ['pt' => 'Conformação de Chapas', 'en' => 'Sheet Metal Forming', 'es' => 'Conformado de Chapa', 'icon' => 'dobra'],
-                    ['pt' => 'Corte Industrial', 'en' => 'Industrial Cutting', 'es' => 'Corte Industrial', 'icon' => 'corte'],
+                // Map the 19 applications to subproducts
+                $subproductApps = [
+                    'PMC-ST'  => ['Corte', 'Estampagem', 'Dobra', 'Rebarbação', 'Repuxo', 'Duplo efeito', 'Montagem', 'Progressivo'],
+                    'PMC-SM'  => ['Corte', 'Estampagem', 'Dobra', 'Rebarbação', 'Repuxo', 'Progressivo', 'Montagem'],
+                    'PMC-BC'  => ['Corte', 'Estampagem', 'Dobra', 'Rebarbação', 'Repuxo', 'Duplo efeito', 'Montagem', 'Progressivo'],
+                    'PMC-GT'  => ['Rebarbação', 'Montagem', 'Forjamento', 'Mesa giratória'],
+                    'PMC-TR'  => ['Rebarbação'],
+                    'PMC-MT'  => ['Rebarbação', 'Montagem'],
+                    'PMC-AL'  => ['Endireitamento'],
+                    'PMC-HZ'  => ['Montagem', 'Endireitamento'],
+                    'PMCD-ST' => ['Corte', 'Estampagem', 'Dobra', 'Rebarbação', 'Repuxo', 'Duplo efeito', 'Montagem', 'Progressivo'],
+                    'PMCD-SM' => ['Corte', 'Estampagem', 'Dobra', 'Rebarbação', 'Repuxo', 'Duplo efeito', 'Montagem', 'Progressivo'],
+                    'PMCD-BC' => ['Corte', 'Estampagem', 'Dobra', 'Rebarbação', 'Repuxo', 'Duplo efeito', 'Montagem', 'Progressivo'],
+                    'PMCD-GT' => ['Rebarbação', 'Montagem', 'Forjamento', 'Mesa giratória'],
+                    'PMCD-TR' => ['Rebarbação'],
+                    'PMCD-MT' => ['Rebarbação', 'Montagem'],
+                    'PMH-ST'  => ['Corte', 'Estampagem', 'Dobra', 'Rebarbação', 'Repuxo', 'Compactação', 'Montagem', 'Moldagem'],
+                    'PMH-PR'  => ['Corte', 'Estampagem', 'Dobra', 'Rebarbação', 'Repuxo', 'Compactação', 'Montagem', 'Moldagem'],
+                    'PMH-WP'  => ['Montagem', 'Desmontagem', 'Endireitamento'],
+                    'PMH-WK'  => ['Montagem', 'Desmontagem', 'Dobra', 'Endireitamento'],
+                    'PMH-VB'  => ['Vulcanização', 'Moldagem', 'Transfer'],
+                    'PM4C-ST' => ['Corte', 'Estampagem', 'Dobra', 'Rebarbação', 'Repuxo', 'Progressivo', 'Montagem'],
+                    'PM4C-RP' => ['Repuxo profundo', 'Repuxo invertido'],
+                    'PM4C-TR' => ['Rebarbação / calibração'],
+                    'PM4C-TY' => ['Corte', 'Estampagem', 'Dobra', 'Rebarbação', 'Repuxo', 'Montagem'],
                 ];
 
-                foreach ($apps as $aIdx => $a) {
-                    $appEntity = new SubproductApplication();
-                    $appEntity->setSubproduct($sub);
-                    $appEntity->setNamePt($a['pt']);
-                    $appEntity->setNameEn($a['en']);
-                    $appEntity->setNameEs($a['es']);
-                    $appEntity->setIcon($a['icon']);
-                    $appEntity->setPosition($aIdx);
-                    $this->em->persist($appEntity);
+                // Load applications index for fast linking
+                static $normalizedApps = null;
+                if ($normalizedApps === null) {
+                    $normalizedApps = [];
+                    $allSeededApps = $this->em->getRepository(Application::class)->findAll();
+                    foreach ($allSeededApps as $app) {
+                        $norm = $this->normalizeString($app->getNamePt());
+                        $normalizedApps[$norm] = $app;
+                    }
+                }
+
+                $subAppsList = $subproductApps[$sub->getModel()] ?? [];
+                foreach ($subAppsList as $appName) {
+                    $normName = $this->normalizeString($appName);
+                    if (isset($normalizedApps[$normName])) {
+                        $sub->addApplication($normalizedApps[$normName]);
+                    }
                 }
 
                 if ($sIdx === 0) $firstSub = $sub;
@@ -620,8 +574,27 @@ class SeedDataCommand extends Command
 
         $jsonData = json_decode(file_get_contents($jsonPath), true);
 
+        $slugToModel = [
+            'prensas-hidraulicas-tipo-c' => 'PMC-ST',
+            'prensas-hidraulicas-tipo-c-duplo' => 'PMCD-ST',
+            'prensas-hidraulicas-tipo-h' => 'PMH-ST',
+            'prensas-hidraulicas-4-colunas' => 'PM4C-ST',
+        ];
+
         foreach ($jsonData as $slug => $productData) {
-            $io->text("Processando tamanhos para: {$slug}");
+            $model = $slugToModel[$slug] ?? null;
+            if (!$model) {
+                $io->warning("Slug {$slug} não possui mapeamento de subproduto.");
+                continue;
+            }
+
+            $subproduct = $this->em->getRepository(Subproduct::class)->findOneBy(['model' => $model]);
+            if (!$subproduct) {
+                $io->warning("Subproduto com modelo {$model} não encontrado no banco.");
+                continue;
+            }
+
+            $io->text("Processando tamanhos para subproduto: {$model}");
             $sizesList = $productData['sizes'] ?? [];
             $valuesList = $productData['values'] ?? [];
 
@@ -629,7 +602,7 @@ class SeedDataCommand extends Command
             $pos = 0;
             foreach ($sizesList as $s) {
                 $size = new ProductSize();
-                $size->setProductSlug($slug);
+                $size->setSubproduct($subproduct);
                 $size->setName($s['name']);
                 $size->setHasVType($s['hasV']);
                 $size->setHasHType($s['hasH']);
@@ -661,7 +634,7 @@ class SeedDataCommand extends Command
                     if (!$size) continue;
 
                     $val = new ProductSpecValue();
-                    $val->setProductSlug($slug);
+                    $val->setSubproduct($subproduct);
                     $val->setSpecification($spec);
                     $val->setProductSize($size);
                     $val->setVTypeValue($vals['v'] ?? null);
@@ -674,7 +647,7 @@ class SeedDataCommand extends Command
             $this->em->flush();
         }
 
-        $io->text('Tamanhos e Parâmetros Técnicos inseridos.');
+        $io->text('Tamanhos e Parâmetros Técnicos de Subprodutos inseridos.');
     }
 
     private function seedConfigItems(SymfonyStyle $io): void
@@ -1106,35 +1079,56 @@ class SeedDataCommand extends Command
         $io->text(count($items) . ' itens do organograma inseridos.');
     }
 
-    private function copyApplicationImages(SymfonyStyle $io): void
+    private function seedApplications(SymfonyStyle $io): void
     {
         $srcAppDir = __DIR__ . '/../../seed/aplicacoes';
-        $destAppDir = __DIR__ . '/../../public/images/aplicacoes';
+        $destAppDir = __DIR__ . '/../../public/uploads/applications';
         
         if (!is_dir($destAppDir)) {
             mkdir($destAppDir, 0777, true);
         }
 
-        $filesToCopy = [
-            'corte.png' => 'corte.png',
-            'dobra.png' => 'dobra.png',
-            'duplo efeito.png' => 'duplo-efeito.png',
-            'estampagem.png' => 'estampagem.png',
-            'montagem.png' => 'montagem.png',
-            'progressivo.png' => 'progressivo.png',
-            'rebarbação.png' => 'rebarbacao.png',
-            'repuxo.png' => 'repuxo.png',
+        $apps = [
+            ['pt' => 'Compactação', 'en' => 'Compacting', 'es' => 'Compactación', 'file' => 'COMPACTAÇÃO.png', 'dest' => 'compactacao.png'],
+            ['pt' => 'Corte', 'en' => 'Cutting', 'es' => 'Corte', 'file' => 'corte.png', 'dest' => 'corte.png'],
+            ['pt' => 'Desmontagem', 'en' => 'Disassembly', 'es' => 'Desmontaje', 'file' => 'DESMONTAGEM.png', 'dest' => 'desmontagem.png'],
+            ['pt' => 'Dobra', 'en' => 'Bending', 'es' => 'Dobra', 'file' => 'dobra.png', 'dest' => 'dobra.png'],
+            ['pt' => 'Duplo efeito', 'en' => 'Double action', 'es' => 'Doble efecto', 'file' => 'duplo efeito.png', 'dest' => 'duplo-efeito.png'],
+            ['pt' => 'Endireitamento', 'en' => 'Straightening', 'es' => 'Enderezado', 'file' => 'ENDIREITAMENTO.png', 'dest' => 'endireitamento.png'],
+            ['pt' => 'Estampagem', 'en' => 'Stamping', 'es' => 'Estampado', 'file' => 'estampagem.png', 'dest' => 'estampagem.png'],
+            ['pt' => 'Forjamento', 'en' => 'Forging', 'es' => 'Forjado', 'file' => 'FORJAMENTO.png', 'dest' => 'forjamento.png'],
+            ['pt' => 'Mesa giratória', 'en' => 'Rotary table', 'es' => 'Mesa giratoria', 'file' => 'MESA GIRATÓRIA.png', 'dest' => 'mesa-giratoria.png'],
+            ['pt' => 'Moldagem', 'en' => 'Molding', 'es' => 'Moldeo', 'file' => 'MOLDAGEM.png', 'dest' => 'moldagem.png'],
+            ['pt' => 'Montagem', 'en' => 'Assembly', 'es' => 'Montaje', 'file' => 'montagem.png', 'dest' => 'montagem.png'],
+            ['pt' => 'Progressivo', 'en' => 'Progressive', 'es' => 'Progresivo', 'file' => 'progressivo.png', 'dest' => 'progressivo.png'],
+            ['pt' => 'Rebarbação', 'en' => 'Deburring', 'es' => 'Rebabado', 'file' => 'rebarbação.png', 'dest' => 'rebarbacao.png'],
+            ['pt' => 'Rebarbação / calibração', 'en' => 'Deburring / calibration', 'es' => 'Rebabado / calibración', 'file' => 'REBARBAÇÃO CALIBRAÇÃO.png', 'dest' => 'rebarbacao-calibracao.png'],
+            ['pt' => 'Repuxo', 'en' => 'Drawing', 'es' => 'Embutido', 'file' => 'repuxo.png', 'dest' => 'repuxo.png'],
+            ['pt' => 'Repuxo invertido', 'en' => 'Inverted drawing', 'es' => 'Embutido invertido', 'file' => 'REPUXO INVERTIDO.png', 'dest' => 'repuxo-invertido.png'],
+            ['pt' => 'Repuxo profundo', 'en' => 'Deep drawing', 'es' => 'Embutido profundo', 'file' => 'REPUXO PROFUNDO.png', 'dest' => 'repuxo-profundo.png'],
+            ['pt' => 'Transfer', 'en' => 'Transfer', 'es' => 'Transfer', 'file' => 'TRANSFER.png', 'dest' => 'transfer.png'],
+            ['pt' => 'Vulcanização', 'en' => 'Vulcanization', 'es' => 'Vulcanización', 'file' => 'VULCANIZAÇÃO.png', 'dest' => 'vulcanizacao.png'],
         ];
 
-        $copiedCount = 0;
-        foreach ($filesToCopy as $srcName => $destName) {
-            $srcFile = $this->findFileRecursively($srcAppDir, $srcName);
+        foreach ($apps as $idx => $a) {
+            $entity = new Application();
+            $entity->setNamePt($a['pt']);
+            $entity->setNameEn($a['en']);
+            $entity->setNameEs($a['es']);
+            $entity->setPosition($idx);
+            $entity->setIsActive(true);
+
+            $srcFile = $this->findFileRecursively($srcAppDir, $a['file']);
             if ($srcFile && file_exists($srcFile)) {
-                copy($srcFile, $destAppDir . '/' . $destName);
-                $copiedCount++;
+                copy($srcFile, $destAppDir . '/' . $a['dest']);
+                $entity->setImageName($a['dest']);
             }
+
+            $this->em->persist($entity);
         }
-        $io->text($copiedCount . ' imagens das aplicações copiadas com sucesso.');
+
+        $this->em->flush();
+        $io->text(count($apps) . ' aplicações globais cadastradas e copiadas.');
     }
 
     private function seedClientLogos(SymfonyStyle $io): void

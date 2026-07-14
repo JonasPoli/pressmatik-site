@@ -9,58 +9,7 @@
     </p>
 </div>
 
-{# ═══════════════════════════════════════════════════════════════════════
-   TAMANHOS (Sizes)
-   ═══════════════════════════════════════════════════════════════════════ #}
-<div class="admin-card mb-6">
-    <h2 class="admin-card-title mb-4"><i class="fa-solid fa-ruler mr-2"></i>Tamanhos (Sub-modelos)</h2>
 
-    {% if sizes|length > 0 %}
-    <div class="overflow-x-auto mb-4">
-        <table class="w-full text-sm">
-            <thead>
-                <tr class="border-b border-slate-200 dark:border-slate-700">
-                    <th class="text-left py-2 px-3">Nome</th>
-                    <th class="text-center py-2 px-3">V-Type</th>
-                    <th class="text-center py-2 px-3">H-Type</th>
-                    <th class="text-right py-2 px-3">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for size in sizes %}
-                <tr class="border-b border-slate-100 dark:border-slate-800">
-                    <td class="py-2 px-3 font-medium">{{ size.name }}</td>
-                    <td class="py-2 px-3 text-center">{{ size.hasVType ? '✓' : '—' }}</td>
-                    <td class="py-2 px-3 text-center">{{ size.hasHType ? '✓' : '—' }}</td>
-                    <td class="py-2 px-3 text-right">
-                        <form method="post" action="{{ path('app_admin_product_size_delete', {slug: slug, id: size.id}) }}" onsubmit="return confirm('Remover?')" class="inline">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete_size' ~ size.id) }}">
-                            <button type="submit" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash-can"></i></button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    {% endif %}
-
-    <form method="post" action="{{ path('app_admin_product_size_add', {slug: slug}) }}" class="flex items-end gap-3 flex-wrap">
-        <div class="wab-field flex-1">
-            <label class="wab-label">Nome do tamanho</label>
-            <input type="text" name="name" class="wab-input" placeholder="Ex: PMC-25" required>
-        </div>
-        <label class="flex items-center gap-2 text-sm">
-            <input type="checkbox" name="hasVType" value="1" checked> V-Type
-        </label>
-        <label class="flex items-center gap-2 text-sm">
-            <input type="checkbox" name="hasHType" value="1" checked> H-Type
-        </label>
-        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg text-sm hover:bg-primary-dark transition-colors">
-            <i class="fa-solid fa-plus"></i> Adicionar
-        </button>
-    </form>
-</div>
 
 {# ═══════════════════════════════════════════════════════════════════════
    SUBPRODUTOS (Subproducts, PDFs & Applications)
@@ -71,7 +20,7 @@
     {% if product.subproducts|length > 0 %}
     <div class="space-y-4 mb-6" id="subproducts-list">
         {% for sub in product.subproducts %}
-        <div class="border border-slate-200 dark:border-slate-700 rounded-lg p-4 bg-white dark:bg-slate-800" data-id="{{ sub.id }}" x-data="{ showEdit: false, showApps: false }">
+        <div class="border border-slate-200 dark:border-slate-700 rounded-lg p-4 bg-white dark:bg-slate-800" data-id="{{ sub.id }}" x-data="{ showEdit: false, showApps: false, showSpecs: false }">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div class="flex items-center">
                     <i class="fa-solid fa-grip-vertical text-slate-400 cursor-move mr-3"></i>
@@ -95,6 +44,9 @@
                     </button>
                     <button type="button" @click="showApps = !showApps" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded text-xs transition-colors">
                         <i class="fa-solid fa-briefcase"></i> Aplicações ({{ sub.applications|length }})
+                    </button>
+                    <button type="button" @click="showSpecs = !showSpecs" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded text-xs transition-colors">
+                        <i class="fa-solid fa-table"></i> Parâmetros ({{ sub.sizes|length }})
                     </button>
                     <form method="post" action="{{ path('app_admin_subproduct_delete', {slug: slug, id: sub.id}) }}" onsubmit="return confirm('Remover subproduto? Isso apagará todas as suas especificações e aplicações associadas.')" class="inline">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete_sub' ~ sub.id) }}">
@@ -199,6 +151,28 @@
                         </div>
                     </div>
 
+                    <!-- Applications Checkbox List -->
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-3 mt-3">
+                        <label class="wab-label font-semibold mb-2 block text-xs text-slate-600 dark:text-slate-300">Aplicações Recomendadas</label>
+                        {% if allApplications|length == 0 %}
+                            <p class="text-xs text-slate-400">Nenhuma aplicação cadastrada no banco de dados.</p>
+                        {% else %}
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
+                                {% for app in allApplications %}
+                                    <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded transition-colors text-xs">
+                                        <input type="checkbox" name="applications[]" value="{{ app.id }}" 
+                                               {% if sub.applications.contains(app) %}checked{% endif %}
+                                               class="rounded border-slate-300 dark:border-slate-600 text-primary">
+                                        {% if app.imageName %}
+                                            <img src="/uploads/applications/{{ app.imageName }}" alt="" class="w-5 h-5 object-contain bg-slate-100 dark:bg-slate-700 rounded p-0.5 border border-slate-200 dark:border-slate-600">
+                                        {% endif %}
+                                        <span class="text-slate-700 dark:text-slate-300 font-medium">{{ app.namePt }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
                     <div class="flex items-center gap-2 mt-4">
                         <button type="submit" class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-semibold transition-colors">
                             Salvar Alterações
@@ -210,68 +184,233 @@
                 </form>
             </div>
 
-            <!-- COLLAPSIBLE APPLICATIONS MANAGEMENT -->
+            <!-- COLLAPSIBLE APPLICATIONS SUMMARY (READ ONLY) -->
             <div x-show="showApps" x-collapse class="mt-4 p-4 border border-slate-100 dark:border-slate-700 rounded bg-slate-50 dark:bg-slate-900/50 text-sm">
-                <h3 class="font-semibold mb-2">Aplicações de {{ sub.model }}</h3>
+                <h3 class="font-semibold mb-3">Aplicações Associadas a {{ sub.model }}</h3>
                 
-                <!-- Applications List -->
                 {% if sub.applications|length > 0 %}
-                <div class="space-y-2 mb-4 app-sortable" data-subproduct-id="{{ sub.id }}">
+                <div class="flex flex-wrap gap-2">
                     {% for app in sub.applications %}
-                    <div class="flex items-center justify-between p-2 bg-white dark:bg-slate-800 rounded border border-slate-100 dark:border-slate-700/50 text-xs" data-id="{{ app.id }}">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-grip-vertical text-slate-400 cursor-move"></i>
-                            {% if app.icon %}
-                                <img src="/images/aplicacoes/{{ app.icon }}.png" alt="" class="w-4 h-4 object-contain">
-                            {% endif %}
-                            <span class="font-medium">{{ app.namePt }}</span>
-                            <span class="text-slate-400">({{ app.icon ?: 'Sem ícone' }})</span>
-                        </div>
-                        <form method="post" action="{{ path('app_admin_subproduct_application_delete', {slug: slug, id: app.id}) }}" class="inline" onsubmit="return confirm('Remover esta aplicação?')">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete_app' ~ app.id) }}">
-                            <button type="submit" class="text-red-500 hover:text-red-700 p-1"><i class="fa-solid fa-trash-can"></i></button>
-                        </form>
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700 shadow-sm text-xs">
+                        {% if app.imageName %}
+                            <img src="/uploads/applications/{{ app.imageName }}" alt="" class="w-4 h-4 object-contain bg-slate-100 dark:bg-slate-700 rounded p-0.5">
+                        {% endif %}
+                        <span class="font-medium text-slate-800 dark:text-slate-200">{{ app.namePt }}</span>
                     </div>
                     {% endfor %}
                 </div>
                 {% else %}
-                <p class="text-xs text-slate-400 mb-4">Nenhuma aplicação cadastrada para este subproduto.</p>
+                <p class="text-xs text-slate-400">Nenhuma aplicação associada a este subproduto. Clique em <strong>Editar Detalhes / PDFs</strong> para associar aplicações.</p>
                 {% endif %}
+            </div>
 
-                <!-- Add Application Form -->
-                <form method="post" action="{{ path('app_admin_subproduct_application_add', {slug: slug, subproductId: sub.id}) }}" class="mt-4 border-t border-slate-200 dark:border-slate-700 pt-3">
-                    <h4 class="font-semibold text-xs mb-2">Adicionar Aplicação</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div class="wab-field">
-                            <label class="wab-label">Nome (PT)</label>
-                            <input type="text" name="namePt" class="wab-input text-xs" placeholder="Ex: Dobra e Conformação" required>
-                        </div>
-                        <div class="wab-field">
-                            <label class="wab-label">Nome (EN)</label>
-                            <input type="text" name="nameEn" class="wab-input text-xs" placeholder="Ex: Bending and Forming">
-                        </div>
-                        <div class="wab-field">
-                            <label class="wab-label">Nome (ES)</label>
-                            <input type="text" name="nameEs" class="wab-input text-xs" placeholder="Ex: Doblado y Conformado">
-                        </div>
-                        <div class="wab-field">
-                            <label class="wab-label">Ícone / Tipo da Aplicação</label>
-                            <select name="icon" class="wab-input text-xs" required>
-                                <option value="corte">Corte</option>
-                                <option value="dobra">Dobra</option>
-                                <option value="duplo-efeito">Duplo Efeito / Substituição</option>
-                                <option value="estampagem">Estampagem</option>
-                                <option value="montagem">Montagem</option>
-                                <option value="progressivo">Progressivo / Calibração / Alinhamento</option>
-                                <option value="rebarbacao">Rebarbação</option>
-                                <option value="repuxo">Repuxo</option>
-                            </select>
-                        </div>
+            <!-- COLLAPSIBLE TECHNICAL PARAMETERS TABLE AND SIZES (READ & WRITE) -->
+            <div x-show="showSpecs" x-collapse class="mt-4 p-4 border border-slate-100 dark:border-slate-700 rounded bg-slate-50 dark:bg-slate-900/50 text-sm space-y-4">
+                
+                <!-- Sizes Management Section -->
+                <div class="border-b border-slate-200 dark:border-slate-700 pb-4">
+                    <h3 class="font-semibold text-xs text-slate-600 dark:text-slate-300 mb-2">Gerenciar Tamanhos de {{ sub.model }}</h3>
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        {% for size in sub.sizes %}
+                            <div class="flex items-center gap-1.5 px-2.5 py-1 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 text-xs">
+                                <span class="font-medium">{{ size.name }}</span>
+                                <span class="text-xxs text-slate-400">({{ (size.hasVType ? 'V' : '') ~ (size.hasVType and size.hasHType ? '+' : '') ~ (size.hasHType ? 'H' : '') }})</span>
+                                <form method="post" action="{{ path('app_admin_subproduct_size_delete', {subproductId: sub.id, id: size.id}) }}" onsubmit="return confirm('Excluir este tamanho? Todos os parâmetros técnicos deste tamanho serão apagados!')" class="inline">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete_size' ~ size.id) }}">
+                                    <button type="submit" class="text-red-500 hover:text-red-700 font-bold ml-1">×</button>
+                                </form>
+                            </div>
+                        {% endfor %}
                     </div>
-                    <button type="submit" class="mt-3 px-3 py-1.5 bg-slate-700 hover:bg-slate-800 text-white rounded text-xs transition-colors">
-                        <i class="fa-solid fa-plus mr-1"></i> Adicionar Aplicação
-                    </button>
-                </form>
+
+                    <!-- Add Size Form -->
+                    <form method="post" action="{{ path('app_admin_subproduct_size_add', {subproductId: sub.id}) }}" class="flex flex-wrap items-end gap-3 bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 max-w-xl">
+                        <div class="wab-field" style="margin: 0; min-width: 120px;">
+                            <label class="wab-label" style="font-size: 10px; margin-bottom: 2px;">Nome (ex: PMC-30)</label>
+                            <input type="text" name="name" class="wab-input text-xs" required style="padding: 4px 8px; height: 28px;">
+                        </div>
+                        <label class="flex items-center gap-1 cursor-pointer text-xs mb-1.5">
+                            <input type="checkbox" name="hasVType" value="1" checked class="rounded">
+                            V-type
+                        </label>
+                        <label class="flex items-center gap-1 cursor-pointer text-xs mb-1.5">
+                            <input type="checkbox" name="hasHType" value="1" checked class="rounded">
+                            H-type
+                        </label>
+                        <button type="submit" class="px-3 py-1 bg-slate-700 hover:bg-slate-800 text-white rounded text-xs transition-colors h-7 font-medium">
+                            + Adicionar Tamanho
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Parameters Grid Section -->
+                <div>
+                    <h3 class="font-semibold text-xs text-slate-600 dark:text-slate-300 mb-3">Tabela de Parâmetros</h3>
+                    {% if sub.sizes|length == 0 %}
+                        <p class="text-xs text-slate-400">Cadastre pelo menos um tamanho acima para habilitar a tabela de especificações.</p>
+                    {% else %}
+                        <div x-data="subSpecTable_{{ sub.id }}()">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-xs border-collapse">
+                                    <thead>
+                                        <tr class="bg-slate-100 dark:bg-slate-800">
+                                            <th class="py-2 px-2 text-center border border-slate-200 dark:border-slate-700" rowspan="2" style="width: 40px;"></th>
+                                            <th class="py-2 px-2 text-left font-semibold border border-slate-200 dark:border-slate-700" rowspan="2">Especificação</th>
+                                            <th class="py-2 px-2 text-left font-semibold border border-slate-200 dark:border-slate-700" rowspan="2">Unidade</th>
+                                            {% for size in sub.sizes %}
+                                                <th class="py-2 px-2 text-center font-semibold border border-slate-200 dark:border-slate-700"
+                                                    colspan="{{ (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) }}">
+                                                    {{ size.name }}
+                                                </th>
+                                            {% endfor %}
+                                            <th class="py-2 px-2 border border-slate-200 dark:border-slate-700" rowspan="2">Ações</th>
+                                        </tr>
+                                        <tr class="bg-slate-100 dark:bg-slate-800">
+                                            {% for size in sub.sizes %}
+                                                {% if size.hasVType %}
+                                                <th class="py-1 px-2 text-center text-xs font-normal border border-slate-200 dark:border-slate-700">V-type</th>
+                                                {% endif %}
+                                                {% if size.hasHType %}
+                                                <th class="py-1 px-2 text-center text-xs font-normal border border-slate-200 dark:border-slate-700">H-type</th>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template x-for="(row, rowIdx) in rows" :key="rowIdx">
+                                            <tr class="hover:bg-slate-200/50 dark:hover:bg-slate-800/80"
+                                                draggable="true"
+                                                @dragstart="draggedIdx = rowIdx"
+                                                @dragover.prevent
+                                                @drop="moveRow(draggedIdx, rowIdx)">
+                                                <td class="py-1 px-2 border border-slate-200 dark:border-slate-700 text-center cursor-move text-slate-400">
+                                                    <i class="fa-solid fa-grip-vertical"></i>
+                                                </td>
+                                                <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
+                                                    <select x-model="row.specId" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0">
+                                                        <option value="">-- Selecionar --</option>
+                                                        {% for spec in allSpecs %}
+                                                        <option value="{{ spec.id }}">{{ spec.namePt }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </td>
+                                                <td class="py-1 px-2 border border-slate-200 dark:border-slate-700 text-slate-500" x-text="getUnit(row.specId)"></td>
+                                                {% for size in sub.sizes %}
+                                                    {% if size.hasVType %}
+                                                    <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
+                                                        <input type="text" x-model="row.values['{{ size.id }}'].v" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0 text-center">
+                                                    </td>
+                                                    {% endif %}
+                                                    {% if size.hasHType %}
+                                                    <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
+                                                        <input type="text" x-model="row.values['{{ size.id }}'].h" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0 text-center">
+                                                    </td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <td class="py-1 px-2 border border-slate-200 dark:border-slate-700 text-center">
+                                                    <button type="button" @click="removeRow(rowIdx)" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash-can"></i></button>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="flex items-center justify-between mt-3">
+                                <button type="button" @click="addRow()" class="px-3 py-1.5 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded text-xs transition-colors font-medium">
+                                    + Adicionar Linha
+                                </button>
+                                <button type="button" @click="saveAll()" class="px-4 py-1.5 bg-primary hover:bg-primary-dark text-white rounded text-xs transition-colors font-semibold">
+                                    Salvar Parâmetros
+                                </button>
+                            </div>
+                        </div>
+
+                        <script>
+                        function subSpecTable_{{ sub.id }}() {
+                            const sizesData = [
+                                {% for size in sub.sizes %}
+                                { id: '{{ size.id }}', name: '{{ size.name|e('js') }}', hasV: {{ size.hasVType ? 'true' : 'false' }}, hasH: {{ size.hasHType ? 'true' : 'false' }} },
+                                {% endfor %}
+                            ];
+
+                            const existingRows = {};
+                            {% for size in sub.sizes %}
+                                {% for val in size.specValues %}
+                                const key_{{ val.id }} = '{{ val.specification.id }}_{{ val.position }}';
+                                if (!existingRows[key_{{ val.id }}]) {
+                                    existingRows[key_{{ val.id }}] = {
+                                        specId: '{{ val.specification.id }}',
+                                        position: {{ val.position }},
+                                        values: {}
+                                    };
+                                    sizesData.forEach(s => { existingRows[key_{{ val.id }}].values[s.id] = { v: '', h: '' }; });
+                                }
+                                existingRows[key_{{ val.id }}].values['{{ val.productSize.id }}'] = {
+                                    v: '{{ val.vTypeValue|e('js') }}',
+                                    h: '{{ val.hTypeValue|e('js') }}'
+                                };
+                                {% endfor %}
+                            {% endfor %}
+
+                            let initialRows = Object.values(existingRows).sort((a, b) => a.position - b.position);
+                            if (initialRows.length === 0) {
+                                initialRows = [
+                                    {
+                                        specId: '',
+                                        values: {},
+                                        position: 999
+                                    }
+                                ];
+                                sizesData.forEach(s => { initialRows[0].values[s.id] = { v: '', h: '' }; });
+                            }
+
+                            return {
+                                rows: initialRows,
+                                draggedIdx: null,
+
+                                addRow() {
+                                    const values = {};
+                                    sizesData.forEach(s => { values[s.id] = { v: '', h: '' }; });
+                                    this.rows.push({ specId: '', values, position: 999 });
+                                },
+
+                                removeRow(idx) {
+                                    this.rows.splice(idx, 1);
+                                },
+
+                                moveRow(from, to) {
+                                    if (from === null || from === undefined || from === to) return;
+                                    const item = this.rows.splice(from, 1)[0];
+                                    this.rows.splice(to, 0, item);
+                                },
+
+                                getUnit(specId) {
+                                    return specsMap[specId]?.unit || '';
+                                },
+
+                                async saveAll() {
+                                    this.rows.forEach((row, idx) => {
+                                        row.position = idx;
+                                    });
+
+                                    const resp = await fetch('{{ path("app_admin_subproduct_specs_save", {subproductId: sub.id}) }}', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ rows: this.rows })
+                                    });
+                                    const data = await resp.json();
+                                    if (data.success) {
+                                        alert('Parâmetros salvos com sucesso!');
+                                        location.reload();
+                                    } else {
+                                        alert('Erro ao salvar os parâmetros.');
+                                    }
+                                }
+                            };
+                        }
+                        </script>
+                    {% endif %}
+                </div>
             </div>
         </div>
         {% endfor %}
@@ -345,6 +484,26 @@
                 </div>
             </div>
 
+            <!-- Applications Checkbox List for New Subproduct -->
+            <div class="border-t border-slate-200 dark:border-slate-700 pt-3 mt-3">
+                <label class="wab-label font-semibold mb-2 block text-xs text-slate-600 dark:text-slate-300">Aplicações Recomendadas</label>
+                {% if allApplications|length == 0 %}
+                    <p class="text-xs text-slate-400">Nenhuma aplicação cadastrada no banco de dados.</p>
+                {% else %}
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
+                        {% for app in allApplications %}
+                            <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded transition-colors text-xs">
+                                <input type="checkbox" name="applications[]" value="{{ app.id }}" class="rounded border-slate-300 dark:border-slate-600 text-primary">
+                                {% if app.imageName %}
+                                    <img src="/uploads/applications/{{ app.imageName }}" alt="" class="w-5 h-5 object-contain bg-slate-100 dark:bg-slate-700 rounded p-0.5 border border-slate-200 dark:border-slate-600">
+                                {% endif %}
+                                <span class="text-slate-700 dark:text-slate-300 font-medium">{{ app.namePt }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
             <button type="submit" class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-sm transition-colors">
                 <i class="fa-solid fa-check mr-1"></i> Confirmar Cadastro
             </button>
@@ -352,91 +511,7 @@
     </div>
 </div>
 
-{# ═══════════════════════════════════════════════════════════════════════
-   PARÂMETROS TÉCNICOS (Spec Values Table)
-   ═══════════════════════════════════════════════════════════════════════ #}
-<div class="admin-card mb-6" x-data="specTable()">
-    <h2 class="admin-card-title mb-4"><i class="fa-solid fa-table mr-2"></i>Parâmetros Técnicos</h2>
 
-    {% if sizes|length == 0 %}
-        <p class="text-sm text-slate-500 py-4 text-center">Cadastre os tamanhos primeiro.</p>
-    {% else %}
-    <div class="overflow-x-auto">
-        <table class="w-full text-xs border-collapse">
-            <thead>
-                <tr class="bg-slate-50 dark:bg-slate-800">
-                    <th class="py-2 px-2 text-center border border-slate-200 dark:border-slate-700" rowspan="2" style="width: 40px;"></th>
-                    <th class="py-2 px-2 text-left font-semibold border border-slate-200 dark:border-slate-700" rowspan="2">Especificação</th>
-                    <th class="py-2 px-2 text-left font-semibold border border-slate-200 dark:border-slate-700" rowspan="2">Unidade</th>
-                    {% for size in sizes %}
-                    <th class="py-2 px-2 text-center font-semibold border border-slate-200 dark:border-slate-700"
-                        colspan="{{ (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) }}">
-                        {{ size.name }}
-                    </th>
-                    {% endfor %}
-                    <th class="py-2 px-2 border border-slate-200 dark:border-slate-700" rowspan="2">Ações</th>
-                </tr>
-                <tr class="bg-slate-50 dark:bg-slate-800">
-                    {% for size in sizes %}
-                        {% if size.hasVType %}
-                        <th class="py-1 px-2 text-center text-xs font-normal border border-slate-200 dark:border-slate-700">V-type</th>
-                        {% endif %}
-                        {% if size.hasHType %}
-                        <th class="py-1 px-2 text-center text-xs font-normal border border-slate-200 dark:border-slate-700">H-type</th>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                <template x-for="(row, rowIdx) in rows" :key="rowIdx">
-                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50"
-                        draggable="true"
-                        @dragstart="draggedIdx = rowIdx"
-                        @dragover.prevent
-                        @drop="moveRow(draggedIdx, rowIdx)">
-                        <td class="py-1 px-2 border border-slate-200 dark:border-slate-700 text-center cursor-move text-slate-400">
-                            <i class="fa-solid fa-grip-vertical"></i>
-                        </td>
-                        <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
-                            <select x-model="row.specId" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0">
-                                <option value="">-- Selecionar --</option>
-                                {% for spec in allSpecs %}
-                                <option value="{{ spec.id }}">{{ spec.namePt }}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                        <td class="py-1 px-2 border border-slate-200 dark:border-slate-700 text-slate-500" x-text="getUnit(row.specId)"></td>
-                        {% for size in sizes %}
-                            {% if size.hasVType %}
-                            <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
-                                <input type="text" x-model="row.values['{{ size.id }}'].v" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0 text-center">
-                            </td>
-                            {% endif %}
-                            {% if size.hasHType %}
-                            <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
-                                <input type="text" x-model="row.values['{{ size.id }}'].h" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0 text-center">
-                            </td>
-                            {% endif %}
-                        {% endfor %}
-                        <td class="py-1 px-2 border border-slate-200 dark:border-slate-700 text-center">
-                            <button type="button" @click="removeRow(rowIdx)" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-times"></i></button>
-                        </td>
-                    </tr>
-                </template>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="flex items-center justify-between mt-4">
-        <button type="button" @click="addRow()" class="inline-flex items-center gap-2 px-3 py-2 text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-            <i class="fa-solid fa-plus"></i> Adicionar Linha
-        </button>
-        <button type="button" @click="saveAll()" class="inline-flex items-center gap-2 px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium">
-            <i class="fa-solid fa-save"></i> Salvar Parâmetros
-        </button>
-    </div>
-    {% endif %}
-</div>
 
 {# ═══════════════════════════════════════════════════════════════════════
    CONFIGURAÇÕES (Standard / Optional)
@@ -561,21 +636,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // 3. Reorder applications within a subproduct
-    document.querySelectorAll('.app-sortable').forEach(el => {
-        new Sortable(el, {
-            animation: 150,
-            handle: '.fa-grip-vertical',
-            onEnd: async function () {
-                const ids = Array.from(el.children).map(div => div.dataset.id);
-                await fetch('{{ path("app_admin_subproduct_application_reorder", {slug: slug}) }}', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ ids })
-                });
-            }
-        });
-    });
+
 });
 
 const specsMap = {
@@ -584,75 +645,11 @@ const specsMap = {
     {% endfor %}
 };
 
-const sizesData = [
-    {% for size in sizes %}
-    { id: '{{ size.id }}', name: '{{ size.name|e('js') }}', hasV: {{ size.hasVType ? 'true' : 'false' }}, hasH: {{ size.hasHType ? 'true' : 'false' }} },
-    {% endfor %}
-];
+const sizesData = [];
 
 function specTable() {
-    // Build initial rows from existing data
-    const existingRows = {};
-    {% for val in specValues %}
-    const key_{{ val.id }} = '{{ val.specification.id }}_{{ val.position }}';
-    if (!existingRows[key_{{ val.id }}]) {
-        existingRows[key_{{ val.id }}] = {
-            specId: '{{ val.specification.id }}',
-            position: {{ val.position }},
-            values: {}
-        };
-        sizesData.forEach(s => { existingRows[key_{{ val.id }}].values[s.id] = { v: '', h: '' }; });
-    }
-    existingRows[key_{{ val.id }}].values['{{ val.productSize.id }}'] = {
-        v: '{{ val.vTypeValue|e('js') }}',
-        h: '{{ val.hTypeValue|e('js') }}'
-    };
-    {% endfor %}
-
-    let initialRows = Object.values(existingRows).sort((a, b) => a.position - b.position);
-    if (initialRows.length === 0) {
-        initialRows = [createEmptyRow()];
-    }
-
     return {
-        rows: initialRows,
-        draggedIdx: null,
-
-        addRow() {
-            this.rows.push(createEmptyRow());
-        },
-
-        removeRow(idx) {
-            this.rows.splice(idx, 1);
-        },
-
-        moveRow(from, to) {
-            if (from === null || from === undefined || from === to) return;
-            const item = this.rows.splice(from, 1)[0];
-            this.rows.splice(to, 0, item);
-        },
-
-        getUnit(specId) {
-            return specsMap[specId]?.unit || '';
-        },
-
-        async saveAll() {
-            // Update row positions before saving
-            this.rows.forEach((row, idx) => {
-                row.position = idx;
-            });
-
-            const resp = await fetch('{{ path("app_admin_product_specs_save", {slug: slug}) }}', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ rows: this.rows })
-            });
-            const data = await resp.json();
-            if (data.success) {
-                alert('Parâmetros salvos com sucesso!');
-                location.reload();
-            }
-        }
+        rows: []
     };
 }
 
