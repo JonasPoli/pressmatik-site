@@ -4,37 +4,92 @@
 {% block title %}Pressmatik - {{ 'banner.title'|trans }}{% endblock %}
 
 {% block body %}
-    <!-- Hero Banner Section (Polished Two-Column Industrial Layout) -->
+    <!-- Hero Banner Section (Premium Two-Column Slider Layout) -->
     <section class="hero-section">
-        <div class="container hero-grid">
-            <div class="hero-content scroll-animate slide-left">
-                <span class="section-title-tag">{{ 'banner.tag'|trans }}</span>
-                <h1 class="hero-title">{{ 'banner.title'|trans }}</h1>
-                <p class="hero-subtitle">{{ 'banner.subtitle'|trans }}</p>
-                <div class="hero-buttons">
-                    <wa-button variant="brand" size="large" href="#contact">
-                        {{ 'cta.quote_now'|trans }}
-                    </wa-button>
-                    <wa-button variant="neutral" size="large" outline href="#about">
-                        {{ 'cta.learn_more'|trans }}
-                    </wa-button>
-                </div>
-            </div>
-            
-            <div class="hero-visual scroll-animate slide-right">
-                <div class="hero-image-frame">
-                    <img src="/images/prensa-hidraulica-tipo-c-linha-st.png" alt="C-Frame Stamping Press" class="hero-main-img">
-                    <div class="hero-badge badge-top">
-                        <span class="badge-num">25-315</span>
-                        <span class="badge-lbl">Toneladas</span>
+        <div class="hero-grid-overlay"></div>
+        
+        <div class="hero-slider">
+            {% if banners|length > 0 %}
+                {% for item in banners %}
+                    <div class="hero-slide {% if loop.first %}active{% endif %}">
+                        <div class="container hero-grid">
+                            <div class="hero-content">
+                                <span class="section-title-tag">PRESSMATIK</span>
+                                <h1 class="hero-title">{{ item.getTitle(locale) }}</h1>
+                                <p class="hero-subtitle">{{ item.getSubtitle(locale) }}</p>
+                                <div class="hero-buttons">
+                                    <wa-button variant="brand" size="large" href="{{ item.getButtonUrl() ?: '#contact' }}">
+                                        {{ item.getButtonText(locale) ?: 'cta.quote_now'|trans }}
+                                    </wa-button>
+                                    <wa-button variant="neutral" size="large" outline href="#about">
+                                        {{ 'cta.learn_more'|trans }}
+                                    </wa-button>
+                                </div>
+                            </div>
+                            
+                            <div class="hero-visual">
+                                <div class="hero-image-frame">
+                                    <img src="{% if item.getImageName() %}/uploads/banners/{{ item.getImageName() }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="" class="hero-main-img">
+                                    <div class="hero-badge badge-top">
+                                        <span class="badge-num">25-315</span>
+                                        <span class="badge-lbl">Toneladas</span>
+                                    </div>
+                                    <div class="hero-badge badge-bottom">
+                                        <span class="badge-num">JIS Classe 1</span>
+                                        <span class="badge-lbl">Alta Precisão</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="hero-badge badge-bottom">
-                        <span class="badge-num">JIS Classe 1</span>
-                        <span class="badge-lbl">Alta Precisão</span>
+                {% endfor %}
+            {% else %}
+                <div class="hero-slide active">
+                    <div class="container hero-grid">
+                        <div class="hero-content">
+                            <span class="section-title-tag">PRESSMATIK</span>
+                            <h1 class="hero-title">{{ 'banner.title'|trans }}</h1>
+                            <p class="hero-subtitle">{{ 'banner.subtitle'|trans }}</p>
+                            <div class="hero-buttons">
+                                <wa-button variant="brand" size="large" href="#contact">
+                                    {{ 'cta.quote_now'|trans }}
+                                </wa-button>
+                                <wa-button variant="neutral" size="large" outline href="#about">
+                                    {{ 'cta.learn_more'|trans }}
+                                </wa-button>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-visual">
+                            <div class="hero-image-frame">
+                                <img src="/images/prensa-hidraulica-tipo-c-linha-st.png" alt="" class="hero-main-img">
+                                <div class="hero-badge badge-top">
+                                    <span class="badge-num">25-315</span>
+                                    <span class="badge-lbl">Toneladas</span>
+                                </div>
+                                <div class="hero-badge badge-bottom">
+                                    <span class="badge-num">JIS Classe 1</span>
+                                    <span class="badge-lbl">Alta Precisão</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
+
+        <!-- Slider Controls -->
+        {% if banners|length > 1 %}
+        <div class="hero-slider-nav">
+            <button class="hero-prev-btn" type="button"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="hero-next-btn" type="button"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="hero-slider-dots">
+            {% for item in banners %}
+                <span class="hero-dot {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}"></span>
+            {% endfor %}
+        </div>
+        {% endif %}
     </section>
 
     <!-- Quem Somos (About Us) Section with Image Collage and Bullet Grid -->
@@ -44,39 +99,49 @@
                 <div class="collage-container">
                     <div class="collage-shape"></div>
                     <div class="collage-img-main-frame">
-                        <img src="/images/about-img.png" alt="Premium Hydraulic Press Manufacturing" class="collage-img-main">
+                        <img src="{% if about and about.getHomeImageName() %}/uploads/about/{{ about.getHomeImageName() }}{% else %}/images/about-img.png{% endif %}" alt="Premium Hydraulic Press Manufacturing" class="collage-img-main">
                     </div>
                 </div>
             </div>
 
             <div class="about-content scroll-animate slide-right">
                 <span class="section-title-tag">{{ 'about.tag'|trans }}</span>
-                <h2>{{ 'about.title'|trans }}</h2>
-                <p>{{ 'about.text'|trans }}</p>
+                <h2>{{ about ? about.getTitle(locale) : 'about.title'|trans }}</h2>
+                <p>{{ about ? (about.getHomeText(locale) ?: about.getDescription(locale)) : 'about.text'|trans }}</p>
                 
                 <div class="about-bullets">
-                    <div class="about-bullet-item">
-                        <div class="bullet-icon-wrapper">
-                            <i class="bi bi-shield-check"></i>
+                    {% if about %}
+                        {% for i in 1..4 %}
+                            {% set adv_title = about.getAdvantageTitle(i, locale) %}
+                            {% set adv_desc = about.getAdvantageDesc(i, locale) %}
+                            {% set adv_icon = about.getAdvantageIcon(i) %}
+                            {% if adv_title %}
+                                <div class="about-bullet-item">
+                                    <div class="bullet-icon-wrapper">
+                                        <i class="{{ adv_icon ?: 'fa-solid fa-shield-halved' }}"></i>
+                                    </div>
+                                    <div class="bullet-text">
+                                        <h4>{{ adv_title }}</h4>
+                                        <p>{{ adv_desc }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="about-bullet-item">
+                            <div class="bullet-icon-wrapper">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div class="bullet-text">
+                                <h4>Segurança Avançada (NR12)</h4>
+                                <p>Sistemas eletro-hidráulicos monitorados redundantes e cortinas ópticas integradas.</p>
+                            </div>
                         </div>
-                        <div class="bullet-text">
-                            <h4>Segurança Avançada (NR12)</h4>
-                            <p>Sistemas eletro-hidráulicos monitorados redundantes e cortinas ópticas integradas.</p>
-                        </div>
-                    </div>
-                    <div class="about-bullet-item">
-                        <div class="bullet-icon-wrapper">
-                            <i class="bi bi-cpu"></i>
-                        </div>
-                        <div class="bullet-text">
-                            <h4>Engenharia e Tecnologia Siemens</h4>
-                            <p>CLPs de segurança, painéis de operação IHM Touch e acionamentos robustos de última geração.</p>
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
                 
-                <wa-button variant="neutral" outline href="#contact" style="margin-top: 1.5rem;">
-                    {{ 'menu.contact'|trans }}
+                <wa-button variant="neutral" outline href="{{ path('app_about_us', {'_locale': locale}) }}" style="margin-top: 1.5rem;">
+                    {{ 'menu.company'|trans }}
                 </wa-button>
             </div>
         </div>
@@ -91,30 +156,23 @@
             </div>
             
             <div class="diff-grid">
-                <!-- Safety card -->
-                <div class="diff-card scroll-animate slide-left">
-                    <div class="diff-card-icon-wrapper">
-                        <i class="bi bi-shield-check"></i>
+                {% for diff in differentials %}
+                    <div class="diff-card scroll-animate {% if loop.index0 % 3 == 0 %}slide-left{% elseif loop.index0 % 3 == 1 %}slide-top{% else %}slide-right{% endif %}">
+                        <div class="diff-card-icon-wrapper">
+                            <i class="{{ diff.icon ?: 'fa-solid fa-star' }}"></i>
+                        </div>
+                        <h3>{{ diff.getTitle(locale) }}</h3>
+                        <p>{{ diff.getDescription(locale) }}</p>
                     </div>
-                    <h3>{{ 'differentials.safety.title'|trans }}</h3>
-                    <p>{{ 'differentials.safety.desc'|trans }}</p>
-                </div>
-                
-                <div class="diff-card scroll-animate slide-top">
-                    <div class="diff-card-icon-wrapper">
-                        <i class="bi bi-cpu"></i>
+                {% else %}
+                    <div class="diff-card scroll-animate slide-left">
+                        <div class="diff-card-icon-wrapper">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3>{{ 'differentials.safety.title'|trans }}</h3>
+                        <p>{{ 'differentials.safety.desc'|trans }}</p>
                     </div>
-                    <h3>{{ 'differentials.components.title'|trans }}</h3>
-                    <p>{{ 'differentials.components.desc'|trans }}</p>
-                </div>
-                
-                <div class="diff-card scroll-animate slide-right">
-                    <div class="diff-card-icon-wrapper">
-                        <i class="bi bi-lightning-charge"></i>
-                    </div>
-                    <h3>{{ 'differentials.performance.title'|trans }}</h3>
-                    <p>{{ 'differentials.performance.desc'|trans }}</p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -127,6 +185,7 @@
                 <h2 class="section-title">{{ 'products_sec.title'|trans }}</h2>
             </div>
 
+            {% set db_grouped = get_products_grouped() %}
             <wa-tab-group class="products-tab-group scroll-animate slide-top">
                 <wa-tab slot="nav" panel="hydraulic">{{ 'products_sec.hydraulic_presses'|trans }}</wa-tab>
                 <wa-tab slot="nav" panel="servo-hydraulic">{{ 'products_sec.servo_presses'|trans }}</wa-tab>
@@ -137,28 +196,26 @@
                 {% for cat in ['hydraulic', 'servo-hydraulic', 'mechanical', 'equipments', 'parts'] %}
                     <wa-tab-panel name="{{ cat }}">
                         <div class="products-tab-grid">
-                            {% for key, prod in catalog %}
-                                {% if prod.category == cat %}
-                                    <div class="product-tab-card">
-                                        <div class="product-tab-img-wrapper">
-                                            <img src="{{ prod.img }}" alt="{{ prod.name_key|trans }}" loading="lazy">
-                                        </div>
-                                        <div class="product-tab-info">
-                                            <h3>{{ prod.name_key|trans }}</h3>
-                                            <p>{{ prod.desc_key|trans }}</p>
-                                            <div class="product-tab-footer">
-                                                {% if prod.tonnage %}
-                                                    <span class="product-specs-badge">{{ prod.tonnage }}</span>
-                                                {% else %}
-                                                    <span class="product-specs-badge">{{ 'product_detail.tag'|trans }}</span>
-                                                {% endif %}
-                                                <wa-button variant="brand" size="small" href="{{ path('app_product_detail', {'_locale': app.request.locale, 'slug': prod.slug}) }}">
-                                                    {{ 'cta.learn_more'|trans }}
-                                                </wa-button>
-                                            </div>
+                            {% for prod in db_grouped[cat] ?? [] %}
+                                <div class="product-tab-card">
+                                    <div class="product-tab-img-wrapper">
+                                        <img src="{% if prod.imageName %}/uploads/products/{{ prod.imageName }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ prod.getName(locale) }}" loading="lazy">
+                                    </div>
+                                    <div class="product-tab-info">
+                                        <h3>{{ prod.getName(locale) }}</h3>
+                                        <p>{{ prod.getDescription(locale) }}</p>
+                                        <div class="product-tab-footer">
+                                            {% if prod.tonnage %}
+                                                <span class="product-specs-badge">{{ prod.tonnage }}</span>
+                                            {% else %}
+                                                <span class="product-specs-badge">{{ 'product_detail.tag'|trans }}</span>
+                                            {% endif %}
+                                            <wa-button variant="brand" size="small" href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}">
+                                                {{ 'cta.learn_more'|trans }}
+                                            </wa-button>
                                         </div>
                                     </div>
-                                {% endif %}
+                                </div>
                             {% endfor %}
                         </div>
                     </wa-tab-panel>
@@ -506,7 +563,7 @@
 
             <div class="contact-form-column scroll-animate slide-right">
                 <h3>{{ 'cta.quote_now'|trans }}</h3>
-                <form id="quote-form" onsubmit="event.preventDefault(); alert('{{ 'contact_form.success'|trans }}'); this.reset();">
+                <form id="quote-form">
                     <div class="form-group">
                         <wa-input id="form-name" type="text" label="{{ 'contact_form.name'|trans }}" placeholder="Ex: João Silva" required></wa-input>
                     </div>
@@ -517,16 +574,266 @@
                         <wa-input id="form-phone" type="tel" label="{{ 'contact_form.phone'|trans }}" placeholder="(16) 99999-9999" required></wa-input>
                     </div>
                     <div class="form-group">
+                        <wa-input id="form-cnpj" type="text" label="CPF / CNPJ" placeholder="Digite apenas números (11 ou 14 dígitos)" required></wa-input>
+                    </div>
+                    <div class="form-group">
                         <wa-input id="form-product" type="text" label="{{ 'contact_form.product_interest'|trans }}" placeholder="Ex: PMC-ST 60 Toneladas"></wa-input>
                     </div>
                     <div class="form-group">
                         <wa-textarea id="form-message" label="{{ 'contact_form.message'|trans }}" placeholder="Descreva os requisitos técnicos da prensa..."></wa-textarea>
                     </div>
-                    <wa-button type="submit" variant="brand" style="width: 100%;">
+                    <wa-button id="form-submit-btn" type="submit" variant="brand" style="width: 100%;">
                         {{ 'cta.submit'|trans }}
                     </wa-button>
+                    <div id="form-status-message" style="margin-top: 1.5rem; padding: 1rem; border-radius: 8px; display: none;"></div>
                 </form>
             </div>
         </div>
     </section>
+
+    <!-- AJAX & Validation Script for Contact Form -->
+    <script>
+        function initHeroSlider() {
+            const slider = document.querySelector('.hero-slider');
+            if (!slider) return;
+
+            const slides = Array.from(slider.querySelectorAll('.hero-slide'));
+            const dots = Array.from(document.querySelectorAll('.hero-dot'));
+            const prevBtn = document.querySelector('.hero-prev-btn');
+            const nextBtn = document.querySelector('.hero-next-btn');
+
+            if (slides.length <= 1) return;
+
+            let currentIndex = 0;
+            let timer = null;
+
+            function showSlide(index) {
+                slides[currentIndex].classList.remove('active');
+                if (dots[currentIndex]) dots[currentIndex].classList.remove('active');
+
+                currentIndex = (index + slides.length) % slides.length;
+
+                slides[currentIndex].classList.add('active');
+                if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+            }
+
+            function startAutoplay() {
+                stopAutoplay();
+                timer = setInterval(() => {
+                    showSlide(currentIndex + 1);
+                }, 6000);
+            }
+
+            function stopAutoplay() {
+                if (timer) {
+                    clearInterval(timer);
+                    timer = null;
+                }
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    showSlide(currentIndex - 1);
+                    startAutoplay();
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    showSlide(currentIndex + 1);
+                    startAutoplay();
+                });
+            }
+
+            dots.forEach((dot, idx) => {
+                dot.addEventListener('click', () => {
+                    showSlide(idx);
+                    startAutoplay();
+                });
+            });
+
+            startAutoplay();
+        }
+
+        document.addEventListener('turbo:load', initHeroSlider);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initHeroSlider();
+            const form = document.getElementById('quote-form');
+            const submitBtn = document.getElementById('form-submit-btn');
+            const statusMsg = document.getElementById('form-status-message');
+
+            function validateCPF(cpf) {
+                cpf = cpf.replace(/[^\d]+/g,'');
+                if(cpf == '') return false;
+                if (cpf.length != 11 || 
+                    cpf == "00000000000" || 
+                    cpf == "11111111111" || 
+                    cpf == "22222222222" || 
+                    cpf == "33333333333" || 
+                    cpf == "44444444444" || 
+                    cpf == "55555555555" || 
+                    cpf == "66666666666" || 
+                    cpf == "77777777777" || 
+                    cpf == "88888888888" || 
+                    cpf == "99999999999")
+                        return false;		
+                let add = 0;	
+                for (let i=0; i < 9; i++)		
+                    add += parseInt(cpf.charAt(i)) * (10 - i);	
+                let rev = 11 - (add % 11);	
+                if (rev == 10 || rev == 11)		
+                    rev = 0;	
+                if (rev != parseInt(cpf.charAt(9)))		
+                    return false;		
+                add = 0;	
+                for (let i = 0; i < 10; i++)		
+                    add += parseInt(cpf.charAt(i)) * (11 - i);	
+                rev = 11 - (add % 11);	
+                if (rev == 10 || rev == 11)	
+                    rev = 0;	
+                if (rev != parseInt(cpf.charAt(10)))
+                    return false;		
+                return true;   
+            }
+
+            function validateCNPJ(cnpj) {
+                cnpj = cnpj.replace(/[^\d]+/g,'');
+                if(cnpj == '') return false;
+                if (cnpj.length != 14)
+                    return false;
+                if (cnpj == "00000000000000" || 
+                    cnpj == "11111111111111" || 
+                    cnpj == "22222222222222" || 
+                    cnpj == "33333333333333" || 
+                    cnpj == "44444444444444" || 
+                    cnpj == "55555555555555" || 
+                    cnpj == "66666666666666" || 
+                    cnpj == "77777777777777" || 
+                    cnpj == "88888888888888" || 
+                    cnpj == "99999999999999")
+                    return false;
+                let tamanho = cnpj.length - 2
+                let numeros = cnpj.substring(0,tamanho);
+                let digitos = cnpj.substring(tamanho);
+                let soma = 0;
+                let pos = tamanho - 7;
+                for (let i = tamanho; i >= 1; i--) {
+                  soma += numeros.charAt(tamanho - i) * pos--;
+                  if (pos < 2)
+                        pos = 9;
+                }
+                let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+                if (resultado != digitos.charAt(0))
+                    return false;
+                tamanho = tamanho + 1;
+                numeros = cnpj.substring(0,tamanho);
+                soma = 0;
+                pos = tamanho - 7;
+                for (let i = tamanho; i >= 1; i--) {
+                  soma += numeros.charAt(tamanho - i) * pos--;
+                  if (pos < 2)
+                        pos = 9;
+                }
+                resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+                if (resultado != digitos.charAt(1))
+                      return false;
+                return true;
+            }
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                statusMsg.style.display = 'none';
+
+                const nameInput = document.getElementById('form-name');
+                const emailInput = document.getElementById('form-email');
+                const phoneInput = document.getElementById('form-phone');
+                const cnpjInput = document.getElementById('form-cnpj');
+                const productInput = document.getElementById('form-product');
+                const messageInput = document.getElementById('form-message');
+
+                const name = nameInput.value.trim();
+                const email = emailInput.value.trim();
+                const phone = phoneInput.value.trim();
+                const docVal = cnpjInput.value.trim().replace(/[^\d]+/g,'');
+                const productInterest = productInput.value.trim();
+                const message = messageInput.value.trim();
+
+                // Validate document
+                if (docVal.length === 11) {
+                    if (!validateCPF(docVal)) {
+                        statusMsg.style.backgroundColor = '#fde8e8';
+                        statusMsg.style.color = '#9b1c1c';
+                        statusMsg.style.border = '1px solid #f8b4b4';
+                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>CPF inválido. Verifique os dígitos.';
+                        statusMsg.style.display = 'block';
+                        return;
+                    }
+                } else if (docVal.length === 14) {
+                    if (!validateCNPJ(docVal)) {
+                        statusMsg.style.backgroundColor = '#fde8e8';
+                        statusMsg.style.color = '#9b1c1c';
+                        statusMsg.style.border = '1px solid #f8b4b4';
+                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>CNPJ inválido. Verifique os dígitos.';
+                        statusMsg.style.display = 'block';
+                        return;
+                    }
+                } else {
+                    statusMsg.style.backgroundColor = '#fde8e8';
+                    statusMsg.style.color = '#9b1c1c';
+                    statusMsg.style.border = '1px solid #f8b4b4';
+                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Insira um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.';
+                    statusMsg.style.display = 'block';
+                    return;
+                }
+
+                submitBtn.setAttribute('loading', '');
+                submitBtn.disabled = true;
+
+                try {
+                    const response = await fetch('{{ path('app_contact_submit', {'_locale': locale}) }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name,
+                            email,
+                            phone,
+                            cpf_cnpj: docVal,
+                            product_interest: productInterest,
+                            message,
+                            type: 'contact'
+                        })
+                    });
+
+                    const resData = await response.json();
+                    submitBtn.removeAttribute('loading');
+                    submitBtn.disabled = false;
+
+                    if (resData.success) {
+                        statusMsg.style.backgroundColor = '#def7ec';
+                        statusMsg.style.color = '#03543f';
+                        statusMsg.style.border = '1px solid #bcf0da';
+                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-check" style="margin-right: 8px;"></i>' + resData.message;
+                        statusMsg.style.display = 'block';
+                        form.reset();
+                    } else {
+                        statusMsg.style.backgroundColor = '#fde8e8';
+                        statusMsg.style.color = '#9b1c1c';
+                        statusMsg.style.border = '1px solid #f8b4b4';
+                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Ocorreu um erro: ' + resData.message;
+                        statusMsg.style.display = 'block';
+                    }
+                } catch (error) {
+                    submitBtn.removeAttribute('loading');
+                    submitBtn.disabled = false;
+                    statusMsg.style.backgroundColor = '#fde8e8';
+                    statusMsg.style.color = '#9b1c1c';
+                    statusMsg.style.border = '1px solid #f8b4b4';
+                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Erro de conexão com o servidor. Tente novamente.';
+                    statusMsg.style.display = 'block';
+                }
+            });
+        });
+    </script>
 {% endblock %}

@@ -190,6 +190,11 @@ final class ServiceController extends AbstractController
         $item->setSlugEn($slugEn);
         $item->setSlugEs($slugEs);
 
+        if ($data->get('deleteImage')) {
+            $item->setImageFile(null);
+            $item->setImageName(null);
+        }
+
         $imageFile = $request->files->get('imageFile');
         if ($imageFile instanceof UploadedFile) {
             $item->setImageFile($imageFile);

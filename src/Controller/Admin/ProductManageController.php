@@ -2,6 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Product;
+use App\Entity\Subproduct;
+use App\Entity\SubproductApplication;
 use App\Entity\ProductSize;
 use App\Entity\ProductSpecValue;
 use App\Entity\ProductConfigItem;
@@ -13,6 +16,7 @@ use App\Repository\ProductVideoRepository;
 use App\Repository\TechnicalSpecificationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,15 +38,7 @@ final class ProductManageController extends AbstractController
     #[Route('', name: 'app_admin_product_manage_index', methods: ['GET'])]
     public function index(): Response
     {
-        // For now, hardcode the product slugs from translation files
-        $products = [
-            ['slug' => 'prensas-hidraulicas-tipo-c', 'name' => 'Prensas Hidráulicas Tipo C'],
-            ['slug' => 'prensas-hidraulicas-tipo-h', 'name' => 'Prensas Hidráulicas Tipo H'],
-            ['slug' => 'prensas-mecanicas-tipo-c', 'name' => 'Prensas Mecânicas Tipo C'],
-            ['slug' => 'prensas-mecanicas-tipo-h', 'name' => 'Prensas Mecânicas Tipo H'],
-            ['slug' => 'prensas-pneumaticas', 'name' => 'Prensas Pneumáticas'],
-            ['slug' => 'alimentadores', 'name' => 'Alimentadores e Desbobinadores'],
-        ];
+        $products = $this->em->getRepository(Product::class)->findBy([], ['position' => 'ASC']);
 
         return $this->render('admin/product/manage_index.html.twig', [
             'products' => $products,
@@ -53,8 +49,11 @@ final class ProductManageController extends AbstractController
     #[Route('/{slug}', name: 'app_admin_product_manage_detail', methods: ['GET'])]
     public function detail(string $slug): Response
     {
+        $product = $this->em->getRepository(Product::class)->findOneBy(['slug' => $slug]);
+
         return $this->render('admin/product/manage_detail.html.twig', [
             'slug' => $slug,
+            'product' => $product,
             'sizes' => $this->sizeRepo->findBySlugOrdered($slug),
             'specValues' => $this->specValueRepo->findBySlugOrdered($slug),
             'standardItems' => $this->configRepo->findBySlugAndType($slug, 'standard'),
@@ -216,5 +215,174 @@ final class ProductManageController extends AbstractController
             $this->addFlash('success', 'Vídeo removido!');
         }
         return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    //  SUBPRODUCT APPLICATIONS
+    // ═══════════════════════════════════════════════════════════════════════
+
+    #[Route('/{slug}/subproduct/{subproductId}/application/add', name: 'app_admin_subproduct_application_add', methods: ['POST'])]
+    public function addApplication(Request $request, string $slug, int $subproductId): Response
+    {
+        $subproduct = $this->em->getRepository(Subproduct::class)->find($subproductId);
+        if (!$subproduct) {
+            throw $this->createNotFoundException('Subproduto não encontrado');
+        }
+
+        $app = new SubproductApplication();
+        $app->setSubproduct($subproduct);
+        $app->setNamePt($request->request->get('namePt'));
+        $app->setNameEn($request->request->get('nameEn'));
+        $app->setNameEs($request->request->get('nameEs'));
+        $app->setIcon($request->request->get('icon'));
+        $app->setPosition(count($subproduct->getApplications()));
+
+        $this->em->persist($app);
+        $this->em->flush();
+
+        $this->addFlash('success', 'Aplicação adicionada com sucesso ao subproduto!');
+        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
+    }
+
+    #[Route('/{slug}/subproduct-application/{id}/delete', name: 'app_admin_subproduct_application_delete', methods: ['POST'])]
+    public function deleteApplication(Request $request, string $slug, SubproductApplication $app): Response
+    {
+        if ($this->isCsrfTokenValid('delete_app' . $app->getId(), $request->request->get('_token'))) {
+            $this->em->remove($app);
+            $this->em->flush();
+            $this->addFlash('success', 'Aplicação removida!');
+        }
+        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
+    }
+
+    #[Route('/{slug}/subproduct-application/reorder', name: 'app_admin_subproduct_application_reorder', methods: ['POST'])]
+    public function reorderApplications(Request $request, string $slug): JsonResponse
+    {
+        $ids = json_decode($request->getContent(), true)['ids'] ?? [];
+        $repo = $this->em->getRepository(SubproductApplication::class);
+        foreach ($ids as $pos => $id) {
+            $app = $repo->find($id);
+            if ($app) {
+                $app->setPosition($pos);
+            }
+        }
+        $this->em->flush();
+        return new JsonResponse(['success' => true]);
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    //  SUBPRODUCTS (Basic CRUD & PDF Catalog Uploads)
+    // ═══════════════════════════════════════════════════════════════════════
+
+    #[Route('/{slug}/subproduct/add', name: 'app_admin_subproduct_add', methods: ['POST'])]
+    public function addSubproduct(Request $request, string $slug): Response
+    {
+        $product = $this->em->getRepository(Product::class)->findOneBy(['slug' => $slug]);
+        if (!$product) {
+            throw $this->createNotFoundException('Produto não encontrado');
+        }
+
+        $sub = new Subproduct();
+        $sub->setProduct($product);
+        $sub->setModel($request->request->get('model'));
+        $sub->setNamePt($request->request->get('namePt'));
+        $sub->setNameEn($request->request->get('nameEn'));
+        $sub->setNameEs($request->request->get('nameEs'));
+        $sub->setDescriptionPt($request->request->get('descriptionPt'));
+        $sub->setDescriptionEn($request->request->get('descriptionEn'));
+        $sub->setDescriptionEs($request->request->get('descriptionEs'));
+        $sub->setTag($request->request->get('tag'));
+        $sub->setIsActive(true);
+        $sub->setPosition(count($product->getSubproducts()));
+
+        $imageFile = $request->files->get('imageFile');
+        if ($imageFile instanceof UploadedFile) {
+            $sub->setImageFile($imageFile);
+        }
+
+        $pdfFilePt = $request->files->get('pdfFilePt');
+        if ($pdfFilePt instanceof UploadedFile) {
+            $sub->setPdfFilePt($pdfFilePt);
+        }
+        $pdfFileEn = $request->files->get('pdfFileEn');
+        if ($pdfFileEn instanceof UploadedFile) {
+            $sub->setPdfFileEn($pdfFileEn);
+        }
+        $pdfFileEs = $request->files->get('pdfFileEs');
+        if ($pdfFileEs instanceof UploadedFile) {
+            $sub->setPdfFileEs($pdfFileEs);
+        }
+
+        $this->em->persist($sub);
+        $this->em->flush();
+
+        $this->addFlash('success', 'Subproduto "' . $sub->getModel() . '" adicionado!');
+        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
+    }
+
+    #[Route('/{slug}/subproduct/{id}/edit', name: 'app_admin_subproduct_edit', methods: ['POST'])]
+    public function editSubproduct(Request $request, string $slug, Subproduct $subproduct): Response
+    {
+        $data = $request->request;
+        $subproduct->setModel($data->get('model'));
+        $subproduct->setNamePt($data->get('namePt'));
+        $subproduct->setNameEn($data->get('nameEn'));
+        $subproduct->setNameEs($data->get('nameEs'));
+        $subproduct->setDescriptionPt($data->get('descriptionPt'));
+        $subproduct->setDescriptionEn($data->get('descriptionEn'));
+        $subproduct->setDescriptionEs($data->get('descriptionEs'));
+        $subproduct->setTag($data->get('tag'));
+        $subproduct->setIsActive((bool) $data->get('isActive', true));
+
+        $imageFile = $request->files->get('imageFile');
+        if ($imageFile instanceof UploadedFile) {
+            $subproduct->setImageFile($imageFile);
+        }
+
+        $pdfFilePt = $request->files->get('pdfFilePt');
+        if ($pdfFilePt instanceof UploadedFile) {
+            $subproduct->setPdfFilePt($pdfFilePt);
+        }
+
+        $pdfFileEn = $request->files->get('pdfFileEn');
+        if ($pdfFileEn instanceof UploadedFile) {
+            $subproduct->setPdfFileEn($pdfFileEn);
+        }
+
+        $pdfFileEs = $request->files->get('pdfFileEs');
+        if ($pdfFileEs instanceof UploadedFile) {
+            $subproduct->setPdfFileEs($pdfFileEs);
+        }
+
+        $this->em->flush();
+
+        $this->addFlash('success', 'Subproduto "' . $subproduct->getModel() . '" atualizado com sucesso!');
+        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
+    }
+
+    #[Route('/{slug}/subproduct/{id}/delete', name: 'app_admin_subproduct_delete', methods: ['POST'])]
+    public function deleteSubproduct(Request $request, string $slug, Subproduct $subproduct): Response
+    {
+        if ($this->isCsrfTokenValid('delete_sub' . $subproduct->getId(), $request->request->get('_token'))) {
+            $this->em->remove($subproduct);
+            $this->em->flush();
+            $this->addFlash('success', 'Subproduto removido!');
+        }
+        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
+    }
+
+    #[Route('/{slug}/subproduct/reorder', name: 'app_admin_subproduct_reorder', methods: ['POST'])]
+    public function reorderSubproducts(Request $request, string $slug): JsonResponse
+    {
+        $ids = json_decode($request->getContent(), true)['ids'] ?? [];
+        $repo = $this->em->getRepository(Subproduct::class);
+        foreach ($ids as $pos => $id) {
+            $sub = $repo->find($id);
+            if ($sub) {
+                $sub->setPosition($pos);
+            }
+        }
+        $this->em->flush();
+        return new JsonResponse(['success' => true]);
     }
 }

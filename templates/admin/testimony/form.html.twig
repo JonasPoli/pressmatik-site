@@ -48,6 +48,11 @@
                 {% if item and item.imageName %}
                 <div class="mb-2">
                     <img src="/uploads/testimonies/{{ item.imageName }}" alt="" class="max-h-24 rounded-full w-24 h-24 object-cover">
+                    <div class="mt-2">
+                        <label class="inline-flex items-center gap-1.5 text-xs text-red-500 cursor-pointer">
+                            <input type="checkbox" name="deleteImage" value="1" class="rounded border-slate-300 text-red-600 focus:ring-red-500"> Remover foto atual
+                        </label>
+                    </div>
                 </div>
                 {% endif %}
                 <input type="file" name="imageFile" accept="image/*" class="wab-input">

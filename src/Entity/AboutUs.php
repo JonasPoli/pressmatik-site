@@ -143,6 +143,42 @@ class AboutUs
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $advantage4Icon = null;
 
+    // ─── YouTube Video (Quem Somos) ─────────────────────────────────────────
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $youtubeVideoUrlPt = null;
+
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $youtubeVideoUrlEn = null;
+
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $youtubeVideoUrlEs = null;
+
+    // ─── Home Section Text ──────────────────────────────────────────────────
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $homeTextPt = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $homeTextEn = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $homeTextEs = null;
+
+    #[Vich\UploadableField(mapping: 'about', fileNameProperty: 'homeImageName')]
+    private ?File $homeImageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $homeImageName = null;
+
+    // ─── Org Chart Description ──────────────────────────────────────────────
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $orgChartDescriptionPt = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $orgChartDescriptionEn = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $orgChartDescriptionEs = null;
+
     // ─── Banner Image ───────────────────────────────────────────────────────
     #[Vich\UploadableField(mapping: 'about', fileNameProperty: 'bannerImageName')]
     private ?File $bannerImageFile = null;
@@ -343,6 +379,71 @@ class AboutUs
     public function setAdvantage4DescEs(?string $v): static { $this->advantage4DescEs = $v; return $this; }
     public function getAdvantage4Icon(): ?string { return $this->advantage4Icon; }
     public function setAdvantage4Icon(?string $v): static { $this->advantage4Icon = $v; return $this; }
+
+    // ─── YouTube Video ──────────────────────────────────────────────────────
+
+    public function getYoutubeVideoUrl(string $locale): ?string
+    {
+        return match ($locale) {
+            'en' => $this->youtubeVideoUrlEn ?: $this->youtubeVideoUrlPt,
+            'es' => $this->youtubeVideoUrlEs ?: $this->youtubeVideoUrlPt,
+            default => $this->youtubeVideoUrlPt,
+        };
+    }
+
+    public function getYoutubeVideoUrlPt(): ?string { return $this->youtubeVideoUrlPt; }
+    public function setYoutubeVideoUrlPt(?string $v): static { $this->youtubeVideoUrlPt = $v; return $this; }
+    public function getYoutubeVideoUrlEn(): ?string { return $this->youtubeVideoUrlEn; }
+    public function setYoutubeVideoUrlEn(?string $v): static { $this->youtubeVideoUrlEn = $v; return $this; }
+    public function getYoutubeVideoUrlEs(): ?string { return $this->youtubeVideoUrlEs; }
+    public function setYoutubeVideoUrlEs(?string $v): static { $this->youtubeVideoUrlEs = $v; return $this; }
+
+    // ─── Home Section ───────────────────────────────────────────────────────
+
+    public function getHomeText(string $locale): ?string
+    {
+        return match ($locale) {
+            'en' => $this->homeTextEn ?: $this->homeTextPt,
+            'es' => $this->homeTextEs ?: $this->homeTextPt,
+            default => $this->homeTextPt,
+        };
+    }
+
+    public function getHomeTextPt(): ?string { return $this->homeTextPt; }
+    public function setHomeTextPt(?string $v): static { $this->homeTextPt = $v; return $this; }
+    public function getHomeTextEn(): ?string { return $this->homeTextEn; }
+    public function setHomeTextEn(?string $v): static { $this->homeTextEn = $v; return $this; }
+    public function getHomeTextEs(): ?string { return $this->homeTextEs; }
+    public function setHomeTextEs(?string $v): static { $this->homeTextEs = $v; return $this; }
+
+    public function setHomeImageFile(?File $file = null): void
+    {
+        $this->homeImageFile = $file;
+        if (null !== $file) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+    public function getHomeImageFile(): ?File { return $this->homeImageFile; }
+    public function setHomeImageName(?string $v): void { $this->homeImageName = $v; }
+    public function getHomeImageName(): ?string { return $this->homeImageName; }
+
+    // ─── Org Chart ──────────────────────────────────────────────────────────
+
+    public function getOrgChartDescription(string $locale): ?string
+    {
+        return match ($locale) {
+            'en' => $this->orgChartDescriptionEn ?: $this->orgChartDescriptionPt,
+            'es' => $this->orgChartDescriptionEs ?: $this->orgChartDescriptionPt,
+            default => $this->orgChartDescriptionPt,
+        };
+    }
+
+    public function getOrgChartDescriptionPt(): ?string { return $this->orgChartDescriptionPt; }
+    public function setOrgChartDescriptionPt(?string $v): static { $this->orgChartDescriptionPt = $v; return $this; }
+    public function getOrgChartDescriptionEn(): ?string { return $this->orgChartDescriptionEn; }
+    public function setOrgChartDescriptionEn(?string $v): static { $this->orgChartDescriptionEn = $v; return $this; }
+    public function getOrgChartDescriptionEs(): ?string { return $this->orgChartDescriptionEs; }
+    public function setOrgChartDescriptionEs(?string $v): static { $this->orgChartDescriptionEs = $v; return $this; }
 
     // ─── Banner Image ───────────────────────────────────────────────────────
 

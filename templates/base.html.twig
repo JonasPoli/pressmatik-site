@@ -13,6 +13,9 @@
         {# Bootstrap Icons CDN (100% Reliable Icon Solution) #}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+        {# Font Awesome for Industrial Icons #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         {# Global CSS Variables and Styles #}
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
@@ -32,8 +35,8 @@
         <header class="site-header">
             <div class="container header-container">
                 <a href="{{ path('app_home', {'_locale': locale}) }}" class="logo-link">
-                    <img src="/images/logo-fundo-branco.png" alt="Pressmatik Logo" class="logo-image logo-light">
-                    <img src="/images/logo-fundo-preto.png" alt="Pressmatik Logo" class="logo-image logo-dark">
+                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_ORIGINAL.png" alt="Pressmatik Logo" class="logo-image logo-light">
+                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png" alt="Pressmatik Logo" class="logo-image logo-dark">
                 </a>
                 
                 <nav>
@@ -47,83 +50,66 @@
                             <div class="megamenu-panel">
                                 <div class="megamenu-container">
                                     <div class="megamenu-grid">
-                                        {% set catalog = get_product_catalog() %}
-                                        {% set grouped = {
-                                            'hydraulic': {
-                                                'title': 'products_sec.hydraulic_presses'|trans,
-                                                'img': '/images/prensa-hidraulica-tipo-c-duplo-linha-st.png',
-                                                'products': []
-                                            },
-                                            'servo-hydraulic': {
-                                                'title': 'products_sec.servo_presses'|trans,
-                                                'img': '/images/pmc-es.png',
-                                                'products': []
-                                            },
-                                            'mechanical': {
-                                                'title': 'Prensas Mecânicas',
-                                                'img': '/images/prensa-hidraulica-tipo-c-linha-st.png',
-                                                'products': []
-                                            }
-                                        } %}
-                                        
-                                        {% for slug, prod in catalog %}
-                                            {% set cat = prod.category %}
-                                            {% if grouped[cat] is defined %}
-                                                {% set grouped = grouped|merge({
-                                                    (cat): grouped[cat]|merge({
-                                                        'products': grouped[cat].products|merge([
-                                                            {'slug': slug, 'name_key': prod.name_key}
-                                                        ])
-                                                    })
-                                                }) %}
-                                            {% endif %}
-                                        {% endfor %}
+                                         {% set db_grouped = get_products_grouped() %}
+                                         {% set grouped_cats = {
+                                             'hydraulic': {
+                                                 'title': 'products_sec.hydraulic_presses'|trans,
+                                                 'img': '/images/prensa-hidraulica-tipo-c-duplo-linha-st.png',
+                                                 'products': db_grouped['hydraulic'] ?? []
+                                             },
+                                             'servo-hydraulic': {
+                                                 'title': 'products_sec.servo_presses'|trans,
+                                                 'img': '/images/pmc-es.png',
+                                                 'products': db_grouped['servo-hydraulic'] ?? []
+                                             },
+                                             'mechanical': {
+                                                 'title': 'Prensas Mecânicas',
+                                                 'img': '/images/prensa-hidraulica-tipo-c-linha-st.png',
+                                                 'products': db_grouped['mechanical'] ?? []
+                                             }
+                                         } %}
 
-                                        {% for cat_id, cat_info in grouped %}
-                                            <div class="megamenu-col">
-                                                <div class="megamenu-img-wrapper">
-                                                    <img src="{{ cat_info.img }}" alt="{{ cat_info.title }}" loading="lazy">
-                                                </div>
-                                                <span class="megamenu-title">{{ cat_info.title }}</span>
-                                                <ul class="megamenu-links">
-                                                    {% for prod in cat_info.products %}
-                                                        <li>
-                                                            <a href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}">
-                                                                {{ prod.name_key|trans }}
-                                                            </a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        {% endfor %}
-                                        <!-- Col 4: Equipamentos -->
-                                        <div class="megamenu-col">
-                                            <div class="megamenu-img-wrapper">
-                                                <img src="/images/tipo-h.png" alt="{{ 'products_sec.equipments'|trans }}" loading="lazy">
-                                            </div>
-                                            <span class="megamenu-title">{{ 'products_sec.equipments'|trans }}</span>
-                                            <ul class="megamenu-links">
-                                                <li><a href="#">Yokes</a></li>
-                                                <li><a href="#">Unidades de Força</a></li>
-                                                <li><a href="#">Cilindros</a></li>
-                                                <li><a href="#">Transf. e Filtração</a></li>
-                                                <li><a href="#">Plataformas</a></li>
-                                                <li><a href="#">Tombadores</a></li>
-                                                <li><a href="#">Especiais</a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Col 5: Peças e Acessórios -->
-                                        <div class="megamenu-col">
-                                            <div class="megamenu-img-wrapper">
-                                                <img src="/images/especiais.png" alt="{{ 'products_sec.parts'|trans }}" loading="lazy">
-                                            </div>
-                                            <span class="megamenu-title">{{ 'products_sec.parts'|trans }}</span>
-                                            <ul class="megamenu-links">
-                                                <li><a href="#">Hidráulica</a></li>
-                                                <li><a href="#">Eletroeletrônica</a></li>
-                                                <li><a href="#">Acessórios</a></li>
-                                            </ul>
-                                        </div>
+                                         {% for cat_id, cat_info in grouped_cats %}
+                                             <div class="megamenu-col">
+                                                 <div class="megamenu-img-wrapper">
+                                                     <img src="{{ cat_info.img }}" alt="{{ cat_info.title }}" loading="lazy">
+                                                 </div>
+                                                 <span class="megamenu-title">{{ cat_info.title }}</span>
+                                                 <ul class="megamenu-links">
+                                                     {% for prod in cat_info.products %}
+                                                         <li>
+                                                             <a href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}">
+                                                                 {{ prod.getName(locale) }}
+                                                             </a>
+                                                         </li>
+                                                     {% endfor %}
+                                                 </ul>
+                                             </div>
+                                         {% endfor %}
+                                         <!-- Col 4: Equipamentos -->
+                                         <div class="megamenu-col">
+                                             <div class="megamenu-img-wrapper">
+                                                 <img src="/images/tipo-h.png" alt="{{ 'products_sec.equipments'|trans }}" loading="lazy">
+                                             </div>
+                                             <span class="megamenu-title">{{ 'products_sec.equipments'|trans }}</span>
+                                             <ul class="megamenu-links">
+                                                 {% for prod in db_grouped['equipments'] ?? [] %}
+                                                     <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}">{{ prod.getName(locale) }}</a></li>
+                                                 {% endfor %}
+                                             </ul>
+                                         </div>
+                                         <!-- Col 5: Peças e Acessórios -->
+                                         <div class="megamenu-col">
+                                             <div class="megamenu-img-wrapper">
+                                                 <img src="/images/especiais.png" alt="{{ 'products_sec.parts'|trans }}" loading="lazy">
+                                             </div>
+                                             <span class="megamenu-title">{{ 'products_sec.parts'|trans }}</span>
+                                             <ul class="megamenu-links">
+                                                 {% for prod in db_grouped['parts'] ?? [] %}
+                                                     <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}">{{ prod.getName(locale) }}</a></li>
+                                                 {% endfor %}
+                                             </ul>
+                                         </div>
                                     </div>
                                 </div>
                             </div>
@@ -183,20 +169,28 @@
                     <li><a href="{{ path('app_about_us', {'_locale': locale}) }}" class="mobile-nav-link" onclick="closeMobileMenu();">{{ 'menu.company'|trans }}</a></li>
                     
                     {# Dynamic Products list in Mobile Menu #}
-                    {% for cat_id, cat_info in grouped %}
-                        {% if cat_info.products is not empty %}
+                    {% set db_grouped = get_products_grouped() %}
+                    {% set grouped_cats_mobile = [
+                        {'title': 'products_sec.hydraulic_presses'|trans, 'products': db_grouped['hydraulic'] ?? []},
+                        {'title': 'products_sec.servo_presses'|trans, 'products': db_grouped['servo-hydraulic'] ?? []},
+                        {'title': 'Prensas Mecânicas', 'products': db_grouped['mechanical'] ?? []},
+                        {'title': 'products_sec.equipments'|trans, 'products': db_grouped['equipments'] ?? []},
+                        {'title': 'products_sec.parts'|trans, 'products': db_grouped['parts'] ?? []}
+                    ] %}
+                    {% for cat in grouped_cats_mobile %}
+                        {% if cat.products is not empty %}
                             <li>
                                 <span class="mobile-nav-category-title" style="display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; color: var(--color-text-secondary); margin-top: 0.75rem; margin-bottom: 0.25rem; padding-left: 0.75rem;">
-                                    {{ cat_info.title }}
+                                    {{ cat.title }}
                                 </span>
                             </li>
-                            {% for prod in cat_info.products %}
+                            {% for prod in cat.products %}
                                 <li>
                                     <a href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}" 
                                        class="mobile-nav-link" 
                                        style="padding-left: 1.5rem;"
                                        onclick="closeMobileMenu();">
-                                        {{ prod.name_key|trans }}
+                                        {{ prod.getName(locale) }}
                                     </a>
                                 </li>
                             {% endfor %}
@@ -245,7 +239,7 @@
         <footer class="site-footer">
             <div class="container footer-grid">
                 <div class="footer-brand">
-                    <img src="/images/logo-fundo-preto.png" alt="Pressmatik" style="max-height: 50px; margin-bottom: 12px;">
+                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png" alt="Pressmatik" style="max-height: 50px; margin-bottom: 12px;">
                     <p>{{ 'footer.about'|trans }}</p>
                     <div class="footer-social-links">
                         <a href="https://linkedin.com" target="_blank" class="footer-social-btn" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
@@ -258,9 +252,9 @@
                     <h4>{{ 'menu.products'|trans }}</h4>
                     <ul>
                         <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-tipo-c'}) }}">{{ 'catalog.hydraulic.tipo_c.name'|trans }}</a></li>
-                        <li><a href="#">{{ 'catalog.hydraulic.colunas.name'|trans }}</a></li>
-                        <li><a href="#">{{ 'catalog.servo_hydraulic.bombas.name'|trans }}</a></li>
-                        <li><a href="#">Prensas Mecânicas</a></li>
+                        <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-4-colunas'}) }}">{{ 'catalog.hydraulic.colunas.name'|trans }}</a></li>
+                        <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-servo-hidraulicas-servo-bombas'}) }}">{{ 'catalog.servo_hydraulic.bombas.name'|trans }}</a></li>
+                        <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-mecanicas-mecanicas'}) }}">{{ 'catalog.mechanical.mecanicas.name'|trans }}</a></li>
                     </ul>
                 </div>
                 
@@ -300,8 +294,8 @@
                     {{ 'footer.rights'|trans }}
                 </div>
                 <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+                    <a href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}">{{ 'footer.privacy_policy'|trans({}, 'messages', locale)|default('Privacy Policy') }}</a>
+                    <a href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}">{{ 'footer.terms_of_service'|trans({}, 'messages', locale)|default('Terms of Service') }}</a>
                 </div>
             </div>
         </footer>

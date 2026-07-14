@@ -1,7 +1,7 @@
 {# templates/site/product_detail.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Pressmatik - {% if activeSubproduct %}{{ activeSubproduct.model }} {{ activeSubproduct.name_key|trans }}{% else %}{{ product.name_key|trans }}{% endif %}{% endblock %}
+{% block title %}Pressmatik - {% if activeSubproduct %}{{ activeSubproduct.model }} {{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}{% endblock %}
 
 {% block body %}
     <div class="container product-detail-layout">
@@ -12,64 +12,86 @@
             <a href="{{ path('app_home', {'_locale': locale}) ~ '#products' }}">{{ 'menu.products'|trans }}</a>
             <span>/</span>
             {% if activeSubproduct %}
-                <a href="{{ path('app_product_detail', {'_locale': locale, 'slug': product.slug}) }}">{{ product.name_key|trans }}</a>
+                <a href="{{ path('app_product_detail', {'_locale': locale, 'slug': product.slug}) }}">{{ product.getName(locale) }}</a>
                 <span>/</span>
-                <span style="color: var(--color-accent-red);">{{ activeSubproduct.model }} {{ activeSubproduct.name_key|trans }}</span>
+                <span style="color: var(--color-accent-red);">{{ activeSubproduct.model }} {{ activeSubproduct.getName(locale) }}</span>
             {% else %}
-                <span style="color: var(--color-accent-red);">{{ product.name_key|trans }}</span>
+                <span style="color: var(--color-accent-red);">{{ product.getName(locale) }}</span>
             {% endif %}
         </div>
 
         <!-- Product Introduction (Above the Fold) -->
         <div class="product-intro-grid">
             <div class="product-gallery scroll-animate slide-left" style="display: flex; align-items: center; justify-content: center; background: var(--color-surface-dark); border-radius: 12px; border: 1px solid var(--color-border); padding: 2rem;">
-                <img src="{% if activeSubproduct %}{{ activeSubproduct.img }}{% else %}{{ product.img }}{% endif %}" alt="{% if activeSubproduct %}{{ activeSubproduct.name_key|trans }}{% else %}{{ product.name_key|trans }}{% endif %}" style="max-width: 100%; max-height: 400px; object-fit: contain; display: block; margin: auto;">
+                <img src="{% if activeSubproduct and activeSubproduct.imageName %}/uploads/products/{{ activeSubproduct.imageName }}{% elseif product.imageName %}/uploads/products/{{ product.imageName }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{% if activeSubproduct %}{{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}" style="max-width: 100%; max-height: 400px; object-fit: contain; display: block; margin: auto;">
             </div>
             
             <div class="product-meta-panel scroll-animate slide-right">
                 <span class="product-tag">{{ 'product_detail.tag'|trans }}</span>
-                <h1>{% if activeSubproduct %}{{ activeSubproduct.model }} - {{ activeSubproduct.name_key|trans }}{% else %}{{ product.name_key|trans }}{% endif %}</h1>
+                <h1>{% if activeSubproduct %}{{ activeSubproduct.model }} - {{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}</h1>
                 {% if product.tonnage %}
                     <div class="product-tonnage">
                         {{ 'product_detail.spec_capacity'|trans }}: {{ product.tonnage }}
                     </div>
                 {% endif %}
                 <p class="product-description">
-                    {% if activeSubproduct %}{{ activeSubproduct.desc_key|trans }}{% else %}{{ product.desc_key|trans }}{% endif %}
+                    {% if activeSubproduct %}{{ activeSubproduct.getDescription(locale) }}{% else %}{{ product.getDescription(locale) }}{% endif %}
                 </p>
                 <div class="product-action-buttons">
-                    <wa-button variant="brand" size="large" href="#quote-product-form">
-                        {{ 'product_detail.quote_product'|trans }}
-                    </wa-button>
-                    <!-- Simulated PDF catalog download using a javascript trigger for premium feel -->
-                    <wa-button variant="neutral" size="large" outline onclick="alert('Iniciando download do Catálogo Técnico.pdf...');">
-                        <i class="bi bi-download" style="margin-right: 8px;"></i>
-                        {{ 'cta.download_catalog'|trans }}
-                    </wa-button>
+                    {% set active_pdf = activeSubproduct ? activeSubproduct.getPdfForLocale(locale) : null %}
+                    {% if active_pdf %}
+                        <wa-button variant="brand" size="large" href="/uploads/products/{{ active_pdf }}" download target="_blank">
+                            <i class="fa-solid fa-file-pdf" style="margin-right: 8px;"></i>
+                            {{ 'product_detail.quote_product'|trans }}
+                        </wa-button>
+                    {% endif %}
                 </div>
             </div>
         </div>
 
         <!-- Applications Section -->
-        {% if product.applications is defined and product.applications is not empty %}
+        {% set show_apps = (product.category in ['hydraulic', 'servo-hydraulic', 'mechanical']) %}
+        {% if show_apps %}
             <section class="product-applications-section scroll-animate slide-top" style="margin-top: 5rem; margin-bottom: 5rem;">
                 <div class="overview-header" style="margin-bottom: 3rem; text-align: left;">
                     <span class="section-title-tag">Aplicações</span>
                     <h2 style="font-size: 2.2rem; margin-top: 0.8rem; font-weight: 800; font-family: var(--font-heading);">Aplicações Recomendadas</h2>
                     <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.6; margin-top: 0.5rem; max-width: 900px;">
-                        Nossas prensas Tipo "C" atendem a uma ampla variedade de processos industriais com alta eficiência e repetibilidade.
+                        Nossas prensas industriais atendem a uma ampla variedade de processos com alta eficiência e repetibilidade.
                     </p>
                 </div>
                 
                 <div class="applications-grid">
-                    {% for app in product.applications %}
-                        <div class="application-card">
-                            <div class="application-img-wrapper">
-                                <img src="{{ app.img }}" alt="{{ app.name_key|trans }}" loading="lazy">
+                    {% if activeSubproduct and activeSubproduct.applications|length > 0 %}
+                        {% for app in activeSubproduct.applications %}
+                            <div class="application-card" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--shadow-card-subtle);">
+                                <div class="application-img-wrapper" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                                    <img src="{% if app.icon %}/images/aplicacoes/{{ app.icon }}.png{% else %}/images/aplicacoes/corte.png{% endif %}" alt="{{ app.getName(locale) }}" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(1.2) contrast(1.1);">
+                                </div>
+                                <h4 style="text-align: center; margin: 0; color: var(--color-text-primary); font-size: 1rem; font-weight: 700;">{{ app.getName(locale) }}</h4>
                             </div>
-                            <h4>{{ app.name_key|trans }}</h4>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        {# Fallback if no applications are registered #}
+                        {% set static_apps = [
+                            {'title': 'Corte de Chapas', 'img': '/images/aplicacoes/corte.png'},
+                            {'title': 'Dobra e Conformação', 'img': '/images/aplicacoes/dobra.png'},
+                            {'title': 'Duplo Efeito', 'img': '/images/aplicacoes/duplo-efeito.png'},
+                            {'title': 'Estampagem Rápida', 'img': '/images/aplicacoes/estampagem.png'},
+                            {'title': 'Montagem e Ajuste', 'img': '/images/aplicacoes/montagem.png'},
+                            {'title': 'Estampagem Progressiva', 'img': '/images/aplicacoes/progressivo.png'},
+                            {'title': 'Rebarbação de Fundidos', 'img': '/images/aplicacoes/rebarbacao.png'},
+                            {'title': 'Repuxo Profundo', 'img': '/images/aplicacoes/repuxo.png'},
+                        ] %}
+                        {% for app in static_apps %}
+                            <div class="application-card" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--shadow-card-subtle);">
+                                <div class="application-img-wrapper" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                                    <img src="{{ app.img }}" alt="{{ app.title }}" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(1.2) contrast(1.1);">
+                                </div>
+                                <h4 style="text-align: center; margin: 0; color: var(--color-text-primary); font-size: 1rem; font-weight: 700;">{{ app.title }}</h4>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </section>
         {% endif %}
@@ -78,9 +100,9 @@
         <section class="product-overview-section scroll-animate slide-top" style="margin-top: 6rem; margin-bottom: 6rem;">
             <div class="overview-header" style="margin-bottom: 3.5rem; text-align: left; max-width: 900px;">
                 <span class="section-title-tag">{{ 'product_detail.overview_heading'|trans }}</span>
-                <h2 style="font-size: 2.5rem; margin-top: 1rem; margin-bottom: 1.5rem; font-weight: 800; font-family: var(--font-heading);">{{ 'product_detail.overview_heading'|trans }}</h2>
+                <h2 style="font-size: 2.5rem; margin-top: 1rem; margin-bottom: 1.5rem; font-weight: 800; font-family: var(--font-heading);">Foco em Segurança e Robustez</h2>
                 <p style="color: var(--color-text-secondary); font-size: 1.15rem; line-height: 1.8; margin: 0;">
-                    {{ product.desc_key|trans }}
+                    Projetadas sob rígidas normas internacionais, nossas máquinas unem estrutura reforçada de aço com componentes de líderes globais para máxima produtividade industrial.
                 </p>
             </div>
 
@@ -88,11 +110,11 @@
                 <div class="overview-detail-card">
                     <div class="overview-detail-card-inner">
                         <div class="overview-detail-icon-box">
-                            <i class="bi bi-box-seam"></i>
+                            <i class="fa-solid fa-shield-halved"></i>
                         </div>
                         <div>
-                            <h4>{{ 'product_detail.feature_detail_1_title'|trans }}</h4>
-                            <p>{{ 'product_detail.feature_detail_1_desc'|trans }}</p>
+                            <h4>{{ 'product_detail.overview_security_title'|trans }}</h4>
+                            <p>{{ 'product_detail.overview_security_desc'|trans }}</p>
                         </div>
                     </div>
                 </div>
@@ -100,11 +122,11 @@
                 <div class="overview-detail-card">
                     <div class="overview-detail-card-inner">
                         <div class="overview-detail-icon-box">
-                            <i class="bi bi-gear-wide-connected"></i>
+                            <i class="fa-solid fa-microchip"></i>
                         </div>
                         <div>
-                            <h4>{{ 'product_detail.feature_detail_2_title'|trans }}</h4>
-                            <p>{{ 'product_detail.feature_detail_2_desc'|trans }}</p>
+                            <h4>{{ 'product_detail.overview_siemens_title'|trans }}</h4>
+                            <p>{{ 'product_detail.overview_siemens_desc'|trans }}</p>
                         </div>
                     </div>
                 </div>
@@ -112,11 +134,11 @@
                 <div class="overview-detail-card">
                     <div class="overview-detail-card-inner">
                         <div class="overview-detail-icon-box">
-                            <i class="bi bi-check-all"></i>
+                            <i class="fa-solid fa-gears"></i>
                         </div>
                         <div>
-                            <h4>{{ 'product_detail.feature_detail_3_title'|trans }}</h4>
-                            <p>{{ 'product_detail.feature_detail_3_desc'|trans }}</p>
+                            <h4>{{ 'product_detail.overview_bosch_title'|trans }}</h4>
+                            <p>{{ 'product_detail.overview_bosch_desc'|trans }}</p>
                         </div>
                     </div>
                 </div>
@@ -124,107 +146,67 @@
                 <div class="overview-detail-card">
                     <div class="overview-detail-card-inner">
                         <div class="overview-detail-icon-box">
-                            <i class="bi bi-cpu"></i>
+                            <i class="fa-solid fa-cube"></i>
                         </div>
                         <div>
-                            <h4>{{ 'product_detail.feature_detail_4_title'|trans }}</h4>
-                            <p>{{ 'product_detail.feature_detail_4_desc'|trans }}</p>
+                            <h4>{{ 'product_detail.overview_premium_title'|trans }}</h4>
+                            <p>{{ 'product_detail.overview_premium_desc'|trans }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Tabs Component (Especificações, Características, Opcionais, Vídeos) -->
+        <!-- Tabs Component (Especificações, Configurações) -->
         <div class="product-tabs-section scroll-animate slide-top">
             <wa-tab-group>
-                {% if productSizes is not empty or (product.specs_table is defined and product.specs_table is not null) %}
+                {% if productSizes is not empty %}
                     <wa-tab slot="nav" panel="specs">{{ 'product_detail.specs_title'|trans }}</wa-tab>
                 {% endif %}
-                {% if product.features is not empty %}
-                    <wa-tab slot="nav" panel="features">{{ 'product_detail.features_title'|trans }}</wa-tab>
-                {% endif %}
-                {% if (productSizes is not empty and (standardItems is not empty or optionalItems is not empty)) or product.std_configs is not empty or product.opt_configs is not empty %}
+                {% if standardItems is not empty or optionalItems is not empty %}
                     <wa-tab slot="nav" panel="config">{{ 'product_detail.config_title'|trans }}</wa-tab>
                 {% endif %}
-                <wa-tab slot="nav" panel="videos">{{ 'product_detail.videos_title'|trans }}</wa-tab>
 
                 <!-- Technical Specification Table Panel -->
-                {% if productSizes is not empty or (product.specs_table is defined and product.specs_table is not null) %}
+                {% if productSizes is not empty %}
                     <wa-tab-panel name="specs">
                         <div class="specs-table-wrapper">
                             <table class="specs-table">
-                                {% if productSizes is not empty %}
-                                    <thead>
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_name'|trans }}</th>
+                                        <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_unit'|trans }}</th>
+                                        {% for size in productSizes %}
+                                            <th colspan="{{ (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) }}" style="text-align: center;">{{ size.name }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr>
+                                        {% for size in productSizes %}
+                                            {% if size.hasVType %}
+                                                <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">V-type</th>
+                                            {% endif %}
+                                            {% if size.hasHType %}
+                                                <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">H-type</th>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in specsTableRows %}
                                         <tr>
-                                            <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_name'|trans }}</th>
-                                            <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_unit'|trans }}</th>
-                                            {% for size in productSizes %}
-                                                <th colspan="{{ (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) }}" style="text-align: center;">{{ size.name }}</th>
-                                            {% endfor %}
-                                        </tr>
-                                        <tr>
+                                            <td>{{ row.specification.getName(locale) }}</td>
+                                            <td>{{ row.specification.getUnit(locale) }}</td>
                                             {% for size in productSizes %}
                                                 {% if size.hasVType %}
-                                                    <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">V-type</th>
+                                                    <td style="text-align: center;">{{ row.values[size.id].v ?? '—' }}</td>
                                                 {% endif %}
                                                 {% if size.hasHType %}
-                                                    <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">H-type</th>
+                                                    <td style="text-align: center;">{{ row.values[size.id].h ?? '—' }}</td>
                                                 {% endif %}
                                             {% endfor %}
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for row in specsTableRows %}
-                                            <tr>
-                                                <td>{{ row.specification.getName(locale) }}</td>
-                                                <td>{{ row.specification.getUnit(locale) }}</td>
-                                                {% for size in productSizes %}
-                                                    {% if size.hasVType %}
-                                                        <td style="text-align: center;">{{ row.values[size.id].v ?? '—' }}</td>
-                                                    {% endif %}
-                                                    {% if size.hasHType %}
-                                                        <td style="text-align: center;">{{ row.values[size.id].h ?? '—' }}</td>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                {% else %}
-                                    <thead>
-                                        <tr>
-                                            <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_name'|trans }}</th>
-                                            <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_unit'|trans }}</th>
-                                            {% for modelName in product.specs_table.models %}
-                                                <th colspan="2" style="text-align: center;">{{ modelName }}</th>
-                                            {% endfor %}
-                                        </tr>
-                                        <tr>
-                                            {% for modelName in product.specs_table.models %}
-                                                {% for subhead in product.specs_table.headers %}
-                                                    <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">{{ subhead }}</th>
-                                                {% endfor %}
-                                            {% endfor %}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for row in product.specs_table.rows %}
-                                            <tr>
-                                                <td>{{ row.label_key|trans }}</td>
-                                                <td>{{ row.unit }}</td>
-                                                {% for val in row.values %}
-                                                    {% if val is iterable %}
-                                                        {% for subval in val %}
-                                                            <td style="text-align: center;">{{ subval }}</td>
-                                                        {% endfor %}
-                                                    {% else %}
-                                                        <td colspan="2" style="text-align: center;">{{ val }}</td>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                {% endif %}
+                                    {% endfor %}
+                                </tbody>
                             </table>
                         </div>
                         <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic;">
@@ -233,104 +215,85 @@
                     </wa-tab-panel>
                 {% endif %}
 
-                <!-- Features Highlight Panel -->
-                {% if product.features is not empty %}
-                    <wa-tab-panel name="features">
-                        <ul class="features-list">
-                            {% for feat in product.features %}
-                                <li>
-                                    <div class="feature-icon-box">
-                                        <i class="bi bi-shield-check-fill" style="color: var(--color-accent-red);"></i>
-                                    </div>
-                                    <span>{{ feat|trans }}</span>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </wa-tab-panel>
-                {% endif %}
-
                 <!-- Standard / Optional Configurations Panel -->
-                {% if (productSizes is not empty and (standardItems is not empty or optionalItems is not empty)) or product.std_configs is not empty or product.opt_configs is not empty %}
+                {% if standardItems is not empty or optionalItems is not empty %}
                     <wa-tab-panel name="config">
                         <div class="config-grid">
-                            {% if (productSizes is not empty and standardItems is not empty) or product.std_configs is not empty %}
+                            {% if standardItems is not empty %}
                                 <div class="config-col">
                                     <h3>{{ 'product_detail.std_items'|trans }}</h3>
                                     <ul class="config-list">
-                                        {% if productSizes is not empty and standardItems is not empty %}
-                                            {% for std in standardItems %}
-                                                <li><i class="bi bi-check-circle-fill" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ std.getName(locale) }}</li>
-                                            {% endfor %}
-                                        {% else %}
-                                            {% for std in product.std_configs %}
-                                                <li><i class="bi bi-check-circle-fill" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ std|trans }}</li>
-                                            {% endfor %}
-                                        {% endif %}
+                                        {% for std in standardItems %}
+                                            <li><i class="fa-solid fa-circle-check" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ std.getName(locale) }}</li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             {% endif %}
                             
-                            {% if (productSizes is not empty and optionalItems is not empty) or product.opt_configs is not empty %}
+                            {% if optionalItems is not empty %}
                                 <div class="config-col">
                                     <h3>{{ 'product_detail.opt_items'|trans }}</h3>
                                     <ul class="config-list">
-                                        {% if productSizes is not empty and optionalItems is not empty %}
-                                            {% for opt in optionalItems %}
-                                                <li><i class="bi bi-plus-circle-fill" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ opt.getName(locale) }}</li>
-                                            {% endfor %}
-                                        {% else %}
-                                            {% for opt in product.opt_configs %}
-                                                <li><i class="bi bi-plus-circle-fill" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ opt|trans }}</li>
-                                            {% endfor %}
-                                        {% endif %}
+                                        {% for opt in optionalItems %}
+                                            <li><i class="fa-solid fa-circle-plus" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ opt.getName(locale) }}</li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             {% endif %}
                         </div>
                     </wa-tab-panel>
                 {% endif %}
-
-                <!-- Videos Showcase Panel -->
-                <wa-tab-panel name="videos">
-                    <div class="video-container" style="display: flex; flex-direction: column; align-items: center; gap: 2rem; padding: 2rem 0; width: 100%;">
-                        {% if productSizes is not empty and productVideos is not empty %}
-                            {% for video in productVideos %}
-                                <div style="width: 100%; max-width: 800px; text-align: left;">
-                                    {% if video.getTitle(locale) %}
-                                        <h4 style="margin-bottom: 0.5rem; font-family: var(--font-heading); color: var(--color-text-primary);">{{ video.getTitle(locale) }}</h4>
-                                    {% endif %}
-                                    {% if 'youtube.com' in video.url or 'youtu.be' in video.url %}
-                                        {% set ytId = '' %}
-                                        {% if 'youtu.be/' in video.url %}
-                                            {% set ytId = video.url|split('youtu.be/')[1]|split('?')[0] %}
-                                        {% elseif 'v=' in video.url %}
-                                            {% set ytId = video.url|split('v=')[1]|split('&')[0] %}
-                                        {% elseif 'embed/' in video.url %}
-                                            {% set ytId = video.url|split('embed/')[1]|split('?')[0] %}
-                                        {% endif %}
-                                        {% if ytId %}
-                                            <iframe width="100%" height="450" src="https://www.youtube.com/embed/{{ ytId }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px; border: 1px solid var(--color-border); box-shadow: var(--shadow-card-subtle); min-height: 450px;"></iframe>
-                                        {% else %}
-                                            <a href="{{ video.url }}" target="_blank" style="color: var(--color-accent-red);">{{ video.url }}</a>
-                                        {% endif %}
-                                    {% else %}
-                                        <video controls style="width: 100%; border-radius: 12px; border: 1px solid var(--color-border); box-shadow: var(--shadow-card-subtle);">
-                                            <source src="{{ video.url }}" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            <video controls style="width: 100%; max-width: 800px; border-radius: 12px; border: 1px solid var(--color-border); box-shadow: var(--shadow-card-subtle);">
-                                <source src="https://www.qiaosenpresses.com/uploads/Deep-Throat-Presses.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        {% endif %}
-                    </div>
-                </wa-tab-panel>
             </wa-tab-group>
         </div>
+
+        <!-- Operational Videos Section (Always Visible) -->
+        {% if productVideos is not empty %}
+            <section class="product-videos-section scroll-animate slide-top" style="margin-top: 5rem; margin-bottom: 5rem; border-top: 1px solid var(--color-border); padding-top: 4rem;">
+                <div class="overview-header" style="margin-bottom: 3rem;">
+                    <span class="section-title-tag">Vídeos</span>
+                    <h2 style="font-size: 2.2rem; margin-top: 0.8rem; font-weight: 800; font-family: var(--font-heading);">Vídeos de Operação e Demonstração</h2>
+                    <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.6; margin-top: 0.5rem; max-width: 900px;">
+                        Assista aos nossos equipamentos em funcionamento e comprove a robustez, velocidade e silêncio operacional das nossas máquinas.
+                    </p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; width: 100%;">
+                    {% for video in productVideos %}
+                        <div class="video-card" style="background: var(--color-surface-dark); border-radius: 16px; border: 1px solid var(--color-border); padding: 1.5rem; box-shadow: var(--shadow-card-subtle);">
+                            {% if video.getTitle(locale) %}
+                                <h4 style="margin-top: 0; margin-bottom: 1rem; font-size: 1.15rem; font-family: var(--font-heading); color: var(--color-text-primary); font-weight: 700;">
+                                    <i class="fa-solid fa-play" style="color: var(--color-accent-red); margin-right: 8px;"></i>
+                                    {{ video.getTitle(locale) }}
+                                </h4>
+                            {% endif %}
+                            
+                            <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
+                                {% if 'youtube.com' in video.url or 'youtu.be' in video.url %}
+                                    {% set ytId = '' %}
+                                    {% if 'youtu.be/' in video.url %}
+                                        {% set ytId = video.url|split('youtu.be/')[1]|split('?')[0] %}
+                                    {% elseif 'v=' in video.url %}
+                                        {% set ytId = video.url|split('v=')[1]|split('&')[0] %}
+                                    {% elseif 'embed/' in video.url %}
+                                        {% set ytId = video.url|split('embed/')[1]|split('?')[0] %}
+                                    {% endif %}
+                                    {% if ytId %}
+                                        <iframe src="https://www.youtube.com/embed/{{ ytId }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
+                                    {% else %}
+                                        <a href="{{ video.url }}" target="_blank" style="color: var(--color-accent-red);">{{ video.url }}</a>
+                                    {% endif %}
+                                {% else %}
+                                    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                        <source src="{{ video.url }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
 
         <!-- Modelos Section -->
         <section class="subproducts-section">
@@ -351,16 +314,16 @@
                         {% endif %}
                         
                         <div class="product-image-container" style="aspect-ratio: 16/11; border-radius: 8px; margin-bottom: 1.5rem; overflow: hidden; border: 1px solid var(--color-border);">
-                            <img src="{{ sub.img }}" alt="{{ sub.name_key|trans }}" loading="lazy" style="width: 100%; height: 100%; object-fit: contain; background: var(--color-surface-dark); padding: 0.5rem;">
+                            <img src="{% if sub.imageName %}/uploads/products/{{ sub.imageName }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ sub.getName(locale) }}" loading="lazy" style="width: 100%; height: 100%; object-fit: contain; background: var(--color-surface-dark); padding: 0.5rem;">
                         </div>
                         <span class="subproduct-model">{{ sub.model }}</span>
-                        <h4 style="margin-top: 0.5rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-text-primary);">{{ sub.name_key|trans }}</h4>
+                        <h4 style="margin-top: 0.5rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-text-primary);">{{ sub.getName(locale) }}</h4>
                         
                         {% if not is_active %}
                             </a>
                         {% endif %}
                         
-                        <p style="margin-top: 0.5rem; margin-bottom: 1rem; color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5;">{{ sub.desc_key|trans }}</p>
+                        <p style="margin-top: 0.5rem; margin-bottom: 1rem; color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5;">{{ sub.getDescription(locale) }}</p>
                         <span class="subproduct-tag-detail">{{ sub.tag }}</span>
                         
                         <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; align-items: center;">
@@ -388,7 +351,7 @@
                 <p>{{ 'contact_form.request_quote_desc'|trans }}</p>
             </div>
             
-            <form onsubmit="event.preventDefault(); alert('{{ 'contact_form.success'|trans }}'); this.reset();" style="max-width: 600px; margin: 0 auto;">
+            <form id="quote-product-form-element" style="max-width: 600px; margin: 0 auto;">
                 <div class="form-group">
                     <wa-input id="p-name" type="text" label="{{ 'contact_form.name'|trans }}" placeholder="Ex: Engenharia Mecânica Ltda" required></wa-input>
                 </div>
@@ -399,9 +362,12 @@
                     <wa-input id="p-phone" type="tel" label="{{ 'contact_form.phone'|trans }}" placeholder="(16) 99999-9999" required></wa-input>
                 </div>
                 <div class="form-group">
+                    <wa-input id="p-cnpj" type="text" label="CPF / CNPJ" placeholder="Digite apenas números (11 ou 14 dígitos)" required></wa-input>
+                </div>
+                <div class="form-group">
                     <wa-select id="p-model" label="{{ 'contact_form.selected_model'|trans }}" value="{{ activeSubproduct ? activeSubproduct.model|lower : '' }}">
                         {% for sub in product.subproducts %}
-                            <wa-option value="{{ sub.model|lower }}">{{ sub.model }} ({{ sub.name_key|trans }})</wa-option>
+                            <wa-option value="{{ sub.model|lower }}">{{ sub.model }} ({{ sub.getName(locale) }})</wa-option>
                         {% endfor %}
                     </wa-select>
                 </div>
@@ -409,10 +375,197 @@
                     <wa-textarea id="p-message" label="{{ 'contact_form.message'|trans }}" placeholder="Especificações adicionais (ex: profundidade da garganta customizada, almofada de estampagem, etc.)"></wa-textarea>
                 </div>
                 
-                <wa-button type="submit" variant="brand" style="width: 100%;">
+                <wa-button id="p-submit-btn" type="submit" variant="brand" style="width: 100%;">
                     {{ 'cta.submit'|trans }}
                 </wa-button>
+                <div id="p-status-message" style="margin-top: 1.5rem; padding: 1rem; border-radius: 8px; display: none;"></div>
             </form>
         </section>
     </div>
+
+    <!-- AJAX & Validation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('quote-product-form-element');
+            const submitBtn = document.getElementById('p-submit-btn');
+            const statusMsg = document.getElementById('p-status-message');
+
+            function validateCPF(cpf) {
+                cpf = cpf.replace(/[^\d]+/g,'');
+                if(cpf == '') return false;
+                if (cpf.length != 11 || 
+                    cpf == "00000000000" || 
+                    cpf == "11111111111" || 
+                    cpf == "22222222222" || 
+                    cpf == "33333333333" || 
+                    cpf == "44444444444" || 
+                    cpf == "55555555555" || 
+                    cpf == "66666666666" || 
+                    cpf == "77777777777" || 
+                    cpf == "88888888888" || 
+                    cpf == "99999999999")
+                        return false;		
+                let add = 0;	
+                for (let i=0; i < 9; i++)		
+                    add += parseInt(cpf.charAt(i)) * (10 - i);	
+                let rev = 11 - (add % 11);	
+                if (rev == 10 || rev == 11)		
+                    rev = 0;	
+                if (rev != parseInt(cpf.charAt(9)))		
+                    return false;		
+                add = 0;	
+                for (let i = 0; i < 10; i++)		
+                    add += parseInt(cpf.charAt(i)) * (11 - i);	
+                rev = 11 - (add % 11);	
+                if (rev == 10 || rev == 11)	
+                    rev = 0;	
+                if (rev != parseInt(cpf.charAt(10)))
+                    return false;		
+                return true;   
+            }
+
+            function validateCNPJ(cnpj) {
+                cnpj = cnpj.replace(/[^\d]+/g,'');
+                if(cnpj == '') return false;
+                if (cnpj.length != 14)
+                    return false;
+                if (cnpj == "00000000000000" || 
+                    cnpj == "11111111111111" || 
+                    cnpj == "22222222222222" || 
+                    cnpj == "33333333333333" || 
+                    cnpj == "44444444444444" || 
+                    cnpj == "55555555555555" || 
+                    cnpj == "66666666666666" || 
+                    cnpj == "77777777777777" || 
+                    cnpj == "88888888888888" || 
+                    cnpj == "99999999999999")
+                    return false;
+                let tamanho = cnpj.length - 2
+                let numeros = cnpj.substring(0,tamanho);
+                let digitos = cnpj.substring(tamanho);
+                let soma = 0;
+                let pos = tamanho - 7;
+                for (let i = tamanho; i >= 1; i--) {
+                  soma += numeros.charAt(tamanho - i) * pos--;
+                  if (pos < 2)
+                        pos = 9;
+                }
+                let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+                if (resultado != digitos.charAt(0))
+                    return false;
+                tamanho = tamanho + 1;
+                numeros = cnpj.substring(0,tamanho);
+                soma = 0;
+                pos = tamanho - 7;
+                for (let i = tamanho; i >= 1; i--) {
+                  soma += numeros.charAt(tamanho - i) * pos--;
+                  if (pos < 2)
+                        pos = 9;
+                }
+                resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+                if (resultado != digitos.charAt(1))
+                      return false;
+                return true;
+            }
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                statusMsg.style.display = 'none';
+
+                const nameInput = document.getElementById('p-name');
+                const emailInput = document.getElementById('p-email');
+                const phoneInput = document.getElementById('p-phone');
+                const cnpjInput = document.getElementById('p-cnpj');
+                const modelSelect = document.getElementById('p-model');
+                const messageInput = document.getElementById('p-message');
+
+                const name = nameInput.value.trim();
+                const email = emailInput.value.trim();
+                const phone = phoneInput.value.trim();
+                const docVal = cnpjInput.value.trim().replace(/[^\d]+/g,'');
+                const model = modelSelect.value;
+                const message = messageInput.value.trim();
+
+                // Validate document
+                if (docVal.length === 11) {
+                    if (!validateCPF(docVal)) {
+                        statusMsg.className = 'status-error';
+                        statusMsg.style.backgroundColor = '#fde8e8';
+                        statusMsg.style.color = '#9b1c1c';
+                        statusMsg.style.border = '1px solid #f8b4b4';
+                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>CPF inválido. Verifique os dígitos.';
+                        statusMsg.style.display = 'block';
+                        return;
+                    }
+                } else if (docVal.length === 14) {
+                    if (!validateCNPJ(docVal)) {
+                        statusMsg.className = 'status-error';
+                        statusMsg.style.backgroundColor = '#fde8e8';
+                        statusMsg.style.color = '#9b1c1c';
+                        statusMsg.style.border = '1px solid #f8b4b4';
+                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>CNPJ inválido. Verifique os dígitos.';
+                        statusMsg.style.display = 'block';
+                        return;
+                    }
+                } else {
+                    statusMsg.className = 'status-error';
+                    statusMsg.style.backgroundColor = '#fde8e8';
+                    statusMsg.style.color = '#9b1c1c';
+                    statusMsg.style.border = '1px solid #f8b4b4';
+                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Insira um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.';
+                    statusMsg.style.display = 'block';
+                    return;
+                }
+
+                submitBtn.setAttribute('loading', '');
+                submitBtn.disabled = true;
+
+                try {
+                    const response = await fetch('{{ path('app_contact_submit', {'_locale': locale}) }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name,
+                            email,
+                            phone,
+                            cpf_cnpj: docVal,
+                            product_interest: model.toUpperCase(),
+                            product_slug: '{{ product.slug }}',
+                            message,
+                            type: 'quote'
+                        })
+                    });
+
+                    const resData = await response.json();
+                    submitBtn.removeAttribute('loading');
+                    submitBtn.disabled = false;
+
+                    if (resData.success) {
+                        statusMsg.style.backgroundColor = '#def7ec';
+                        statusMsg.style.color = '#03543f';
+                        statusMsg.style.border = '1px solid #bcf0da';
+                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-check" style="margin-right: 8px;"></i>' + resData.message;
+                        statusMsg.style.display = 'block';
+                        form.reset();
+                    } else {
+                        statusMsg.style.backgroundColor = '#fde8e8';
+                        statusMsg.style.color = '#9b1c1c';
+                        statusMsg.style.border = '1px solid #f8b4b4';
+                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Ocorreu um erro: ' + resData.message;
+                        statusMsg.style.display = 'block';
+                    }
+                } catch (error) {
+                    submitBtn.removeAttribute('loading');
+                    submitBtn.disabled = false;
+                    statusMsg.style.backgroundColor = '#fde8e8';
+                    statusMsg.style.color = '#9b1c1c';
+                    statusMsg.style.border = '1px solid #f8b4b4';
+                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Erro de conexão com o servidor. Tente novamente.';
+                    statusMsg.style.display = 'block';
+                }
+            });
+        });
+    </script>
 {% endblock %}

@@ -117,6 +117,20 @@
         </div>
     </div>
 
+    {# ── Home Quem Somos Image ─────────────────────────────────────────── #}
+    <div class="admin-card">
+        <h2 class="admin-card-title mb-4"><i class="fa-solid fa-house-laptop mr-2"></i>Imagem do Quem Somos da Home</h2>
+        {% if about.homeImageName %}
+        <div class="mb-4">
+            <img src="/uploads/about/{{ about.homeImageName }}" alt="Home Image" class="max-h-48 rounded-lg bg-slate-100 p-2 border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+        </div>
+        {% endif %}
+        <div class="wab-field">
+            <label class="wab-label">Upload nova imagem da Home</label>
+            <input type="file" name="homeImageFile" accept="image/*" class="wab-input">
+        </div>
+    </div>
+
     {# ── Save Button ─────────────────────────────────────────────────── #}
     <div class="flex justify-end">
         <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium">

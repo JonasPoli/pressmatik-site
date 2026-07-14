@@ -6,17 +6,35 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Detectar binário do PHP
-PHP_BIN="/RunCloud/Packages/php84rc/bin/php"
-if [ ! -f "$PHP_BIN" ]; then
-    if command -v php84 &> /dev/null; then
+# Detectar binário do PHP se não foi fornecido no ambiente
+if [ -z "$PHP_BIN" ]; then
+    if [ -f "/RunCloud/Packages/php84rc/bin/php" ]; then
+        PHP_BIN="/RunCloud/Packages/php84rc/bin/php"
+    elif [ -f "/opt/cpanel/ea-php83/root/bin/php" ]; then
+        PHP_BIN="/opt/cpanel/ea-php83/root/bin/php"
+    elif [ -f "/opt/cpanel/ea-php84/root/bin/php" ]; then
+        PHP_BIN="/opt/cpanel/ea-php84/root/bin/php"
+    elif command -v php84 &> /dev/null; then
         PHP_BIN="php84"
+    elif command -v php83 &> /dev/null; then
+        PHP_BIN="php83"
     else
         PHP_BIN="php"
     fi
 fi
 
-echo -e "${BLUE}==> Iniciando limpeza completa do sistema TickePix...${NC}"
+echo -e "${BLUE}==> Iniciando limpeza completa...${NC}"
+
+# 0. Instalar dependências via Composer se necessário
+if [ -f "composer.json" ]; then
+    echo -e "${GREEN}--> Executando composer install com o PHP correto...${NC}"
+    COMPOSER_PATH=$(which composer 2>/dev/null || echo "/usr/local/bin/composer")
+    if [ -f "$COMPOSER_PATH" ]; then
+        $PHP_BIN "$COMPOSER_PATH" install --no-interaction --optimize-autoloader
+    else
+        $PHP_BIN composer install --no-interaction --optimize-autoloader
+    fi
+fi
 
 # 1. Limpar Cache do Symfony
 echo -e "${GREEN}--> Limpando cache do Symfony...${NC}"

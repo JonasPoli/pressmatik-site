@@ -115,37 +115,225 @@
    LINHA DO TEMPO
    ═══════════════════════════════════════════════════════════════════════ #}
 {% if timeline|length > 0 %}
-<section class="about-timeline section-padding">
+<section class="about-timeline section-padding" style="background: var(--color-bg-deep);">
     <div class="container">
-        <div class="section-header">
-            <span class="section-tag">{{ 'about.timeline_tag'|trans({}, 'messages', locale) }}</span>
-            <h2 class="section-title">{{ 'about.timeline_title'|trans({}, 'messages', locale) }}</h2>
+        <div class="section-header scroll-animate slide-top">
+            <span class="section-title-tag">{{ 'about.timeline_tag'|trans }}</span>
+            <h2 class="section-title">{{ 'about.timeline_title'|trans }}</h2>
         </div>
-        <div class="timeline">
+        <div class="timeline" style="position: relative; max-width: 1200px; margin: 3rem auto 0 auto; padding: 2rem 0;">
+            <!-- Center line -->
+            <div style="position: absolute; width: 4px; background: var(--color-border); top: 0; bottom: 0; left: 50%; transform: translateX(-50%); border-radius: 2px;"></div>
+            
             {% for item in timeline %}
-            <div class="timeline-item {{ loop.index is odd ? 'timeline-left' : 'timeline-right' }}">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    {% if item.imageName %}
-                    <div class="timeline-image">
-                        <img src="/uploads/history/{{ item.imageName }}" alt="{{ item.getTitle(locale) }}" loading="lazy">
-                    </div>
-                    {% endif %}
-                    <div class="timeline-text">
-                        {% if item.eventDate %}
-                        <span class="timeline-date">{{ item.eventDate|date('Y') }}</span>
-                        {% endif %}
-                        <h3 class="timeline-title">{{ item.getTitle(locale) }}</h3>
-                        {% if item.getDescription(locale) %}
-                        <p class="timeline-desc">{{ item.getDescription(locale)|nl2br }}</p>
-                        {% endif %}
+                <div class="timeline-row" style="display: flex; justify-content: {% if loop.index is odd %}flex-start{% else %}flex-end{% endif %}; position: relative; margin-bottom: 3rem; width: 100%;">
+                    <!-- Timeline point -->
+                    <div style="position: absolute; width: 20px; height: 20px; background: var(--color-accent-red); border: 4px solid var(--color-bg-deep); border-radius: 50%; left: 50%; top: 25px; transform: translateX(-50%); z-index: 5; box-shadow: 0 0 0 4px rgba(213, 28, 35, 0.15);"></div>
+                    
+                    <div class="timeline-content-card scroll-animate {% if loop.index is odd %}slide-left{% else %}slide-right{% endif %}" style="width: 45%; background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 12px; padding: 2rem; box-shadow: var(--shadow-card-subtle);">
+                        <span class="timeline-date" style="color: var(--color-accent-red); font-size: 1.5rem; font-weight: 800; font-family: var(--font-heading); display: block; margin-bottom: 0.5rem;">
+                            {{ item.eventDate ? item.eventDate|date('Y') : '' }}
+                        </span>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 1rem;">{{ item.getTitle(locale) }}</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6;">{{ item.getDescription(locale) }}</p>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
 </section>
 {% endif %}
 
+{# ═══════════════════════════════════════════════════════════════════════
+   ESTRUTURA ORGANIZACIONAL (ORGANIGRAMA)
+   ═══════════════════════════════════════════════════════════════════════ #}
+{% if orgChart|length > 0 %}
+<section class="about-org-chart section-padding">
+    <div class="container">
+        <div class="section-header scroll-animate slide-top">
+            <span class="section-title-tag">{{ 'about.governance_tag'|trans }}</span>
+            <h2 class="section-title">{{ 'about.governance_title'|trans }}</h2>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            {% for item in orgChart %}
+                <div class="org-card scroll-animate slide-top" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 16px; padding: 2rem; text-align: center; box-shadow: var(--shadow-card-subtle); transition: transform 0.3s ease, border-color 0.3s ease;">
+                    <div style="width: 60px; height: 60px; background: rgba(213, 28, 35, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; color: var(--color-accent-red);">
+                        <i class="{{ item.icon ?: 'fa-solid fa-users-gear' }}" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.5rem;">{{ item.getTitle(locale) }}</h3>
+                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5;">{{ item.getDescription(locale) }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# ═══════════════════════════════════════════════════════════════════════
+   CASES DE SUCESSO
+   ═══════════════════════════════════════════════════════════════════════ #}
+{% if successCases|length > 0 %}
+<section class="about-success-cases section-padding" style="background: var(--color-bg-deep);">
+    <div class="container">
+        <div class="section-header scroll-animate slide-top">
+            <span class="section-title-tag">{{ 'about.partnerships_tag'|trans }}</span>
+            <h2 class="section-title">{{ 'about.success_cases_title'|trans }}</h2>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; margin-top: 3rem;">
+            {% for case in successCases %}
+                <div class="case-card scroll-animate slide-top" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-card-subtle);">
+                    <div style="height: 200px; background: #2d3748; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center;">
+                        {% if case.imageName %}
+                            <img src="/uploads/success_cases/{{ case.imageName }}" alt="{{ case.getTitle(locale) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        {% else %}
+                            <i class="fa-solid fa-industry" style="font-size: 4rem; color: rgba(255,255,255,0.15);"></i>
+                        {% endif %}
+                        <div style="position: absolute; bottom: 1rem; left: 1rem; background: var(--color-accent-red); color: white; padding: 0.35rem 0.85rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">
+                            {{ case.clientIndustry }}
+                        </div>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <h4 style="color: var(--color-text-secondary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.5px;">{{ case.clientName }}</h4>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 1rem; line-height: 1.4;">{{ case.getTitle(locale) }}</h3>
+                        <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6;">{{ case.getDescription(locale) }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# ═══════════════════════════════════════════════════════════════════════
+   CERTIFICAÇÕES DE QUALIDADE
+   ═══════════════════════════════════════════════════════════════════════ #}
+{% if certifications|length > 0 %}
+<section class="about-certifications section-padding">
+    <div class="container">
+        <div class="section-header scroll-animate slide-top">
+            <span class="section-title-tag">{{ 'about.standards_tag'|trans }}</span>
+            <h2 class="section-title">{{ 'about.quality_certifications_title'|trans }}</h2>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            {% for cert in certifications %}
+                <div class="cert-card scroll-animate slide-top" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: var(--shadow-card-subtle);">
+                    <div style="width: 90px; height: 90px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 0.5rem; margin-bottom: 1.5rem; border: 1px solid var(--color-border);">
+                        {% if cert.imageName %}
+                            <img src="/uploads/quality/{{ cert.imageName }}" alt="{{ cert.getTitle(locale) }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        {% else %}
+                            <i class="fa-solid fa-award" style="font-size: 2.5rem; color: var(--color-accent-red);"></i>
+                        {% endif %}
+                    </div>
+                    <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.5rem;">{{ cert.getTitle(locale) }}</h3>
+                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5;">{{ cert.getDescription(locale) }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# ═══════════════════════════════════════════════════════════════════════
+   NOSSOS PARCEIROS (SUPPLIERS)
+   ═══════════════════════════════════════════════════════════════════════ #}
+{% if suppliers|length > 0 %}
+<section class="about-suppliers section-padding" style="background: var(--color-bg-deep); border-top: 1px solid var(--color-border);">
+    <div class="container">
+        <div class="section-header scroll-animate slide-top" style="text-align: center; margin-bottom: 4rem;">
+            <span class="section-title-tag">{{ 'about.partners_tag'|trans }}</span>
+            <h2 class="section-title">{{ 'about.world_class_components_title'|trans }}</h2>
+            <p style="color: var(--color-text-secondary); max-width: 800px; margin: 1rem auto 0 auto; font-size: 1.05rem;">
+                {{ 'about.world_class_components_desc'|trans }}
+            </p>
+        </div>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3rem;">
+            {% for sup in suppliers %}
+                <a href="{{ sup.websiteUrl ?: '#' }}" target="_blank" class="supplier-logo-link scroll-animate slide-top" style="display: block; width: 150px; height: 70px; background: white; border-radius: 8px; border: 1px solid var(--color-border); padding: 0.75rem; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: var(--shadow-card-subtle);">
+                    {% if sup.imageName %}
+                        <img src="/uploads/suppliers/{{ sup.imageName }}" alt="{{ sup.name }}" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    {% else %}
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #4a5568; font-size: 0.9rem;">{{ sup.name }}</div>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# ═══════════════════════════════════════════════════════════════════════
+   NOSSOS CLIENTES (CLIENT LOGOS)
+   ═══════════════════════════════════════════════════════════════════════ #}
+{% if clientLogos|length > 0 %}
+<section class="about-clients section-padding" style="background: var(--color-surface-dark); border-top: 1px solid var(--color-border);">
+    <div class="container">
+        <div class="section-header scroll-animate slide-top" style="text-align: center; margin-bottom: 4rem;">
+            <span class="section-title-tag">{{ 'about.clients_tag'|trans }}</span>
+            <h2 class="section-title">{{ 'about.who_trusts_pressmatik_title'|trans }}</h2>
+            <p style="color: var(--color-text-secondary); max-width: 800px; margin: 1rem auto 0 auto; font-size: 1.05rem;">
+                {{ 'about.who_trusts_pressmatik_desc'|trans }}
+            </p>
+        </div>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3.5rem;">
+            {% for client in clientLogos %}
+                <div class="client-logo-wrapper scroll-animate slide-top" style="width: 140px; height: 60px; display: flex; align-items: center; justify-content: center; opacity: 0.85; transition: opacity 0.3s ease, transform 0.3s ease;">
+                    {% if client.imageName %}
+                        <img src="/uploads/clients/{{ client.imageName }}" alt="{{ client.name }}" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(100%) brightness(1.1); transition: filter 0.3s ease, opacity 0.3s ease;">
+                    {% else %}
+                        <div style="font-weight: 700; color: var(--color-text-secondary); font-size: 0.95rem;">{{ client.name }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<style>
+    .client-logo-wrapper:hover {
+        opacity: 1 !important;
+        transform: scale(1.05);
+    }
+    .client-logo-wrapper:hover img {
+        filter: grayscale(0%) !important;
+    }
+</style>
+{% endif %}
+
+<style>
+    .supplier-logo-link:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .supplier-logo-link:hover img {
+        filter: grayscale(0%) !important;
+    }
+    .org-card:hover, .cert-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--color-accent-red) !important;
+    }
+    /* Timeline responsive adjustments */
+    @media (max-width: 768px) {
+        .timeline::before {
+            left: 20px !important;
+        }
+        .timeline-row {
+            justify-content: flex-start !important;
+            padding-left: 50px;
+        }
+        .timeline-content-card {
+            width: 100% !important;
+        }
+        .timeline-row div[style*="left: 50%"] {
+            left: 20px !important;
+        }
+        div[style*="left: 50%; transform: translateX(-50%)"] {
+            left: 20px !important;
+        }
+    }
+</style>
 {% endblock %}

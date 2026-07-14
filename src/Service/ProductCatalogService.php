@@ -184,7 +184,7 @@ class ProductCatalogService
             // 2. PRENSAS SERVO-HIDRÁULICAS
             'prensas-servo-hidraulicas-servo-bombas' => [
                 'slug' => 'prensas-servo-hidraulicas-servo-bombas',
-                'category' => 'servo_hydraulic',
+                'category' => 'servo-hydraulic',
                 'name_key' => 'catalog.servo_hydraulic.bombas.name',
                 'desc_key' => 'catalog.servo_hydraulic.bombas.desc',
                 'tonnage' => '50 ~ 2000 Ton',

@@ -108,6 +108,11 @@ final class TestimonyController extends AbstractController
         $item->setIsActive((bool) $data->get('isActive', false));
         $item->setPosition((int) $data->get('position', 0));
 
+        if ($data->get('deleteImage')) {
+            $item->setImageFile(null);
+            $item->setImageName(null);
+        }
+
         $imageFile = $request->files->get('imageFile');
         if ($imageFile instanceof UploadedFile) {
             $item->setImageFile($imageFile);

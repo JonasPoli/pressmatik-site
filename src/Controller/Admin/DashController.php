@@ -2,6 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Repository\BannerRepository;
+use App\Repository\ContactMessageRepository;
+use App\Repository\DifferentialRepository;
+use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use App\Repository\ProductSizeRepository;
 use App\Repository\TechnicalSpecificationRepository;
@@ -22,7 +26,11 @@ class DashController extends AbstractController
         TechnicalSpecificationRepository $specRepository,
         HistoryTimelineRepository $historyRepository,
         ProductVideoRepository $videoRepository,
-        ProductCatalogService $catalogService
+        ProductCatalogService $catalogService,
+        BannerRepository $bannerRepo,
+        DifferentialRepository $differentialRepo,
+        ContactMessageRepository $contactRepo,
+        ProductRepository $productRepo,
     ): Response {
         $catalog = $catalogService->getCatalog();
         $groupedCatalog = [
@@ -71,6 +79,10 @@ class DashController extends AbstractController
                 'sizes_total' => $sizeRepository->count([]),
                 'timeline_total' => $historyRepository->count([]),
                 'videos_total' => $videoRepository->count([]),
+                'banners_total' => $bannerRepo->count([]),
+                'differentials_total' => $differentialRepo->count([]),
+                'messages_unread' => $contactRepo->countUnread(),
+                'db_products_total' => $productRepo->count([]),
             ],
         ]);
     }

@@ -3,12 +3,20 @@
 namespace App\Controller;
 
 use App\Repository\AboutUsRepository;
+use App\Repository\BannerRepository;
+use App\Repository\DifferentialRepository;
 use App\Repository\HistoryTimelineRepository;
+use App\Repository\OrgChartItemRepository;
+use App\Repository\ProductRepository;
 use App\Repository\ProductSizeRepository;
 use App\Repository\ProductSpecValueRepository;
 use App\Repository\ProductConfigItemRepository;
 use App\Repository\ProductVideoRepository;
+use App\Repository\QualityCertificationRepository;
+use App\Repository\SuccessCaseRepository;
+use App\Repository\SupplierRepository;
 use App\Service\ProductCatalogService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +37,14 @@ class SiteController extends AbstractController
         private readonly \App\Repository\ClientLogoRepository $clientLogoRepo,
         private readonly \App\Repository\ServiceRepository $serviceRepo,
         private readonly \App\Repository\NewsRepository $newsRepo,
+        private readonly ProductRepository $productRepo,
+        private readonly BannerRepository $bannerRepo,
+        private readonly DifferentialRepository $differentialRepo,
+        private readonly SupplierRepository $supplierRepo,
+        private readonly QualityCertificationRepository $qualityRepo,
+        private readonly SuccessCaseRepository $successCaseRepo,
+        private readonly OrgChartItemRepository $orgChartRepo,
+        private readonly EntityManagerInterface $em,
     ) {}
 
     #[Route('/{_locale}/', name: 'app_home', requirements: ['_locale' => 'pt|en|es'])]
@@ -41,6 +57,9 @@ class SiteController extends AbstractController
             'clientLogos' => $this->clientLogoRepo->findAllOrdered(),
             'services' => $this->serviceRepo->findActiveOrdered(),
             'news' => $this->newsRepo->findLatestActive(3),
+            'banners' => $this->bannerRepo->findActive(),
+            'differentials' => $this->differentialRepo->findActive(),
+            'about' => $this->aboutUsRepo->findOrCreate(),
         ]);
     }
 
@@ -55,32 +74,38 @@ class SiteController extends AbstractController
             'about' => $about,
             'timeline' => $timeline,
             'catalog' => $this->catalogService->getCatalog(),
+            'suppliers' => $this->supplierRepo->findActive(),
+            'certifications' => $this->qualityRepo->findActive(),
+            'successCases' => $this->successCaseRepo->findActive(),
+            'orgChart' => $this->orgChartRepo->findAllOrdered(),
+            'differentials' => $this->differentialRepo->findActive(),
+            'clientLogos' => $this->clientLogoRepo->findAllOrdered(),
         ]);
     }
 
     #[Route('/{_locale}/produtos/{slug}', name: 'app_product_detail', requirements: ['_locale' => 'pt|en|es'])]
     public function productDetail(Request $request, string $_locale, string $slug): Response
     {
-        $product = $this->catalogService->getProductBySlug($slug);
+        $product = $this->productRepo->findBySlug($slug);
 
         if (!$product) {
             throw $this->createNotFoundException('Produto não encontrado');
         }
 
         // Find active subproduct from query parameter, fallback to first subproduct
-        $subproducts = $product['subproducts'] ?? [];
+        $subproducts = $product->getSubproducts();
         $activeSubproduct = null;
         $modelCode = $request->query->get('model');
         if ($modelCode) {
             foreach ($subproducts as $sub) {
-                if (strcasecmp($sub['model'], $modelCode) === 0) {
+                if (strcasecmp($sub->getModel(), $modelCode) === 0) {
                     $activeSubproduct = $sub;
                     break;
                 }
             }
         }
-        if (!$activeSubproduct && !empty($subproducts)) {
-            $activeSubproduct = $subproducts[0];
+        if (!$activeSubproduct) {
+            $activeSubproduct = $product->getDefaultSubproduct() ?: ($subproducts->first() ?: null);
         }
 
         // Fetch dynamic data from database
@@ -172,5 +197,41 @@ class SiteController extends AbstractController
             'catalog' => $this->catalogService->getCatalog(),
             'item' => $item,
         ]);
+    }
+
+    #[Route('/{_locale}/contato-enviar', name: 'app_contact_submit', methods: ['POST'], requirements: ['_locale' => 'pt|en|es'])]
+    public function contactSubmit(Request $request, EntityManagerInterface $em): Response
+    {
+        $data = json_decode($request->getContent(), true) ?: $request->request->all();
+
+        $name = $data['name'] ?? null;
+        $email = $data['email'] ?? null;
+        $phone = $data['phone'] ?? null;
+        $cpfCnpj = $data['cpf_cnpj'] ?? null;
+        $company = $data['company'] ?? null;
+        $productInterest = $data['product_interest'] ?? null;
+        $message = $data['message'] ?? null;
+        $type = $data['type'] ?? 'contact';
+        $productSlug = $data['product_slug'] ?? null;
+
+        if (!$name || !$email) {
+            return $this->json(['success' => false, 'message' => 'Nome e e-mail são obrigatórios.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $msg = new \App\Entity\ContactMessage();
+        $msg->setName($name);
+        $msg->setEmail($email);
+        $msg->setPhone($phone);
+        $msg->setCpfCnpj($cpfCnpj);
+        $msg->setCompany($company);
+        $msg->setProductInterest($productInterest);
+        $msg->setMessage($message);
+        $msg->setType($type);
+        $msg->setProductSlug($productSlug);
+
+        $em->persist($msg);
+        $em->flush();
+
+        return $this->json(['success' => true, 'message' => 'Sua mensagem foi enviada com sucesso!']);
     }
 }

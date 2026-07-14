@@ -1,0 +1,27 @@
+{# Sortable.js drag-and-drop script — include in any admin list page #}
+{# Usage: pass tbodyId and reorderUrl to this partial #}
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script>
+function initSortable() {
+    const el = document.getElementById('{{ tbodyId }}');
+    if (el && !el.dataset.sortableInitialized) {
+        el.dataset.sortableInitialized = 'true';
+        new Sortable(el, {
+            animation: 150,
+            handle: '.cursor-move',
+            onEnd: function () {
+                const ids = Array.from(el.children).map(tr => tr.dataset.id);
+                fetch('{{ reorderUrl }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ids })
+                });
+            }
+        });
+    }
+}
+initSortable();
+document.addEventListener('turbo:load', initSortable);
+document.addEventListener('DOMContentLoaded', initSortable);
+</script>

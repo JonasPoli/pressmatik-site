@@ -1,0 +1,49 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Mensagens de Contato{% endblock %}
+{% block body %}
+<div class="page-header">
+    <h1 class="page-title">Mensagens de Contato</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400">Contatos e solicitações de cotação recebidos pelo site</p>
+</div>
+<div class="admin-card">
+    {% if items|length == 0 %}
+        <p class="text-sm text-slate-500 py-8 text-center">Nenhuma mensagem recebida.</p>
+    {% else %}
+    <div class="overflow-x-auto"><table class="w-full text-sm">
+        <thead><tr class="border-b border-slate-200 dark:border-slate-700">
+            <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Data</th>
+            <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Tipo</th>
+            <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Nome</th>
+            <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">E-mail</th>
+            <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Status</th>
+            <th class="text-right py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">Ações</th>
+        </tr></thead>
+        <tbody>{% for item in items %}
+            <tr class="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors {{ not item.isRead ? 'font-semibold' : '' }}">
+                <td class="py-3 px-4 text-slate-500">{{ item.createdAt|date('d/m/Y H:i') }}</td>
+                <td class="py-3 px-4">
+                    {% if item.type == 'quote' %}
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"><i class="fa-solid fa-file-invoice"></i> Cotação</span>
+                    {% else %}
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"><i class="fa-solid fa-envelope"></i> Contato</span>
+                    {% endif %}
+                </td>
+                <td class="py-3 px-4 text-slate-800 dark:text-white">{{ item.name }}</td>
+                <td class="py-3 px-4 text-slate-600 dark:text-slate-400">{{ item.email }}</td>
+                <td class="py-3 px-4">
+                    {% if not item.isRead %}
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary"><i class="fa-solid fa-circle text-[6px]"></i> Novo</span>
+                    {% else %}
+                        <span class="text-xs text-slate-400">Lido</span>
+                    {% endif %}
+                </td>
+                <td class="py-3 px-4 text-right"><div class="flex items-center justify-end gap-2">
+                    <a href="{{ path('app_admin_contact_show', {id: item.id}) }}" class="text-primary hover:text-primary-dark"><i class="fa-solid fa-eye"></i></a>
+                    <form method="post" action="{{ path('app_admin_contact_delete', {id: item.id}) }}" onsubmit="return confirm('Tem certeza?')" class="inline"><input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}"><button type="submit" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash-can"></i></button></form>
+                </div></td>
+            </tr>
+        {% endfor %}</tbody>
+    </table></div>
+    {% endif %}
+</div>
+{% endblock %}

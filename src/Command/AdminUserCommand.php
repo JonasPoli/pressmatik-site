@@ -71,8 +71,8 @@ class AdminUserCommand extends Command
         if (!$email) {
             $email = $io->ask('E-mail', null, function (string $value) use ($validator): string {
                 $violations = $validator->validate($value, [
-                    new NotBlank(['message' => 'O e-mail é obrigatório.']),
-                    new Email(['message'   => 'Informe um e-mail válido.']),
+                    new NotBlank(message: 'O e-mail é obrigatório.'),
+                    new Email(message: 'Informe um e-mail válido.'),
                 ]);
                 if (count($violations) > 0) throw new \RuntimeException((string) $violations->get(0)->getMessage());
                 return strtolower(trim($value));
@@ -90,8 +90,8 @@ class AdminUserCommand extends Command
         if (!$password) {
             $password = $io->askHidden('Senha (mínimo 8 caracteres)', function (string $value) use ($validator): string {
                 $violations = $validator->validate($value, [
-                    new NotBlank(['message' => 'A senha não pode ser vazia.']),
-                    new Length(['min' => 8, 'minMessage' => 'A senha deve ter pelo menos {{ limit }} caracteres.']),
+                    new NotBlank(message: 'A senha não pode ser vazia.'),
+                    new Length(min: 8, minMessage: 'A senha deve ter pelo menos {{ limit }} caracteres.'),
                 ]);
                 if (count($violations) > 0) throw new \RuntimeException((string) $violations->get(0)->getMessage());
                 return $value;

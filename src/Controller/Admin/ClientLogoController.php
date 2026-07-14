@@ -100,6 +100,11 @@ final class ClientLogoController extends AbstractController
         $item->setName($data->get('name'));
         $item->setPosition((int) $data->get('position', 0));
 
+        if ($data->get('deleteImage')) {
+            $item->setImageFile(null);
+            $item->setImageName(null);
+        }
+
         $imageFile = $request->files->get('imageFile');
         if ($imageFile instanceof UploadedFile) {
             $item->setImageFile($imageFile);

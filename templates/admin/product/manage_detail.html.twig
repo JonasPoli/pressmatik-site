@@ -63,6 +63,296 @@
 </div>
 
 {# ═══════════════════════════════════════════════════════════════════════
+   SUBPRODUTOS (Subproducts, PDFs & Applications)
+   ═══════════════════════════════════════════════════════════════════════ #}
+<div class="admin-card mb-6">
+    <h2 class="admin-card-title mb-4"><i class="fa-solid fa-boxes-stacked mr-2"></i>Subprodutos (Modelos, PDFs e Aplicações)</h2>
+
+    {% if product.subproducts|length > 0 %}
+    <div class="space-y-4 mb-6" id="subproducts-list">
+        {% for sub in product.subproducts %}
+        <div class="border border-slate-200 dark:border-slate-700 rounded-lg p-4 bg-white dark:bg-slate-800" data-id="{{ sub.id }}" x-data="{ showEdit: false, showApps: false }">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-grip-vertical text-slate-400 cursor-move mr-3"></i>
+                    {% if sub.imageName %}
+                        <img src="/uploads/products/{{ sub.imageName }}" alt="" class="w-10 h-10 object-contain rounded bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 mr-3">
+                    {% else %}
+                        <div class="w-10 h-10 flex items-center justify-center bg-slate-100 dark:bg-slate-700 rounded mr-3 text-slate-400 text-xs">
+                            <i class="fa-regular fa-image"></i>
+                        </div>
+                    {% endif %}
+                    <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold rounded text-xs mr-2">{{ sub.model }}</span>
+                    <span class="font-medium">{{ sub.namePt }}</span>
+                    {% if sub.tag %}
+                        <span class="ml-2 text-xs px-1.5 py-0.5 bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200 rounded">{{ sub.tag }}</span>
+                    {% endif %}
+                    <span class="ml-2 text-xs {{ sub.isIsActive ? 'text-green-500' : 'text-slate-400' }}">({{ sub.isIsActive ? 'Ativo' : 'Inativo' }})</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button type="button" @click="showEdit = !showEdit" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded text-xs transition-colors">
+                        <i class="fa-solid fa-pen-to-square"></i> Editar Detalhes / PDFs
+                    </button>
+                    <button type="button" @click="showApps = !showApps" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded text-xs transition-colors">
+                        <i class="fa-solid fa-briefcase"></i> Aplicações ({{ sub.applications|length }})
+                    </button>
+                    <form method="post" action="{{ path('app_admin_subproduct_delete', {slug: slug, id: sub.id}) }}" onsubmit="return confirm('Remover subproduto? Isso apagará todas as suas especificações e aplicações associadas.')" class="inline">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete_sub' ~ sub.id) }}">
+                        <button type="submit" class="text-red-500 hover:text-red-700 p-1 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- PDFs and basic info summary -->
+            <div class="mt-2 flex flex-wrap gap-4 text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-700/50 pt-2">
+                <div>
+                    <strong>PDF PT:</strong> 
+                    {% if sub.pdfNamePt %}
+                        <a href="/uploads/products/{{ sub.pdfNamePt }}" target="_blank" class="text-primary hover:underline">{{ sub.pdfNamePt }}</a>
+                    {% else %}
+                        <span class="text-slate-400">Não cadastrado</span>
+                    {% endif %}
+                </div>
+                <div>
+                    <strong>PDF EN:</strong> 
+                    {% if sub.pdfNameEn %}
+                        <a href="/uploads/products/{{ sub.pdfNameEn }}" target="_blank" class="text-primary hover:underline">{{ sub.pdfNameEn }}</a>
+                    {% else %}
+                        <span class="text-slate-400">Não cadastrado</span>
+                    {% endif %}
+                </div>
+                <div>
+                    <strong>PDF ES:</strong> 
+                    {% if sub.pdfNameEs %}
+                        <a href="/uploads/products/{{ sub.pdfNameEs }}" target="_blank" class="text-primary hover:underline">{{ sub.pdfNameEs }}</a>
+                    {% else %}
+                        <span class="text-slate-400">Não cadastrado</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- COLLAPSIBLE EDIT FORM -->
+            <div x-show="showEdit" x-collapse class="mt-4 p-4 border border-slate-100 dark:border-slate-700 rounded bg-slate-50 dark:bg-slate-900/50 text-sm space-y-3">
+                <form method="post" action="{{ path('app_admin_subproduct_edit', {slug: slug, id: sub.id}) }}" enctype="multipart/form-data">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="wab-field">
+                            <label class="wab-label">Código do Modelo</label>
+                            <input type="text" name="model" value="{{ sub.model }}" class="wab-input" required>
+                        </div>
+                        <div class="wab-field col-span-2">
+                            <label class="wab-label">Tag (ex: Standard, Premium, Compact)</label>
+                            <input type="text" name="tag" value="{{ sub.tag }}" class="wab-input">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+                        <div class="wab-field">
+                            <label class="wab-label">Nome (PT)</label>
+                            <input type="text" name="namePt" value="{{ sub.namePt }}" class="wab-input" required>
+                        </div>
+                        <div class="wab-field">
+                            <label class="wab-label">Nome (EN)</label>
+                            <input type="text" name="nameEn" value="{{ sub.nameEn }}" class="wab-input">
+                        </div>
+                        <div class="wab-field">
+                            <label class="wab-label">Nome (ES)</label>
+                            <input type="text" name="nameEs" value="{{ sub.nameEs }}" class="wab-input">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+                        <div class="wab-field">
+                            <label class="wab-label">Descrição (PT)</label>
+                            <textarea name="descriptionPt" class="wab-input" rows="2">{{ sub.descriptionPt }}</textarea>
+                        </div>
+                        <div class="wab-field">
+                            <label class="wab-label">Descrição (EN)</label>
+                            <textarea name="descriptionEn" class="wab-input" rows="2">{{ sub.descriptionEn }}</textarea>
+                        </div>
+                        <div class="wab-field">
+                            <label class="wab-label">Descrição (ES)</label>
+                            <textarea name="descriptionEs" class="wab-input" rows="2">{{ sub.descriptionEs }}</textarea>
+                        </div>
+                    </div>
+
+                     <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mt-3">
+                        <div class="wab-field">
+                            <label class="wab-label">Imagem do Subproduto</label>
+                            {% if sub.imageName %}
+                                <div class="mb-2">
+                                    <img src="/uploads/products/{{ sub.imageName }}" alt="" class="h-16 object-contain rounded bg-slate-100 dark:bg-slate-700 p-1 border border-slate-200 dark:border-slate-600">
+                                </div>
+                            {% endif %}
+                            <input type="file" name="imageFile" class="wab-input" accept="image/*">
+                        </div>
+                        <div class="wab-field">
+                            <label class="wab-label">Catálogo PDF (PT)</label>
+                            <input type="file" name="pdfFilePt" class="wab-input" accept="application/pdf">
+                        </div>
+                        <div class="wab-field">
+                            <label class="wab-label">Catálogo PDF (EN)</label>
+                            <input type="file" name="pdfFileEn" class="wab-input" accept="application/pdf">
+                        </div>
+                        <div class="wab-field">
+                            <label class="wab-label">Catálogo PDF (ES)</label>
+                            <input type="file" name="pdfFileEs" class="wab-input" accept="application/pdf">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 mt-4">
+                        <button type="submit" class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-semibold transition-colors">
+                            Salvar Alterações
+                        </button>
+                        <button type="button" @click="showEdit = false" class="px-3 py-2 bg-slate-200 dark:bg-slate-700 rounded-lg text-xs transition-colors">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- COLLAPSIBLE APPLICATIONS MANAGEMENT -->
+            <div x-show="showApps" x-collapse class="mt-4 p-4 border border-slate-100 dark:border-slate-700 rounded bg-slate-50 dark:bg-slate-900/50 text-sm">
+                <h3 class="font-semibold mb-2">Aplicações de {{ sub.model }}</h3>
+                
+                <!-- Applications List -->
+                {% if sub.applications|length > 0 %}
+                <div class="space-y-2 mb-4 app-sortable" data-subproduct-id="{{ sub.id }}">
+                    {% for app in sub.applications %}
+                    <div class="flex items-center justify-between p-2 bg-white dark:bg-slate-800 rounded border border-slate-100 dark:border-slate-700/50 text-xs" data-id="{{ app.id }}">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-grip-vertical text-slate-400 cursor-move"></i>
+                            {% if app.icon %}
+                                <img src="/images/aplicacoes/{{ app.icon }}.png" alt="" class="w-4 h-4 object-contain">
+                            {% endif %}
+                            <span class="font-medium">{{ app.namePt }}</span>
+                            <span class="text-slate-400">({{ app.icon ?: 'Sem ícone' }})</span>
+                        </div>
+                        <form method="post" action="{{ path('app_admin_subproduct_application_delete', {slug: slug, id: app.id}) }}" class="inline" onsubmit="return confirm('Remover esta aplicação?')">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_app' ~ app.id) }}">
+                            <button type="submit" class="text-red-500 hover:text-red-700 p-1"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-xs text-slate-400 mb-4">Nenhuma aplicação cadastrada para este subproduto.</p>
+                {% endif %}
+
+                <!-- Add Application Form -->
+                <form method="post" action="{{ path('app_admin_subproduct_application_add', {slug: slug, subproductId: sub.id}) }}" class="mt-4 border-t border-slate-200 dark:border-slate-700 pt-3">
+                    <h4 class="font-semibold text-xs mb-2">Adicionar Aplicação</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="wab-field">
+                            <label class="wab-label">Nome (PT)</label>
+                            <input type="text" name="namePt" class="wab-input text-xs" placeholder="Ex: Dobra e Conformação" required>
+                        </div>
+                        <div class="wab-field">
+                            <label class="wab-label">Nome (EN)</label>
+                            <input type="text" name="nameEn" class="wab-input text-xs" placeholder="Ex: Bending and Forming">
+                        </div>
+                        <div class="wab-field">
+                            <label class="wab-label">Nome (ES)</label>
+                            <input type="text" name="nameEs" class="wab-input text-xs" placeholder="Ex: Doblado y Conformado">
+                        </div>
+                        <div class="wab-field">
+                            <label class="wab-label">Ícone / Tipo da Aplicação</label>
+                            <select name="icon" class="wab-input text-xs" required>
+                                <option value="corte">Corte</option>
+                                <option value="dobra">Dobra</option>
+                                <option value="duplo-efeito">Duplo Efeito / Substituição</option>
+                                <option value="estampagem">Estampagem</option>
+                                <option value="montagem">Montagem</option>
+                                <option value="progressivo">Progressivo / Calibração / Alinhamento</option>
+                                <option value="rebarbacao">Rebarbação</option>
+                                <option value="repuxo">Repuxo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-3 px-3 py-1.5 bg-slate-700 hover:bg-slate-800 text-white rounded text-xs transition-colors">
+                        <i class="fa-solid fa-plus mr-1"></i> Adicionar Aplicação
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ADD SUBPRODUCT FORM -->
+    <div x-data="{ open: false }">
+        <button type="button" @click="open = !open" class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-sm transition-colors">
+            <i class="fa-solid fa-plus mr-1"></i> Cadastrar Novo Subproduto
+        </button>
+
+        <form x-show="open" method="post" action="{{ path('app_admin_subproduct_add', {slug: slug}) }}" enctype="multipart/form-data" class="mt-4 p-4 border border-slate-200 dark:border-slate-700 rounded-lg space-y-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="wab-field">
+                    <label class="wab-label">Código do Modelo (ex: PMC-BC)</label>
+                    <input type="text" name="model" class="wab-input" placeholder="Ex: PMC-BC" required>
+                </div>
+                <div class="wab-field">
+                    <label class="wab-label">Tag / Destaque (ex: Compacto, Premium)</label>
+                    <input type="text" name="tag" class="wab-input" placeholder="Ex: Compacto">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="wab-field">
+                    <label class="wab-label">Nome (PT)</label>
+                    <input type="text" name="namePt" class="wab-input" required>
+                </div>
+                <div class="wab-field">
+                    <label class="wab-label">Nome (EN)</label>
+                    <input type="text" name="nameEn" class="wab-input">
+                </div>
+                <div class="wab-field">
+                    <label class="wab-label">Nome (ES)</label>
+                    <input type="text" name="nameEs" class="wab-input">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="wab-field">
+                    <label class="wab-label">Descrição (PT)</label>
+                    <textarea name="descriptionPt" class="wab-input" rows="2"></textarea>
+                </div>
+                <div class="wab-field">
+                    <label class="wab-label">Descrição (EN)</label>
+                    <textarea name="descriptionEn" class="wab-input" rows="2"></textarea>
+                </div>
+                <div class="wab-field">
+                    <label class="wab-label">Descrição (ES)</label>
+                    <textarea name="descriptionEs" class="wab-input" rows="2"></textarea>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                <div class="wab-field">
+                    <label class="wab-label">Imagem do Subproduto</label>
+                    <input type="file" name="imageFile" class="wab-input" accept="image/*">
+                </div>
+                <div class="wab-field">
+                    <label class="wab-label">Catálogo PDF (PT)</label>
+                    <input type="file" name="pdfFilePt" class="wab-input" accept="application/pdf">
+                </div>
+                <div class="wab-field">
+                    <label class="wab-label">Catálogo PDF (EN)</label>
+                    <input type="file" name="pdfFileEn" class="wab-input" accept="application/pdf">
+                </div>
+                <div class="wab-field">
+                    <label class="wab-label">Catálogo PDF (ES)</label>
+                    <input type="file" name="pdfFileEs" class="wab-input" accept="application/pdf">
+                </div>
+            </div>
+
+            <button type="submit" class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-sm transition-colors">
+                <i class="fa-solid fa-check mr-1"></i> Confirmar Cadastro
+            </button>
+        </form>
+    </div>
+</div>
+
+{# ═══════════════════════════════════════════════════════════════════════
    PARÂMETROS TÉCNICOS (Spec Values Table)
    ═══════════════════════════════════════════════════════════════════════ #}
 <div class="admin-card mb-6" x-data="specTable()">
@@ -238,6 +528,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // 1. Reorder configurations (existing)
     document.querySelectorAll('.config-sortable-list').forEach(el => {
         new Sortable(el, {
             animation: 150,
@@ -245,6 +536,39 @@ document.addEventListener('DOMContentLoaded', function () {
             onEnd: async function () {
                 const ids = Array.from(el.children).map(li => li.dataset.id);
                 await fetch(el.dataset.reorderUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ids })
+                });
+            }
+        });
+    });
+
+    // 2. Reorder subproducts
+    const subListEl = document.getElementById('subproducts-list');
+    if (subListEl) {
+        new Sortable(subListEl, {
+            animation: 150,
+            handle: '.fa-grip-vertical',
+            onEnd: async function () {
+                const ids = Array.from(subListEl.children).map(card => card.dataset.id);
+                await fetch('{{ path("app_admin_subproduct_reorder", {slug: slug}) }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ids })
+                });
+            }
+        });
+    }
+
+    // 3. Reorder applications within a subproduct
+    document.querySelectorAll('.app-sortable').forEach(el => {
+        new Sortable(el, {
+            animation: 150,
+            handle: '.fa-grip-vertical',
+            onEnd: async function () {
+                const ids = Array.from(el.children).map(div => div.dataset.id);
+                await fetch('{{ path("app_admin_subproduct_application_reorder", {slug: slug}) }}', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ ids })

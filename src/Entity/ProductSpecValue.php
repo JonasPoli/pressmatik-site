@@ -13,8 +13,12 @@ class ProductSpecValue
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $productSlug = null;
+
+    #[ORM\ManyToOne(targetEntity: Product::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Product $product = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -37,6 +41,9 @@ class ProductSpecValue
 
     public function getProductSlug(): ?string { return $this->productSlug; }
     public function setProductSlug(?string $v): static { $this->productSlug = $v; return $this; }
+
+    public function getProduct(): ?Product { return $this->product; }
+    public function setProduct(?Product $v): static { $this->product = $v; return $this; }
 
     public function getSpecification(): ?TechnicalSpecification { return $this->specification; }
     public function setSpecification(?TechnicalSpecification $v): static { $this->specification = $v; return $this; }

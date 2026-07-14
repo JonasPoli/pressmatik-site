@@ -13,3 +13,11 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+/docs/documentos
+/docs/documentos*
+/docs/tabelas
+/docs/Enviado*pelo*cliente*em*14-jul
+/docs/fornecedores
+/docs/qualidade
+/docs/clientes
+*.psd

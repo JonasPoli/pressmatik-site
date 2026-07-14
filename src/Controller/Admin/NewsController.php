@@ -211,6 +211,11 @@ final class NewsController extends AbstractController
             }
         }
 
+        if ($data->get('deleteImage')) {
+            $item->setImageFile(null);
+            $item->setImageName(null);
+        }
+
         $imageFile = $request->files->get('imageFile');
         if ($imageFile instanceof UploadedFile) {
             $item->setImageFile($imageFile);

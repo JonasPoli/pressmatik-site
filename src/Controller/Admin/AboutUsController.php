@@ -70,6 +70,12 @@ final class AboutUsController extends AbstractController
                 $about->setBannerImageFile($bannerFile);
             }
 
+            // Home image
+            $homeImageFile = $request->files->get('homeImageFile');
+            if ($homeImageFile instanceof UploadedFile) {
+                $about->setHomeImageFile($homeImageFile);
+            }
+
             $this->em->flush();
             $this->addFlash('success', 'Quem Somos atualizado com sucesso!');
 
