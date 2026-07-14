@@ -378,8 +378,9 @@ class SeedDataCommand extends Command
 
             // Copy and associate client-provided product image
             if (isset($p['image_src'])) {
-                $srcPath = __DIR__ . '/../../seed/products/' . $p['image_src'];
-                if (file_exists($srcPath)) {
+                $targetFilename = basename($p['image_src']);
+                $srcPath = $this->findFileRecursively(__DIR__ . '/../../seed/products', $targetFilename);
+                if ($srcPath && file_exists($srcPath)) {
                     $destDir = __DIR__ . '/../../public/uploads/products';
                     if (!is_dir($destDir)) {
                         mkdir($destDir, 0777, true);
@@ -483,8 +484,8 @@ class SeedDataCommand extends Command
                 
                 // Copy specific subproduct model image if exists, else fallback to category image
                 $specificImage = strtolower($sub->getModel()) . '.png';
-                $srcSubPath = __DIR__ . '/../../seed/products/' . $specificImage;
-                if (file_exists($srcSubPath)) {
+                $srcSubPath = $this->findFileRecursively(__DIR__ . '/../../seed/products', $specificImage);
+                if ($srcSubPath && file_exists($srcSubPath)) {
                     $destDir = __DIR__ . '/../../public/uploads/products';
                     if (!is_dir($destDir)) {
                         mkdir($destDir, 0777, true);
@@ -525,8 +526,8 @@ class SeedDataCommand extends Command
 
                 $pdfFileName = $pdfMapping[$sub->getModel()] ?? null;
                 if ($pdfFileName) {
-                    $srcPdfPath = __DIR__ . '/../../seed/pdf/' . $pdfFileName;
-                    if (file_exists($srcPdfPath)) {
+                    $srcPdfPath = $this->findFileRecursively(__DIR__ . '/../../seed/pdf', $pdfFileName);
+                    if ($srcPdfPath && file_exists($srcPdfPath)) {
                         $destDir = __DIR__ . '/../../public/uploads/products';
                         if (!is_dir($destDir)) {
                             mkdir($destDir, 0777, true);
@@ -1127,8 +1128,8 @@ class SeedDataCommand extends Command
 
         $copiedCount = 0;
         foreach ($filesToCopy as $srcName => $destName) {
-            $srcFile = $srcAppDir . '/' . $srcName;
-            if (file_exists($srcFile)) {
+            $srcFile = $this->findFileRecursively($srcAppDir, $srcName);
+            if ($srcFile && file_exists($srcFile)) {
                 copy($srcFile, $destAppDir . '/' . $destName);
                 $copiedCount++;
             }
@@ -1421,5 +1422,46 @@ class SeedDataCommand extends Command
 
         $this->em->flush();
         $io->text(count($testimonies) . ' depoimentos inseridos.');
+    }
+
+    private function findFileRecursively(string $dir, string $targetFilename): ?string
+    {
+        if (!is_dir($dir)) {
+            return null;
+        }
+
+        $normalizedTarget = $this->normalizeString($targetFilename);
+
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS)
+        );
+
+        foreach ($iterator as $file) {
+            /** @var \SplFileInfo $file */
+            if ($file->isFile()) {
+                $normalizedFile = $this->normalizeString($file->getFilename());
+                if ($normalizedFile === $normalizedTarget) {
+                    return $file->getPathname();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private function normalizeString(string $str): string
+    {
+        $str = mb_strtolower($str);
+        $str = str_replace(['“', '”', '“', '”', '"', "'", '́', '̃', '̂', '̧'], '', $str);
+        $str = strtr($str, [
+            'á'=>'a', 'à'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+            'é'=>'e', 'è'=>'e', 'ê'=>'e', 'ë'=>'e',
+            'í'=>'i', 'ì'=>'i', 'î'=>'i', 'ï'=>'i',
+            'ó'=>'o', 'ò'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o',
+            'ú'=>'u', 'ù'=>'u', 'û'=>'u', 'ü'=>'u',
+            'ç'=>'c'
+        ]);
+        $str = preg_replace('/[\s\-_]+/', '', $str);
+        return $str;
     }
 }

@@ -58,9 +58,9 @@ class UserType extends AbstractType
                 'invalid_message' => 'As senhas não conferem.',
                 'constraints' => $isNew ? [
                     new NotBlank(['message' => 'Informe uma senha.']),
-                    new Length(['min' => 8, 'minMessage' => 'A senha deve ter pelo menos {{ limit }} caracteres.']),
+                    new Length(min: 8, minMessage: 'A senha deve ter pelo menos {{ limit }} caracteres.'),
                 ] : [
-                    new Length(['min' => 8, 'minMessage' => 'A senha deve ter pelo menos {{ limit }} caracteres.']),
+                    new Length(min: 8, minMessage: 'A senha deve ter pelo menos {{ limit }} caracteres.'),
                 ],
             ])
         ;
