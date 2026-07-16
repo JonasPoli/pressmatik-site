@@ -214,7 +214,7 @@
                         {% for size in sub.sizes %}
                             <div class="flex items-center gap-1.5 px-2.5 py-1 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 text-xs">
                                 <span class="font-medium">{{ size.name }}</span>
-                                <span class="text-xxs text-slate-400">({{ (size.hasVType ? 'V' : '') ~ (size.hasVType and size.hasHType ? '+' : '') ~ (size.hasHType ? 'H' : '') }})</span>
+                                <span class="text-xxs text-slate-400">({{ size.hasVType and size.hasHType ? 'V+H' : (size.hasVType ? 'V' : (size.hasHType ? 'H' : 'Único')) }})</span>
                                 <form method="post" action="{{ path('app_admin_subproduct_size_delete', {subproductId: sub.id, id: size.id}) }}" onsubmit="return confirm('Excluir este tamanho? Todos os parâmetros técnicos deste tamanho serão apagados!')" class="inline">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete_size' ~ size.id) }}">
                                     <button type="submit" class="text-red-500 hover:text-red-700 font-bold ml-1">×</button>
@@ -253,18 +253,27 @@
                             <div class="overflow-x-auto">
                                 <table class="w-full text-xs border-collapse">
                                     <thead>
+                                        {% set hasAnySub = false %}
+                                        {% for size in sub.sizes %}
+                                            {% if size.hasVType or size.hasHType %}
+                                                {% set hasAnySub = true %}
+                                            {% endif %}
+                                        {% endfor %}
                                         <tr class="bg-slate-100 dark:bg-slate-800">
-                                            <th class="py-2 px-2 text-center border border-slate-200 dark:border-slate-700" rowspan="2" style="width: 40px;"></th>
-                                            <th class="py-2 px-2 text-left font-semibold border border-slate-200 dark:border-slate-700" rowspan="2">Especificação</th>
-                                            <th class="py-2 px-2 text-left font-semibold border border-slate-200 dark:border-slate-700" rowspan="2">Unidade</th>
+                                            <th class="py-2 px-2 text-center border border-slate-200 dark:border-slate-700" {% if hasAnySub %}rowspan="2"{% endif %} style="width: 40px;"></th>
+                                            <th class="py-2 px-2 text-left font-semibold border border-slate-200 dark:border-slate-700" {% if hasAnySub %}rowspan="2"{% endif %}>Especificação</th>
+                                            <th class="py-2 px-2 text-left font-semibold border border-slate-200 dark:border-slate-700" {% if hasAnySub %}rowspan="2"{% endif %}>Unidade</th>
                                             {% for size in sub.sizes %}
+                                                {% set hasSub = size.hasVType or size.hasHType %}
                                                 <th class="py-2 px-2 text-center font-semibold border border-slate-200 dark:border-slate-700"
-                                                    colspan="{{ (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) }}">
+                                                    colspan="{{ hasSub ? (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) : 1 }}"
+                                                    {% if hasAnySub and not hasSub %}rowspan="2" style="vertical-align: middle;"{% endif %}>
                                                     {{ size.name }}
                                                 </th>
                                             {% endfor %}
-                                            <th class="py-2 px-2 border border-slate-200 dark:border-slate-700" rowspan="2">Ações</th>
+                                            <th class="py-2 px-2 border border-slate-200 dark:border-slate-700" {% if hasAnySub %}rowspan="2"{% endif %}>Ações</th>
                                         </tr>
+                                        {% if hasAnySub %}
                                         <tr class="bg-slate-100 dark:bg-slate-800">
                                             {% for size in sub.sizes %}
                                                 {% if size.hasVType %}
@@ -275,6 +284,7 @@
                                                 {% endif %}
                                             {% endfor %}
                                         </tr>
+                                        {% endif %}
                                     </thead>
                                     <tbody>
                                         <template x-for="(row, rowIdx) in rows" :key="rowIdx">
@@ -304,6 +314,11 @@
                                                     {% if size.hasHType %}
                                                     <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
                                                         <input type="text" x-model="row.values['{{ size.id }}'].h" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0 text-center">
+                                                    </td>
+                                                    {% endif %}
+                                                    {% if not size.hasVType and not size.hasHType %}
+                                                    <td class="py-1 px-2 border border-slate-200 dark:border-slate-700">
+                                                        <input type="text" x-model="row.values['{{ size.id }}'].v" class="w-full text-xs bg-transparent border-0 focus:ring-0 p-0 text-center">
                                                     </td>
                                                     {% endif %}
                                                 {% endfor %}

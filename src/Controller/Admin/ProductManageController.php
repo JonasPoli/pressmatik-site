@@ -77,8 +77,8 @@ final class ProductManageController extends AbstractController
         $size = new ProductSize();
         $size->setSubproduct($subproduct);
         $size->setName($request->request->get('name'));
-        $size->setHasVType($request->request->getBoolean('hasVType', true));
-        $size->setHasHType($request->request->getBoolean('hasHType', true));
+        $size->setHasVType($request->request->getBoolean('hasVType', false));
+        $size->setHasHType($request->request->getBoolean('hasHType', false));
         $size->setPosition(count($subproduct->getSizes()));
 
         $this->em->persist($size);

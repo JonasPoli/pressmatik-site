@@ -178,13 +178,24 @@
                         <div class="specs-table-wrapper">
                             <table class="specs-table">
                                 <thead>
+                                    {% set hasAnySub = false %}
+                                    {% for size in productSizes %}
+                                        {% if size.hasVType or size.hasHType %}
+                                            {% set hasAnySub = true %}
+                                        {% endif %}
+                                    {% endfor %}
                                     <tr>
-                                        <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_name'|trans }}</th>
-                                        <th rowspan="2" style="vertical-align: middle;">{{ 'product_detail.spec_unit'|trans }}</th>
+                                        <th {% if hasAnySub %}rowspan="2" style="vertical-align: middle;"{% endif %}>{{ 'product_detail.spec_name'|trans }}</th>
+                                        <th {% if hasAnySub %}rowspan="2" style="vertical-align: middle;"{% endif %}>{{ 'product_detail.spec_unit'|trans }}</th>
                                         {% for size in productSizes %}
-                                            <th colspan="{{ (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) }}" style="text-align: center;">{{ size.name }}</th>
+                                            {% set hasSub = size.hasVType or size.hasHType %}
+                                            <th colspan="{{ hasSub ? (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) : 1 }}"
+                                                {% if hasAnySub and not hasSub %}rowspan="2" style="vertical-align: middle; text-align: center;"{% else %}style="text-align: center;"{% endif %}>
+                                                {{ size.name }}
+                                            </th>
                                         {% endfor %}
                                     </tr>
+                                    {% if hasAnySub %}
                                     <tr>
                                         {% for size in productSizes %}
                                             {% if size.hasVType %}
@@ -195,6 +206,7 @@
                                             {% endif %}
                                         {% endfor %}
                                     </tr>
+                                    {% endif %}
                                 </thead>
                                 <tbody>
                                     {% for row in specsTableRows %}
@@ -207,6 +219,9 @@
                                                 {% endif %}
                                                 {% if size.hasHType %}
                                                     <td style="text-align: center;">{{ row.values[size.id].h ?? '—' }}</td>
+                                                {% endif %}
+                                                {% if not size.hasVType and not size.hasHType %}
+                                                    <td style="text-align: center;">{{ row.values[size.id].v ?? '—' }}</td>
                                                 {% endif %}
                                             {% endfor %}
                                         </tr>
