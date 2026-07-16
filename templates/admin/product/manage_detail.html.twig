@@ -330,12 +330,23 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="flex items-center justify-between mt-3">
-                                <button type="button" @click="addRow()" class="px-3 py-1.5 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded text-xs transition-colors font-medium">
-                                    + Adicionar Linha
-                                </button>
+                            <div class="flex flex-wrap items-center justify-between gap-2 mt-3">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <button type="button" @click="addRow()" class="px-3 py-1.5 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded text-xs transition-colors font-medium">
+                                        <i class="fa-solid fa-plus mr-1"></i> Adicionar Linha
+                                    </button>
+                                    <a href="{{ path('app_admin_subproduct_specs_export_csv', {subproductId: sub.id}) }}" class="px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded text-xs transition-colors font-medium inline-flex items-center gap-1">
+                                        <i class="fa-solid fa-file-csv"></i> Exportar CSV
+                                    </a>
+                                    <form method="post" action="{{ path('app_admin_subproduct_specs_import_csv', {subproductId: sub.id}) }}" enctype="multipart/form-data" class="inline-flex items-center gap-1">
+                                        <input type="file" name="csvFile" accept=".csv,text/csv" class="hidden" id="csv-import-{{ sub.id }}" onchange="this.form.submit()">
+                                        <button type="button" onclick="document.getElementById('csv-import-{{ sub.id }}').click()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded text-xs transition-colors font-medium inline-flex items-center gap-1">
+                                            <i class="fa-solid fa-file-import"></i> Importar CSV
+                                        </button>
+                                    </form>
+                                </div>
                                 <button type="button" @click="saveAll()" class="px-4 py-1.5 bg-primary hover:bg-primary-dark text-white rounded text-xs transition-colors font-semibold">
-                                    Salvar Parâmetros
+                                    <i class="fa-solid fa-floppy-disk mr-1"></i> Salvar Parâmetros
                                 </button>
                             </div>
                         </div>
@@ -390,6 +401,9 @@
                                 },
 
                                 removeRow(idx) {
+                                    const row = this.rows[idx];
+                                    const specName = specsMap[row.specId]?.name || 'esta linha';
+                                    if (!confirm('Remover "' + specName + '" da tabela?\n\nAtenção: clique em "Salvar Parâmetros" para confirmar a remoção.')) return;
                                     this.rows.splice(idx, 1);
                                 },
 
@@ -404,21 +418,35 @@
                                 },
 
                                 async saveAll() {
+                                    // Guard: check if there are valid rows
+                                    const validRows = this.rows.filter(r => r.specId && r.specId !== '');
+                                    if (validRows.length === 0) {
+                                        alert('Erro: a tabela não pode ser salva sem nenhuma especificação selecionada.');
+                                        return;
+                                    }
+
+                                    if (!confirm('Salvar parâmetros? (' + validRows.length + ' linhas válidas)')) return;
+
                                     this.rows.forEach((row, idx) => {
                                         row.position = idx;
                                     });
 
-                                    const resp = await fetch('{{ path("app_admin_subproduct_specs_save", {subproductId: sub.id}) }}', {
-                                        method: 'POST',
-                                        headers: { 'Content-Type': 'application/json' },
-                                        body: JSON.stringify({ rows: this.rows })
-                                    });
-                                    const data = await resp.json();
-                                    if (data.success) {
-                                        alert('Parâmetros salvos com sucesso!');
-                                        location.reload();
-                                    } else {
-                                        alert('Erro ao salvar os parâmetros.');
+                                    try {
+                                        const resp = await fetch('{{ path("app_admin_subproduct_specs_save", {subproductId: sub.id}) }}', {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({ rows: this.rows })
+                                        });
+                                        const data = await resp.json();
+                                        if (data.success) {
+                                            alert('Parâmetros salvos com sucesso!');
+                                            location.reload();
+                                        } else {
+                                            alert('Erro: ' + (data.message || 'Falha ao salvar os parâmetros.'));
+                                        }
+                                    } catch (err) {
+                                        alert('Erro de comunicação com o servidor. Seus dados NÃO foram perdidos. Tente novamente.');
+                                        console.error('Save error:', err);
                                     }
                                 }
                             };

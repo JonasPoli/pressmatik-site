@@ -105,7 +105,7 @@ final class ProductManageController extends AbstractController
     }
 
     // ═══════════════════════════════════════════════════════════════════════
-    //  SPEC VALUES (Subproduct level)
+    //  SPEC VALUES (Subproduct level) — Safe upsert pattern
     // ═══════════════════════════════════════════════════════════════════════
 
     #[Route('/subproduct/{subproductId}/specs/save', name: 'app_admin_subproduct_specs_save', methods: ['POST'])]
@@ -113,37 +113,77 @@ final class ProductManageController extends AbstractController
     {
         $subproduct = $this->em->getRepository(Subproduct::class)->find($subproductId);
         if (!$subproduct) {
-            return new JsonResponse(['success' => false, 'message' => 'Subproduct not found'], 404);
+            return new JsonResponse(['success' => false, 'message' => 'Subproduto não encontrado.'], 404);
         }
 
         $data = json_decode($request->getContent(), true);
-        $rows = $data['rows'] ?? [];
-
-        // Clear existing values for this subproduct
-        $existing = $this->specValueRepo->findBySubproductOrdered($subproductId);
-        foreach ($existing as $val) {
-            $this->em->remove($val);
+        if (!is_array($data) || !isset($data['rows'])) {
+            return new JsonResponse(['success' => false, 'message' => 'Dados inválidos recebidos.'], 400);
         }
-        $this->em->flush();
 
-        // Re-create from submitted data
-        foreach ($rows as $position => $row) {
-            $specId = $row['specId'] ?? null;
-            $spec = $specId ? $this->techSpecRepo->find($specId) : null;
-            if (!$spec) continue;
+        $rows = $data['rows'];
 
-            foreach ($row['values'] as $sizeId => $typeValues) {
-                $size = $this->sizeRepo->find($sizeId);
-                if (!$size) continue;
+        // ─── Guard: refuse to save completely empty data when specs already exist ───
+        $existing = $this->specValueRepo->findBySubproductOrdered($subproductId);
+        $validRows = array_filter($rows, fn($r) => !empty($r['specId']));
 
+        if (count($validRows) === 0 && count($existing) > 0) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => 'Operação bloqueada: não é possível apagar todos os parâmetros de uma vez. Se deseja limpar todos os dados, remova os tamanhos individualmente.'
+            ], 422);
+        }
+
+        // ─── Build a set of expected (specId, sizeId) keys from submitted data ───
+        $submittedKeys = [];
+        foreach ($validRows as $position => $row) {
+            $specId = (int) $row['specId'];
+            foreach (($row['values'] ?? []) as $sizeId => $typeValues) {
+                $submittedKeys[$specId . '_' . $sizeId] = [
+                    'specId' => $specId,
+                    'sizeId' => (int) $sizeId,
+                    'v' => $typeValues['v'] ?? null,
+                    'h' => $typeValues['h'] ?? null,
+                    'position' => (int) $position,
+                ];
+            }
+        }
+
+        // ─── Index existing records for diff ───
+        $existingByKey = [];
+        foreach ($existing as $val) {
+            $key = $val->getSpecification()->getId() . '_' . $val->getProductSize()->getId();
+            $existingByKey[$key] = $val;
+        }
+
+        // ─── Delete records no longer in submitted data ───
+        foreach ($existingByKey as $key => $val) {
+            if (!isset($submittedKeys[$key])) {
+                $this->em->remove($val);
+            }
+        }
+
+        // ─── Upsert: update existing or create new ───
+        foreach ($submittedKeys as $key => $data) {
+            $spec = $this->techSpecRepo->find($data['specId']);
+            $size = $this->sizeRepo->find($data['sizeId']);
+            if (!$spec || !$size) continue;
+
+            if (isset($existingByKey[$key])) {
+                // Update
+                $val = $existingByKey[$key];
+                $val->setVTypeValue($data['v']);
+                $val->setHTypeValue($data['h']);
+                $val->setPosition($data['position']);
+            } else {
+                // Insert
                 $val = new ProductSpecValue();
                 $val->setSubproduct($subproduct);
                 $val->setSpecification($spec);
                 $val->setProductSize($size);
-                $val->setVTypeValue($typeValues['v'] ?? null);
-                $val->setHTypeValue($typeValues['h'] ?? null);
-                $val->setPosition($position);
-
+                $val->setVTypeValue($data['v']);
+                $val->setHTypeValue($data['h']);
+                $val->setPosition($data['position']);
                 $this->em->persist($val);
             }
         }
@@ -151,6 +191,229 @@ final class ProductManageController extends AbstractController
         $this->em->flush();
 
         return new JsonResponse(['success' => true]);
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    //  CSV EXPORT / IMPORT (Subproduct specs)
+    // ═══════════════════════════════════════════════════════════════════════
+
+    #[Route('/subproduct/{subproductId}/specs/export.csv', name: 'app_admin_subproduct_specs_export_csv', methods: ['GET'])]
+    public function exportSubproductSpecsCsv(int $subproductId): Response
+    {
+        $subproduct = $this->em->getRepository(Subproduct::class)->find($subproductId);
+        if (!$subproduct) {
+            throw $this->createNotFoundException('Subproduto não encontrado');
+        }
+
+        $sizes = $this->sizeRepo->findBySubproductOrdered($subproductId);
+        $specValues = $this->specValueRepo->findBySubproductOrdered($subproductId);
+
+        // Build header columns
+        $headers = ['Especificação', 'Unidade'];
+        foreach ($sizes as $size) {
+            if ($size->isHasVType() && $size->isHasHType()) {
+                $headers[] = $size->getName() . ' (V)';
+                $headers[] = $size->getName() . ' (H)';
+            } elseif ($size->isHasVType()) {
+                $headers[] = $size->getName() . ' (V)';
+            } elseif ($size->isHasHType()) {
+                $headers[] = $size->getName() . ' (H)';
+            } else {
+                $headers[] = $size->getName();
+            }
+        }
+
+        // Group spec values by position
+        $groupedByPosition = [];
+        foreach ($specValues as $val) {
+            $pos = $val->getPosition();
+            if (!isset($groupedByPosition[$pos])) {
+                $groupedByPosition[$pos] = [
+                    'specification' => $val->getSpecification(),
+                    'values' => [],
+                ];
+            }
+            $groupedByPosition[$pos]['values'][$val->getProductSize()->getId()] = [
+                'v' => $val->getVTypeValue() ?? '',
+                'h' => $val->getHTypeValue() ?? '',
+            ];
+        }
+        ksort($groupedByPosition);
+
+        // Build CSV
+        $output = fopen('php://temp', 'r+');
+        // BOM for UTF-8
+        fwrite($output, "\xEF\xBB\xBF");
+        fputcsv($output, $headers, ';');
+
+        foreach ($groupedByPosition as $row) {
+            $spec = $row['specification'];
+            $line = [$spec->getNamePt(), $spec->getUnitPt() ?? ''];
+            foreach ($sizes as $size) {
+                $vals = $row['values'][$size->getId()] ?? ['v' => '', 'h' => ''];
+                if ($size->isHasVType() && $size->isHasHType()) {
+                    $line[] = $vals['v'];
+                    $line[] = $vals['h'];
+                } elseif ($size->isHasVType()) {
+                    $line[] = $vals['v'];
+                } elseif ($size->isHasHType()) {
+                    $line[] = $vals['h'];
+                } else {
+                    $line[] = $vals['v'];
+                }
+            }
+            fputcsv($output, $line, ';');
+        }
+
+        rewind($output);
+        $csvContent = stream_get_contents($output);
+        fclose($output);
+
+        $filename = 'parametros_' . $subproduct->getModel() . '_' . date('Y-m-d') . '.csv';
+
+        return new Response($csvContent, 200, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ]);
+    }
+
+    #[Route('/subproduct/{subproductId}/specs/import', name: 'app_admin_subproduct_specs_import_csv', methods: ['POST'])]
+    public function importSubproductSpecsCsv(Request $request, int $subproductId): Response
+    {
+        $subproduct = $this->em->getRepository(Subproduct::class)->find($subproductId);
+        if (!$subproduct) {
+            $this->addFlash('danger', 'Subproduto não encontrado.');
+            return $this->redirectToRoute('app_admin_product_manage_index');
+        }
+
+        /** @var UploadedFile|null $file */
+        $file = $request->files->get('csvFile');
+        if (!$file || !$file->isValid()) {
+            $this->addFlash('danger', 'Arquivo CSV inválido ou não enviado.');
+            return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $subproduct->getProduct()->getSlug()]);
+        }
+
+        $sizes = $this->sizeRepo->findBySubproductOrdered($subproductId);
+        if (count($sizes) === 0) {
+            $this->addFlash('danger', 'Cadastre pelo menos um tamanho antes de importar.');
+            return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $subproduct->getProduct()->getSlug()]);
+        }
+
+        // Build column mapping: ordered list of (sizeId, type) matching header order
+        $columnMapping = [];
+        foreach ($sizes as $size) {
+            if ($size->isHasVType() && $size->isHasHType()) {
+                $columnMapping[] = ['sizeId' => $size->getId(), 'type' => 'v'];
+                $columnMapping[] = ['sizeId' => $size->getId(), 'type' => 'h'];
+            } elseif ($size->isHasVType()) {
+                $columnMapping[] = ['sizeId' => $size->getId(), 'type' => 'v'];
+            } elseif ($size->isHasHType()) {
+                $columnMapping[] = ['sizeId' => $size->getId(), 'type' => 'h'];
+            } else {
+                $columnMapping[] = ['sizeId' => $size->getId(), 'type' => 'v'];
+            }
+        }
+
+        // Read CSV
+        $content = file_get_contents($file->getPathname());
+        // Remove BOM if present
+        $content = preg_replace('/^\xEF\xBB\xBF/', '', $content);
+        $lines = array_filter(explode("\n", $content), fn($l) => trim($l) !== '');
+
+        if (count($lines) < 2) {
+            $this->addFlash('danger', 'Arquivo CSV vazio ou sem dados.');
+            return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $subproduct->getProduct()->getSlug()]);
+        }
+
+        // Skip header row
+        array_shift($lines);
+
+        // Index existing spec values
+        $existing = $this->specValueRepo->findBySubproductOrdered($subproductId);
+        $existingByKey = [];
+        foreach ($existing as $val) {
+            $key = $val->getSpecification()->getId() . '_' . $val->getProductSize()->getId();
+            $existingByKey[$key] = $val;
+        }
+
+        // Build specs lookup by name
+        $allSpecs = $this->techSpecRepo->findAllOrdered();
+        $specsByName = [];
+        foreach ($allSpecs as $spec) {
+            $specsByName[mb_strtolower(trim($spec->getNamePt()))] = $spec;
+        }
+
+        $sizesById = [];
+        foreach ($sizes as $size) {
+            $sizesById[$size->getId()] = $size;
+        }
+
+        $importedCount = 0;
+        foreach ($lines as $position => $line) {
+            $cols = str_getcsv($line, ';');
+            if (count($cols) < 2) continue;
+
+            $specName = trim($cols[0]);
+            $unitName = trim($cols[1] ?? '');
+
+            if (empty($specName)) continue;
+
+            // Find or create spec
+            $specKey = mb_strtolower($specName);
+            $spec = $specsByName[$specKey] ?? null;
+            if (!$spec) {
+                $spec = new \App\Entity\TechnicalSpecification();
+                $spec->setNamePt($specName);
+                $spec->setUnitPt($unitName);
+                $spec->setPosition(count($allSpecs) + $importedCount);
+                $this->em->persist($spec);
+                $specsByName[$specKey] = $spec;
+            }
+
+            // Parse value columns
+            $dataColumns = array_slice($cols, 2);
+            foreach ($columnMapping as $colIdx => $map) {
+                $cellValue = isset($dataColumns[$colIdx]) ? trim($dataColumns[$colIdx]) : '';
+                $sizeId = $map['sizeId'];
+                $type = $map['type'];
+
+                // Force flush to get spec ID if it was just created
+                if ($spec->getId() === null) {
+                    $this->em->flush();
+                }
+
+                $key = $spec->getId() . '_' . $sizeId;
+
+                if (isset($existingByKey[$key])) {
+                    $val = $existingByKey[$key];
+                    if ($type === 'v') {
+                        $val->setVTypeValue($cellValue ?: null);
+                    } else {
+                        $val->setHTypeValue($cellValue ?: null);
+                    }
+                    $val->setPosition($position);
+                } else {
+                    $val = new ProductSpecValue();
+                    $val->setSubproduct($subproduct);
+                    $val->setSpecification($spec);
+                    $val->setProductSize($sizesById[$sizeId]);
+                    if ($type === 'v') {
+                        $val->setVTypeValue($cellValue ?: null);
+                    } else {
+                        $val->setHTypeValue($cellValue ?: null);
+                    }
+                    $val->setPosition($position);
+                    $this->em->persist($val);
+                    $existingByKey[$key] = $val;
+                }
+            }
+            $importedCount++;
+        }
+
+        $this->em->flush();
+
+        $this->addFlash('success', "CSV importado com sucesso! {$importedCount} linhas processadas.");
+        return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $subproduct->getProduct()->getSlug()]);
     }
 
     // ═══════════════════════════════════════════════════════════════════════
