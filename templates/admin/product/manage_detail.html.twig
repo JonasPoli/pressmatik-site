@@ -247,7 +247,16 @@
                 <div>
                     <h3 class="font-semibold text-xs text-slate-600 dark:text-slate-300 mb-3">Tabela de Parâmetros</h3>
                     {% if sub.sizes|length == 0 %}
-                        <p class="text-xs text-slate-400">Cadastre pelo menos um tamanho acima para habilitar a tabela de especificações.</p>
+                        <p class="text-xs text-slate-400 mb-3">Cadastre pelo menos um tamanho acima para habilitar a tabela de especificações.</p>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <form method="post" action="{{ path('app_admin_subproduct_specs_import_csv', {subproductId: sub.id}) }}" enctype="multipart/form-data" class="inline-flex items-center gap-1">
+                                <input type="file" name="csvFile" accept=".csv,text/csv" class="hidden" id="csv-import-empty-{{ sub.id }}" onchange="this.form.submit()">
+                                <button type="button" onclick="document.getElementById('csv-import-empty-{{ sub.id }}').click()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded text-xs transition-colors font-medium inline-flex items-center gap-1">
+                                    <i class="fa-solid fa-file-import"></i> Importar CSV
+                                </button>
+                            </form>
+                            <span class="text-xxs text-slate-400">(Cadastre os tamanhos antes de importar para que os valores sejam mapeados corretamente)</span>
+                        </div>
                     {% else %}
                         <div x-data="subSpecTable_{{ sub.id }}()">
                             <div class="overflow-x-auto">
