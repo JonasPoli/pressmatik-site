@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('styles/admin.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     {# Tailwind CDN for admin area #}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -346,6 +346,19 @@ function getIconPrefix(iconName) {
 function loadIconsFromStylesheets() {
     const iconSet = new Set();
     const staticList = [
+        // Industrial, Machinery & Manufacturing (Pressmatik Core)
+        'industry', 'gears', 'gear', 'wrench', 'screwdriver-wrench', 'hammer', 'tools', 'bolt', 'bolt-lightning',
+        'fire', 'fire-flame-curved', 'gauge', 'gauge-high', 'gauge-simple', 'gauge-simple-high', 'microchip',
+        'robot', 'power-off', 'plug', 'plug-circle-bolt', 'plug-circle-check', 'truck-ramp-box', 'boxes-stacked',
+        'box', 'cube', 'cubes', 'dolly', 'warehouse', 'truck', 'truck-moving', 'truck-front', 'oil-can',
+        'atom', 'magnet', 'droplet', 'temperature-high', 'temperature-low', 'temperature-half', 'sliders',
+        'sliders-up', 'toggle-on', 'toggle-off', 'microscope', 'flask', 'flask-vial', 'compass-drafting',
+        'ruler-combined', 'ruler', 'tape', 'scissors', 'shield', 'shield-halved', 'shield-heart', 'shield-cat',
+        'triangle-exclamation', 'circle-exclamation', 'circle-check', 'square-check', 'stop', 'play', 'pause',
+        'rotate', 'arrows-rotate', 'rotate-right', 'rotate-left', 'arrows-spin', 'arrows-up-down', 'arrows-left-right',
+        'eye', 'eye-slash', 'lightbulb', 'computer', 'desktop', 'tv', 'solar-panel', 'wind', 'fan', 'fire-extinguisher',
+        'helmet-safety', 'hand-fist', 'hand-back-fist', 'fingerprint', 'layer-group', 'border-all', 'table-cells',
+
         // Essentials & General
         'house', 'star', 'heart', 'user', 'users', 'user-group', 'user-plus', 'user-minus', 'user-check', 'user-xmark',
         'building', 'landmark', 'school', 'graduation-cap', 'book', 'book-open', 'book-reader', 'chalkboard',
@@ -357,86 +370,66 @@ function loadIconsFromStylesheets() {
         'pen', 'pencil', 'pen-nib', 'pen-fancy', 'pen-to-square', 'brush', 'palette', 'highlighter', 'paint-roller',
         'eraser', 'search', 'magnifying-glass', 'magnifying-glass-plus', 'magnifying-glass-minus', 'filter',
         'funnel-dollar', 'sort', 'sort-up', 'sort-down', 'bars', 'bars-staggered', 'bars-progress', 'list',
-        'list-ol', 'list-ul', 'table', 'table-columns', 'table-cells', 'table-cells-large', 'ellipsis', 'ellipsis-vertical',
-        'check', 'check-double', 'circle-check', 'check-to-slot', 'times', 'xmark', 'circle-xmark', 'ban',
+        'list-ol', 'list-ul', 'table', 'table-columns', 'table-cells-large', 'ellipsis', 'ellipsis-vertical',
+        'check', 'check-double', 'check-to-slot', 'times', 'xmark', 'circle-xmark', 'ban',
         'info', 'info-circle', 'circle-info', 'question', 'question-circle', 'circle-question', 'exclamation',
-        'exclamation-circle', 'circle-exclamation', 'triangle-exclamation', 'shield', 'shield-halved', 'shield-heart',
-        'lock', 'lock-open', 'key', 'key-skeleton', 'gear', 'gears', 'cog', 'cogs', 'wrench', 'hammer',
-        'screwdriver-wrench', 'screwdriver', 'tools', 'trash', 'trash-can', 'trash-arrow-up', 'clock',
-        'clock-rotate-left', 'calendar', 'calendar-days', 'calendar-check', 'calendar-xmark', 'calendar-plus',
-        'calendar-minus', 'bell', 'bell-slash', 'eye', 'eye-slash', 'comment', 'comments', 'comment-dots',
+        'exclamation-circle', 'key', 'key-skeleton', 'cog', 'cogs', 'screwdriver', 'trash', 'trash-can',
+        'trash-arrow-up', 'clock', 'clock-rotate-left', 'calendar', 'calendar-days', 'calendar-check', 'calendar-xmark',
+        'calendar-plus', 'calendar-minus', 'bell', 'bell-slash', 'comment', 'comments', 'comment-dots',
         'comment-medical', 'comment-slash', 'envelope', 'envelope-open', 'envelope-circle-check', 'phone',
         'phone-volume', 'phone-slash', 'mobile', 'mobile-screen', 'tablet', 'tablet-screen-button', 'laptop',
-        'desktop', 'server', 'database', 'cloud', 'cloud-arrow-up', 'cloud-arrow-down', 'wifi', 'signal',
+        'server', 'database', 'cloud', 'cloud-arrow-up', 'cloud-arrow-down', 'wifi', 'signal',
         'globe', 'compass', 'map', 'map-pin', 'location-dot', 'location-arrow', 'route', 'road', 'traffic-light',
-        'gas-pump', 'charging-station', 'plug', 'battery-full', 'battery-three-quarters', 'battery-half',
-        'battery-quarter', 'battery-empty', 'bolt', 'bolt-lightning', 'fire', 'fire-flame-curved', 'leaf',
-        'tree', 'seedling', 'plant-wilt', 'sun', 'moon', 'cloud-sun', 'cloud-moon', 'wind', 'umbrella',
-        'snowflake', 'water', 'droplet', 'glass-water', 'mug-hot', 'coffee', 'utensils', 'spoon', 'knife',
-        'burger', 'pizza-slice', 'apple-whole', 'cake-candles', 'gift', 'shop', 'shopping-bag', 'shopping-cart',
-        'bag-shopping', 'cart-shopping', 'tag', 'tags', 'ticket', 'ticket-simple', 'credit-card', 'wallet',
-        'coins', 'dollar-sign', 'euro-sign', 'sterling-sign', 'percent', 'percentage', 'receipt', 'invoice',
-        'car', 'bus', 'plane', 'ship', 'bicycle', 'motorcycle', 'truck', 'truck-medical', 'train', 'subway',
-        'helicopter', 'anchor', 'flag', 'compass-drafting', 'ruler', 'tape', 'cube', 'cubes', 'shapes',
-        'arrow-up', 'arrow-down', 'arrow-left', 'arrow-right', 'arrow-up-long', 'arrow-down-long',
-        'arrow-left-long', 'arrow-right-long', 'arrows-rotate', 'rotate', 'recycle', 'hourglass',
-        'hourglass-half', 'stopwatch', 'gauge', 'calculator', 'plus', 'minus', 'divide', 'equals',
+        'gas-pump', 'charging-station', 'battery-full', 'battery-three-quarters', 'battery-half',
+        'battery-quarter', 'battery-empty', 'leaf', 'tree', 'seedling', 'plant-wilt', 'sun', 'moon', 'cloud-sun',
+        'cloud-moon', 'umbrella', 'snowflake', 'water', 'glass-water', 'mug-hot', 'coffee', 'utensils',
+        'spoon', 'knife', 'burger', 'pizza-slice', 'apple-whole', 'cake-candles', 'gift', 'shop', 'shopping-bag',
+        'shopping-cart', 'bag-shopping', 'cart-shopping', 'tag', 'tags', 'ticket', 'ticket-simple', 'credit-card',
+        'wallet', 'coins', 'dollar-sign', 'euro-sign', 'sterling-sign', 'percent', 'percentage', 'receipt', 'invoice',
+        'car', 'bus', 'plane', 'ship', 'bicycle', 'motorcycle', 'truck-medical', 'train', 'subway',
+        'helicopter', 'anchor', 'flag', 'shapes', 'arrow-up', 'arrow-down', 'arrow-left', 'arrow-right',
+        'arrow-up-long', 'arrow-down-long', 'arrow-left-long', 'arrow-right-long', 'recycle', 'hourglass',
+        'hourglass-half', 'stopwatch', 'calculator', 'plus', 'minus', 'divide', 'equals',
         
         // Education & Cursos
-        'graduation-cap', 'school', 'university', 'book', 'book-open', 'book-reader', 'chalkboard',
-        'chalkboard-user', 'user-graduate', 'award', 'trophy', 'medal', 'certificate', 'microscope',
-        'flask', 'flask-vial', 'dna', 'brain', 'lightbulb', 'atom', 'globe-americas', 'globe-europe',
-        'globe-asia', 'map-location', 'compass-drafting', 'pencil', 'pen-nib', 'ruler-combined',
-        'calculator', 'shapes', 'palette', 'brush', 'music', 'laptop-code', 'terminal', 'code',
+        'user-graduate', 'dna', 'brain', 'atom', 'globe-americas', 'globe-europe',
+        'globe-asia', 'map-location', 'laptop-code', 'terminal', 'code',
         'puzzle-piece', 'gamepad', 'child', 'children', 'people-group', 'person-chalkboard',
-        'book-bookmark', 'bookmark', 'paperclip', 'magnet', 'hourglass-start', 'infinity',
+        'book-bookmark', 'bookmark', 'paperclip', 'hourglass-start', 'infinity',
         'masks-theater', 'book-atlas', 'language', 'earth-americas', 'face-smile',
         
         // Negócios & Web
-        'briefcase', 'building', 'store', 'shop', 'cart-shopping', 'bag-shopping', 'credit-card',
-        'wallet', 'coins', 'dollar-sign', 'euro-sign', 'cent-sign', 'money-bill', 'money-bill-wave',
+        'cart-shopping', 'money-bill', 'money-bill-wave',
         'money-bills', 'piggy-bank', 'bank', 'chart-line', 'chart-bar', 'chart-pie', 'chart-column',
-        'chart-area', 'gauge', 'tachometer-alt', 'handshake', 'handshake-simple', 'handshake-angle',
+        'chart-area', 'tachometer-alt', 'handshake', 'handshake-simple', 'handshake-angle',
         'people-arrows', 'user-tie', 'users-gear', 'address-book', 'address-card', 'signature',
-        'stamp', 'scale-balanced', 'gavel', 'calculator', 'file-invoice', 'file-invoice-dollar',
-        'receipt', 'percent', 'percentage', 'tags', 'tag', 'box', 'boxes-stacked', 'warehouse',
-        'truck', 'dolly', 'industry', 'globe', 'earth-americas', 'earth-europe', 'earth-asia',
-        'passport', 'shield-halved', 'key', 'lock', 'vault', 'briefcase-medical',
+        'stamp', 'scale-balanced', 'gavel', 'file-invoice-dollar', 'vault',
         
         // Interface & Mídia
         'image', 'images', 'photo-film', 'camera', 'camera-retro', 'video', 'video-slash', 'film',
-        'play', 'pause', 'stop', 'backward', 'forward', 'forward-step', 'backward-step',
+        'backward', 'forward', 'forward-step', 'backward-step',
         'volume-high', 'volume-low', 'volume-mute', 'volume-xmark', 'microphone', 'microphone-lines',
         'headphones', 'music', 'tv', 'radio', 'podcast', 'rss', 'newspaper', 'bullhorn',
         'share-nodes', 'link', 'link-slash', 'arrow-up-right-from-square', 'circle-play', 'circle-pause',
-        'circle-stop', 'sliders', 'toggle-on', 'toggle-off', 'sliders-up', 'window-maximize',
-        'window-restore', 'window-close', 'xmark', 'check', 'plus', 'minus', 'chevron-up',
-        'chevron-down', 'chevron-left', 'chevron-right', 'caret-up', 'caret-down', 'caret-left',
-        'caret-right', 'arrow-rotate-left', 'arrow-rotate-right', 'gear', 'gears', 'trash-can',
-        'pen-to-square', 'magnifying-glass', 'filter', 'list', 'bars', 'ellipsis', 'clock',
-        'calendar-days',
+        'circle-stop', 'window-maximize', 'window-restore', 'window-close',
+        'chevron-up', 'chevron-down', 'chevron-left', 'chevron-right', 'caret-up', 'caret-down', 'caret-left',
+        'caret-right', 'arrow-rotate-left', 'arrow-rotate-right', 'magnifying-glass',
         
         // Saúde & Esporte
-        'heart', 'heart-pulse', 'heartbeat', 'stethoscope', 'hospital', 'hospital-user',
-        'user-doctor', 'user-nurse', 'user-injured', 'kit-medical', 'briefcase-medical',
+        'heart-pulse', 'heartbeat', 'stethoscope', 'hospital', 'hospital-user',
+        'user-doctor', 'user-nurse', 'user-injured', 'kit-medical',
         'pills', 'prescription-bottle', 'syringe', 'wheelchair', 'truck-medical', 'virus',
         'virus-slash', 'microbe', 'lungs', 'spa', 'dumbbell', 'running',
         'person-running', 'person-hiking', 'person-swimming', 'person-biking', 'person-walking',
-        'bicycle', 'apple-whole', 'carrot', 'lemon', 'leaf', 'seedling', 'droplet', 'fire-flame-curved',
-        'shield-heart', 'hand-holding-medical', 'weight-scale', 'flask-vial', 'child',
+        'carrot', 'lemon', 'hand-holding-medical', 'weight-scale',
         'football', 'basketball', 'baseball', 'soccer-ball', 'volleyball', 'golf-ball', 'bowling-ball',
-        'table-tennis-paddle-ball', 'medal', 'trophy', 'award',
+        'table-tennis-paddle-ball',
         
         // Setas & Navegação
-        'arrow-up', 'arrow-down', 'arrow-left', 'arrow-right', 'arrow-up-long', 'arrow-down-long',
-        'arrow-left-long', 'arrow-right-long', 'arrow-up-right', 'arrow-up-left', 'arrow-down-right',
-        'arrow-down-left', 'arrows-up-down', 'arrows-left-right', 'arrows-rotate', 'rotate',
-        'repeat', 'arrows-spin', 'circle-arrow-up', 'circle-arrow-down', 'circle-arrow-left',
-        'circle-arrow-right', 'chevron-up', 'chevron-down', 'chevron-left', 'chevron-right',
-        'caret-up', 'caret-down', 'caret-left', 'caret-right', 'forward', 'backward', 'forward-step',
-        'backward-step', 'arrow-right-to-bracket', 'arrow-right-from-bracket', 'sign-in-alt', 'sign-out-alt',
-        'reply', 'share', 'location-arrow', 'compass', 'map-pin', 'location-dot', 'route', 'road',
-        'map-location-dot', 'map-location', 'paper-plane',
+        'arrow-up-right', 'arrow-up-left', 'arrow-down-right',
+        'arrow-down-left', 'arrows-rotate', 'repeat', 'circle-arrow-up', 'circle-arrow-down', 'circle-arrow-left',
+        'circle-arrow-right', 'arrow-right-to-bracket', 'arrow-right-from-bracket', 'sign-in-alt', 'sign-out-alt',
+        'reply', 'share', 'map-location-dot', 'paper-plane',
         
         // Marcas & Redes
         'instagram', 'facebook', 'facebook-f', 'youtube', 'linkedin', 'linkedin-in', 'whatsapp',
@@ -483,8 +476,8 @@ function loadIconsFromStylesheets() {
 }
 
 function openIconPicker(inputId, previewId) {
-    _pickerTarget = document.getElementById(inputId);
-    _pickerPreview = document.getElementById(previewId);
+    _pickerTarget = typeof inputId === 'string' ? document.getElementById(inputId) : inputId;
+    _pickerPreview = typeof previewId === 'string' ? document.getElementById(previewId) : previewId;
     
     loadIconsFromStylesheets();
     document.getElementById('icon-search').value = '';
@@ -539,7 +532,7 @@ function getCategorizedIcons(category) {
         }
         
         if (category === 'biz') {
-            const keywords = ['briefcase', 'building', 'store', 'shop', 'shopping', 'credit', 'wallet', 'piggy', 'bank', 'chart', 'tachometer', 'handshake', 'globe', 'server', 'database', 'cloud', 'wifi', 'shield', 'key', 'lock', 'envelope', 'phone', 'bell', 'dollar', 'euro', 'coin', 'receipt', 'invoice', 'vault', 'stamp', 'signature'];
+            const keywords = ['briefcase', 'building', 'store', 'shop', 'shopping', 'credit', 'wallet', 'piggy', 'bank', 'chart', 'tachometer', 'handshake', 'globe', 'server', 'database', 'cloud', 'wifi', 'shield', 'key', 'lock', 'envelope', 'phone', 'bell', 'dollar', 'euro', 'coin', 'receipt', 'invoice', 'vault', 'stamp', 'signature', 'industry', 'gear', 'wrench', 'tool', 'robot', 'bolt', 'box', 'truck', 'dolly', 'microchip'];
             return keywords.some(k => name.includes(k));
         }
         
@@ -632,8 +625,18 @@ function appendMoreIcons() {
 }
 
 function selectIcon(cls) {
-    if (_pickerTarget) _pickerTarget.value = cls;
-    if (_pickerPreview) _pickerPreview.innerHTML = `<i class="${cls}"></i>`;
+    if (_pickerTarget) {
+        _pickerTarget.value = cls;
+        _pickerTarget.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    if (_pickerPreview) {
+        const iconEl = _pickerPreview.querySelector('i') || _pickerPreview;
+        if (iconEl && iconEl.tagName && iconEl.tagName.toLowerCase() === 'i') {
+            iconEl.className = cls;
+        } else {
+            _pickerPreview.innerHTML = `<i class="${cls}"></i>`;
+        }
+    }
     closeIconPicker();
 }
 

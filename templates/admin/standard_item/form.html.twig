@@ -25,10 +25,13 @@
             <div class="wab-field">
                 <label class="wab-label">Ícone FontAwesome (ex: fa-solid fa-sliders)</label>
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 flex items-center justify-center bg-blue-50 dark:bg-blue-950/40 rounded border border-slate-200 dark:border-slate-700 text-blue-600 dark:text-blue-400 text-lg">
+                    <div class="w-10 h-10 flex items-center justify-center bg-blue-50 dark:bg-blue-950/40 rounded border border-slate-200 dark:border-slate-700 text-blue-600 dark:text-blue-400 text-lg" id="icon-preview-box">
                         <i id="icon-preview-el" class="{{ item and item.icon ? item.icon : 'fa-solid fa-sliders' }}"></i>
                     </div>
-                    <input type="text" id="icon-input" name="icon" value="{{ item ? item.icon : '' }}" placeholder="fa-solid fa-sliders" class="wab-input" oninput="document.getElementById('icon-preview-el').className = this.value || 'fa-solid fa-sliders'">
+                    <input type="text" id="icon-input" name="icon" value="{{ item ? item.icon : '' }}" placeholder="fa-solid fa-sliders" class="wab-input flex-1" oninput="document.getElementById('icon-preview-el').className = this.value || 'fa-solid fa-sliders'">
+                    <button type="button" onclick="openIconPicker('icon-input', 'icon-preview-box')" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-semibold whitespace-nowrap flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer">
+                        <i class="fa-solid fa-icons"></i> Escolher Ícone
+                    </button>
                 </div>
             </div>
 
