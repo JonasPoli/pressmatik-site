@@ -199,7 +199,11 @@
                             {% for prod in db_grouped[cat] ?? [] %}
                                 <div class="product-tab-card">
                                     <div class="product-tab-img-wrapper">
-                                        <img src="{% if prod.imageName %}/uploads/products/{{ prod.imageName }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ prod.getName(locale) }}" loading="lazy">
+                                        {% set productImg = prod.imageName %}
+                                        {% if prod.defaultSubproduct and prod.defaultSubproduct.imageName %}
+                                            {% set productImg = prod.defaultSubproduct.imageName %}
+                                        {% endif %}
+                                        <img src="{% if productImg %}/uploads/products/{{ productImg }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ prod.getName(locale) }}" loading="lazy">
                                     </div>
                                     <div class="product-tab-info">
                                         <h3>{{ prod.getName(locale) }}</h3>
