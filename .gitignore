@@ -22,4 +22,5 @@
 /docs/clientes
 *.psd
 
+/public/uploads/
 .DS_Store
