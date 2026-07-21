@@ -20,6 +20,24 @@ class Subproduct
     #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $applications;
 
+    /** @var Collection<int, StandardItem> */
+    #[ORM\ManyToMany(targetEntity: StandardItem::class)]
+    #[ORM\JoinTable(name: 'subproduct_standard_items_map')]
+    #[ORM\OrderBy(['position' => 'ASC'])]
+    private Collection $standardItems;
+
+    /** @var Collection<int, ApplicationListItem> */
+    #[ORM\ManyToMany(targetEntity: ApplicationListItem::class)]
+    #[ORM\JoinTable(name: 'subproduct_application_list_items_map')]
+    #[ORM\OrderBy(['position' => 'ASC'])]
+    private Collection $applicationListItems;
+
+    /** @var Collection<int, OptionalItem> */
+    #[ORM\ManyToMany(targetEntity: OptionalItem::class)]
+    #[ORM\JoinTable(name: 'subproduct_optional_items_map')]
+    #[ORM\OrderBy(['position' => 'ASC'])]
+    private Collection $optionalItems;
+
     /** @var Collection<int, ProductSize> */
     #[ORM\OneToMany(targetEntity: ProductSize::class, mappedBy: 'subproduct', cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\OrderBy(['position' => 'ASC'])]
@@ -159,6 +177,9 @@ class Subproduct
     public function __construct()
     {
         $this->applications = new ArrayCollection();
+        $this->standardItems = new ArrayCollection();
+        $this->applicationListItems = new ArrayCollection();
+        $this->optionalItems = new ArrayCollection();
         $this->sizes = new ArrayCollection();
     }
 
@@ -176,6 +197,57 @@ class Subproduct
     public function removeApplication(Application $a): static
     {
         $this->applications->removeElement($a);
+        return $this;
+    }
+
+    /** @return Collection<int, StandardItem> */
+    public function getStandardItems(): Collection { return $this->standardItems; }
+
+    public function addStandardItem(StandardItem $i): static
+    {
+        if (!$this->standardItems->contains($i)) {
+            $this->standardItems->add($i);
+        }
+        return $this;
+    }
+
+    public function removeStandardItem(StandardItem $i): static
+    {
+        $this->standardItems->removeElement($i);
+        return $this;
+    }
+
+    /** @return Collection<int, ApplicationListItem> */
+    public function getApplicationListItems(): Collection { return $this->applicationListItems; }
+
+    public function addApplicationListItem(ApplicationListItem $i): static
+    {
+        if (!$this->applicationListItems->contains($i)) {
+            $this->applicationListItems->add($i);
+        }
+        return $this;
+    }
+
+    public function removeApplicationListItem(ApplicationListItem $i): static
+    {
+        $this->applicationListItems->removeElement($i);
+        return $this;
+    }
+
+    /** @return Collection<int, OptionalItem> */
+    public function getOptionalItems(): Collection { return $this->optionalItems; }
+
+    public function addOptionalItem(OptionalItem $i): static
+    {
+        if (!$this->optionalItems->contains($i)) {
+            $this->optionalItems->add($i);
+        }
+        return $this;
+    }
+
+    public function removeOptionalItem(OptionalItem $i): static
+    {
+        $this->optionalItems->removeElement($i);
         return $this;
     }
 

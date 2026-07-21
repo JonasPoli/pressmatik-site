@@ -1,0 +1,5227 @@
+{
+  "masters": {
+    "standard": [
+      {
+        "icon": "fa-solid fa-sliders",
+        "namePt": "Bloco manifold monitorado - Categoria 4",
+        "nameEs": "Bloque manifold supervisado - Categoría 4",
+        "nameEn": "Monitored manifold block - Category 4",
+        "position": 0
+      },
+      {
+        "icon": "fa-solid fa-microchip",
+        "namePt": "CLP de segurança",
+        "nameEs": "PLC de seguridad",
+        "nameEn": "Safety PLC",
+        "position": 1
+      },
+      {
+        "icon": "fa-solid fa-shield-halved",
+        "namePt": "Calço de segurança",
+        "nameEs": "Calzo de seguridad",
+        "nameEn": "Safety block",
+        "position": 2
+      },
+      {
+        "icon": "fa-solid fa-eye",
+        "namePt": "Cortina de luz",
+        "nameEs": "Cortina de luz",
+        "nameEn": "Light curtain",
+        "position": 3
+      },
+      {
+        "icon": "fa-solid fa-shield",
+        "namePt": "Grade de proteção",
+        "nameEs": "Resguardo de protección",
+        "nameEn": "Protective guard",
+        "position": 4
+      },
+      {
+        "icon": "fa-solid fa-fire",
+        "namePt": "Grades de proteção fechadas contra fagulhas",
+        "nameEs": "Resguardos cerrados para protección contra chispas",
+        "nameEn": "Enclosed safety guards for spark protection",
+        "position": 5
+      },
+      {
+        "icon": "fa-solid fa-circle-exclamation",
+        "namePt": "Botão de emergência",
+        "nameEs": "Pulsador de emergencia",
+        "nameEn": "Emergency stop button",
+        "position": 6
+      },
+      {
+        "icon": "fa-solid fa-sliders",
+        "namePt": "Console bimanual com simultaneidade",
+        "nameEs": "Pupitre de mando bimanual con simultaneidad",
+        "nameEn": "Two-hand control station with simultaneity monitoring",
+        "position": 7
+      },
+      {
+        "icon": "fa-solid fa-rotate",
+        "namePt": "Mesa giratória",
+        "nameEs": "Mesa giratoria",
+        "nameEn": "Rotary table",
+        "position": 8
+      },
+      {
+        "icon": "fa-solid fa-up-down-left-right",
+        "namePt": "Mesa móvel",
+        "nameEs": "Mesa móvil",
+        "nameEn": "Movable table",
+        "position": 9
+      },
+      {
+        "icon": "fa-solid fa-arrows-rotate",
+        "namePt": "Martelo basculante a 145°",
+        "nameEs": "Corredera basculante a 145°",
+        "nameEn": "Tilting ram at 145°",
+        "position": 10
+      },
+      {
+        "icon": "fa-solid fa-ruler-combined",
+        "namePt": "Martelo guiado por prismas",
+        "nameEs": "Corredera guiada por prismas",
+        "nameEn": "Prism-guided ram",
+        "position": 11
+      },
+      {
+        "icon": "fa-solid fa-wrench",
+        "namePt": "Dispositivo de apoio para eixos",
+        "nameEs": "Dispositivo de apoyo para ejes",
+        "nameEn": "Shaft support device",
+        "position": 12
+      },
+      {
+        "icon": "fa-solid fa-compress",
+        "namePt": "Prensa-chapas",
+        "nameEs": "Pisador de chapa",
+        "nameEn": "Blank holder",
+        "position": 13
+      },
+      {
+        "icon": "fa-solid fa-gauge-high",
+        "namePt": "Regulagem de pressão do prensa-chapas",
+        "nameEs": "Ajuste de presión del pisador de chapa",
+        "nameEn": "Blank-holder pressure adjustment",
+        "position": 14
+      },
+      {
+        "icon": "fa-solid fa-arrow-up",
+        "namePt": "Extrator inferior mecânico",
+        "nameEs": "Expulsor inferior mecánico",
+        "nameEn": "Mechanical lower ejector",
+        "position": 15
+      },
+      {
+        "icon": "fa-solid fa-recycle",
+        "namePt": "Calhas laterais para limpeza",
+        "nameEs": "Canaletas laterales para limpieza",
+        "nameEn": "Side cleaning gutters",
+        "position": 16
+      },
+      {
+        "icon": "fa-solid fa-screwdriver-wrench",
+        "namePt": "Ponta da haste roscada com martelo postiço",
+        "nameEs": "Extremo roscado del vástago con cabezal intercambiable",
+        "nameEn": "Threaded rod end with replaceable ram head",
+        "position": 17
+      },
+      {
+        "icon": "fa-solid fa-link",
+        "namePt": "Corrente para elevação da mesa pela haste",
+        "nameEs": "Cadena para elevación de la mesa mediante el vástago",
+        "nameEn": "Chain for table lifting via the rod",
+        "position": 18
+      },
+      {
+        "icon": "fa-solid fa-bolt",
+        "namePt": "Acionamento motorizado (220 V trifásico)",
+        "nameEs": "Accionamiento motorizado (220 V trifásico)",
+        "nameEn": "Motorized operation (220 V three-phase)",
+        "position": 19
+      },
+      {
+        "icon": "fa-solid fa-gears",
+        "namePt": "Movimento da mesa por cremalheira acionada por motoredutor",
+        "nameEs": "Movimiento de la mesa por cremallera accionada por motorreductor",
+        "nameEn": "Gearmotor-driven rack-and-pinion table movement",
+        "position": 20
+      },
+      {
+        "icon": "fa-solid fa-microchip",
+        "namePt": "CLP + IHM (Controlador Lógico Programável + Interface Homem-Máquina)",
+        "nameEs": "PLC + HMI (Controlador Lógico Programable + Interfaz Hombre-Máquina)",
+        "nameEn": "PLC + HMI (Programmable Logic Controller + Human-Machine Interface)",
+        "position": 21
+      },
+      {
+        "icon": "fa-solid fa-palette",
+        "namePt": "Pintura customizada",
+        "nameEs": "Pintura personalizada",
+        "nameEn": "Custom paint finish",
+        "position": 22
+      }
+    ],
+    "application": [
+      {
+        "icon": "fa-solid fa-globe",
+        "namePt": "Universal",
+        "nameEs": "Universal",
+        "nameEn": "Universal",
+        "position": 0
+      },
+      {
+        "icon": "fa-solid fa-arrows-rotate",
+        "namePt": "Substituição de prensas excêntricas e de chaveta",
+        "nameEs": "Sustitución de prensas excéntricas y de chaveta",
+        "nameEn": "Replacement of eccentric and key-driven presses",
+        "position": 1
+      },
+      {
+        "icon": "fa-solid fa-chart-line",
+        "namePt": "Melhoria de processos manuais de rebarbação",
+        "nameEs": "Mejora de procesos manuales de desbarbado",
+        "nameEn": "Improvement of manual deburring processes",
+        "position": 2
+      },
+      {
+        "icon": "fa-solid fa-hammer",
+        "namePt": "Corte",
+        "nameEs": "Corte",
+        "nameEn": "Cutting",
+        "position": 3
+      },
+      {
+        "icon": "fa-solid fa-rotate",
+        "namePt": "Dobra",
+        "nameEs": "Plegado",
+        "nameEn": "Bending",
+        "position": 4
+      },
+      {
+        "icon": "fa-solid fa-compress",
+        "namePt": "Repuxo",
+        "nameEs": "Embutición",
+        "nameEn": "Drawing",
+        "position": 5
+      },
+      {
+        "icon": "fa-solid fa-arrow-down",
+        "namePt": "Repuxo profundo",
+        "nameEs": "Embutición profunda",
+        "nameEn": "Deep drawing",
+        "position": 6
+      },
+      {
+        "icon": "fa-solid fa-arrow-up",
+        "namePt": "Repuxo invertido",
+        "nameEs": "Embutición inversa",
+        "nameEn": "Reverse drawing",
+        "position": 7
+      },
+      {
+        "icon": "fa-solid fa-arrows-rotate",
+        "namePt": "Repuxo de duplo efeito",
+        "nameEs": "Embutición de doble efecto",
+        "nameEn": "Double-action drawing",
+        "position": 8
+      },
+      {
+        "icon": "fa-solid fa-hammer",
+        "namePt": "Estampagem",
+        "nameEs": "Estampado",
+        "nameEn": "Stamping",
+        "position": 9
+      },
+      {
+        "icon": "fa-solid fa-angles-right",
+        "namePt": "Estampagem progressiva",
+        "nameEs": "Estampado progresivo",
+        "nameEn": "Progressive stamping",
+        "position": 10
+      },
+      {
+        "icon": "fa-solid fa-wrench",
+        "namePt": "Rebarbação / corte de rebarbas",
+        "nameEs": "Desbarbado / recorte",
+        "nameEn": "Deburring / trimming",
+        "position": 11
+      },
+      {
+        "icon": "fa-solid fa-gauge-high",
+        "namePt": "Calibração",
+        "nameEs": "Calibrado",
+        "nameEn": "Sizing / calibration",
+        "position": 12
+      },
+      {
+        "icon": "fa-solid fa-gears",
+        "namePt": "Montagem",
+        "nameEs": "Montaje",
+        "nameEn": "Assembly",
+        "position": 13
+      },
+      {
+        "icon": "fa-solid fa-screwdriver-wrench",
+        "namePt": "Desmontagem",
+        "nameEs": "Desmontaje",
+        "nameEn": "Disassembly",
+        "position": 14
+      },
+      {
+        "icon": "fa-solid fa-cube",
+        "namePt": "Moldagem",
+        "nameEs": "Moldeo",
+        "nameEn": "Molding",
+        "position": 15
+      },
+      {
+        "icon": "fa-solid fa-compress",
+        "namePt": "Compactação",
+        "nameEs": "Compactación",
+        "nameEn": "Compaction",
+        "position": 16
+      },
+      {
+        "icon": "fa-solid fa-hammer",
+        "namePt": "Forjamento",
+        "nameEs": "Forja",
+        "nameEn": "Forging",
+        "position": 17
+      },
+      {
+        "icon": "fa-solid fa-ruler",
+        "namePt": "Endireitamento",
+        "nameEs": "Enderezado",
+        "nameEn": "Straightening",
+        "position": 18
+      },
+      {
+        "icon": "fa-solid fa-crosshairs",
+        "namePt": "Alinhamento",
+        "nameEs": "Alineación",
+        "nameEn": "Alignment",
+        "position": 19
+      },
+      {
+        "icon": "fa-solid fa-ruler-combined",
+        "namePt": "Desempenamento",
+        "nameEs": "Aplanado / rectificado",
+        "nameEn": "Flattening / truing",
+        "position": 20
+      },
+      {
+        "icon": "fa-solid fa-fire",
+        "namePt": "Vulcanização",
+        "nameEs": "Vulcanización",
+        "nameEn": "Vulcanization",
+        "position": 21
+      },
+      {
+        "icon": "fa-solid fa-link",
+        "namePt": "Colagem",
+        "nameEs": "Encolado",
+        "nameEn": "Bonding",
+        "position": 22
+      },
+      {
+        "icon": "fa-solid fa-arrow-right",
+        "namePt": "Injeção por transferência",
+        "nameEs": "Inyección por transferencia",
+        "nameEn": "Transfer injection / transfer molding",
+        "position": 23
+      },
+      {
+        "icon": "fa-solid fa-toolbox",
+        "namePt": "Try-out, preparação, testes e ajuste de moldes, ferramentas e matrizes",
+        "nameEs": "Try-out, preparación, pruebas y ajuste de moldes, herramientas y matrices",
+        "nameEn": "Try-out, preparation, testing, and adjustment of molds, tools, and dies",
+        "position": 24
+      },
+      {
+        "icon": "fa-solid fa-rotate",
+        "namePt": "Operações com mesa giratória",
+        "nameEs": "Operaciones con mesa giratoria",
+        "nameEn": "Operations with a rotary table",
+        "position": 25
+      },
+      {
+        "icon": "fa-solid fa-gears",
+        "namePt": "Montagem e desmontagem de eixos, rotores, motores, redutores, bombas e buchas",
+        "nameEs": "Montaje y desmontaje de ejes, rotores, motores, reductores, bombas y bujes",
+        "nameEn": "Assembly and disassembly of shafts, rotors, motors, gearboxes, pumps, and bushings",
+        "position": 26
+      },
+      {
+        "icon": "fa-solid fa-link",
+        "namePt": "Montagem e desmontagem de correntes e esteiras",
+        "nameEs": "Montaje y desmontaje de cadenas y transportadores",
+        "nameEn": "Assembly and disassembly of chains and conveyors",
+        "position": 27
+      },
+      {
+        "icon": "fa-solid fa-ruler-combined",
+        "namePt": "Alinhamento e endireitamento de eixos, vigas, chapas, tubos, cardans e barras",
+        "nameEs": "Alineación y enderezado de ejes, vigas, chapas, tubos, cardanes y barras",
+        "nameEn": "Alignment and straightening of shafts, beams, sheets, tubes, drive shafts, and bars",
+        "position": 28
+      },
+      {
+        "icon": "fa-solid fa-award",
+        "namePt": "Fabricação de peças que exigem robustez, qualidade e precisão",
+        "nameEs": "Fabricación de piezas que requieren robustez, calidad y precisión",
+        "nameEn": "Manufacture of parts requiring robustness, quality, and precision",
+        "position": 29
+      },
+      {
+        "icon": "fa-solid fa-toolbox",
+        "namePt": "Oficinas de manutenção e linhas de montagem",
+        "nameEs": "Talleres de mantenimiento y líneas de montaje",
+        "nameEn": "Maintenance workshops and assembly lines",
+        "position": 30
+      },
+      {
+        "icon": "fa-solid fa-screwdriver-wrench",
+        "namePt": "Ferramentarias e matrizarias",
+        "nameEs": "Talleres de herramientas y matrices",
+        "nameEn": "Tool and die shops",
+        "position": 31
+      },
+      {
+        "icon": "fa-solid fa-industry",
+        "namePt": "Indústrias metalúrgicas",
+        "nameEs": "Industrias metalúrgicas",
+        "nameEn": "Metallurgical industries",
+        "position": 32
+      },
+      {
+        "icon": "fa-solid fa-cubes",
+        "namePt": "Indústrias de plástico",
+        "nameEs": "Industrias del plástico",
+        "nameEn": "Plastics industries",
+        "position": 33
+      },
+      {
+        "icon": "fa-solid fa-building",
+        "namePt": "Siderúrgicas, mineradoras e estaleiros",
+        "nameEs": "Siderúrgicas, mineras y astilleros",
+        "nameEn": "Steel mills, mining companies, and shipyards",
+        "position": 34
+      },
+      {
+        "icon": "fa-solid fa-gear",
+        "namePt": "Fabricantes de autopeças e motopeças",
+        "nameEs": "Fabricantes de autopartes y motopartes",
+        "nameEn": "Automotive and motorcycle parts manufacturers",
+        "position": 35
+      },
+      {
+        "icon": "fa-solid fa-fire",
+        "namePt": "Fundições e forjarias",
+        "nameEs": "Fundiciones y forjas",
+        "nameEn": "Foundries and forging shops",
+        "position": 36
+      },
+      {
+        "icon": "fa-solid fa-cube",
+        "namePt": "Fabricantes de peças injetadas em alumínio ou zamak e suas ligas",
+        "nameEs": "Fabricantes de piezas inyectadas en aluminio o zamak y sus aleaciones",
+        "nameEn": "Manufacturers of aluminum- or zamak-injected parts and their alloys",
+        "position": 37
+      },
+      {
+        "icon": "fa-solid fa-boxes-stacked",
+        "namePt": "Fabricantes de utensílios domésticos: panelas, frigideiras, caçarolas, cuscuzeiras, assadeiras e bacias",
+        "nameEs": "Fabricantes de utensilios domésticos: ollas, sartenes, cacerolas, cuscuseras, bandejas y recipientes",
+        "nameEn": "Household utensil manufacturers: pots, frying pans, casseroles, couscous pots, baking trays, and basins",
+        "position": 38
+      },
+      {
+        "icon": "fa-solid fa-lightbulb",
+        "namePt": "Fabricantes de luminárias, vasos de pressão, botijões de gás, barris, extintores e copos de filtro",
+        "nameEs": "Fabricantes de luminarias, recipientes a presión, bombonas de gas, barriles, extintores y vasos de filtro",
+        "nameEn": "Manufacturers of lighting fixtures, pressure vessels, gas cylinders, barrels, extinguishers, and filter cups",
+        "position": 39
+      },
+      {
+        "icon": "fa-solid fa-layer-group",
+        "namePt": "Indústria de borracha, calçados, tapetes e peças técnicas de silicone",
+        "nameEs": "Industria del caucho, calzado, alfombras y piezas técnicas de silicona",
+        "nameEn": "Rubber, footwear, carpet, and technical silicone-parts industries",
+        "position": 40
+      },
+      {
+        "icon": "fa-solid fa-car-battery",
+        "namePt": "Fabricação de peças automotivas, coxins e patins de freio",
+        "nameEs": "Fabricación de piezas automotrices, soportes antivibratorios y pastillas de freno",
+        "nameEn": "Manufacture of automotive parts, engine mounts, and brake pads",
+        "position": 41
+      },
+      {
+        "icon": "fa-solid fa-building",
+        "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+        "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+        "nameEn": "All types of companies, metallurgical or otherwise",
+        "position": 42
+      },
+      {
+        "icon": "fa-solid fa-cogs",
+        "namePt": "Processamento de materiais metálicos e não metálicos",
+        "nameEs": "Procesamiento de materiales metálicos y no metálicos",
+        "nameEn": "Processing of metallic and non-metallic materials",
+        "position": 43
+      },
+      {
+        "icon": "fa-solid fa-cubes",
+        "namePt": "Aço carbono, aço inoxidável, alumínio e derivados",
+        "nameEs": "Acero al carbono, acero inoxidable, aluminio y derivados",
+        "nameEn": "Carbon steel, stainless steel, aluminum, and derivatives",
+        "position": 44
+      },
+      {
+        "icon": "fa-solid fa-cubes",
+        "namePt": "Aço, latão, alumínio, zamak e suas ligas",
+        "nameEs": "Acero, latón, aluminio, zamak y sus aleaciones",
+        "nameEn": "Steel, brass, aluminum, zamak, and their alloys",
+        "position": 45
+      },
+      {
+        "icon": "fa-solid fa-layer-group",
+        "namePt": "Borrachas e compostos metal-borracha",
+        "nameEs": "Cauchos y compuestos metal-caucho",
+        "nameEn": "Rubber and metal-rubber compounds",
+        "position": 46
+      },
+      {
+        "icon": "fa-solid fa-atom",
+        "namePt": "Fibras, compostos/SMC, tecidos, plásticos, madeira, cerâmicas, pós, químicos, orgânicos e silicone",
+        "nameEs": "Fibras, compuestos/SMC, tejidos, plásticos, madera, cerámicas, polvos, químicos, orgánicos y silicona",
+        "nameEn": "Fibers, composites/SMC, fabrics, plastics, wood, ceramics, powders, chemicals, organic materials, and silicone",
+        "position": 47
+      },
+      {
+        "icon": "fa-solid fa-stopwatch",
+        "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+        "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+        "nameEn": "Fast tooling setup, longer tool life, and better part quality",
+        "position": 48
+      },
+      {
+        "icon": "fa-solid fa-wrench",
+        "namePt": "Baixa manutenção, ruído e vibração",
+        "nameEs": "Bajo mantenimiento, ruido y vibración",
+        "nameEn": "Low maintenance, noise, and vibration",
+        "position": 49
+      },
+      {
+        "icon": "fa-solid fa-compress",
+        "namePt": "Máquinas compactas",
+        "nameEs": "Máquinas compactas",
+        "nameEn": "Compact machines",
+        "position": 50
+      },
+      {
+        "icon": "fa-solid fa-shield-halved",
+        "namePt": "Atendimento às normas de segurança mais exigentes",
+        "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+        "nameEn": "Compliance with the most demanding safety standards",
+        "position": 51
+      },
+      {
+        "icon": "fa-solid fa-robot",
+        "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+        "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+        "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals",
+        "position": 52
+      },
+      {
+        "icon": "fa-solid fa-up-down-left-right",
+        "namePt": "Martelo flutuante guiado por colunas cilíndricas",
+        "nameEs": "Corredera flotante guiada por columnas cilíndricas",
+        "nameEn": "Floating ram guided by cylindrical columns",
+        "position": 53
+      },
+      {
+        "icon": "fa-solid fa-drafting-compass",
+        "namePt": "Martelo guiado por réguas prismáticas ajustáveis",
+        "nameEs": "Corredera guiada por guías prismáticas ajustables",
+        "nameEn": "Ram guided by adjustable prism ways",
+        "position": 54
+      },
+      {
+        "icon": "fa-solid fa-gears",
+        "namePt": "Martelo guiado por buchas de bronze deslizantes e lubrificadas em quatro colunas de aço cromado",
+        "nameEs": "Corredera guiada por bujes de bronce deslizantes y lubricados sobre cuatro columnas de acero cromado",
+        "nameEn": "Ram guided by sliding, lubricated bronze bushings on four chrome-plated steel columns",
+        "position": 55
+      }
+    ],
+    "optional": [
+      {
+        "icon": "fa-solid fa-microchip",
+        "namePt": "CLP + IHM (Controlador Lógico Programável + Interface Homem-Máquina)",
+        "nameEs": "PLC + HMI (Controlador Lógico Programable + Interfaz Hombre-Máquina)",
+        "nameEn": "PLC + HMI (Programmable Logic Controller + Human-Machine Interface)",
+        "position": 0
+      },
+      {
+        "icon": "fa-solid fa-clock",
+        "namePt": "Temporizador",
+        "nameEs": "Temporizador",
+        "nameEn": "Timer",
+        "position": 1
+      },
+      {
+        "icon": "fa-solid fa-temperature-half",
+        "namePt": "Aquecimento, inclusive de platôs por vapor ou óleo térmico",
+        "nameEs": "Calentamiento, incluidos los platos por vapor o aceite térmico",
+        "nameEn": "Heating, including steam- or thermal-oil-heated platens",
+        "position": 2
+      },
+      {
+        "icon": "fa-solid fa-flask",
+        "namePt": "Degasagem",
+        "nameEs": "Desgasificación",
+        "nameEn": "Degassing",
+        "position": 3
+      },
+      {
+        "icon": "fa-solid fa-temperature-half",
+        "namePt": "Platôs preparados para sistema de resfriamento",
+        "nameEs": "Platos preparados para sistema de refrigeración",
+        "nameEn": "Platens prepared for a cooling system",
+        "position": 4
+      },
+      {
+        "icon": "fa-solid fa-sliders",
+        "namePt": "Válvulas proporcionais de vazão e pressão",
+        "nameEs": "Válvulas proporcionales de caudal y presión",
+        "nameEn": "Proportional flow and pressure valves",
+        "position": 5
+      },
+      {
+        "icon": "fa-solid fa-weight-hanging",
+        "namePt": "Célula de carga",
+        "nameEs": "Célula de carga",
+        "nameEn": "Load cell",
+        "position": 6
+      },
+      {
+        "icon": "fa-solid fa-eye",
+        "namePt": "Leitor biométrico ou de código de barras",
+        "nameEs": "Lector biométrico o de código de barras",
+        "nameEn": "Biometric or barcode reader",
+        "position": 7
+      },
+      {
+        "icon": "fa-solid fa-chart-line",
+        "namePt": "Preparação para sistema supervisório",
+        "nameEs": "Preparación para sistema de supervisión",
+        "nameEn": "Provision for a supervisory control system",
+        "position": 8
+      },
+      {
+        "icon": "fa-solid fa-pump-soap",
+        "namePt": "Bomba de vazão variável",
+        "nameEs": "Bomba de caudal variable",
+        "nameEn": "Variable-flow pump",
+        "position": 9
+      },
+      {
+        "icon": "fa-solid fa-gauge-high",
+        "namePt": "Acumulador de pressão",
+        "nameEs": "Acumulador de presión",
+        "nameEn": "Pressure accumulator",
+        "position": 10
+      },
+      {
+        "icon": "fa-solid fa-arrow-up",
+        "namePt": "Cilindro extrator",
+        "nameEs": "Cilindro extractor",
+        "nameEn": "Ejector cylinder",
+        "position": 11
+      },
+      {
+        "icon": "fa-solid fa-compress",
+        "namePt": "Almofada hidráulica, inclusive de duplo efeito",
+        "nameEs": "Cojín hidráulico, incluso de doble efecto",
+        "nameEn": "Hydraulic cushion, including double-acting",
+        "position": 12
+      },
+      {
+        "icon": "fa-solid fa-arrows-rotate",
+        "namePt": "Cilindros destacadores",
+        "nameEs": "Cilindros despegadores",
+        "nameEn": "Stripper cylinders",
+        "position": 13
+      },
+      {
+        "icon": "fa-solid fa-lock",
+        "namePt": "Parada mecânica, inclusive versão ajustável",
+        "nameEs": "Tope mecánico, incluida la versión regulable",
+        "nameEn": "Mechanical stop, including adjustable version",
+        "position": 14
+      },
+      {
+        "icon": "fa-solid fa-up-down-left-right",
+        "namePt": "Mesa móvel",
+        "nameEs": "Mesa móvil",
+        "nameEn": "Movable table",
+        "position": 15
+      },
+      {
+        "icon": "fa-solid fa-rotate",
+        "namePt": "Mesa giratória, inclusive 360°",
+        "nameEs": "Mesa giratoria, incluso 360°",
+        "nameEn": "Rotary table, including 360° rotation",
+        "position": 16
+      },
+      {
+        "icon": "fa-solid fa-arrows-rotate",
+        "namePt": "Mesa basculante, inclusive 45°",
+        "nameEs": "Mesa basculante, incluso 45°",
+        "nameEn": "Tilting table, including 45° tilt",
+        "position": 17
+      },
+      {
+        "icon": "fa-solid fa-truck-ramp-box",
+        "namePt": "Mesa de preparação/extração, simples ou dupla",
+        "nameEs": "Mesa de preparación/extracción, simple o doble",
+        "nameEn": "Preparation/extraction table, single or double",
+        "position": 18
+      },
+      {
+        "icon": "fa-solid fa-pallet",
+        "namePt": "Mesa fixa lisa ou com canais T",
+        "nameEs": "Mesa fija lisa o con ranuras en T",
+        "nameEn": "Fixed plain table or table with T-slots",
+        "position": 19
+      },
+      {
+        "icon": "fa-solid fa-compress",
+        "namePt": "Prensa-chapas guiado nas colunas principais",
+        "nameEs": "Pisador de chapa guiado en las columnas principales",
+        "nameEn": "Blank holder guided on the main columns",
+        "position": 20
+      },
+      {
+        "icon": "fa-solid fa-box",
+        "namePt": "Bandeja para retirada de peça ou cavaco",
+        "nameEs": "Bandeja para retirada de piezas o virutas",
+        "nameEn": "Tray for part or chip removal",
+        "position": 21
+      },
+      {
+        "icon": "fa-solid fa-arrows-rotate",
+        "namePt": "Saídas hidráulicas adicionais para cilindros radiais",
+        "nameEs": "Salidas hidráulicas adicionales para cilindros radiales",
+        "nameEn": "Additional hydraulic outlets for radial cylinders",
+        "position": 22
+      },
+      {
+        "icon": "fa-solid fa-arrow-down",
+        "namePt": "Saídas para cavacos",
+        "nameEs": "Salidas para virutas",
+        "nameEn": "Chip outlets",
+        "position": 23
+      },
+      {
+        "icon": "fa-solid fa-pump-soap",
+        "namePt": "Bico pneumático de limpeza",
+        "nameEs": "Boquilla neumática de limpieza",
+        "nameEn": "Pneumatic cleaning nozzle",
+        "position": 24
+      },
+      {
+        "icon": "fa-solid fa-ruler-combined",
+        "namePt": "Braços de apoio e réguas com esferas ou roletes para colocação de ferramentas",
+        "nameEs": "Brazos de apoyo y guías con bolas o rodillos para colocar herramientas",
+        "nameEn": "Support arms and guides with balls or rollers for tool placement",
+        "position": 25
+      },
+      {
+        "icon": "fa-solid fa-pump-soap",
+        "namePt": "Bomba de baixo ruído",
+        "nameEs": "Bomba de bajo ruido",
+        "nameEn": "Low-noise pump",
+        "position": 26
+      },
+      {
+        "icon": "fa-solid fa-oil-can",
+        "namePt": "Trocador de calor para resfriamento do óleo",
+        "nameEs": "Intercambiador de calor para refrigeración del aceite",
+        "nameEn": "Oil-cooling heat exchanger",
+        "position": 27
+      },
+      {
+        "icon": "fa-solid fa-eye",
+        "namePt": "Cortina de luz",
+        "nameEs": "Cortina de luz",
+        "nameEn": "Light curtain",
+        "position": 28
+      },
+      {
+        "icon": "fa-solid fa-eye",
+        "namePt": "Cortina de luz com feixes flutuantes",
+        "nameEs": "Cortina de luz con haces flotantes",
+        "nameEn": "Light curtain with floating beams",
+        "position": 29
+      },
+      {
+        "icon": "fa-solid fa-shield",
+        "namePt": "Proteção sanfonada para as colunas",
+        "nameEs": "Protección de fuelle para las columnas",
+        "nameEn": "Bellows protection for the columns",
+        "position": 30
+      },
+      {
+        "icon": "fa-solid fa-palette",
+        "namePt": "Pintura customizada",
+        "nameEs": "Pintura personalizada",
+        "nameEn": "Custom paint finish",
+        "position": 31
+      },
+      {
+        "icon": "fa-solid fa-hand-peace",
+        "namePt": "Acionamento por console bimanual com simultaneidade",
+        "nameEs": "Accionamiento mediante pupitre bimanual con simultaneidad",
+        "nameEn": "Two-hand control operation with simultaneity monitoring",
+        "position": 32
+      },
+      {
+        "icon": "fa-solid fa-toolbox",
+        "namePt": "Prensa manual auxiliar fixa na lateral",
+        "nameEs": "Prensa manual auxiliar fija en el lateral",
+        "nameEn": "Auxiliary manual press fixed to the side",
+        "position": 33
+      },
+      {
+        "icon": "fa-solid fa-cubes",
+        "namePt": "Blocos em V",
+        "nameEs": "Bloques en V",
+        "nameEn": "V-blocks",
+        "position": 34
+      },
+      {
+        "icon": "fa-solid fa-up-down-left-right",
+        "namePt": "Cilindro com movimento lateral (direita/esquerda)",
+        "nameEs": "Cilindro con movimiento lateral (derecha/izquierda)",
+        "nameEn": "Cylinder with lateral movement (right/left)",
+        "position": 35
+      },
+      {
+        "icon": "fa-solid fa-arrow-up",
+        "namePt": "Elevação automática da mesa por cilindros laterais",
+        "nameEs": "Elevación automática de la mesa mediante cilindros laterales",
+        "nameEn": "Automatic table lifting by side cylinders",
+        "position": 36
+      },
+      {
+        "icon": "fa-solid fa-shield",
+        "namePt": "Enclausuramento perimetral com fechamento mecânico e/ou barreira de luz",
+        "nameEs": "Cerramiento perimetral con cierre mecánico y/o barrera de luz",
+        "nameEn": "Perimeter enclosure with mechanical closure and/or light barrier",
+        "position": 37
+      },
+      {
+        "icon": "fa-solid fa-sliders",
+        "namePt": "Bloco manifold monitorado - Categoria 4",
+        "nameEs": "Bloque manifold supervisado - Categoría 4",
+        "nameEn": "Monitored manifold block - Category 4",
+        "position": 38
+      },
+      {
+        "icon": "fa-solid fa-microchip",
+        "namePt": "CLP de segurança",
+        "nameEs": "PLC de seguridad",
+        "nameEn": "Safety PLC",
+        "position": 39
+      }
+    ]
+  },
+  "mappings": [
+    {
+      "model": "PMC-ST",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "standard",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Repuxo de duplo efeito",
+      "nameEs": "Embutición de doble efecto",
+      "nameEn": "Double-action drawing"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Corte",
+      "nameEs": "Corte",
+      "nameEn": "Cutting"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Dobra",
+      "nameEs": "Plegado",
+      "nameEn": "Bending"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Rebarbação",
+      "nameEs": "Desbarbado",
+      "nameEn": "Deburring"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Estampagem",
+      "nameEs": "Estampado",
+      "nameEn": "Stamping"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Estampagem progressiva",
+      "nameEs": "Estampado progresivo",
+      "nameEn": "Progressive stamping"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Universal",
+      "nameEs": "Universal",
+      "nameEn": "Universal"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e de chaveta",
+      "nameEs": "Sustitución de prensas excéntricas y de chaveta",
+      "nameEn": "Replacement of eccentric and key-driven presses"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Corte, dobra, repuxo, estampagem, rebarbação, montagem e desmontagem, moldagem, estampagem progressiva, compactação e forjamento",
+      "nameEs": "Corte, plegado, embutición, estampado, desbarbado, montaje y desmontaje, moldeo, estampado progresivo, compactación y forja",
+      "nameEn": "Cutting, bending, drawing, stamping, deburring, assembly and disassembly, molding, progressive stamping, compaction, and forging"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "application",
+      "namePt": "Materiais metálicos e não metálicos, borrachas, fibras, compostos/SMC, tecidos, plásticos, madeira, cerâmicas, pós, químicos e orgânicos",
+      "nameEs": "Materiales metálicos y no metálicos, cauchos, fibras, compuestos/SMC, tejidos, plásticos, madera, cerámicas, polvos, químicos y orgánicos",
+      "nameEn": "Metallic and non-metallic materials, rubber, fibers, composites/SMC, fabrics, plastics, wood, ceramics, powders, chemicals, and organic materials"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Célula de carga",
+      "nameEs": "Célula de carga",
+      "nameEn": "Load cell"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Leitor biométrico ou de código de barras",
+      "nameEs": "Lector biométrico o de código de barras",
+      "nameEn": "Biometric or barcode reader"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Preparação para sistema supervisório",
+      "nameEs": "Preparación para sistema de supervisión",
+      "nameEn": "Provision for a supervisory control system"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Bomba de vazão variável",
+      "nameEs": "Bomba de caudal variable",
+      "nameEn": "Variable-flow pump"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Acumulador de pressão",
+      "nameEs": "Acumulador de presión",
+      "nameEn": "Pressure accumulator"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada de duplo efeito",
+      "nameEs": "Cilindro extractor o cojín de doble efecto",
+      "nameEn": "Extractor cylinder or double-acting cushion"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Parada mecânica ajustável",
+      "nameEs": "Tope mecánico regulable",
+      "nameEn": "Adjustable mechanical stop"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Mesa móvel ou giratória",
+      "nameEs": "Mesa móvil o giratoria",
+      "nameEn": "Movable or rotary table"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Braços de apoio e réguas com esferas ou roletes para colocação de ferramentas",
+      "nameEs": "Brazos de apoyo y guías con bolas o rodillos para colocar herramientas",
+      "nameEn": "Support arms and guides with balls or rollers for tool placement"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMC-ST",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Repuxo",
+      "nameEs": "Embutición",
+      "nameEn": "Drawing"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Repuxo de duplo efeito",
+      "nameEs": "Embutición de doble efecto",
+      "nameEn": "Double-action drawing"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Corte",
+      "nameEs": "Corte",
+      "nameEn": "Cutting"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Dobra",
+      "nameEs": "Plegado",
+      "nameEn": "Bending"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Rebarbação",
+      "nameEs": "Desbarbado",
+      "nameEn": "Deburring"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Estampagem",
+      "nameEs": "Estampado",
+      "nameEn": "Stamping"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Estampagem progressiva",
+      "nameEs": "Estampado progresivo",
+      "nameEn": "Progressive stamping"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Universal",
+      "nameEs": "Universal",
+      "nameEn": "Universal"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e de chaveta",
+      "nameEs": "Sustitución de prensas excéntricas y de chaveta",
+      "nameEn": "Replacement of eccentric and key-driven presses"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "application",
+      "namePt": "Materiais metálicos e não metálicos, borrachas, fibras, compostos/SMC, tecidos, plásticos, madeira, cerâmicas, pós, químicos e orgânicos",
+      "nameEs": "Materiales metálicos y no metálicos, cauchos, fibras, compuestos/SMC, tejidos, plásticos, madera, cerámicas, polvos, químicos y orgánicos",
+      "nameEn": "Metallic and non-metallic materials, rubber, fibers, composites/SMC, fabrics, plastics, wood, ceramics, powders, chemicals, and organic materials"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "optional",
+      "namePt": "Célula de carga",
+      "nameEs": "Célula de carga",
+      "nameEn": "Load cell"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada",
+      "nameEs": "Cilindro extractor o cojín",
+      "nameEn": "Extractor cylinder or cushion"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "optional",
+      "namePt": "Parada mecânica",
+      "nameEs": "Tope mecánico",
+      "nameEn": "Mechanical stop"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "optional",
+      "namePt": "Mesa móvel ou giratória",
+      "nameEs": "Mesa móvil o giratoria",
+      "nameEn": "Movable or rotary table"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMC-BC",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "standard",
+      "namePt": "Mesa giratória",
+      "nameEs": "Mesa giratoria",
+      "nameEn": "Rotary table"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Rebarbação",
+      "nameEs": "Desbarbado",
+      "nameEn": "Deburring"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Forjamento",
+      "nameEs": "Forja",
+      "nameEn": "Forging"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Rebarbação e calibração de peças em geral",
+      "nameEs": "Desbarbado y calibrado de piezas en general",
+      "nameEn": "Deburring and calibration of general parts"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e melhoria de processos manuais de rebarbação",
+      "nameEs": "Sustitución de prensas excéntricas y mejora de procesos manuales de desbarbado",
+      "nameEn": "Replacement of eccentric presses and improvement of manual deburring processes"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "application",
+      "namePt": "Fabricantes de peças injetadas em alumínio ou zamak e suas ligas, fundições e forjarias de aço, latão, alumínio e outros",
+      "nameEs": "Fabricantes de piezas inyectadas en aluminio o zamak y sus aleaciones, fundiciones y forjas de acero, latón, aluminio y otros",
+      "nameEn": "Manufacturers of aluminum- or zamak-injected parts and their alloys, foundries and forging shops for steel, brass, aluminum, and other materials"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "optional",
+      "namePt": "Cilindro extrator",
+      "nameEs": "Cilindro extractor",
+      "nameEn": "Extractor cylinder"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "optional",
+      "namePt": "Saídas hidráulicas para cilindros radiais",
+      "nameEs": "Salidas hidráulicas para cilindros radiales",
+      "nameEn": "Hydraulic outlets for radial cylinders"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "optional",
+      "namePt": "Saídas para cavacos",
+      "nameEs": "Salidas para virutas",
+      "nameEn": "Chip outlets"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "optional",
+      "namePt": "Bico pneumático de limpeza",
+      "nameEs": "Boquilla neumática de limpieza",
+      "nameEn": "Pneumatic cleaning nozzle"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "optional",
+      "namePt": "Parada mecânica",
+      "nameEs": "Tope mecánico",
+      "nameEn": "Mechanical stop"
+    },
+    {
+      "model": "PMC-GT",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "application",
+      "namePt": "Rebarbação e calibração de peças em geral",
+      "nameEs": "Desbarbado y calibrado de piezas en general",
+      "nameEn": "Deburring and calibration of general parts"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e melhoria de processos manuais de rebarbação",
+      "nameEs": "Sustitución de prensas excéntricas y mejora de procesos manuales de desbarbado",
+      "nameEn": "Replacement of eccentric presses and improvement of manual deburring processes"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "application",
+      "namePt": "Fabricantes de peças injetadas em alumínio ou zamak e suas ligas, fundições e forjarias de aço, latão, alumínio e outros",
+      "nameEs": "Fabricantes de piezas inyectadas en aluminio o zamak y sus aleaciones, fundiciones y forjas de acero, latón, aluminio y otros",
+      "nameEn": "Manufacturers of aluminum- or zamak-injected parts and their alloys, foundries and forging shops for steel, brass, aluminum, and other materials"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "optional",
+      "namePt": "Cilindro extrator",
+      "nameEs": "Cilindro extractor",
+      "nameEn": "Extractor cylinder"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "optional",
+      "namePt": "Saídas hidráulicas para cilindros radiais",
+      "nameEs": "Salidas hidráulicas para cilindros radiales",
+      "nameEn": "Hydraulic outlets for radial cylinders"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "optional",
+      "namePt": "Parada mecânica",
+      "nameEs": "Tope mecánico",
+      "nameEn": "Mechanical stop"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMC-TR",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "application",
+      "namePt": "Rebarbação e calibração de peças em geral",
+      "nameEs": "Desbarbado y calibrado de piezas en general",
+      "nameEn": "Deburring and calibration of general parts"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e melhoria de processos manuais de rebarbação",
+      "nameEs": "Sustitución de prensas excéntricas y mejora de procesos manuales de desbarbado",
+      "nameEn": "Replacement of eccentric presses and improvement of manual deburring processes"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "application",
+      "namePt": "Fabricantes de peças injetadas em alumínio ou zamak e suas ligas, fundições e forjarias de aço, latão, alumínio e outros",
+      "nameEs": "Fabricantes de piezas inyectadas en aluminio o zamak y sus aleaciones, fundiciones y forjas de acero, latón, aluminio y otros",
+      "nameEn": "Manufacturers of aluminum- or zamak-injected parts and their alloys, foundries and forging shops for steel, brass, aluminum, and other materials"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "optional",
+      "namePt": "Cilindro extrator",
+      "nameEs": "Cilindro extractor",
+      "nameEn": "Extractor cylinder"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "optional",
+      "namePt": "Saídas hidráulicas para cilindros radiais",
+      "nameEs": "Salidas hidráulicas para cilindros radiales",
+      "nameEn": "Hydraulic outlets for radial cylinders"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "optional",
+      "namePt": "Saídas para cavacos",
+      "nameEs": "Salidas para virutas",
+      "nameEn": "Chip outlets"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "optional",
+      "namePt": "Bico pneumático de limpeza",
+      "nameEs": "Boquilla neumática de limpieza",
+      "nameEn": "Pneumatic cleaning nozzle"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "optional",
+      "namePt": "Parada mecânica",
+      "nameEs": "Tope mecánico",
+      "nameEn": "Mechanical stop"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMC-MT",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "standard",
+      "namePt": "Dispositivo de apoio para eixos",
+      "nameEs": "Dispositivo de apoyo para ejes",
+      "nameEn": "Shaft support device"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "application",
+      "namePt": "Alinhamento de eixos, vigas e outros componentes",
+      "nameEs": "Alineación de ejes, vigas y otros componentes",
+      "nameEn": "Alignment of shafts, beams, and other components"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "application",
+      "namePt": "Indústrias metalúrgicas, autopeças e fabricantes de componentes que necessitam de alinhamento ou endireitamento",
+      "nameEs": "Industrias metalúrgicas, autopartes y fabricantes de componentes que requieren alineación o enderezado",
+      "nameEn": "Metallurgical, auto-parts, and component manufacturers requiring alignment or straightening"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "application",
+      "namePt": "Alinhamento, endireitamento e desempenamento",
+      "nameEs": "Alineación, enderezado y aplanado",
+      "nameEn": "Alignment, straightening, and truing"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "application",
+      "namePt": "Metais, tubos, eixos, cardans, barras e vigas",
+      "nameEs": "Metales, tubos, ejes, cardanes, barras y vigas",
+      "nameEn": "Metals, tubes, shafts, drive shafts, bars, and beams"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "optional",
+      "namePt": "Célula de carga",
+      "nameEs": "Célula de carga",
+      "nameEn": "Load cell"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "optional",
+      "namePt": "Leitor biométrico ou de código de barras",
+      "nameEs": "Lector biométrico o de código de barras",
+      "nameEn": "Biometric or barcode reader"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "optional",
+      "namePt": "Preparação para sistema supervisório",
+      "nameEs": "Preparación para sistema de supervisión",
+      "nameEn": "Provision for a supervisory control system"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "optional",
+      "namePt": "Parada mecânica",
+      "nameEs": "Tope mecánico",
+      "nameEn": "Mechanical stop"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMC-AL",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "application",
+      "namePt": "Alinhamento, endireitamento e desempenamento",
+      "nameEs": "Alineación, enderezado y aplanado",
+      "nameEn": "Alignment, straightening, and truing"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "application",
+      "namePt": "Montagem e desmontagem de correntes e esteiras, com alinhamento de vigas",
+      "nameEs": "Montaje y desmontaje de cadenas y transportadores, con alineación de vigas",
+      "nameEn": "Assembly and disassembly of chains and conveyors, with beam alignment"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada",
+      "nameEs": "Cilindro extractor o cojín",
+      "nameEn": "Extractor cylinder or cushion"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "optional",
+      "namePt": "Parada mecânica",
+      "nameEs": "Tope mecánico",
+      "nameEn": "Mechanical stop"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "optional",
+      "namePt": "Braços de apoio e réguas com esferas ou roletes para colocação de ferramentas",
+      "nameEs": "Brazos de apoyo y guías con bolas o rodillos para colocar herramientas",
+      "nameEn": "Support arms and guides with balls or rollers for tool placement"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMC-HZ",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Repuxo",
+      "nameEs": "Embutición",
+      "nameEn": "Drawing"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Estampagem progressiva",
+      "nameEs": "Estampado progresivo",
+      "nameEn": "Progressive stamping"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Corte",
+      "nameEs": "Corte",
+      "nameEn": "Cutting"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Dobra",
+      "nameEs": "Plegado",
+      "nameEn": "Bending"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Rebarbação",
+      "nameEs": "Desbarbado",
+      "nameEn": "Deburring"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Estampagem",
+      "nameEs": "Estampado",
+      "nameEn": "Stamping"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Universal",
+      "nameEs": "Universal",
+      "nameEn": "Universal"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e de chaveta",
+      "nameEs": "Sustitución de prensas excéntricas y de chaveta",
+      "nameEn": "Replacement of eccentric and key-driven presses"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Corte, dobra, repuxo, estampagem, rebarbação, montagem e desmontagem, moldagem, estampagem progressiva, compactação e forjamento",
+      "nameEs": "Corte, plegado, embutición, estampado, desbarbado, montaje y desmontaje, moldeo, estampado progresivo, compactación y forja",
+      "nameEn": "Cutting, bending, drawing, stamping, deburring, assembly and disassembly, molding, progressive stamping, compaction, and forging"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "application",
+      "namePt": "Materiais metálicos e não metálicos, borrachas, fibras, compostos/SMC, tecidos, plásticos, madeira, cerâmicas, pós, químicos e orgânicos",
+      "nameEs": "Materiales metálicos y no metálicos, cauchos, fibras, compuestos/SMC, tejidos, plásticos, madera, cerámicas, polvos, químicos y orgánicos",
+      "nameEn": "Metallic and non-metallic materials, rubber, fibers, composites/SMC, fabrics, plastics, wood, ceramics, powders, chemicals, and organic materials"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada de duplo efeito",
+      "nameEs": "Cilindro extractor o cojín de doble efecto",
+      "nameEn": "Extractor cylinder or double-acting cushion"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "optional",
+      "namePt": "Parada mecânica ajustável",
+      "nameEs": "Tope mecánico regulable",
+      "nameEn": "Adjustable mechanical stop"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMC-SM",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "standard",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Repuxo de duplo efeito",
+      "nameEs": "Embutición de doble efecto",
+      "nameEn": "Double-action drawing"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Corte",
+      "nameEs": "Corte",
+      "nameEn": "Cutting"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Dobra",
+      "nameEs": "Plegado",
+      "nameEn": "Bending"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Rebarbação",
+      "nameEs": "Desbarbado",
+      "nameEn": "Deburring"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Estampagem",
+      "nameEs": "Estampado",
+      "nameEn": "Stamping"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Estampagem progressiva",
+      "nameEs": "Estampado progresivo",
+      "nameEn": "Progressive stamping"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Universal",
+      "nameEs": "Universal",
+      "nameEn": "Universal"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e de chaveta",
+      "nameEs": "Sustitución de prensas excéntricas y de chaveta",
+      "nameEn": "Replacement of eccentric and key-driven presses"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Corte, dobra, repuxo, estampagem, rebarbação, montagem e desmontagem, moldagem, estampagem progressiva, compactação e forjamento",
+      "nameEs": "Corte, plegado, embutición, estampado, desbarbado, montaje y desmontaje, moldeo, estampado progresivo, compactación y forja",
+      "nameEn": "Cutting, bending, drawing, stamping, deburring, assembly and disassembly, molding, progressive stamping, compaction, and forging"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "application",
+      "namePt": "Materiais metálicos e não metálicos, borrachas, fibras, compostos/SMC, tecidos, plásticos, madeira, cerâmicas, pós, químicos e orgânicos",
+      "nameEs": "Materiales metálicos y no metálicos, cauchos, fibras, compuestos/SMC, tejidos, plásticos, madera, cerámicas, polvos, químicos y orgánicos",
+      "nameEn": "Metallic and non-metallic materials, rubber, fibers, composites/SMC, fabrics, plastics, wood, ceramics, powders, chemicals, and organic materials"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Célula de carga",
+      "nameEs": "Célula de carga",
+      "nameEn": "Load cell"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Leitor biométrico ou de código de barras",
+      "nameEs": "Lector biométrico o de código de barras",
+      "nameEn": "Biometric or barcode reader"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Preparação para sistema supervisório",
+      "nameEs": "Preparación para sistema de supervisión",
+      "nameEn": "Provision for a supervisory control system"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Bomba de vazão variável",
+      "nameEs": "Bomba de caudal variable",
+      "nameEn": "Variable-flow pump"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Acumulador de pressão",
+      "nameEs": "Acumulador de presión",
+      "nameEn": "Pressure accumulator"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada de duplo efeito",
+      "nameEs": "Cilindro extractor o cojín de doble efecto",
+      "nameEn": "Extractor cylinder or double-acting cushion"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Parada mecânica ajustável",
+      "nameEs": "Tope mecánico regulable",
+      "nameEn": "Adjustable mechanical stop"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Mesa móvel ou giratória",
+      "nameEs": "Mesa móvil o giratoria",
+      "nameEn": "Movable or rotary table"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Braços de apoio e réguas com esferas ou roletes para colocação de ferramentas",
+      "nameEs": "Brazos de apoyo y guías con bolas o rodillos para colocar herramientas",
+      "nameEn": "Support arms and guides with balls or rollers for tool placement"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMCD-ST",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "standard",
+      "namePt": "Mesa giratória",
+      "nameEs": "Mesa giratoria",
+      "nameEn": "Rotary table"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Rebarbação",
+      "nameEs": "Desbarbado",
+      "nameEn": "Deburring"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Forjamento",
+      "nameEs": "Forja",
+      "nameEn": "Forging"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Rebarbação e calibração de peças em geral",
+      "nameEs": "Desbarbado y calibrado de piezas en general",
+      "nameEn": "Deburring and calibration of general parts"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e melhoria de processos manuais de rebarbação",
+      "nameEs": "Sustitución de prensas excéntricas y mejora de procesos manuales de desbarbado",
+      "nameEn": "Replacement of eccentric presses and improvement of manual deburring processes"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "application",
+      "namePt": "Fabricantes de peças injetadas em alumínio ou zamak e suas ligas, fundições e forjarias de aço, latão, alumínio e outros",
+      "nameEs": "Fabricantes de piezas inyectadas en aluminio o zamak y sus aleaciones, fundiciones y forjas de acero, latón, aluminio y otros",
+      "nameEn": "Manufacturers of aluminum- or zamak-injected parts and their alloys, foundries and forging shops for steel, brass, aluminum, and other materials"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "optional",
+      "namePt": "Cilindro extrator",
+      "nameEs": "Cilindro extractor",
+      "nameEn": "Extractor cylinder"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "optional",
+      "namePt": "Saídas hidráulicas para cilindros radiais",
+      "nameEs": "Salidas hidráulicas para cilindros radiales",
+      "nameEn": "Hydraulic outlets for radial cylinders"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "optional",
+      "namePt": "Saídas para cavacos",
+      "nameEs": "Salidas para virutas",
+      "nameEn": "Chip outlets"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "optional",
+      "namePt": "Bico pneumático de limpeza",
+      "nameEs": "Boquilla neumática de limpieza",
+      "nameEn": "Pneumatic cleaning nozzle"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "optional",
+      "namePt": "Parada mecânica",
+      "nameEs": "Tope mecánico",
+      "nameEn": "Mechanical stop"
+    },
+    {
+      "model": "PMCD-GT",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "application",
+      "namePt": "Rebarbação e calibração de peças em geral",
+      "nameEs": "Desbarbado y calibrado de piezas en general",
+      "nameEn": "Deburring and calibration of general parts"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e melhoria de processos manuais de rebarbação",
+      "nameEs": "Sustitución de prensas excéntricas y mejora de procesos manuales de desbarbado",
+      "nameEn": "Replacement of eccentric presses and improvement of manual deburring processes"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "application",
+      "namePt": "Fabricantes de peças injetadas em alumínio ou zamak e suas ligas, fundições e forjarias de aço, latão, alumínio e outros",
+      "nameEs": "Fabricantes de piezas inyectadas en aluminio o zamak y sus aleaciones, fundiciones y forjas de acero, latón, aluminio y otros",
+      "nameEn": "Manufacturers of aluminum- or zamak-injected parts and their alloys, foundries and forging shops for steel, brass, aluminum, and other materials"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "optional",
+      "namePt": "Cilindro extrator",
+      "nameEs": "Cilindro extractor",
+      "nameEn": "Extractor cylinder"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "optional",
+      "namePt": "Saídas hidráulicas para cilindros radiais",
+      "nameEs": "Salidas hidráulicas para cilindros radiales",
+      "nameEn": "Hydraulic outlets for radial cylinders"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "optional",
+      "namePt": "Parada mecânica",
+      "nameEs": "Tope mecánico",
+      "nameEn": "Mechanical stop"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMCD-TR",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "application",
+      "namePt": "Rebarbação e calibração de peças em geral",
+      "nameEs": "Desbarbado y calibrado de piezas en general",
+      "nameEn": "Deburring and calibration of general parts"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e melhoria de processos manuais de rebarbação",
+      "nameEs": "Sustitución de prensas excéntricas y mejora de procesos manuales de desbarbado",
+      "nameEn": "Replacement of eccentric presses and improvement of manual deburring processes"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "application",
+      "namePt": "Fabricantes de peças injetadas em alumínio ou zamak e suas ligas, fundições e forjarias de aço, latão, alumínio e outros",
+      "nameEs": "Fabricantes de piezas inyectadas en aluminio o zamak y sus aleaciones, fundiciones y forjas de acero, latón, aluminio y otros",
+      "nameEn": "Manufacturers of aluminum- or zamak-injected parts and their alloys, foundries and forging shops for steel, brass, aluminum, and other materials"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "optional",
+      "namePt": "Cilindro extrator",
+      "nameEs": "Cilindro extractor",
+      "nameEn": "Extractor cylinder"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "optional",
+      "namePt": "Saídas hidráulicas para cilindros radiais",
+      "nameEs": "Salidas hidráulicas para cilindros radiales",
+      "nameEn": "Hydraulic outlets for radial cylinders"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "optional",
+      "namePt": "Saídas para cavacos",
+      "nameEs": "Salidas para virutas",
+      "nameEn": "Chip outlets"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "optional",
+      "namePt": "Bico pneumático de limpeza",
+      "nameEs": "Boquilla neumática de limpieza",
+      "nameEn": "Pneumatic cleaning nozzle"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "optional",
+      "namePt": "Parada mecânica",
+      "nameEs": "Tope mecánico",
+      "nameEn": "Mechanical stop"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMCD-MT",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Repuxo",
+      "nameEs": "Embutición",
+      "nameEn": "Drawing"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Repuxo de duplo efeito",
+      "nameEs": "Embutición de doble efecto",
+      "nameEn": "Double-action drawing"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Corte",
+      "nameEs": "Corte",
+      "nameEn": "Cutting"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Dobra",
+      "nameEs": "Plegado",
+      "nameEn": "Bending"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Rebarbação",
+      "nameEs": "Desbarbado",
+      "nameEn": "Deburring"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Estampagem",
+      "nameEs": "Estampado",
+      "nameEn": "Stamping"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Estampagem progressiva",
+      "nameEs": "Estampado progresivo",
+      "nameEn": "Progressive stamping"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Universal",
+      "nameEs": "Universal",
+      "nameEn": "Universal"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e de chaveta",
+      "nameEs": "Sustitución de prensas excéntricas y de chaveta",
+      "nameEn": "Replacement of eccentric and key-driven presses"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "application",
+      "namePt": "Materiais metálicos e não metálicos, borrachas, fibras, compostos/SMC, tecidos, plásticos, madeira, cerâmicas, pós, químicos e orgânicos",
+      "nameEs": "Materiales metálicos y no metálicos, cauchos, fibras, compuestos/SMC, tejidos, plásticos, madera, cerámicas, polvos, químicos y orgánicos",
+      "nameEn": "Metallic and non-metallic materials, rubber, fibers, composites/SMC, fabrics, plastics, wood, ceramics, powders, chemicals, and organic materials"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "optional",
+      "namePt": "Célula de carga",
+      "nameEs": "Célula de carga",
+      "nameEn": "Load cell"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada",
+      "nameEs": "Cilindro extractor o cojín",
+      "nameEn": "Extractor cylinder or cushion"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "optional",
+      "namePt": "Parada mecânica",
+      "nameEs": "Tope mecánico",
+      "nameEn": "Mechanical stop"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "optional",
+      "namePt": "Mesa móvel ou giratória",
+      "nameEs": "Mesa móvil o giratoria",
+      "nameEn": "Movable or rotary table"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMCD-BC",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Repuxo de duplo efeito",
+      "nameEs": "Embutición de doble efecto",
+      "nameEn": "Double-action drawing"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Montagem",
+      "nameEs": "Montaje",
+      "nameEn": "Assembly"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Corte",
+      "nameEs": "Corte",
+      "nameEn": "Cutting"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Dobra",
+      "nameEs": "Plegado",
+      "nameEn": "Bending"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Rebarbação",
+      "nameEs": "Desbarbado",
+      "nameEn": "Deburring"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Estampagem",
+      "nameEs": "Estampado",
+      "nameEn": "Stamping"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Estampagem progressiva",
+      "nameEs": "Estampado progresivo",
+      "nameEn": "Progressive stamping"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Universal",
+      "nameEs": "Universal",
+      "nameEn": "Universal"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Substituição de prensas excêntricas e de chaveta",
+      "nameEs": "Sustitución de prensas excéntricas y de chaveta",
+      "nameEn": "Replacement of eccentric and key-driven presses"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Máquinas compactas",
+      "nameEs": "Máquinas compactas",
+      "nameEn": "Compact machines"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Corte, dobra, repuxo, estampagem, rebarbação, montagem e desmontagem, moldagem, estampagem progressiva, compactação e forjamento",
+      "nameEs": "Corte, plegado, embutición, estampado, desbarbado, montaje y desmontaje, moldeo, estampado progresivo, compactación y forja",
+      "nameEn": "Cutting, bending, drawing, stamping, deburring, assembly and disassembly, molding, progressive stamping, compaction, and forging"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "application",
+      "namePt": "Materiais metálicos e não metálicos, borrachas, fibras, compostos/SMC, tecidos, plásticos, madeira, cerâmicas, pós, químicos e orgânicos",
+      "nameEs": "Materiales metálicos y no metálicos, cauchos, fibras, compuestos/SMC, tejidos, plásticos, madera, cerámicas, polvos, químicos y orgánicos",
+      "nameEn": "Metallic and non-metallic materials, rubber, fibers, composites/SMC, fabrics, plastics, wood, ceramics, powders, chemicals, and organic materials"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada de duplo efeito",
+      "nameEs": "Cilindro extractor o cojín de doble efecto",
+      "nameEn": "Extractor cylinder or double-acting cushion"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "optional",
+      "namePt": "Parada mecânica ajustável",
+      "nameEs": "Tope mecánico regulable",
+      "nameEn": "Adjustable mechanical stop"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMCD-SM",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "application",
+      "namePt": "Universal",
+      "nameEs": "Universal",
+      "nameEn": "Universal"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "application",
+      "namePt": "Fabricação de peças que exigem qualidade e precisão",
+      "nameEs": "Fabricación de piezas que requieren calidad y precisión",
+      "nameEn": "Manufacture of parts requiring quality and precision"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "application",
+      "namePt": "Martelo guiado por buchas de bronze deslizantes e lubrificadas em quatro colunas de aço cromado",
+      "nameEs": "Corredera guiada por bujes de bronce deslizantes y lubricados sobre cuatro columnas de acero cromado",
+      "nameEn": "Ram guided by sliding, lubricated bronze bushings on four chrome-plated steel columns"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "application",
+      "namePt": "Corte, dobra, repuxo, estampagem, rebarbação, montagem e desmontagem, moldagem, estampagem progressiva, compactação e forjamento",
+      "nameEs": "Corte, plegado, embutición, estampado, desbarbado, montaje y desmontaje, moldeo, estampado progresivo, compactación y forja",
+      "nameEn": "Cutting, bending, drawing, stamping, deburring, assembly and disassembly, molding, progressive stamping, compaction, and forging"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "application",
+      "namePt": "Materiais metálicos e não metálicos, borrachas, fibras, compostos/SMC, tecidos, plásticos, madeira, cerâmicas, pós, químicos e orgânicos",
+      "nameEs": "Materiales metálicos y no metálicos, cauchos, fibras, compuestos/SMC, tejidos, plásticos, madera, cerámicas, polvos, químicos y orgánicos",
+      "nameEn": "Metallic and non-metallic materials, rubber, fibers, composites/SMC, fabrics, plastics, wood, ceramics, powders, chemicals, and organic materials"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Temporizador",
+      "nameEs": "Temporizador",
+      "nameEn": "Timer"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Aquecimento",
+      "nameEs": "Calentamiento",
+      "nameEn": "Heating"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Célula de carga",
+      "nameEs": "Célula de carga",
+      "nameEn": "Load cell"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Leitor biométrico ou de código de barras",
+      "nameEs": "Lector biométrico o de código de barras",
+      "nameEn": "Biometric or barcode reader"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Preparação para sistema supervisório",
+      "nameEs": "Preparación para sistema de supervisión",
+      "nameEn": "Provision for a supervisory control system"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Bomba de vazão variável",
+      "nameEs": "Bomba de caudal variable",
+      "nameEn": "Variable-flow pump"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Acumulador de pressão",
+      "nameEs": "Acumulador de presión",
+      "nameEn": "Pressure accumulator"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada de duplo efeito",
+      "nameEs": "Cilindro extractor o cojín de doble efecto",
+      "nameEn": "Extractor cylinder or double-acting cushion"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Mesa móvel",
+      "nameEs": "Mesa móvil",
+      "nameEn": "Movable table"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Braços de apoio e réguas com esferas ou roletes para colocação de ferramentas",
+      "nameEs": "Brazos de apoyo y guías con bolas o rodillos para colocar herramientas",
+      "nameEn": "Support arms and guides with balls or rollers for tool placement"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Trocador de calor para resfriamento do óleo",
+      "nameEs": "Intercambiador de calor para refrigeración del aceite",
+      "nameEn": "Oil-cooling heat exchanger"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Proteção sanfonada para as colunas",
+      "nameEs": "Protección de fuelle para las columnas",
+      "nameEn": "Bellows protection for the columns"
+    },
+    {
+      "model": "PM4C-ST",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "standard",
+      "namePt": "Prensa-chapas",
+      "nameEs": "Pisador de chapa",
+      "nameEn": "Blank holder"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "standard",
+      "namePt": "Regulagem de pressão do prensa-chapas",
+      "nameEs": "Ajuste de presión del pisador de chapa",
+      "nameEn": "Blank-holder pressure adjustment"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "standard",
+      "namePt": "Extrator inferior mecânico",
+      "nameEs": "Expulsor inferior mecánico",
+      "nameEn": "Mechanical lower ejector"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Repuxo",
+      "nameEs": "Embutición",
+      "nameEn": "Drawing"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Repuxo profundo",
+      "nameEs": "Embutición profunda",
+      "nameEn": "Deep drawing"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Repuxo invertido",
+      "nameEs": "Embutición inversa",
+      "nameEn": "Reverse drawing"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Fabricação de peças que exigem qualidade e precisão",
+      "nameEs": "Fabricación de piezas que requieren calidad y precisión",
+      "nameEn": "Manufacture of parts requiring quality and precision"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Martelo guiado por buchas de bronze deslizantes e lubrificadas em quatro colunas de aço cromado",
+      "nameEs": "Corredera guiada por bujes de bronce deslizantes y lubricados sobre cuatro columnas de acero cromado",
+      "nameEn": "Ram guided by sliding, lubricated bronze bushings on four chrome-plated steel columns"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Repuxo com setup rápido, maior durabilidade das ferramentas e melhor qualidade das peças repuxadas",
+      "nameEs": "Embutición con preparación rápida, mayor vida útil de las herramientas y mejor calidad de las piezas embutidas",
+      "nameEn": "Drawing with fast setup, longer tool life, and better deep-drawn part quality"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Utensílios domésticos, luminárias, vasos de pressão, botijões de gás, barris, extintores e copos de filtro",
+      "nameEs": "Utensilios domésticos, luminarias, recipientes a presión, bombonas de gas, barriles, extintores y vasos de filtro",
+      "nameEn": "Household utensils, lighting fixtures, pressure vessels, gas cylinders, barrels, extinguishers, and filter cups"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "application",
+      "namePt": "Aço carbono, aço inoxidável, alumínio e derivados",
+      "nameEs": "Acero al carbono, acero inoxidable, aluminio y derivados",
+      "nameEn": "Carbon steel, stainless steel, aluminum, and derivatives"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "optional",
+      "namePt": "Prensa-chapas guiado nas colunas principais",
+      "nameEs": "Pisador de chapa guiado en las columnas principales",
+      "nameEn": "Blank holder guided on the main columns"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "optional",
+      "namePt": "Bomba de vazão variável",
+      "nameEs": "Bomba de caudal variable",
+      "nameEn": "Variable-flow pump"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada",
+      "nameEs": "Cilindro extractor o cojín",
+      "nameEn": "Extractor cylinder or cushion"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "optional",
+      "namePt": "Braços de apoio e réguas com esferas ou roletes para colocação de ferramentas",
+      "nameEs": "Brazos de apoyo y guías con bolas o rodillos para colocar herramientas",
+      "nameEn": "Support arms and guides with balls or rollers for tool placement"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "optional",
+      "namePt": "Trocador de calor para resfriamento do óleo",
+      "nameEs": "Intercambiador de calor para refrigeración del aceite",
+      "nameEn": "Oil-cooling heat exchanger"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "optional",
+      "namePt": "Proteção sanfonada para as colunas",
+      "nameEs": "Protección de fuelle para las columnas",
+      "nameEn": "Bellows protection for the columns"
+    },
+    {
+      "model": "PM4C-RP",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "standard",
+      "namePt": "Grades de proteção fechadas contra fagulhas",
+      "nameEs": "Resguardos cerrados de protección contra chispas",
+      "nameEn": "Enclosed protective guards against sparks"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "standard",
+      "namePt": "Calhas laterais para limpeza",
+      "nameEs": "Canaletas laterales para limpieza",
+      "nameEn": "Side cleaning gutters"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "application",
+      "namePt": "Rebarbação e calibração de peças em geral",
+      "nameEs": "Desbarbado y calibrado de piezas en general",
+      "nameEn": "Deburring and calibration of general parts"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "application",
+      "namePt": "Fabricação de peças que exigem qualidade e precisão",
+      "nameEs": "Fabricación de piezas que requieren calidad y precisión",
+      "nameEn": "Manufacture of parts requiring quality and precision"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "application",
+      "namePt": "Martelo guiado por buchas de bronze deslizantes e lubrificadas em quatro colunas de aço cromado",
+      "nameEs": "Corredera guiada por bujes de bronce deslizantes y lubricados sobre cuatro columnas de acero cromado",
+      "nameEn": "Ram guided by sliding, lubricated bronze bushings on four chrome-plated steel columns"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "application",
+      "namePt": "Fabricantes de peças injetadas em alumínio ou zamak e suas ligas, fundições e forjarias de aço, latão, alumínio e outros",
+      "nameEs": "Fabricantes de piezas inyectadas en aluminio o zamak y sus aleaciones, fundiciones y forjas de acero, latón, aluminio y otros",
+      "nameEn": "Manufacturers of aluminum- or zamak-injected parts and their alloys, foundries and forging shops for steel, brass, aluminum, and other materials"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "optional",
+      "namePt": "Saídas adicionais para acionamento de radiais",
+      "nameEs": "Salidas adicionales para accionamiento radial",
+      "nameEn": "Additional outputs for radial actuation"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "optional",
+      "namePt": "Cilindro extrator",
+      "nameEs": "Cilindro extractor",
+      "nameEn": "Extractor cylinder"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "optional",
+      "namePt": "Bandeja para retirada de peça ou cavaco",
+      "nameEs": "Bandeja para retirada de piezas o virutas",
+      "nameEn": "Tray for part or chip removal"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "optional",
+      "namePt": "Mesa móvel",
+      "nameEs": "Mesa móvil",
+      "nameEn": "Movable table"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "optional",
+      "namePt": "Mesa basculante",
+      "nameEs": "Mesa basculante",
+      "nameEn": "Tilting table"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "optional",
+      "namePt": "Proteção sanfonada para as colunas",
+      "nameEs": "Protección de fuelle para las columnas",
+      "nameEn": "Bellows protection for the columns"
+    },
+    {
+      "model": "PM4C-TR",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "standard",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "standard",
+      "namePt": "Martelo basculante a 145°",
+      "nameEs": "Corredera basculante a 145°",
+      "nameEn": "Tilting ram at 145°"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "standard",
+      "namePt": "Mesa móvel",
+      "nameEs": "Mesa móvil",
+      "nameEn": "Movable table"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "application",
+      "namePt": "Martelo guiado por buchas de bronze deslizantes e lubrificadas em quatro colunas de aço cromado",
+      "nameEs": "Corredera guiada por bujes de bronce deslizantes y lubricados sobre cuatro columnas de acero cromado",
+      "nameEn": "Ram guided by sliding, lubricated bronze bushings on four chrome-plated steel columns"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "application",
+      "namePt": "Try-out, preparação, testes e ajuste de moldes, ferramentas e matrizes",
+      "nameEs": "Try-out, preparación, pruebas y ajuste de moldes, herramientas y matrices",
+      "nameEn": "Try-out, preparation, testing, and adjustment of molds, tools, and dies"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "application",
+      "namePt": "Ferramentarias e matrizarias",
+      "nameEs": "Talleres de herramientas y matrices",
+      "nameEn": "Tool and die shops"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "application",
+      "namePt": "Indústrias metalúrgicas, de plástico e outras",
+      "nameEs": "Industrias metalúrgicas, del plástico y otras",
+      "nameEn": "Metallurgical, plastics, and other industries"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "optional",
+      "namePt": "Mesa basculante a 45°",
+      "nameEs": "Mesa basculante a 45°",
+      "nameEn": "45° tilting table"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "optional",
+      "namePt": "Mesa giratória a 360°",
+      "nameEs": "Mesa giratoria a 360°",
+      "nameEn": "360° rotary table"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "optional",
+      "namePt": "Acumulador de pressão",
+      "nameEs": "Acumulador de presión",
+      "nameEn": "Pressure accumulator"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "optional",
+      "namePt": "Cilindro extrator",
+      "nameEs": "Cilindro extractor",
+      "nameEn": "Extractor cylinder"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "optional",
+      "namePt": "Braços de apoio e réguas com esferas ou roletes para colocação de ferramentas",
+      "nameEs": "Brazos de apoyo y guías con bolas o rodillos para colocar herramientas",
+      "nameEn": "Support arms and guides with balls or rollers for tool placement"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "optional",
+      "namePt": "Proteção sanfonada para as colunas",
+      "nameEs": "Protección de fuelle para las columnas",
+      "nameEn": "Bellows protection for the columns"
+    },
+    {
+      "model": "PM4C-TY",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "application",
+      "namePt": "Universal",
+      "nameEs": "Universal",
+      "nameEn": "Universal"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "application",
+      "namePt": "Fabricação de peças que exigem máquinas robustas",
+      "nameEs": "Fabricación de piezas que requieren máquinas robustas",
+      "nameEn": "Manufacture of parts requiring robust machines"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "application",
+      "namePt": "Martelo flutuante guiado por colunas cilíndricas",
+      "nameEs": "Corredera flotante guiada por columnas cilíndricas",
+      "nameEn": "Floating ram guided by cylindrical columns"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "application",
+      "namePt": "Corte, dobra, repuxo, estampagem, rebarbação, montagem e desmontagem, moldagem, estampagem progressiva, compactação e forjamento",
+      "nameEs": "Corte, plegado, embutición, estampado, desbarbado, montaje y desmontaje, moldeo, estampado progresivo, compactación y forja",
+      "nameEn": "Cutting, bending, drawing, stamping, deburring, assembly and disassembly, molding, progressive stamping, compaction, and forging"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "application",
+      "namePt": "Materiais metálicos e não metálicos, borrachas, fibras, compostos/SMC, tecidos, plásticos, madeira, cerâmicas, pós, químicos e orgânicos",
+      "nameEs": "Materiales metálicos y no metálicos, cauchos, fibras, compuestos/SMC, tejidos, plásticos, madera, cerámicas, polvos, químicos y orgánicos",
+      "nameEn": "Metallic and non-metallic materials, rubber, fibers, composites/SMC, fabrics, plastics, wood, ceramics, powders, chemicals, and organic materials"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Temporizador",
+      "nameEs": "Temporizador",
+      "nameEn": "Timer"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Aquecimento",
+      "nameEs": "Calentamiento",
+      "nameEn": "Heating"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Célula de carga",
+      "nameEs": "Célula de carga",
+      "nameEn": "Load cell"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Bomba de vazão variável",
+      "nameEs": "Bomba de caudal variable",
+      "nameEn": "Variable-flow pump"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Acumulador de pressão",
+      "nameEs": "Acumulador de presión",
+      "nameEn": "Pressure accumulator"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada de duplo efeito",
+      "nameEs": "Cilindro extractor o cojín de doble efecto",
+      "nameEn": "Extractor cylinder or double-acting cushion"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Mesa móvel",
+      "nameEs": "Mesa móvil",
+      "nameEn": "Movable table"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Braços de apoio e réguas com esferas ou roletes para colocação de ferramentas",
+      "nameEs": "Brazos de apoyo y guías con bolas o rodillos para colocar herramientas",
+      "nameEn": "Support arms and guides with balls or rollers for tool placement"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Trocador de calor para resfriamento do óleo",
+      "nameEs": "Intercambiador de calor para refrigeración del aceite",
+      "nameEn": "Oil-cooling heat exchanger"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMH-ST",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "standard",
+      "namePt": "Martelo guiado por prismas",
+      "nameEs": "Corredera guiada por prismas",
+      "nameEn": "Prism-guided ram"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "standard",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "standard",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "standard",
+      "namePt": "Calço de segurança",
+      "nameEs": "Calzo de seguridad",
+      "nameEn": "Safety block"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "standard",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "standard",
+      "namePt": "Grade de proteção",
+      "nameEs": "Resguardo de protección",
+      "nameEn": "Protective guard"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "application",
+      "namePt": "Universal",
+      "nameEs": "Universal",
+      "nameEn": "Universal"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "application",
+      "namePt": "Fabricação de peças que exigem robustez, qualidade e precisão",
+      "nameEs": "Fabricación de piezas que requieren robustez, calidad y precisión",
+      "nameEn": "Manufacture of parts requiring robustness, quality, and precision"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "application",
+      "namePt": "Martelo guiado por réguas prismáticas ajustáveis",
+      "nameEs": "Corredera guiada por guías prismáticas ajustables",
+      "nameEn": "Ram guided by adjustable prismatic guides"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "application",
+      "namePt": "Compatibilidade com alimentadores, robôs, acessórios, componentes e periféricos",
+      "nameEs": "Compatibilidad con alimentadores, robots, accesorios, componentes y periféricos",
+      "nameEn": "Compatibility with feeders, robots, accessories, components, and peripherals"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "application",
+      "namePt": "Corte, dobra, repuxo, estampagem, rebarbação, montagem e desmontagem, moldagem, estampagem progressiva, compactação e forjamento",
+      "nameEs": "Corte, plegado, embutición, estampado, desbarbado, montaje y desmontaje, moldeo, estampado progresivo, compactación y forja",
+      "nameEn": "Cutting, bending, drawing, stamping, deburring, assembly and disassembly, molding, progressive stamping, compaction, and forging"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "application",
+      "namePt": "Materiais metálicos e não metálicos, borrachas, fibras, compostos/SMC, tecidos, plásticos, madeira, cerâmicas, pós, químicos e orgânicos",
+      "nameEs": "Materiales metálicos y no metálicos, cauchos, fibras, compuestos/SMC, tejidos, plásticos, madera, cerámicas, polvos, químicos y orgánicos",
+      "nameEn": "Metallic and non-metallic materials, rubber, fibers, composites/SMC, fabrics, plastics, wood, ceramics, powders, chemicals, and organic materials"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Temporizador",
+      "nameEs": "Temporizador",
+      "nameEn": "Timer"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Aquecimento",
+      "nameEs": "Calentamiento",
+      "nameEn": "Heating"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Célula de carga",
+      "nameEs": "Célula de carga",
+      "nameEn": "Load cell"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Leitor biométrico ou de código de barras",
+      "nameEs": "Lector biométrico o de código de barras",
+      "nameEn": "Biometric or barcode reader"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Preparação para sistema supervisório",
+      "nameEs": "Preparación para sistema de supervisión",
+      "nameEn": "Provision for a supervisory control system"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Bomba de vazão variável",
+      "nameEs": "Bomba de caudal variable",
+      "nameEn": "Variable-flow pump"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Acumulador de pressão",
+      "nameEs": "Acumulador de presión",
+      "nameEn": "Pressure accumulator"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Cilindro extrator ou almofada de duplo efeito",
+      "nameEs": "Cilindro extractor o cojín de doble efecto",
+      "nameEn": "Extractor cylinder or double-acting cushion"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Mesa móvel",
+      "nameEs": "Mesa móvil",
+      "nameEn": "Movable table"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Braços de apoio e réguas com esferas ou roletes para colocação de ferramentas",
+      "nameEs": "Brazos de apoyo y guías con bolas o rodillos para colocar herramientas",
+      "nameEn": "Support arms and guides with balls or rollers for tool placement"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Trocador de calor para resfriamento do óleo",
+      "nameEs": "Intercambiador de calor para refrigeración del aceite",
+      "nameEn": "Oil-cooling heat exchanger"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Cortina de luz com feixes flutuantes",
+      "nameEs": "Cortina de luz con haces flotantes",
+      "nameEn": "Light curtain with floating beams"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Proteção sanfonada para as colunas",
+      "nameEs": "Protección de fuelle para las columnas",
+      "nameEn": "Bellows protection for the columns"
+    },
+    {
+      "model": "PMH-PR",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "standard",
+      "namePt": "Ponta da haste roscada com martelo postiço",
+      "nameEs": "Extremo roscado del vástago con cabezal intercambiable",
+      "nameEn": "Threaded rod end with replaceable ram head"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "standard",
+      "namePt": "Corrente para elevação da mesa pela haste",
+      "nameEs": "Cadena para elevación de la mesa mediante el vástago",
+      "nameEn": "Chain for table lifting through the rod"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "standard",
+      "namePt": "Console bimanual com simultaneidade",
+      "nameEs": "Pupitre bimanual con simultaneidad",
+      "nameEn": "Two-hand control console with simultaneity"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "standard",
+      "namePt": "Acionamento motorizado — 220 V trifásico",
+      "nameEs": "Accionamiento motorizado — 220 V trifásico",
+      "nameEn": "Motorized operation — 220 V three-phase"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "application",
+      "namePt": "Universal",
+      "nameEs": "Universal",
+      "nameEn": "Universal"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "application",
+      "namePt": "Oficinas de manutenção e linhas de montagem",
+      "nameEs": "Talleres de mantenimiento y líneas de montaje",
+      "nameEn": "Maintenance workshops and assembly lines"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "application",
+      "namePt": "Corte, dobra, repuxo, rebarbação, montagem e desmontagem, moldagem e compactação",
+      "nameEs": "Corte, plegado, embutición, desbarbado, montaje y desmontaje, moldeo y compactación",
+      "nameEn": "Cutting, bending, drawing, deburring, assembly and disassembly, molding, and compaction"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "application",
+      "namePt": "Todos os tipos de empresas, metalúrgicas ou não",
+      "nameEs": "Todo tipo de empresas, metalúrgicas o no",
+      "nameEn": "All types of companies, metallurgical or otherwise"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "application",
+      "namePt": "Montagem e desmontagem de eixos, rotores, motores, redutores e buchas; alinhamento de eixos e vigas; corte e dobra",
+      "nameEs": "Montaje y desmontaje de ejes, rotores, motores, reductores y bujes; alineación de ejes y vigas; corte y plegado",
+      "nameEn": "Assembly and disassembly of shafts, rotors, motors, gearboxes, and bushings; shaft and beam alignment; cutting and bending"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "optional",
+      "namePt": "Acionamento por console bimanual",
+      "nameEs": "Accionamiento mediante pupitre bimanual",
+      "nameEn": "Two-hand console operation"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "optional",
+      "namePt": "Prensa manual auxiliar fixa na lateral",
+      "nameEs": "Prensa manual auxiliar fija en el lateral",
+      "nameEn": "Auxiliary manual press fixed to the side"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "optional",
+      "namePt": "Blocos em V",
+      "nameEs": "Bloques en V",
+      "nameEn": "V-blocks"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "optional",
+      "namePt": "Mesa fixa lisa ou com canais T",
+      "nameEs": "Mesa fija lisa o con ranuras en T",
+      "nameEn": "Fixed plain table or table with T-slots"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "optional",
+      "namePt": "Cilindro com movimento lateral — direita/esquerda",
+      "nameEs": "Cilindro con movimiento lateral — derecha/izquierda",
+      "nameEn": "Cylinder with lateral movement — right/left"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "optional",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "optional",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "optional",
+      "namePt": "Elevação automática da mesa por cilindros laterais",
+      "nameEs": "Elevación automática de la mesa mediante cilindros laterales",
+      "nameEn": "Automatic table lifting by side cylinders"
+    },
+    {
+      "model": "PMH-WK",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "standard",
+      "namePt": "Movimento da mesa por cremalheira acionada por motoredutor",
+      "nameEs": "Movimiento de la mesa por cremallera accionada por motorreductor",
+      "nameEn": "Gearmotor-driven rack-and-pinion table movement"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "standard",
+      "namePt": "Botão de emergência",
+      "nameEs": "Pulsador de emergencia",
+      "nameEn": "Emergency stop button"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "application",
+      "namePt": "Oficinas de manutenção: montagem e desmontagem de redutores, eixos, motores, bombas e outros",
+      "nameEs": "Talleres de mantenimiento: montaje y desmontaje de reductores, ejes, motores, bombas y otros",
+      "nameEn": "Maintenance workshops: assembly and disassembly of gearboxes, shafts, motors, pumps, and other components"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "application",
+      "namePt": "Endireitamento de chapas e vigas na indústria metalúrgica",
+      "nameEs": "Enderezado de chapas y vigas en la industria metalúrgica",
+      "nameEn": "Straightening of sheets and beams in the metallurgical industry"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "application",
+      "namePt": "Montagem, desmontagem e alinhamento",
+      "nameEs": "Montaje, desmontaje y alineación",
+      "nameEn": "Assembly, disassembly, and alignment"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "application",
+      "namePt": "Metalúrgicas, siderúrgicas, mineradoras, estaleiros e grandes empresas",
+      "nameEs": "Empresas metalúrgicas, siderúrgicas, mineras, astilleros y grandes industrias",
+      "nameEn": "Metallurgical companies, steel mills, mining companies, shipyards, and large industrial companies"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "optional",
+      "namePt": "Acionamento por console bimanual",
+      "nameEs": "Accionamiento mediante pupitre bimanual",
+      "nameEn": "Two-hand console operation"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "optional",
+      "namePt": "Cilindro com movimentos laterais",
+      "nameEs": "Cilindro con movimientos laterales",
+      "nameEn": "Cylinder with lateral movements"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "optional",
+      "namePt": "Enclausuramento perimetral com fechamento mecânico e/ou barreira de luz",
+      "nameEs": "Cerramiento perimetral con cierre mecánico y/o barrera de luz",
+      "nameEn": "Perimeter enclosure with mechanical closure and/or light barrier"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "optional",
+      "namePt": "Bloco manifold monitorado — Categoria 4",
+      "nameEs": "Bloque manifold supervisado — Categoría 4",
+      "nameEn": "Monitored manifold block — Category 4"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "optional",
+      "namePt": "CLP de segurança",
+      "nameEs": "PLC de seguridad",
+      "nameEn": "Safety PLC"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "optional",
+      "namePt": "Cortina de luz",
+      "nameEs": "Cortina de luz",
+      "nameEn": "Light curtain"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    },
+    {
+      "model": "PMH-WP",
+      "category": "optional",
+      "namePt": "Trocador de calor para resfriamento do óleo",
+      "nameEs": "Intercambiador de calor para refrigeración del aceite",
+      "nameEn": "Oil-cooling heat exchanger"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "application",
+      "namePt": "Fabricação de peças automotivas, coxins, patins de freio e outras",
+      "nameEs": "Fabricación de piezas automotrices, soportes antivibratorios, pastillas de freno y otras",
+      "nameEn": "Manufacture of automotive parts, engine mounts, brake pads, and other components"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "application",
+      "namePt": "Setup rápido do ferramental, maior durabilidade das ferramentas e melhor qualidade das peças",
+      "nameEs": "Preparación rápida del herramental, mayor vida útil de las herramientas y mejor calidad de las piezas",
+      "nameEn": "Fast tooling setup, longer tool life, and better part quality"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "application",
+      "namePt": "Baixa manutenção, ruído e vibração",
+      "nameEs": "Bajo mantenimiento, ruido y vibración",
+      "nameEn": "Low maintenance, noise, and vibration"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "application",
+      "namePt": "Atendimento às normas de segurança mais exigentes",
+      "nameEs": "Cumplimiento de las normas de seguridad más exigentes",
+      "nameEn": "Compliance with the most demanding safety standards"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "application",
+      "namePt": "Vulcanização, colagem, moldagem e injeção por transferência",
+      "nameEs": "Vulcanización, encolado, moldeo e inyección por transferencia",
+      "nameEn": "Vulcanization, bonding, molding, and transfer injection"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "application",
+      "namePt": "Indústrias metalúrgicas, autopeças, motopeças, borracha, calçados, tapetes e peças técnicas em silicone",
+      "nameEs": "Industrias metalúrgicas, autopartes, motopartes, caucho, calzado, alfombras y piezas técnicas de silicona",
+      "nameEn": "Metallurgical, automotive, motorcycle-parts, rubber, footwear, carpet, and technical silicone-parts industries"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "application",
+      "namePt": "Borrachas, compostos metal-borracha, fibras, compostos e madeira",
+      "nameEs": "Cauchos, compuestos metal-caucho, fibras, compuestos y madera",
+      "nameEn": "Rubber, metal-rubber compounds, fibers, composites, and wood"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "optional",
+      "namePt": "CLP + IHM — Controlador Lógico Programável + Interface Homem-Máquina",
+      "nameEs": "PLC + HMI — Controlador Lógico Programable + Interfaz Hombre-Máquina",
+      "nameEn": "PLC + HMI — Programmable Logic Controller + Human-Machine Interface"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "optional",
+      "namePt": "Degasagem",
+      "nameEs": "Desgasificación",
+      "nameEn": "Degassing"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "optional",
+      "namePt": "Aquecimento dos platôs por vapor ou óleo térmico",
+      "nameEs": "Calentamiento de los platos por vapor o aceite térmico",
+      "nameEn": "Steam- or thermal-oil-heated platens"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "optional",
+      "namePt": "Platôs preparados para sistema de resfriamento",
+      "nameEs": "Platos preparados para sistema de refrigeración",
+      "nameEn": "Platens prepared for a cooling system"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "optional",
+      "namePt": "Válvulas proporcionais de vazão e pressão",
+      "nameEs": "Válvulas proporcionales de caudal y presión",
+      "nameEn": "Proportional flow and pressure valves"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "optional",
+      "namePt": "Mesa de preparação/extração, simples ou dupla",
+      "nameEs": "Mesa de preparación/extracción, simple o doble",
+      "nameEn": "Preparation/extraction table, single or double"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "optional",
+      "namePt": "Cilindros destacadores",
+      "nameEs": "Cilindros despegadores",
+      "nameEn": "Stripper cylinders"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "optional",
+      "namePt": "Bomba de baixo ruído",
+      "nameEs": "Bomba de bajo ruido",
+      "nameEn": "Low-noise pump"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "optional",
+      "namePt": "Trocador de calor para resfriamento do óleo",
+      "nameEs": "Intercambiador de calor para refrigeración del aceite",
+      "nameEn": "Oil-cooling heat exchanger"
+    },
+    {
+      "model": "PMH-VB",
+      "category": "optional",
+      "namePt": "Pintura customizada",
+      "nameEs": "Pintura personalizada",
+      "nameEn": "Custom paint finish"
+    }
+  ]
+}

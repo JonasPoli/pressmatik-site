@@ -54,52 +54,7 @@
             </div>
         </div>
 
-        <!-- Applications Section -->
-        {% set show_apps = (product.category in ['hydraulic', 'servo-hydraulic', 'mechanical']) %}
-        {% if show_apps %}
-            <section class="product-applications-section scroll-animate slide-top" style="margin-top: 5rem; margin-bottom: 5rem;">
-                <div class="overview-header" style="margin-bottom: 3rem; text-align: left;">
-                    <span class="section-title-tag">Aplicações</span>
-                    <h2 style="font-size: 2.2rem; margin-top: 0.8rem; font-weight: 800; font-family: var(--font-heading);">Aplicações Recomendadas</h2>
-                    <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.6; margin-top: 0.5rem; max-width: 900px;">
-                        Nossas prensas industriais atendem a uma ampla variedade de processos com alta eficiência e repetibilidade.
-                    </p>
-                </div>
-                
-                <div class="applications-grid">
-                    {% if activeSubproduct and activeSubproduct.applications|length > 0 %}
-                        {% for app in activeSubproduct.applications %}
-                            <div class="application-card" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--shadow-card-subtle);">
-                                <div class="application-img-wrapper" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                                    <img src="{% if app.imageName %}/uploads/applications/{{ app.imageName }}{% else %}/uploads/applications/corte.png{% endif %}" alt="{{ app.getName(locale) }}" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(1.2) contrast(1.1);">
-                                </div>
-                                <h4 style="text-align: center; margin: 0; color: var(--color-text-primary); font-size: 1rem; font-weight: 700;">{{ app.getName(locale) }}</h4>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {# Fallback if no applications are registered #}
-                        {% set static_apps = [
-                            {'title': 'Corte de Chapas', 'img': '/images/aplicacoes/corte.png'},
-                            {'title': 'Dobra e Conformação', 'img': '/images/aplicacoes/dobra.png'},
-                            {'title': 'Duplo Efeito', 'img': '/images/aplicacoes/duplo-efeito.png'},
-                            {'title': 'Estampagem Rápida', 'img': '/images/aplicacoes/estampagem.png'},
-                            {'title': 'Montagem e Ajuste', 'img': '/images/aplicacoes/montagem.png'},
-                            {'title': 'Estampagem Progressiva', 'img': '/images/aplicacoes/progressivo.png'},
-                            {'title': 'Rebarbação de Fundidos', 'img': '/images/aplicacoes/rebarbacao.png'},
-                            {'title': 'Repuxo Profundo', 'img': '/images/aplicacoes/repuxo.png'},
-                        ] %}
-                        {% for app in static_apps %}
-                            <div class="application-card" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--shadow-card-subtle);">
-                                <div class="application-img-wrapper" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                                    <img src="{{ app.img }}" alt="{{ app.title }}" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(1.2) contrast(1.1);">
-                                </div>
-                                <h4 style="text-align: center; margin: 0; color: var(--color-text-primary); font-size: 1rem; font-weight: 700;">{{ app.title }}</h4>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            </section>
-        {% endif %}
+
 
         <!-- Product Overview & Detailed Features -->
         <section class="product-overview-section scroll-animate slide-top" style="margin-top: 6rem; margin-bottom: 6rem;">
@@ -162,109 +117,208 @@
             </div>
         </section>
 
-        <!-- Tabs Component (Especificações, Configurações) -->
-        <div class="product-tabs-section scroll-animate slide-top">
-            <wa-tab-group>
-                {% if productSizes is not empty %}
-                    <wa-tab slot="nav" panel="specs">{{ 'product_detail.specs_title'|trans }}</wa-tab>
-                {% endif %}
-                {% if standardItems is not empty or optionalItems is not empty %}
-                    <wa-tab slot="nav" panel="config">{{ 'product_detail.config_title'|trans }}</wa-tab>
-                {% endif %}
+        <!-- Technical Specifications Table Section (Sem Abas) -->
+        {% if productSizes is not empty %}
+            <section class="product-specs-section scroll-animate slide-top" style="margin-top: 5rem; margin-bottom: 5rem;">
+                <div class="overview-header" style="margin-bottom: 3rem; text-align: left; max-width: 900px;">
+                    <span class="section-title-tag">{{ 'product_detail.specs_tag'|trans }}</span>
+                    <h2 style="font-size: 2.2rem; margin-top: 0.8rem; font-weight: 800; font-family: var(--font-heading);">
+                        {{ 'product_detail.specs_title'|trans }}
+                    </h2>
+                    <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.6; margin-top: 0.5rem; max-width: 900px;">
+                        {{ 'product_detail.specs_desc'|trans }}
+                    </p>
+                </div>
 
-                <!-- Technical Specification Table Panel -->
-                {% if productSizes is not empty %}
-                    <wa-tab-panel name="specs">
-                        <div class="specs-table-wrapper">
-                            <table class="specs-table">
-                                <thead>
-                                    {% set hasAnySub = false %}
+                <div class="specs-table-wrapper">
+                    <table class="specs-table">
+                        <thead>
+                            {% set hasAnySub = false %}
+                            {% for size in productSizes %}
+                                {% if size.hasVType or size.hasHType %}
+                                    {% set hasAnySub = true %}
+                                {% endif %}
+                            {% endfor %}
+                            <tr>
+                                <th {% if hasAnySub %}rowspan="2" style="vertical-align: middle;"{% endif %}>{{ 'product_detail.spec_name'|trans }}</th>
+                                <th {% if hasAnySub %}rowspan="2" style="vertical-align: middle;"{% endif %}>{{ 'product_detail.spec_unit'|trans }}</th>
+                                {% for size in productSizes %}
+                                    {% set hasSub = size.hasVType or size.hasHType %}
+                                    <th colspan="{{ hasSub ? (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) : 1 }}"
+                                        {% if hasAnySub and not hasSub %}rowspan="2" style="vertical-align: middle; text-align: center;"{% else %}style="text-align: center;"{% endif %}>
+                                        {{ size.name }}
+                                    </th>
+                                {% endfor %}
+                            </tr>
+                            {% if hasAnySub %}
+                            <tr>
+                                {% for size in productSizes %}
+                                    {% if size.hasVType %}
+                                        <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">V-type</th>
+                                    {% endif %}
+                                    {% if size.hasHType %}
+                                        <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">H-type</th>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                            {% endif %}
+                        </thead>
+                        <tbody>
+                            {% for row in specsTableRows %}
+                                <tr>
+                                    <td>{{ row.specification.getName(locale) }}</td>
+                                    <td>{{ row.specification.getUnit(locale) }}</td>
                                     {% for size in productSizes %}
-                                        {% if size.hasVType or size.hasHType %}
-                                            {% set hasAnySub = true %}
+                                        {% if size.hasVType %}
+                                            <td style="text-align: center;">{{ row.values[size.id].v ?? '—' }}</td>
+                                        {% endif %}
+                                        {% if size.hasHType %}
+                                            <td style="text-align: center;">{{ row.values[size.id].h ?? '—' }}</td>
+                                        {% endif %}
+                                        {% if not size.hasVType and not size.hasHType %}
+                                            <td style="text-align: center;">{{ row.values[size.id].v ?? '—' }}</td>
                                         {% endif %}
                                     {% endfor %}
-                                    <tr>
-                                        <th {% if hasAnySub %}rowspan="2" style="vertical-align: middle;"{% endif %}>{{ 'product_detail.spec_name'|trans }}</th>
-                                        <th {% if hasAnySub %}rowspan="2" style="vertical-align: middle;"{% endif %}>{{ 'product_detail.spec_unit'|trans }}</th>
-                                        {% for size in productSizes %}
-                                            {% set hasSub = size.hasVType or size.hasHType %}
-                                            <th colspan="{{ hasSub ? (size.hasVType ? 1 : 0) + (size.hasHType ? 1 : 0) : 1 }}"
-                                                {% if hasAnySub and not hasSub %}rowspan="2" style="vertical-align: middle; text-align: center;"{% else %}style="text-align: center;"{% endif %}>
-                                                {{ size.name }}
-                                            </th>
-                                        {% endfor %}
-                                    </tr>
-                                    {% if hasAnySub %}
-                                    <tr>
-                                        {% for size in productSizes %}
-                                            {% if size.hasVType %}
-                                                <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">V-type</th>
-                                            {% endif %}
-                                            {% if size.hasHType %}
-                                                <th style="text-align: center; border-bottom: 2px solid var(--color-accent-red);">H-type</th>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </tr>
-                                    {% endif %}
-                                </thead>
-                                <tbody>
-                                    {% for row in specsTableRows %}
-                                        <tr>
-                                            <td>{{ row.specification.getName(locale) }}</td>
-                                            <td>{{ row.specification.getUnit(locale) }}</td>
-                                            {% for size in productSizes %}
-                                                {% if size.hasVType %}
-                                                    <td style="text-align: center;">{{ row.values[size.id].v ?? '—' }}</td>
-                                                {% endif %}
-                                                {% if size.hasHType %}
-                                                    <td style="text-align: center;">{{ row.values[size.id].h ?? '—' }}</td>
-                                                {% endif %}
-                                                {% if not size.hasVType and not size.hasHType %}
-                                                    <td style="text-align: center;">{{ row.values[size.id].v ?? '—' }}</td>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic;">
-                            {{ 'product_detail.footnote'|trans }}
-                        </p>
-                    </wa-tab-panel>
-                {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic;">
+                    {{ 'product_detail.footnote'|trans }}
+                </p>
+            </section>
+        {% endif %}
 
-                <!-- Standard / Optional Configurations Panel -->
-                {% if standardItems is not empty or optionalItems is not empty %}
-                    <wa-tab-panel name="config">
-                        <div class="config-grid">
-                            {% if standardItems is not empty %}
-                                <div class="config-col">
-                                    <h3>{{ 'product_detail.std_items'|trans }}</h3>
-                                    <ul class="config-list">
-                                        {% for std in standardItems %}
-                                            <li><i class="fa-solid fa-circle-check" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ std.getName(locale) }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
+        <!-- ================================================================= -->
+        <!-- THREE NEW SUBPRODUCT ITEM SECTIONS (Standard, Applications, Optionals) -->
+        <!-- Below Parâmetros Técnicos, Above Vídeos de Operação -->
+        <!-- ================================================================= -->
+
+        {% if activeSubproduct %}
+
+            <!-- 1. ITENS DE SÉRIE (STANDARD ITEMS) -->
+            {% if activeSubproduct.standardItems|length > 0 %}
+                <section class="subproduct-standard-items-section scroll-animate slide-top" style="margin-top: 5rem; margin-bottom: 4rem;">
+                    <div class="overview-header" style="margin-bottom: 3rem; text-align: left; max-width: 900px;">
+                        <span class="section-title-tag">
+                            {% if locale == 'en' %}FACTORY STANDARD EQUIPMENT{% elseif locale == 'es' %}EQUIPAMIENTO DE FÁBRICA{% else %}EQUIPAMENTO DE FÁBRICA{% endif %}
+                        </span>
+                        <h2 style="font-size: 2.2rem; margin-top: 0.8rem; font-weight: 800; font-family: var(--font-heading);">
+                            {% if locale == 'en' %}Standard Items & Features{% elseif locale == 'es' %}Ítems de Serie del Equipo{% else %}Itens de Série do Equipamento{% endif %}
+                        </h2>
+                        <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.6; margin-top: 0.5rem; max-width: 900px;">
+                            {% if locale == 'en' %}Factory-integrated safety systems, controls, and premium components included standard with model {{ activeSubproduct.model }}.
+                            {% elseif locale == 'es' %}Sistemas de seguridad, mandos y componentes de alta calidad integrados de fábrica en el modelo {{ activeSubproduct.model }}.
+                            {% else %}Sistemas de segurança, comandos e componentes integrados de fábrica neste modelo {{ activeSubproduct.model }} para garantir máxima eficiência.
                             {% endif %}
-                            
-                            {% if optionalItems is not empty %}
-                                <div class="config-col">
-                                    <h3>{{ 'product_detail.opt_items'|trans }}</h3>
-                                    <ul class="config-list">
-                                        {% for opt in optionalItems %}
-                                            <li><i class="fa-solid fa-circle-plus" style="color: var(--color-accent-red); margin-right: 8px;"></i>{{ opt.getName(locale) }}</li>
-                                        {% endfor %}
-                                    </ul>
+                        </p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem;">
+                        {% for item in activeSubproduct.standardItems %}
+                            <div style="background: var(--color-surface-dark); border-left: 4px solid #3b82f6; border-top: 1px solid var(--color-border); border-right: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); border-radius: 10px; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-card-subtle); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+                                 onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px rgba(59, 130, 246, 0.15)';"
+                                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-card-subtle)';">
+                                <div style="width: 44px; height: 44px; min-width: 44px; border-radius: 10px; background: rgba(59, 130, 246, 0.12); color: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                                    <i class="{{ item.icon ?: 'fa-solid fa-check' }}"></i>
                                 </div>
+                                <div style="flex-grow: 1;">
+                                    <h4 style="margin: 0; font-size: 1rem; font-weight: 700; color: var(--color-text-primary); line-height: 1.4;">
+                                        {{ item.getName(locale) }}
+                                    </h4>
+                                    <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; color: #3b82f6; opacity: 0.85;">
+                                        {% if locale == 'en' %}In-Series{% elseif locale == 'es' %}De Serie{% else %}De Série{% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+
+            <!-- 2. APLICAÇÕES (LISTAGEM) -->
+            {% if activeSubproduct.applicationListItems|length > 0 %}
+                <section class="subproduct-applications-section scroll-animate slide-top" style="margin-top: 5rem; margin-bottom: 4rem;">
+                    <div class="overview-header" style="margin-bottom: 3rem; text-align: left; max-width: 900px;">
+                        <span class="section-title-tag">
+                            {% if locale == 'en' %}OPERATIONAL VERSATILITY{% elseif locale == 'es' %}VERSATILIDAD OPERATIVA{% else %}VERSATILIDADE OPERACIONAL{% endif %}
+                        </span>
+                        <h2 style="font-size: 2.2rem; margin-top: 0.8rem; font-weight: 800; font-family: var(--font-heading);">
+                            {% if locale == 'en' %}Recommended Applications{% elseif locale == 'es' %}Aplicaciones Recomendadas{% else %}Aplicações Recomendadas{% endif %}
+                        </h2>
+                        <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.6; margin-top: 0.5rem; max-width: 900px;">
+                            {% if locale == 'en' %}Industrial operations, manufacturing processes, and materials optimized for model {{ activeSubproduct.model }}.
+                            {% elseif locale == 'es' %}Operaciones industriales, procesos de fabricación y materiales ideales para el modelo {{ activeSubproduct.model }}.
+                            {% else %}Processos produtivos, operações industriais e materiais especialmente indicados para o modelo {{ activeSubproduct.model }}.
                             {% endif %}
-                        </div>
-                    </wa-tab-panel>
-                {% endif %}
-            </wa-tab-group>
-        </div>
+                        </p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem;">
+                        {% for app in activeSubproduct.applicationListItems %}
+                            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.04), var(--color-surface-dark)); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 14px; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-card-subtle); transition: all 0.3s ease;"
+                                 onmouseover="this.style.transform='translateY(-3px)'; this.style.borderColor='rgba(16, 185, 129, 0.6)'; this.style.boxShadow='0 10px 25px rgba(16, 185, 129, 0.15)';"
+                                 onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(16, 185, 129, 0.25)'; this.style.boxShadow='var(--shadow-card-subtle)';">
+                                <div style="width: 48px; height: 48px; min-width: 48px; border-radius: 12px; background: rgba(16, 185, 129, 0.12); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                                    <i class="{{ app.icon ?: 'fa-solid fa-industry' }}"></i>
+                                </div>
+                                <div>
+                                    <h4 style="margin: 0; font-size: 1rem; font-weight: 700; color: var(--color-text-primary); line-height: 1.4;">
+                                        {{ app.getName(locale) }}
+                                    </h4>
+                                    <span style="font-size: 0.72rem; font-weight: 600; color: #10b981;">
+                                        <i class="fa-solid fa-circle-check" style="font-size: 0.65rem; margin-right: 4px;"></i>
+                                        {% if locale == 'en' %}Optimized{% elseif locale == 'es' %}Recomendado{% else %}Recomendado{% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+
+            <!-- 3. ITENS OPCIONAIS (OPTIONAL ITEMS) -->
+            {% if activeSubproduct.optionalItems|length > 0 %}
+                <section class="subproduct-optional-items-section scroll-animate slide-top" style="margin-top: 5rem; margin-bottom: 5rem;">
+                    <div class="overview-header" style="margin-bottom: 3rem; text-align: left; max-width: 900px;">
+                        <span class="section-title-tag">
+                            {% if locale == 'en' %}TAILORED CUSTOMIZATION{% elseif locale == 'es' %}CONFIGURACIÓN OPCIONAL{% else %}PERSONALIZAÇÃO SOB MEDIDA{% endif %}
+                        </span>
+                        <h2 style="font-size: 2.2rem; margin-top: 0.8rem; font-weight: 800; font-family: var(--font-heading);">
+                            {% if locale == 'en' %}Optional Equipment & Peripherals{% elseif locale == 'es' %}Ítems Opcionales y Periféricos{% else %}Itens Opcionais e Periféricos{% endif %}
+                        </h2>
+                        <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.6; margin-top: 0.5rem; max-width: 900px;">
+                            {% if locale == 'en' %}Custom automation features, sensors, extra cylinders, and specialized tooling controls for model {{ activeSubproduct.model }}.
+                            {% elseif locale == 'es' %}Automatización avanzada, sensores, cilindros auxiliares y accesorios especializados para el modelo {{ activeSubproduct.model }}.
+                            {% else %}Recursos avançados de automação, sensores, cilindros auxiliares e periféricos sob medida para o modelo {{ activeSubproduct.model }}.
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem;">
+                        {% for item in activeSubproduct.optionalItems %}
+                            <div style="background: rgba(245, 158, 11, 0.03); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-card-subtle); transition: all 0.3s ease;"
+                                 onmouseover="this.style.transform='translateY(-3px)'; this.style.borderColor='rgba(245, 158, 11, 0.6)'; this.style.boxShadow='0 10px 25px rgba(245, 158, 11, 0.15)';"
+                                 onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(245, 158, 11, 0.25)'; this.style.boxShadow='var(--shadow-card-subtle)';">
+                                <div style="width: 44px; height: 44px; min-width: 44px; border-radius: 10px; background: rgba(245, 158, 11, 0.12); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                                    <i class="{{ item.icon ?: 'fa-solid fa-plus-circle' }}"></i>
+                                </div>
+                                <div style="flex-grow: 1;">
+                                    <h4 style="margin: 0; font-size: 1rem; font-weight: 700; color: var(--color-text-primary); line-height: 1.4;">
+                                        {{ item.getName(locale) }}
+                                    </h4>
+                                    <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; color: #f59e0b; opacity: 0.9;">
+                                        {% if locale == 'en' %}Optional{% elseif locale == 'es' %}Opcional{% else %}Opcional{% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+
+        {% endif %}
 
         <!-- Operational Videos Section (Always Visible) -->
         {% if productVideos is not empty %}

@@ -20,7 +20,7 @@
     {% if product.subproducts|length > 0 %}
     <div class="space-y-4 mb-6" id="subproducts-list">
         {% for sub in product.subproducts %}
-        <div class="border border-slate-200 dark:border-slate-700 rounded-lg p-4 bg-white dark:bg-slate-800" data-id="{{ sub.id }}" x-data="{ showEdit: false, showApps: false, showSpecs: false }">
+        <div class="border border-slate-200 dark:border-slate-700 rounded-lg p-4 bg-white dark:bg-slate-800" data-id="{{ sub.id }}" x-data="{ showEdit: false, showSerie: false, showApps: false, showOpts: false, showSpecs: false }">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div class="flex items-center">
                     <i class="fa-solid fa-grip-vertical text-slate-400 cursor-move mr-3"></i>
@@ -40,10 +40,16 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <button type="button" @click="showEdit = !showEdit" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded text-xs transition-colors">
-                        <i class="fa-solid fa-pen-to-square"></i> Editar Detalhes / PDFs
+                        <i class="fa-solid fa-pen-to-square"></i> Editar / Listas / PDFs
                     </button>
-                    <button type="button" @click="showApps = !showApps" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded text-xs transition-colors">
-                        <i class="fa-solid fa-briefcase"></i> Aplicações ({{ sub.applications|length }})
+                    <button type="button" @click="showSerie = !showSerie" class="px-2 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:hover:bg-blue-900/60 dark:text-blue-300 rounded text-xs transition-colors font-medium">
+                        <i class="fa-solid fa-list-check"></i> Série ({{ sub.standardItems|length }})
+                    </button>
+                    <button type="button" @click="showApps = !showApps" class="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:hover:bg-emerald-900/60 dark:text-emerald-300 rounded text-xs transition-colors font-medium">
+                        <i class="fa-solid fa-industry"></i> Aplicações ({{ sub.applicationListItems|length }})
+                    </button>
+                    <button type="button" @click="showOpts = !showOpts" class="px-2 py-1 bg-amber-50 hover:bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:hover:bg-amber-900/60 dark:text-amber-300 rounded text-xs transition-colors font-medium">
+                        <i class="fa-solid fa-square-plus"></i> Opcionais ({{ sub.optionalItems|length }})
                     </button>
                     <button type="button" @click="showSpecs = !showSpecs" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded text-xs transition-colors">
                         <i class="fa-solid fa-table"></i> Parâmetros ({{ sub.sizes|length }})
@@ -151,22 +157,82 @@
                         </div>
                     </div>
 
-                    <!-- Applications Checkbox List -->
+                    <!-- Standard Items Checkbox List -->
                     <div class="border-t border-slate-200 dark:border-slate-700 pt-3 mt-3">
-                        <label class="wab-label font-semibold mb-2 block text-xs text-slate-600 dark:text-slate-300">Aplicações Recomendadas</label>
-                        {% if allApplications|length == 0 %}
-                            <p class="text-xs text-slate-400">Nenhuma aplicação cadastrada no banco de dados.</p>
+                        <label class="wab-label font-semibold mb-2 block text-xs text-blue-700 dark:text-blue-400"><i class="fa-solid fa-list-check mr-1"></i> Itens de Série (Equipamento Padrão)</label>
+                        {% if allStandardItems|length == 0 %}
+                            <p class="text-xs text-slate-400">Nenhum item de série cadastrado.</p>
                         {% else %}
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700 max-h-48 overflow-y-auto">
+                                {% for item in allStandardItems %}
+                                    <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded transition-colors text-xs">
+                                        <input type="checkbox" name="standardItems[]" value="{{ item.id }}" 
+                                               {% if sub.standardItems.contains(item) %}checked{% endif %}
+                                               class="rounded border-slate-300 dark:border-slate-600 text-blue-600">
+                                        <i class="{{ item.icon ?: 'fa-solid fa-check' }} text-blue-500 text-sm"></i>
+                                        <span class="text-slate-700 dark:text-slate-300 font-medium">{{ item.namePt }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- ApplicationListItems Checkbox List -->
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-3 mt-3">
+                        <label class="wab-label font-semibold mb-2 block text-xs text-emerald-700 dark:text-emerald-400"><i class="fa-solid fa-industry mr-1"></i> Aplicações (Listagem)</label>
+                        {% if allApplicationListItems|length == 0 %}
+                            <p class="text-xs text-slate-400">Nenhuma aplicação (listagem) cadastrada.</p>
+                        {% else %}
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700 max-h-48 overflow-y-auto">
+                                {% for item in allApplicationListItems %}
+                                    <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 rounded transition-colors text-xs">
+                                        <input type="checkbox" name="applicationListItems[]" value="{{ item.id }}" 
+                                               {% if sub.applicationListItems.contains(item) %}checked{% endif %}
+                                               class="rounded border-slate-300 dark:border-slate-600 text-emerald-600">
+                                        <i class="{{ item.icon ?: 'fa-solid fa-industry' }} text-emerald-500 text-sm"></i>
+                                        <span class="text-slate-700 dark:text-slate-300 font-medium">{{ item.namePt }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Applications (Banners) Checkbox List -->
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-3 mt-3">
+                        <label class="wab-label font-semibold mb-2 block text-xs text-slate-600 dark:text-slate-300"><i class="fa-solid fa-briefcase mr-1"></i> Aplicações (Banners com Imagem)</label>
+                        {% if allApplications|length == 0 %}
+                            <p class="text-xs text-slate-400">Nenhuma aplicação (banner) cadastrada.</p>
+                        {% else %}
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700 max-h-48 overflow-y-auto">
                                 {% for app in allApplications %}
                                     <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded transition-colors text-xs">
                                         <input type="checkbox" name="applications[]" value="{{ app.id }}" 
                                                {% if sub.applications.contains(app) %}checked{% endif %}
                                                class="rounded border-slate-300 dark:border-slate-600 text-primary">
                                         {% if app.imageName %}
-                                            <img src="/uploads/applications/{{ app.imageName }}" alt="" class="w-5 h-5 object-contain bg-slate-100 dark:bg-slate-700 rounded p-0.5 border border-slate-200 dark:border-slate-600">
+                                            <img src="/uploads/applications/{{ app.imageName }}" alt="" class="w-4 h-4 object-contain bg-slate-100 dark:bg-slate-700 rounded p-0.5 border border-slate-200 dark:border-slate-600">
                                         {% endif %}
                                         <span class="text-slate-700 dark:text-slate-300 font-medium">{{ app.namePt }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Optional Items Checkbox List -->
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-3 mt-3">
+                        <label class="wab-label font-semibold mb-2 block text-xs text-amber-700 dark:text-amber-400"><i class="fa-solid fa-square-plus mr-1"></i> Itens Opcionais & Periféricos</label>
+                        {% if allOptionalItems|length == 0 %}
+                            <p class="text-xs text-slate-400">Nenhum item opcional cadastrado.</p>
+                        {% else %}
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700 max-h-48 overflow-y-auto">
+                                {% for item in allOptionalItems %}
+                                    <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-amber-50/50 dark:hover:bg-amber-900/20 rounded transition-colors text-xs">
+                                        <input type="checkbox" name="optionalItems[]" value="{{ item.id }}" 
+                                               {% if sub.optionalItems.contains(item) %}checked{% endif %}
+                                               class="rounded border-slate-300 dark:border-slate-600 text-amber-600">
+                                        <i class="{{ item.icon ?: 'fa-solid fa-plus-circle' }} text-amber-500 text-sm"></i>
+                                        <span class="text-slate-700 dark:text-slate-300 font-medium">{{ item.namePt }}</span>
                                     </label>
                                 {% endfor %}
                             </div>
@@ -184,23 +250,54 @@
                 </form>
             </div>
 
-            <!-- COLLAPSIBLE APPLICATIONS SUMMARY (READ ONLY) -->
-            <div x-show="showApps" x-collapse class="mt-4 p-4 border border-slate-100 dark:border-slate-700 rounded bg-slate-50 dark:bg-slate-900/50 text-sm">
-                <h3 class="font-semibold mb-3">Aplicações Associadas a {{ sub.model }}</h3>
-                
-                {% if sub.applications|length > 0 %}
+            <!-- COLLAPSIBLE STANDARD ITEMS SUMMARY (READ ONLY) -->
+            <div x-show="showSerie" x-collapse class="mt-4 p-4 border border-blue-100 dark:border-blue-900/30 rounded bg-blue-50/30 dark:bg-blue-950/20 text-sm">
+                <h3 class="font-semibold text-xs text-blue-800 dark:text-blue-300 mb-3"><i class="fa-solid fa-list-check mr-1"></i> Itens de Série de {{ sub.model }} ({{ sub.standardItems|length }})</h3>
+                {% if sub.standardItems|length > 0 %}
                 <div class="flex flex-wrap gap-2">
-                    {% for app in sub.applications %}
-                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700 shadow-sm text-xs">
-                        {% if app.imageName %}
-                            <img src="/uploads/applications/{{ app.imageName }}" alt="" class="w-4 h-4 object-contain bg-slate-100 dark:bg-slate-700 rounded p-0.5">
-                        {% endif %}
-                        <span class="font-medium text-slate-800 dark:text-slate-200">{{ app.namePt }}</span>
+                    {% for item in sub.standardItems %}
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full border border-blue-200 dark:border-blue-800 shadow-sm text-xs">
+                        <i class="{{ item.icon ?: 'fa-solid fa-check' }} text-blue-600"></i>
+                        <span class="font-medium text-slate-800 dark:text-slate-200">{{ item.namePt }}</span>
                     </div>
                     {% endfor %}
                 </div>
                 {% else %}
-                <p class="text-xs text-slate-400">Nenhuma aplicação associada a este subproduto. Clique em <strong>Editar Detalhes / PDFs</strong> para associar aplicações.</p>
+                <p class="text-xs text-slate-400">Nenhum item de série associado. Clique em <strong>Editar / Listas / PDFs</strong> para associar.</p>
+                {% endif %}
+            </div>
+
+            <!-- COLLAPSIBLE APPLICATIONS SUMMARY (READ ONLY) -->
+            <div x-show="showApps" x-collapse class="mt-4 p-4 border border-emerald-100 dark:border-emerald-900/30 rounded bg-emerald-50/30 dark:bg-emerald-950/20 text-sm">
+                <h3 class="font-semibold text-xs text-emerald-800 dark:text-emerald-300 mb-3"><i class="fa-solid fa-industry mr-1"></i> Aplicações (Listagem) de {{ sub.model }} ({{ sub.applicationListItems|length }})</h3>
+                {% if sub.applicationListItems|length > 0 %}
+                <div class="flex flex-wrap gap-2">
+                    {% for item in sub.applicationListItems %}
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full border border-emerald-200 dark:border-emerald-800 shadow-sm text-xs">
+                        <i class="{{ item.icon ?: 'fa-solid fa-industry' }} text-emerald-600"></i>
+                        <span class="font-medium text-slate-800 dark:text-slate-200">{{ item.namePt }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-xs text-slate-400">Nenhuma aplicação (listagem) associada. Clique em <strong>Editar / Listas / PDFs</strong> para associar.</p>
+                {% endif %}
+            </div>
+
+            <!-- COLLAPSIBLE OPTIONAL ITEMS SUMMARY (READ ONLY) -->
+            <div x-show="showOpts" x-collapse class="mt-4 p-4 border border-amber-100 dark:border-amber-900/30 rounded bg-amber-50/30 dark:bg-amber-950/20 text-sm">
+                <h3 class="font-semibold text-xs text-amber-800 dark:text-amber-300 mb-3"><i class="fa-solid fa-square-plus mr-1"></i> Itens Opcionais de {{ sub.model }} ({{ sub.optionalItems|length }})</h3>
+                {% if sub.optionalItems|length > 0 %}
+                <div class="flex flex-wrap gap-2">
+                    {% for item in sub.optionalItems %}
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full border border-amber-200 dark:border-amber-800 shadow-sm text-xs">
+                        <i class="{{ item.icon ?: 'fa-solid fa-plus-circle' }} text-amber-600"></i>
+                        <span class="font-medium text-slate-800 dark:text-slate-200">{{ item.namePt }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-xs text-slate-400">Nenhum item opcional associado. Clique em <strong>Editar / Listas / PDFs</strong> para associar.</p>
                 {% endif %}
             </div>
 

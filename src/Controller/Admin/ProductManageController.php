@@ -5,6 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use App\Entity\Subproduct;
 use App\Entity\Application;
+use App\Entity\StandardItem;
+use App\Entity\ApplicationListItem;
+use App\Entity\OptionalItem;
 use App\Entity\ProductSize;
 use App\Entity\ProductSpecValue;
 use App\Entity\ProductConfigItem;
@@ -58,7 +61,10 @@ final class ProductManageController extends AbstractController
             'optionalItems' => $this->configRepo->findBySlugAndType($slug, 'optional'),
             'videos' => $this->videoRepo->findBySlugOrdered($slug),
             'allSpecs' => $this->techSpecRepo->findAllOrdered(),
-            'allApplications' => $this->em->getRepository(Application::class)->findAllOrdered(),
+            'allStandardItems' => $this->em->getRepository(StandardItem::class)->findActiveOrdered(),
+            'allApplications' => $this->em->getRepository(Application::class)->findActiveOrdered(),
+            'allApplicationListItems' => $this->em->getRepository(ApplicationListItem::class)->findActiveOrdered(),
+            'allOptionalItems' => $this->em->getRepository(OptionalItem::class)->findActiveOrdered(),
         ]);
     }
 
@@ -629,13 +635,29 @@ final class ProductManageController extends AbstractController
             $sub->setPdfFileEs($pdfFileEs);
         }
 
-        // ManyToMany applications association
+        // ManyToMany associations
+        $standardIds = $request->request->all('standardItems') ?? [];
+        foreach ($standardIds as $id) {
+            $item = $this->em->getRepository(StandardItem::class)->find($id);
+            if ($item) { $sub->addStandardItem($item); }
+        }
+
+        $appListIds = $request->request->all('applicationListItems') ?? [];
+        foreach ($appListIds as $id) {
+            $item = $this->em->getRepository(ApplicationListItem::class)->find($id);
+            if ($item) { $sub->addApplicationListItem($item); }
+        }
+
         $appIds = $request->request->all('applications') ?? [];
         foreach ($appIds as $appId) {
             $app = $this->em->getRepository(Application::class)->find($appId);
-            if ($app) {
-                $sub->addApplication($app);
-            }
+            if ($app) { $sub->addApplication($app); }
+        }
+
+        $optionalIds = $request->request->all('optionalItems') ?? [];
+        foreach ($optionalIds as $id) {
+            $item = $this->em->getRepository(OptionalItem::class)->find($id);
+            if ($item) { $sub->addOptionalItem($item); }
         }
 
         $this->em->persist($sub);
@@ -679,14 +701,36 @@ final class ProductManageController extends AbstractController
             $subproduct->setPdfFileEs($pdfFileEs);
         }
 
+        // ManyToMany standardItems sync
+        $subproduct->getStandardItems()->clear();
+        $standardIds = $request->request->all('standardItems') ?? [];
+        foreach ($standardIds as $id) {
+            $item = $this->em->getRepository(StandardItem::class)->find($id);
+            if ($item) { $subproduct->addStandardItem($item); }
+        }
+
+        // ManyToMany applicationListItems sync
+        $subproduct->getApplicationListItems()->clear();
+        $appListIds = $request->request->all('applicationListItems') ?? [];
+        foreach ($appListIds as $id) {
+            $item = $this->em->getRepository(ApplicationListItem::class)->find($id);
+            if ($item) { $subproduct->addApplicationListItem($item); }
+        }
+
         // ManyToMany applications sync
         $subproduct->getApplications()->clear();
         $appIds = $request->request->all('applications') ?? [];
         foreach ($appIds as $appId) {
             $app = $this->em->getRepository(Application::class)->find($appId);
-            if ($app) {
-                $subproduct->addApplication($app);
-            }
+            if ($app) { $subproduct->addApplication($app); }
+        }
+
+        // ManyToMany optionalItems sync
+        $subproduct->getOptionalItems()->clear();
+        $optionalIds = $request->request->all('optionalItems') ?? [];
+        foreach ($optionalIds as $id) {
+            $item = $this->em->getRepository(OptionalItem::class)->find($id);
+            if ($item) { $subproduct->addOptionalItem($item); }
         }
 
         $this->em->flush();
