@@ -21,3 +21,5 @@
 /docs/qualidade
 /docs/clientes
 *.psd
+
+.DS_Store

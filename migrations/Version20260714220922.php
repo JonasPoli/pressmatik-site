@@ -31,6 +31,8 @@ final class Version20260714220922 extends AbstractMigration
 
         $productSizeTable = $schema->getTable('product_size');
         if (!$productSizeTable->hasColumn('subproduct_id')) {
+            $this->addSql('DELETE FROM product_spec_value');
+            $this->addSql('DELETE FROM product_size');
             if ($productSizeTable->hasForeignKey('FK_7A2806CB4584665A')) {
                 $this->addSql('ALTER TABLE product_size DROP FOREIGN KEY `FK_7A2806CB4584665A`');
             }

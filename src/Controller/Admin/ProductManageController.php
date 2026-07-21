@@ -298,6 +298,7 @@ final class ProductManageController extends AbstractController
         // ─── Read and parse CSV ───
         $content = file_get_contents($file->getPathname());
         $content = preg_replace('/^\xEF\xBB\xBF/', '', $content); // Remove BOM
+        $content = str_replace("\r\n", "\n", $content); // Normalize line endings
         $lines = array_filter(explode("\n", $content), fn($l) => trim($l) !== '');
 
         if (count($lines) < 2) {
@@ -305,8 +306,14 @@ final class ProductManageController extends AbstractController
             return $this->redirectToRoute('app_admin_product_manage_detail', ['slug' => $slug]);
         }
 
+        // ─── Auto-detect CSV delimiter (semicolon or comma) ───
+        $firstLine = reset($lines);
+        $semicolonCount = substr_count($firstLine, ';');
+        $commaCount = substr_count($firstLine, ',');
+        $delimiter = $semicolonCount >= $commaCount ? ';' : ',';
+
         // ─── Parse header row to discover sizes and their V/H configuration ───
-        $headerCols = str_getcsv(array_shift($lines), ';');
+        $headerCols = str_getcsv(array_shift($lines), $delimiter);
         // First 2 columns are always "Especificação" and "Unidade"
         $sizeHeaders = array_slice($headerCols, 2);
 
@@ -417,7 +424,7 @@ final class ProductManageController extends AbstractController
         $importedCount = 0;
         $createdSpecs = 0;
         foreach ($lines as $position => $line) {
-            $cols = str_getcsv($line, ';');
+            $cols = str_getcsv($line, $delimiter);
             if (count($cols) < 2) continue;
 
             $specName = trim($cols[0]);
