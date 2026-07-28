@@ -55,6 +55,9 @@
                         <div class="wab-field">
                             <label class="wab-label">Arquivo de Imagem</label>
                             <input type="file" form="galleryForm" name="galleryFile" accept="image/*" class="wab-input" required>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                <strong>Resolução indicada:</strong> 1200 × 800 px (ou 1200 × 675 px) &nbsp;|&nbsp; <strong>Proporção recomendada:</strong> 4:3 ou 16:9 &nbsp;|&nbsp; <strong>Formatos:</strong> JPG, WebP, PNG
+                            </p>
                         </div>
                         
                         <div class="flex gap-2 border-b border-slate-200 dark:border-slate-700 pb-1">
@@ -156,6 +159,9 @@
                 </div>
                 {% endif %}
                 <input type="file" name="imageFile" accept="image/*" class="wab-input" form="mainForm" {% if item is null %}required{% endif %}>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    <strong>Resolução indicada:</strong> 1200 × 675 px &nbsp;|&nbsp; <strong>Proporção recomendada:</strong> 16:9 &nbsp;|&nbsp; <strong>Formatos:</strong> JPG, WebP, PNG
+                </p>
             </div>
 
             <div class="border-t border-slate-200 dark:border-slate-700 pt-4 mt-6">

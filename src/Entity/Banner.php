@@ -56,6 +56,42 @@ class Banner
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeTopNumPt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeTopNumEn = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeTopNumEs = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeTopLabelPt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeTopLabelEn = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeTopLabelEs = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeBottomNumPt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeBottomNumEn = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeBottomNumEs = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeBottomLabelPt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeBottomLabelEn = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $badgeBottomLabelEs = null;
+
     #[ORM\Column]
     private int $position = 0;
 
@@ -91,6 +127,42 @@ class Banner
         };
     }
 
+    public function getBadgeTopNum(string $locale): ?string
+    {
+        return match ($locale) {
+            'en' => $this->badgeTopNumEn ?: $this->badgeTopNumPt,
+            'es' => $this->badgeTopNumEs ?: $this->badgeTopNumPt,
+            default => $this->badgeTopNumPt,
+        };
+    }
+
+    public function getBadgeTopLabel(string $locale): ?string
+    {
+        return match ($locale) {
+            'en' => $this->badgeTopLabelEn ?: $this->badgeTopLabelPt,
+            'es' => $this->badgeTopLabelEs ?: $this->badgeTopLabelPt,
+            default => $this->badgeTopLabelPt,
+        };
+    }
+
+    public function getBadgeBottomNum(string $locale): ?string
+    {
+        return match ($locale) {
+            'en' => $this->badgeBottomNumEn ?: $this->badgeBottomNumPt,
+            'es' => $this->badgeBottomNumEs ?: $this->badgeBottomNumPt,
+            default => $this->badgeBottomNumPt,
+        };
+    }
+
+    public function getBadgeBottomLabel(string $locale): ?string
+    {
+        return match ($locale) {
+            'en' => $this->badgeBottomLabelEn ?: $this->badgeBottomLabelPt,
+            'es' => $this->badgeBottomLabelEs ?: $this->badgeBottomLabelPt,
+            default => $this->badgeBottomLabelPt,
+        };
+    }
+
     // ─── Getters/Setters ────────────────────────────────────────────────────
 
     public function getId(): ?int { return $this->id; }
@@ -118,6 +190,34 @@ class Banner
 
     public function getButtonUrl(): ?string { return $this->buttonUrl; }
     public function setButtonUrl(?string $v): static { $this->buttonUrl = $v; return $this; }
+
+    public function getBadgeTopNumPt(): ?string { return $this->badgeTopNumPt; }
+    public function setBadgeTopNumPt(?string $v): static { $this->badgeTopNumPt = $v; return $this; }
+    public function getBadgeTopNumEn(): ?string { return $this->badgeTopNumEn; }
+    public function setBadgeTopNumEn(?string $v): static { $this->badgeTopNumEn = $v; return $this; }
+    public function getBadgeTopNumEs(): ?string { return $this->badgeTopNumEs; }
+    public function setBadgeTopNumEs(?string $v): static { $this->badgeTopNumEs = $v; return $this; }
+
+    public function getBadgeTopLabelPt(): ?string { return $this->badgeTopLabelPt; }
+    public function setBadgeTopLabelPt(?string $v): static { $this->badgeTopLabelPt = $v; return $this; }
+    public function getBadgeTopLabelEn(): ?string { return $this->badgeTopLabelEn; }
+    public function setBadgeTopLabelEn(?string $v): static { $this->badgeTopLabelEn = $v; return $this; }
+    public function getBadgeTopLabelEs(): ?string { return $this->badgeTopLabelEs; }
+    public function setBadgeTopLabelEs(?string $v): static { $this->badgeTopLabelEs = $v; return $this; }
+
+    public function getBadgeBottomNumPt(): ?string { return $this->badgeBottomNumPt; }
+    public function setBadgeBottomNumPt(?string $v): static { $this->badgeBottomNumPt = $v; return $this; }
+    public function getBadgeBottomNumEn(): ?string { return $this->badgeBottomNumEn; }
+    public function setBadgeBottomNumEn(?string $v): static { $this->badgeBottomNumEn = $v; return $this; }
+    public function getBadgeBottomNumEs(): ?string { return $this->badgeBottomNumEs; }
+    public function setBadgeBottomNumEs(?string $v): static { $this->badgeBottomNumEs = $v; return $this; }
+
+    public function getBadgeBottomLabelPt(): ?string { return $this->badgeBottomLabelPt; }
+    public function setBadgeBottomLabelPt(?string $v): static { $this->badgeBottomLabelPt = $v; return $this; }
+    public function getBadgeBottomLabelEn(): ?string { return $this->badgeBottomLabelEn; }
+    public function setBadgeBottomLabelEn(?string $v): static { $this->badgeBottomLabelEn = $v; return $this; }
+    public function getBadgeBottomLabelEs(): ?string { return $this->badgeBottomLabelEs; }
+    public function setBadgeBottomLabelEs(?string $v): static { $this->badgeBottomLabelEs = $v; return $this; }
 
     public function setImageFile(?File $file = null): void
     {

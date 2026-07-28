@@ -31,12 +31,12 @@
                                 <div class="hero-image-frame">
                                     <img src="{% if item.getImageName() %}/uploads/banners/{{ item.getImageName() }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="" class="hero-main-img">
                                     <div class="hero-badge badge-top">
-                                        <span class="badge-num">25-315</span>
-                                        <span class="badge-lbl">Toneladas</span>
+                                        <span class="badge-num">{{ item.getBadgeTopNum(locale) ?: '25-315' }}</span>
+                                        <span class="badge-lbl">{{ item.getBadgeTopLabel(locale) ?: 'Toneladas' }}</span>
                                     </div>
                                     <div class="hero-badge badge-bottom">
-                                        <span class="badge-num">JIS Classe 1</span>
-                                        <span class="badge-lbl">Alta Precisão</span>
+                                        <span class="badge-num">{{ item.getBadgeBottomNum(locale) ?: 'JIS Classe 1' }}</span>
+                                        <span class="badge-lbl">{{ item.getBadgeBottomLabel(locale) ?: 'Alta Precisão' }}</span>
                                     </div>
                                 </div>
                             </div>

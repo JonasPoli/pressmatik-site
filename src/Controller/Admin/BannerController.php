@@ -98,6 +98,18 @@ final class BannerController extends AbstractController
         $item->setButtonTextEn($data->get('buttonTextEn'));
         $item->setButtonTextEs($data->get('buttonTextEs'));
         $item->setButtonUrl($data->get('buttonUrl'));
+        $item->setBadgeTopNumPt($data->get('badgeTopNumPt'));
+        $item->setBadgeTopNumEn($data->get('badgeTopNumEn'));
+        $item->setBadgeTopNumEs($data->get('badgeTopNumEs'));
+        $item->setBadgeTopLabelPt($data->get('badgeTopLabelPt'));
+        $item->setBadgeTopLabelEn($data->get('badgeTopLabelEn'));
+        $item->setBadgeTopLabelEs($data->get('badgeTopLabelEs'));
+        $item->setBadgeBottomNumPt($data->get('badgeBottomNumPt'));
+        $item->setBadgeBottomNumEn($data->get('badgeBottomNumEn'));
+        $item->setBadgeBottomNumEs($data->get('badgeBottomNumEs'));
+        $item->setBadgeBottomLabelPt($data->get('badgeBottomLabelPt'));
+        $item->setBadgeBottomLabelEn($data->get('badgeBottomLabelEn'));
+        $item->setBadgeBottomLabelEs($data->get('badgeBottomLabelEs'));
         $item->setPosition((int) $data->get('position', 0));
         $item->setIsActive((bool) $data->get('isActive', false));
 
