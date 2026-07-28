@@ -567,7 +567,7 @@
 
             <div class="contact-form-column scroll-animate slide-right">
                 <h3>{{ 'cta.quote_now'|trans }}</h3>
-                <form id="quote-form">
+                <form id="quote-form" data-turbo="false">
                     <div class="form-group">
                         <wa-input id="form-name" type="text" label="{{ 'contact_form.name'|trans }}" placeholder="Ex: João Silva" required></wa-input>
                     </div>
@@ -660,13 +660,14 @@
 
         document.addEventListener('turbo:load', initHeroSlider);
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initHeroSlider();
+        function initContactForm() {
             const form = document.getElementById('quote-form');
             const submitBtn = document.getElementById('form-submit-btn');
             const statusMsg = document.getElementById('form-status-message');
 
             if (!form || !submitBtn) return;
+            if (form.dataset.initialized === 'true') return;
+            form.dataset.initialized = 'true';
 
             function validateCPF(cpf) {
                 cpf = cpf.replace(/[^\d]+/g,'');
@@ -746,8 +747,25 @@
                 return true;
             }
 
+            function showStatus(type, msg) {
+                if (type === 'success') {
+                    statusMsg.style.backgroundColor = '#def7ec';
+                    statusMsg.style.color = '#03543f';
+                    statusMsg.style.border = '1px solid #bcf0da';
+                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-check" style="margin-right: 8px;"></i>' + msg;
+                } else {
+                    statusMsg.style.backgroundColor = '#fde8e8';
+                    statusMsg.style.color = '#9b1c1c';
+                    statusMsg.style.border = '1px solid #f8b4b4';
+                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>' + msg;
+                }
+                statusMsg.style.display = 'block';
+                statusMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
             async function handleFormSubmit(e) {
                 if (e) e.preventDefault();
+                if (e) e.stopPropagation();
                 statusMsg.style.display = 'none';
 
                 const nameInput = document.getElementById('form-name');
@@ -764,41 +782,24 @@
                 const productInterest = (productInput.value || '').trim();
                 const message = (messageInput.value || '').trim();
 
-                // Basic required field validation
                 if (!name || !email) {
-                    statusMsg.style.backgroundColor = '#fde8e8';
-                    statusMsg.style.color = '#9b1c1c';
-                    statusMsg.style.border = '1px solid #f8b4b4';
-                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Preencha o nome e e-mail.';
-                    statusMsg.style.display = 'block';
+                    showStatus('error', 'Preencha o nome e e-mail.');
                     return;
                 }
 
                 // Validate document
                 if (docVal.length === 11) {
                     if (!validateCPF(docVal)) {
-                        statusMsg.style.backgroundColor = '#fde8e8';
-                        statusMsg.style.color = '#9b1c1c';
-                        statusMsg.style.border = '1px solid #f8b4b4';
-                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>CPF inválido. Verifique os dígitos.';
-                        statusMsg.style.display = 'block';
+                        showStatus('error', 'CPF inválido. Verifique os dígitos.');
                         return;
                     }
                 } else if (docVal.length === 14) {
                     if (!validateCNPJ(docVal)) {
-                        statusMsg.style.backgroundColor = '#fde8e8';
-                        statusMsg.style.color = '#9b1c1c';
-                        statusMsg.style.border = '1px solid #f8b4b4';
-                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>CNPJ inválido. Verifique os dígitos.';
-                        statusMsg.style.display = 'block';
+                        showStatus('error', 'CNPJ inválido. Verifique os dígitos.');
                         return;
                     }
-                } else {
-                    statusMsg.style.backgroundColor = '#fde8e8';
-                    statusMsg.style.color = '#9b1c1c';
-                    statusMsg.style.border = '1px solid #f8b4b4';
-                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Insira um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.';
-                    statusMsg.style.display = 'block';
+                } else if (docVal.length > 0) {
+                    showStatus('error', 'Insira um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.');
                     return;
                 }
 
@@ -809,7 +810,8 @@
                     const response = await fetch('{{ path('app_contact_submit', {'_locale': locale}) }}', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
                         },
                         body: JSON.stringify({
                             name,
@@ -827,39 +829,30 @@
                     submitBtn.disabled = false;
 
                     if (resData.success) {
-                        statusMsg.style.backgroundColor = '#def7ec';
-                        statusMsg.style.color = '#03543f';
-                        statusMsg.style.border = '1px solid #bcf0da';
-                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-check" style="margin-right: 8px;"></i>' + resData.message;
-                        statusMsg.style.display = 'block';
-                        // Reset wa-input values manually
+                        showStatus('success', resData.message);
                         form.querySelectorAll('wa-input, wa-textarea, wa-select').forEach(el => { el.value = ''; });
                     } else {
-                        statusMsg.style.backgroundColor = '#fde8e8';
-                        statusMsg.style.color = '#9b1c1c';
-                        statusMsg.style.border = '1px solid #f8b4b4';
-                        statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Ocorreu um erro: ' + resData.message;
-                        statusMsg.style.display = 'block';
+                        showStatus('error', 'Ocorreu um erro: ' + resData.message);
                     }
                 } catch (error) {
                     submitBtn.removeAttribute('loading');
                     submitBtn.disabled = false;
-                    statusMsg.style.backgroundColor = '#fde8e8';
-                    statusMsg.style.color = '#9b1c1c';
-                    statusMsg.style.border = '1px solid #f8b4b4';
-                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Erro de conexão com o servidor. Tente novamente.';
-                    statusMsg.style.display = 'block';
+                    showStatus('error', 'Erro de conexão com o servidor. Tente novamente.');
                 }
             }
 
-            // Listen for native form submit (if triggered)
+            // Listen for native form submit
             form.addEventListener('submit', handleFormSubmit);
 
-            // Listen for click on wa-button (Web Component doesn't always trigger native form submit)
+            // Listen for click on wa-button (Web Component may not trigger native form submit)
             submitBtn.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 handleFormSubmit(e);
             });
-        });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => { initHeroSlider(); initContactForm(); });
+        document.addEventListener('turbo:load', () => { initHeroSlider(); initContactForm(); });
     </script>
 {% endblock %}
