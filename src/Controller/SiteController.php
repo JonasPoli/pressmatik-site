@@ -212,25 +212,49 @@ class SiteController extends AbstractController
     ): Response {
         $data = json_decode($request->getContent(), true) ?: $request->request->all();
 
-        $name = $data['name'] ?? null;
-        $email = $data['email'] ?? null;
-        $phone = $data['phone'] ?? null;
-        $cpfCnpj = $data['cpf_cnpj'] ?? null;
-        $company = $data['company'] ?? null;
-        $productInterest = $data['product_interest'] ?? null;
-        $message = $data['message'] ?? null;
+        $name = trim((string)($data['name'] ?? ''));
+        $email = trim((string)($data['email'] ?? ''));
+        $phone = trim((string)($data['phone'] ?? ''));
+        $cpfCnpjRaw = (string)($data['cpf_cnpj'] ?? '');
+        $cpfCnpjDigits = preg_replace('/[^\d]/', '', $cpfCnpjRaw);
+        $company = trim((string)($data['company'] ?? ''));
+        $productInterest = trim((string)($data['product_interest'] ?? ''));
+        $message = trim((string)($data['message'] ?? ''));
         $type = $data['type'] ?? 'contact';
         $productSlug = $data['product_slug'] ?? null;
 
-        if (!$name || !$email) {
-            return $this->json(['success' => false, 'message' => 'Nome e e-mail são obrigatórios.'], Response::HTTP_BAD_REQUEST);
+        // Validação de campos obrigatórios
+        if (mb_strlen($name) < 3) {
+            return $this->json(['success' => false, 'message' => 'Por favor, informe seu nome completo (mínimo 3 caracteres).'], Response::HTTP_BAD_REQUEST);
+        }
+
+        if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $this->json(['success' => false, 'message' => 'Por favor, informe um endereço de e-mail válido (ex: nome@empresa.com.br).'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $phoneDigits = preg_replace('/[^\d]/', '', $phone);
+        if (strlen($phoneDigits) < 8) {
+            return $this->json(['success' => false, 'message' => 'Por favor, informe um número de telefone/WhatsApp válido com DDD.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        // Validação de CPF ou CNPJ
+        if (strlen($cpfCnpjDigits) === 11) {
+            if (!$this->validateCPF($cpfCnpjDigits)) {
+                return $this->json(['success' => false, 'message' => 'O CPF informado é inválido. Verifique os dígitos.'], Response::HTTP_BAD_REQUEST);
+            }
+        } elseif (strlen($cpfCnpjDigits) === 14) {
+            if (!$this->validateCNPJ($cpfCnpjDigits)) {
+                return $this->json(['success' => false, 'message' => 'O CNPJ informado é inválido. Verifique os dígitos.'], Response::HTTP_BAD_REQUEST);
+            }
+        } else {
+            return $this->json(['success' => false, 'message' => 'Por favor, informe um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.'], Response::HTTP_BAD_REQUEST);
         }
 
         $msg = new \App\Entity\ContactMessage();
         $msg->setName($name);
         $msg->setEmail($email);
         $msg->setPhone($phone);
-        $msg->setCpfCnpj($cpfCnpj);
+        $msg->setCpfCnpj($cpfCnpjDigits);
         $msg->setCompany($company);
         $msg->setProductInterest($productInterest);
         $msg->setMessage($message);
@@ -301,5 +325,46 @@ class SiteController extends AbstractController
             'mail_sent' => false,
             'message' => 'Sua mensagem foi salva no sistema com sucesso! (Aviso: Houve uma falha no servidor de e-mail ao entregar a notificação: ' . $mailError . ')'
         ]);
+    }
+
+    private function validateCPF(string $cpf): bool
+    {
+        $cpf = preg_replace('/[^\d]/', '', $cpf);
+        if (strlen($cpf) !== 11 || preg_match('/^(\d)\1{10}$/', $cpf)) {
+            return false;
+        }
+
+        for ($t = 9; $t < 11; $t++) {
+            $d = 0;
+            for ($c = 0; $c < $t; $c++) {
+                $d += (int) $cpf[$c] * (($t + 1) - $c);
+            }
+            $d = ((10 * $d) % 11) % 10;
+            if ((int) $cpf[$t] !== $d) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private function validateCNPJ(string $cnpj): bool
+    {
+        $cnpj = preg_replace('/[^\d]/', '', $cnpj);
+        if (strlen($cnpj) !== 14 || preg_match('/^(\d)\1{13}$/', $cnpj)) {
+            return false;
+        }
+
+        $b = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        for ($i = 0, $n = 0; $i < 12; $n += (int) $cnpj[$i] * $b[++$i]);
+        if ((int) $cnpj[12] !== (($n %= 11) < 2 ? 0 : 11 - $n)) {
+            return false;
+        }
+
+        for ($i = 0, $n = 0; $i < 13; $n += (int) $cnpj[$i] * $b[$i++]);
+        if ((int) $cnpj[13] !== (($n %= 11) < 2 ? 0 : 11 - $n)) {
+            return false;
+        }
+
+        return true;
     }
 }

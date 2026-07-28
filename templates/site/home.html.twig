@@ -787,23 +787,42 @@
                 const productInterest = (productInput.value || '').trim();
                 const message = (messageInput.value || '').trim();
 
-                if (!name || !email) {
-                    showStatus('error', 'Preencha o nome e e-mail.');
+                function validateEmail(emailStr) {
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailStr);
+                }
+
+                if (!name || name.length < 3) {
+                    showStatus('error', 'Por favor, informe seu nome completo.');
                     return;
                 }
 
-                // Validate document
+                if (!email || !validateEmail(email)) {
+                    showStatus('error', 'Por favor, informe um endereço de e-mail válido (ex: nome@empresa.com.br).');
+                    return;
+                }
+
+                const phoneDigits = phone.replace(/[^\d]+/g, '');
+                if (!phone || phoneDigits.length < 8) {
+                    showStatus('error', 'Por favor, informe um número de telefone/WhatsApp válido com DDD.');
+                    return;
+                }
+
+                if (!docVal) {
+                    showStatus('error', 'Por favor, informe o CPF ou CNPJ.');
+                    return;
+                }
+
                 if (docVal.length === 11) {
                     if (!validateCPF(docVal)) {
-                        showStatus('error', 'CPF inválido. Verifique os dígitos.');
+                        showStatus('error', 'O CPF informado é inválido. Verifique os dígitos.');
                         return;
                     }
                 } else if (docVal.length === 14) {
                     if (!validateCNPJ(docVal)) {
-                        showStatus('error', 'CNPJ inválido. Verifique os dígitos.');
+                        showStatus('error', 'O CNPJ informado é inválido. Verifique os dígitos.');
                         return;
                     }
-                } else if (docVal.length > 0) {
+                } else {
                     showStatus('error', 'Insira um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.');
                     return;
                 }
