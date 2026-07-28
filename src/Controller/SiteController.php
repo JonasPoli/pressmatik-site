@@ -250,24 +250,7 @@ class SiteController extends AbstractController
             return $this->json(['success' => false, 'message' => 'Por favor, informe um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.'], Response::HTTP_BAD_REQUEST);
         }
 
-        $msg = new \App\Entity\ContactMessage();
-        $msg->setName($name);
-        $msg->setEmail($email);
-        $msg->setPhone($phone);
-        $msg->setCpfCnpj($cpfCnpjDigits);
-        $msg->setCompany($company);
-        $msg->setProductInterest($productInterest);
-        $msg->setMessage($message);
-        $msg->setType($type);
-        $msg->setProductSlug($productSlug);
-
-        $em->persist($msg);
-        $em->flush();
-
-        // Envio imediato do e-mail via WMailer
-        $emailSent = false;
-        $mailError = null;
-
+        // 1. Tenta enviar o e-mail via WMailer PRIMEIRO
         try {
             $fromEmail = $_SERVER['EMAIL_FROM'] ?? $_ENV['EMAIL_FROM'] ?? $_SERVER['MAIL_FROM'] ?? $_ENV['MAIL_FROM'] ?? $_SERVER['MAIL_SENDER'] ?? $_ENV['MAIL_SENDER'] ?? getenv('EMAIL_FROM') ?: 'no-reply@wab.com.br';
 
@@ -283,7 +266,7 @@ class SiteController extends AbstractController
                 . "• Nome: " . $name . "\n"
                 . "• E-mail: " . $email . "\n"
                 . "• Telefone: " . ($phone ?: 'Não informado') . "\n"
-                . "• CPF/CNPJ: " . ($cpfCnpj ?: 'Não informado') . "\n"
+                . "• CPF/CNPJ: " . ($cpfCnpjDigits ?: 'Não informado') . "\n"
                 . "• Empresa: " . ($company ?: 'Não informada') . "\n"
                 . "• Produto/Interesse: " . ($productInterest ?: 'Não especificado') . "\n"
                 . "• Tipo: " . ($type === 'quote' ? 'Solicitação de Cotação' : 'Mensagem de Contato') . "\n\n"
@@ -302,28 +285,37 @@ class SiteController extends AbstractController
             }
 
             $mailer->send($emailObj);
-            $emailSent = true;
         } catch (\Throwable $e) {
-            $mailError = $e->getMessage();
-            $logger->error('Erro ao enviar email via WMailer: ' . $mailError, [
+            $logger->error('Erro ao enviar email via WMailer: ' . $e->getMessage(), [
                 'exception' => $e,
                 'email' => $email,
                 'name' => $name
             ]);
+
+            return $this->json([
+                'success' => false,
+                'message' => 'Não foi possível entregar o e-mail de contato no momento. A mensagem não foi registrada. Tente novamente ou entre em contato via WhatsApp.'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        if ($emailSent) {
-            return $this->json([
-                'success' => true,
-                'mail_sent' => true,
-                'message' => 'Sua mensagem foi enviada e o e-mail de notificação foi entregue com sucesso!'
-            ]);
-        }
+        // 2. Salva no banco de dados SOMENTE se o e-mail foi enviado com sucesso
+        $msg = new \App\Entity\ContactMessage();
+        $msg->setName($name);
+        $msg->setEmail($email);
+        $msg->setPhone($phone);
+        $msg->setCpfCnpj($cpfCnpjDigits);
+        $msg->setCompany($company);
+        $msg->setProductInterest($productInterest);
+        $msg->setMessage($message);
+        $msg->setType($type);
+        $msg->setProductSlug($productSlug);
+
+        $em->persist($msg);
+        $em->flush();
 
         return $this->json([
             'success' => true,
-            'mail_sent' => false,
-            'message' => 'Sua mensagem foi salva no sistema com sucesso! (Aviso: Houve uma falha no servidor de e-mail ao entregar a notificação: ' . $mailError . ')'
+            'message' => 'Sua mensagem foi enviada por e-mail e gravada com sucesso! Nossa equipe entrará em contato em breve.'
         ]);
     }
 
