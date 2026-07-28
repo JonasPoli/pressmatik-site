@@ -126,9 +126,10 @@ contact_form:
 footer:
   about: "A Pressmatik é referência nacional na fabricação de prensas industriais pesadas de alta performance, focando em segurança, robustez e inovação contínua."
   address_title: "Nossas Instalações"
-  address_factory: "Fábrica: Av. Industrial, 1500 - Distrito Industrial - Araraquara/SP"
-  address_office: "Escritório: Av. Paulista, 2000 - Cj 101 - São Paulo/SP"
-  phone: "Telefone: (16) 3301-9000"
+  address_factory: "Av. Caibar Schutel, 123 - Jardim Aeroporto, Araraquara - SP, 14808-362"
+  address_office: ""
+  phone: "Telefone: (16) 3014-8368"
+  whatsapp: "WhatsApp: (16) 99770-4156"
   email: "E-mail: comercial@pressmatik.com.br"
   rights: "© Copyright 2010-2026 Pressmatik. Todos os direitos reservados."
 

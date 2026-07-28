@@ -126,9 +126,10 @@ contact_form:
 footer:
   about: "Pressmatik is a national benchmark in heavy-duty high-performance industrial presses, focusing on safety, reliability, and continuous innovation."
   address_title: "Our Facilities"
-  address_factory: "Factory: Av. Industrial, 1500 - Distrito Industrial - Araraquara/SP, Brazil"
-  address_office: "Office: Av. Paulista, 2000 - Cj 101 - São Paulo/SP, Brazil"
-  phone: "Phone: +55 (16) 3301-9000"
+  address_factory: "Av. Caibar Schutel, 123 - Jardim Aeroporto, Araraquara - SP, 14808-362, Brazil"
+  address_office: ""
+  phone: "Phone: +55 (16) 3014-8368"
+  whatsapp: "WhatsApp: +55 (16) 99770-4156"
   email: "Email: sales@pressmatik.com.br"
   rights: "© Copyright 2010-2026 Pressmatik. All Rights Reserved."
 
