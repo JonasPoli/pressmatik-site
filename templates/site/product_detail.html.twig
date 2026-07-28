@@ -495,6 +495,8 @@
             const submitBtn = document.getElementById('p-submit-btn');
             const statusMsg = document.getElementById('p-status-message');
 
+            if (!form || !submitBtn) return;
+
             function validateCPF(cpf) {
                 cpf = cpf.replace(/[^\d]+/g,'');
                 if(cpf == '') return false;
@@ -573,8 +575,8 @@
                 return true;
             }
 
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
+            async function handleProductFormSubmit(e) {
+                if (e) e.preventDefault();
                 statusMsg.style.display = 'none';
 
                 const nameInput = document.getElementById('p-name');
@@ -584,17 +586,26 @@
                 const modelSelect = document.getElementById('p-model');
                 const messageInput = document.getElementById('p-message');
 
-                const name = nameInput.value.trim();
-                const email = emailInput.value.trim();
-                const phone = phoneInput.value.trim();
-                const docVal = cnpjInput.value.trim().replace(/[^\d]+/g,'');
-                const model = modelSelect.value;
-                const message = messageInput.value.trim();
+                const name = (nameInput.value || '').trim();
+                const email = (emailInput.value || '').trim();
+                const phone = (phoneInput.value || '').trim();
+                const docVal = (cnpjInput.value || '').trim().replace(/[^\d]+/g,'');
+                const model = (modelSelect.value || '');
+                const message = (messageInput.value || '').trim();
+
+                // Basic required field validation
+                if (!name || !email) {
+                    statusMsg.style.backgroundColor = '#fde8e8';
+                    statusMsg.style.color = '#9b1c1c';
+                    statusMsg.style.border = '1px solid #f8b4b4';
+                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Preencha o nome e e-mail.';
+                    statusMsg.style.display = 'block';
+                    return;
+                }
 
                 // Validate document
                 if (docVal.length === 11) {
                     if (!validateCPF(docVal)) {
-                        statusMsg.className = 'status-error';
                         statusMsg.style.backgroundColor = '#fde8e8';
                         statusMsg.style.color = '#9b1c1c';
                         statusMsg.style.border = '1px solid #f8b4b4';
@@ -604,7 +615,6 @@
                     }
                 } else if (docVal.length === 14) {
                     if (!validateCNPJ(docVal)) {
-                        statusMsg.className = 'status-error';
                         statusMsg.style.backgroundColor = '#fde8e8';
                         statusMsg.style.color = '#9b1c1c';
                         statusMsg.style.border = '1px solid #f8b4b4';
@@ -613,7 +623,6 @@
                         return;
                     }
                 } else {
-                    statusMsg.className = 'status-error';
                     statusMsg.style.backgroundColor = '#fde8e8';
                     statusMsg.style.color = '#9b1c1c';
                     statusMsg.style.border = '1px solid #f8b4b4';
@@ -653,7 +662,8 @@
                         statusMsg.style.border = '1px solid #bcf0da';
                         statusMsg.innerHTML = '<i class="fa-solid fa-circle-check" style="margin-right: 8px;"></i>' + resData.message;
                         statusMsg.style.display = 'block';
-                        form.reset();
+                        // Reset wa-input values manually
+                        form.querySelectorAll('wa-input, wa-textarea').forEach(el => { el.value = ''; });
                     } else {
                         statusMsg.style.backgroundColor = '#fde8e8';
                         statusMsg.style.color = '#9b1c1c';
@@ -670,6 +680,15 @@
                     statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>Erro de conexão com o servidor. Tente novamente.';
                     statusMsg.style.display = 'block';
                 }
+            }
+
+            // Listen for native form submit (if triggered)
+            form.addEventListener('submit', handleProductFormSubmit);
+
+            // Listen for click on wa-button (Web Component doesn't always trigger native form submit)
+            submitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                handleProductFormSubmit(e);
             });
         });
     </script>
