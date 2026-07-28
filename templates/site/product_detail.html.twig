@@ -117,6 +117,37 @@
             </div>
         </section>
 
+        <!-- Applications (Banners com Imagem) Section -->
+        {% if activeSubproduct and activeSubproduct.applications|length > 0 %}
+            <section class="product-applications-section scroll-animate slide-top" style="margin-top: 5rem; margin-bottom: 5rem;">
+                <div class="overview-header" style="margin-bottom: 3rem; text-align: left;">
+                    <span class="section-title-tag">
+                        {% if locale == 'en' %}Applications{% elseif locale == 'es' %}Aplicaciones{% else %}Aplicações{% endif %}
+                    </span>
+                    <h2 style="font-size: 2.2rem; margin-top: 0.8rem; font-weight: 800; font-family: var(--font-heading);">
+                        {% if locale == 'en' %}Recommended Applications{% elseif locale == 'es' %}Aplicaciones Recomendadas{% else %}Aplicações Recomendadas{% endif %}
+                    </h2>
+                    <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.6; margin-top: 0.5rem; max-width: 900px;">
+                        {% if locale == 'en' %}Our industrial presses serve a wide variety of processes with high efficiency and repeatability.
+                        {% elseif locale == 'es' %}Nuestras prensas industriales atienden una amplia variedad de procesos con alta eficiencia y repetibilidad.
+                        {% else %}Nossas prensas industriais atendem a uma ampla variedade de processos com alta eficiência e repetibilidade.
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="applications-grid">
+                    {% for app in activeSubproduct.applications %}
+                        <div class="application-card">
+                            <div class="application-img-wrapper" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                                <img src="{% if app.imageName %}/uploads/applications/{{ app.imageName }}{% else %}/uploads/applications/corte.png{% endif %}" alt="{{ app.getName(locale) }}" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(1.2) contrast(1.1);">
+                            </div>
+                            <h4 style="text-align: center; margin: 0; color: var(--color-text-primary); font-size: 1rem; font-weight: 700;">{{ app.getName(locale) }}</h4>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
         <!-- Technical Specifications Table Section (Sem Abas) -->
         {% if productSizes is not empty %}
             <section class="product-specs-section scroll-animate slide-top" style="margin-top: 5rem; margin-bottom: 5rem;">
