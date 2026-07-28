@@ -3022,6 +3022,11 @@ wa-carousel-item::part(base) {
     color: var(--color-accent-red) !important;
 }
 
+/* Mobile accordion trigger */
+.mobile-nav-accordion-trigger.open .bi-chevron-down {
+    transform: rotate(180deg);
+}
+
 /* Divider */
 .mobile-nav-divider {
     height: 1px;
