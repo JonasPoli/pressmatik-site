@@ -204,8 +204,12 @@ class SiteController extends AbstractController
     }
 
     #[Route('/{_locale}/contato-enviar', name: 'app_contact_submit', methods: ['POST'], requirements: ['_locale' => 'pt|en|es'])]
-    public function contactSubmit(Request $request, EntityManagerInterface $em, \Symfony\Component\Mailer\MailerInterface $mailer): Response
-    {
+    public function contactSubmit(
+        Request $request,
+        EntityManagerInterface $em,
+        \Symfony\Component\Mailer\MailerInterface $mailer,
+        \Psr\Log\LoggerInterface $logger
+    ): Response {
         $data = json_decode($request->getContent(), true) ?: $request->request->all();
 
         $name = $data['name'] ?? null;
@@ -237,9 +241,17 @@ class SiteController extends AbstractController
         $em->flush();
 
         // Envio imediato do e-mail via WMailer
+        $emailSent = false;
+        $mailError = null;
+
         try {
-            $fromEmail = $_ENV['EMAIL_FROM'] ?? 'noreply@wab.com.br';
-            $toEmail = $_ENV['EMAIL_CONTACT_TO'] ?? 'comercial@pressmatik.com.br';
+            $fromEmail = $_SERVER['EMAIL_FROM'] ?? $_ENV['EMAIL_FROM'] ?? $_SERVER['MAIL_FROM'] ?? $_ENV['MAIL_FROM'] ?? $_SERVER['MAIL_SENDER'] ?? $_ENV['MAIL_SENDER'] ?? getenv('EMAIL_FROM') ?: 'no-reply@wab.com.br';
+
+            $toEmail = $_SERVER['CONTACT_TO'] ?? $_ENV['CONTACT_TO'] ?? $_SERVER['EMAIL_CONTACT_TO'] ?? $_ENV['EMAIL_CONTACT_TO'] ?? getenv('CONTACT_TO') ?: 'tiago.simoes@pressmatik.com.br';
+
+            $bccEmail = $_SERVER['MAIL_BCC'] ?? $_ENV['MAIL_BCC'] ?? getenv('MAIL_BCC') ?: null;
+
+            $senderName = $_SERVER['MAIL_SENDER_NAME'] ?? $_ENV['MAIL_SENDER_NAME'] ?? getenv('MAIL_SENDER_NAME') ?: 'Pressmatik';
 
             $subject = ($type === 'quote' ? '[Cotação Site] ' : '[Contato Site] ') . ($productInterest ?: $name);
 
@@ -255,17 +267,39 @@ class SiteController extends AbstractController
                 . "Data de envio: " . (new \DateTime())->format('d/m/Y H:i:s');
 
             $emailObj = (new \Symfony\Component\Mime\Email())
-                ->from(new \Symfony\Component\Mime\Address($fromEmail, 'Site Pressmatik'))
+                ->from(new \Symfony\Component\Mime\Address($fromEmail, $senderName))
                 ->to($toEmail)
                 ->replyTo(new \Symfony\Component\Mime\Address($email, $name))
                 ->subject($subject)
                 ->text($emailText);
 
+            if ($bccEmail) {
+                $emailObj->addBcc($bccEmail);
+            }
+
             $mailer->send($emailObj);
+            $emailSent = true;
         } catch (\Throwable $e) {
-            // Em caso de erro no envio do e-mail, a mensagem permanece salva no banco de dados
+            $mailError = $e->getMessage();
+            $logger->error('Erro ao enviar email via WMailer: ' . $mailError, [
+                'exception' => $e,
+                'email' => $email,
+                'name' => $name
+            ]);
         }
 
-        return $this->json(['success' => true, 'message' => 'Sua mensagem foi enviada com sucesso!']);
+        if ($emailSent) {
+            return $this->json([
+                'success' => true,
+                'mail_sent' => true,
+                'message' => 'Sua mensagem foi enviada e o e-mail de notificação foi entregue com sucesso!'
+            ]);
+        }
+
+        return $this->json([
+            'success' => true,
+            'mail_sent' => false,
+            'message' => 'Sua mensagem foi salva no sistema com sucesso! (Aviso: Houve uma falha no servidor de e-mail ao entregar a notificação: ' . $mailError . ')'
+        ]);
     }
 }

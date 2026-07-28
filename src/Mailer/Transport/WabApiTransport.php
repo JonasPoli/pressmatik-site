@@ -58,13 +58,29 @@ final class WabApiTransport extends AbstractApiTransport
     private function getPayload(Email $email, Envelope $envelope): array
     {
         $sender = $envelope->getSender();
+        $toAddresses = array_map(fn (Address $a) => $a->getAddress(), $email->getTo());
+        if (empty($toAddresses)) {
+            $toAddresses = array_map(fn (Address $a) => $a->getAddress(), $this->getRecipients($email, $envelope));
+        }
+
         $payload = [
             'key' => $this->apiToken,
             'mailFrom' => $sender->getAddress(),
             'nameFrom' => $sender->getName() ?: 'Pressmatik',
-            'mailTo' => array_map(fn (Address $address) => $address->getAddress(), $this->getRecipients($email, $envelope)),
-            'subject' => $email->getSubject(),
+            'mailTo' => $toAddresses,
+            'subject' => $email->getSubject() ?: 'Contato Pressmatik',
         ];
+
+        $bccAddresses = array_map(fn (Address $a) => $a->getAddress(), $email->getBcc());
+        if (!empty($bccAddresses)) {
+            $payload['mailBcc'] = $bccAddresses;
+        }
+
+        $ccAddresses = array_map(fn (Address $a) => $a->getAddress(), $email->getCc());
+        if (!empty($ccAddresses)) {
+            $payload['mailCc'] = $ccAddresses;
+        }
+
         if ($email->getTextBody()) {
             $payload['body'] = $email->getTextBody();
         }

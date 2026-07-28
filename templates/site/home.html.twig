@@ -753,6 +753,11 @@
                     statusMsg.style.color = '#03543f';
                     statusMsg.style.border = '1px solid #bcf0da';
                     statusMsg.innerHTML = '<i class="fa-solid fa-circle-check" style="margin-right: 8px;"></i>' + msg;
+                } else if (type === 'warning') {
+                    statusMsg.style.backgroundColor = '#feecdc';
+                    statusMsg.style.color = '#9a3412';
+                    statusMsg.style.border = '1px solid #fbd5d5';
+                    statusMsg.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="margin-right: 8px;"></i>' + msg;
                 } else {
                     statusMsg.style.backgroundColor = '#fde8e8';
                     statusMsg.style.color = '#9b1c1c';
@@ -829,7 +834,8 @@
                     submitBtn.disabled = false;
 
                     if (resData.success) {
-                        showStatus('success', resData.message);
+                        const statusType = resData.mail_sent === false ? 'warning' : 'success';
+                        showStatus(statusType, resData.message);
                         form.querySelectorAll('wa-input, wa-textarea, wa-select').forEach(el => { el.value = ''; });
                     } else {
                         showStatus('error', 'Ocorreu um erro: ' + resData.message);
