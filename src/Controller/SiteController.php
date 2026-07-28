@@ -204,7 +204,7 @@ class SiteController extends AbstractController
     }
 
     #[Route('/{_locale}/contato-enviar', name: 'app_contact_submit', methods: ['POST'], requirements: ['_locale' => 'pt|en|es'])]
-    public function contactSubmit(Request $request, EntityManagerInterface $em): Response
+    public function contactSubmit(Request $request, EntityManagerInterface $em, \Symfony\Component\Mailer\MailerInterface $mailer): Response
     {
         $data = json_decode($request->getContent(), true) ?: $request->request->all();
 
@@ -235,6 +235,36 @@ class SiteController extends AbstractController
 
         $em->persist($msg);
         $em->flush();
+
+        // Envio imediato do e-mail via WMailer
+        try {
+            $fromEmail = $_ENV['EMAIL_FROM'] ?? 'noreply@wab.com.br';
+            $toEmail = $_ENV['EMAIL_CONTACT_TO'] ?? 'comercial@pressmatik.com.br';
+
+            $subject = ($type === 'quote' ? '[Cotação Site] ' : '[Contato Site] ') . ($productInterest ?: $name);
+
+            $emailText = "Nova mensagem recebida pelo site Pressmatik:\n\n"
+                . "• Nome: " . $name . "\n"
+                . "• E-mail: " . $email . "\n"
+                . "• Telefone: " . ($phone ?: 'Não informado') . "\n"
+                . "• CPF/CNPJ: " . ($cpfCnpj ?: 'Não informado') . "\n"
+                . "• Empresa: " . ($company ?: 'Não informada') . "\n"
+                . "• Produto/Interesse: " . ($productInterest ?: 'Não especificado') . "\n"
+                . "• Tipo: " . ($type === 'quote' ? 'Solicitação de Cotação' : 'Mensagem de Contato') . "\n\n"
+                . "Mensagem:\n" . ($message ?: 'Sem mensagem adicional') . "\n\n"
+                . "Data de envio: " . (new \DateTime())->format('d/m/Y H:i:s');
+
+            $emailObj = (new \Symfony\Component\Mime\Email())
+                ->from(new \Symfony\Component\Mime\Address($fromEmail, 'Site Pressmatik'))
+                ->to($toEmail)
+                ->replyTo(new \Symfony\Component\Mime\Address($email, $name))
+                ->subject($subject)
+                ->text($emailText);
+
+            $mailer->send($emailObj);
+        } catch (\Throwable $e) {
+            // Em caso de erro no envio do e-mail, a mensagem permanece salva no banco de dados
+        }
 
         return $this->json(['success' => true, 'message' => 'Sua mensagem foi enviada com sucesso!']);
     }
