@@ -190,8 +190,31 @@
     window.filterIcons = function(query) {
         const list = CATEGORIES[_currentTab]();
         if (!query) { renderIcons(list); return; }
-        const q = query.toLowerCase();
-        renderIcons(list.filter(ic => ic.toLowerCase().includes(q)));
+        let term = query.toLowerCase().trim();
+
+        const ALIASES = {
+            'diamante': ['gem', 'diamond'],
+            'diamantes': ['gem', 'diamond'],
+            'joia': ['gem'],
+            'gema': ['gem'],
+            'engrenagem': ['gear', 'gears'],
+            'ferramenta': ['wrench', 'toolbox', 'screwdriver', 'hammer'],
+            'industria': ['industry'],
+            'estrela': ['star'],
+            'trofeu': ['trophy'],
+            'medalha': ['medal'],
+            'coroa': ['crown']
+        };
+
+        let searchTerms = [term];
+        if (ALIASES[term]) {
+            searchTerms = searchTerms.concat(ALIASES[term]);
+        }
+
+        renderIcons(list.filter(ic => {
+            const icLower = ic.toLowerCase();
+            return searchTerms.some(st => icLower.includes(st));
+        }));
     };
 
     window.switchIconTab = function(category, btn) {

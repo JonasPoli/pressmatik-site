@@ -528,15 +528,39 @@ function getCategorizedIcons(category) {
 }
 
 function filterIcons(q) {
-    const term = q.toLowerCase().trim().replace(/^fa-(solid|brands|regular)\s+fa-/, '').replace(/fa-/,'');
+    let term = q.toLowerCase().trim().replace(/^fa-(solid|brands|regular)\s+fa-/, '').replace(/fa-/,'');
     const baseList = getCategorizedIcons(_currentTab);
     
     if (!term) {
         renderIcons(baseList, true);
         return;
     }
-    
-    const filtered = baseList.filter(ic => ic.toLowerCase().includes(term));
+
+    const ALIASES = {
+        'diamante': ['gem', 'diamond'],
+        'diamantes': ['gem', 'diamond'],
+        'joia': ['gem'],
+        'gema': ['gem'],
+        'engrenagem': ['gear', 'gears'],
+        'engrenagens': ['gears'],
+        'ferramenta': ['wrench', 'toolbox', 'screwdriver-wrench', 'hammer'],
+        'industria': ['industry'],
+        'empresa': ['building', 'briefcase'],
+        'estrela': ['star'],
+        'trofeu': ['trophy'],
+        'medalha': ['medal'],
+        'coroa': ['crown']
+    };
+
+    let searchTerms = [term];
+    if (ALIASES[term]) {
+        searchTerms = searchTerms.concat(ALIASES[term]);
+    }
+
+    const filtered = baseList.filter(ic => {
+        const icLower = ic.toLowerCase();
+        return searchTerms.some(st => icLower.includes(st));
+    });
     renderIcons(filtered, true);
 }
 
