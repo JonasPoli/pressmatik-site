@@ -20,6 +20,7 @@ class AppExtension extends AbstractExtension
         private readonly ProductRepository $productRepo,
         private readonly BannerRepository $bannerRepo,
         private readonly DifferentialRepository $differentialRepo,
+        private readonly \App\Repository\MegaMenuCategoryRepository $megaMenuRepo,
     ) {}
 
     public function getFunctions(): array
@@ -31,6 +32,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('get_products_grouped', [$this, 'getProductsGrouped']),
             new TwigFunction('get_active_banners', [$this, 'getActiveBanners']),
             new TwigFunction('get_active_differentials', [$this, 'getActiveDifferentials']),
+            new TwigFunction('get_megamenu_categories', [$this, 'getMegaMenuCategories']),
         ];
     }
 
@@ -92,5 +94,16 @@ class AppExtension extends AbstractExtension
     public function getActiveDifferentials(): array
     {
         return $this->differentialRepo->findActive();
+    }
+
+    /** @return array<string, \App\Entity\MegaMenuCategory> */
+    public function getMegaMenuCategories(): array
+    {
+        $items = $this->megaMenuRepo->findAllOrdered();
+        $indexed = [];
+        foreach ($items as $item) {
+            $indexed[$item->getCategoryKey()] = $item;
+        }
+        return $indexed;
     }
 }

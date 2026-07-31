@@ -11,7 +11,7 @@
         <div class="hero-slider">
             {% if banners|length > 0 %}
                 {% for item in banners %}
-                    <div class="hero-slide {% if loop.first %}active{% endif %}">
+                    <div class="hero-slide {% if loop.first %}active{% endif %}" {% if item.getBgImageName() %}style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.65)), url('/uploads/banners/{{ item.getBgImageName() }}'); background-size: cover; background-position: center;"{% endif %}>
                         <div class="container hero-grid">
                             <div class="hero-content">
                                 <span class="section-title-tag">PRESSMATIK</span>
@@ -396,86 +396,96 @@
             </div>
 
             <div class="testimonials-carousel">
-                {% for item in testimonials %}
-                    <div class="testimonial-card scroll-animate {% if loop.index0 % 3 == 0 %}slide-left{% elseif loop.index0 % 3 == 1 %}slide-top{% else %}slide-right{% endif %}">
-                        <div class="testimonial-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="testimonial-quote">"{{ item.getText(locale) }}"</p>
-                        <div class="testimonial-client">
-                            {% if item.imageName %}
-                                <img src="/uploads/testimonies/{{ item.imageName }}" alt="{{ item.name }}" class="client-avatar">
-                            {% else %}
-                                <div class="client-avatar" style="background: linear-gradient(135deg,#4f8ef7,#a855f7); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size: 14px;">
-                                    {{ item.name|first|upper }}
+                <div class="testimonials-slider-container">
+                    <div class="testimonials-track">
+                        {% for item in testimonials %}
+                            <div class="testimonial-card scroll-animate {% if loop.index0 % 3 == 0 %}slide-left{% elseif loop.index0 % 3 == 1 %}slide-top{% else %}slide-right{% endif %}">
+                                <div class="testimonial-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
                                 </div>
-                            {% endif %}
-                            <div class="client-meta">
-                                <h4>{{ item.name }}</h4>
-                                <p>{{ item.getRole(locale) }} - {{ item.company }}</p>
+                                <p class="testimonial-quote">"{{ item.getText(locale) }}"</p>
+                                <div class="testimonial-client">
+                                    {% if item.imageName %}
+                                        <img src="/uploads/testimonies/{{ item.imageName }}" alt="{{ item.name }}" class="client-avatar">
+                                    {% else %}
+                                        <div class="client-avatar" style="background: linear-gradient(135deg,#4f8ef7,#a855f7); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size: 14px;">
+                                            {{ item.name|first|upper }}
+                                        </div>
+                                    {% endif %}
+                                    <div class="client-meta">
+                                        <h4>{{ item.name }}</h4>
+                                        <p>{{ item.getRole(locale) }} - {{ item.company }}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                {% else %}
-                    <!-- Static Fallbacks -->
-                    <div class="testimonial-card scroll-animate slide-left">
-                        <div class="testimonial-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="testimonial-quote">"{{ 'testimonials.client1.text'|trans }}"</p>
-                        <div class="testimonial-client">
-                            <img src="/images/client1.jpg" alt="{{ 'testimonials.client1.name'|trans }}" class="client-avatar">
-                            <div class="client-meta">
-                                <h4>{{ 'testimonials.client1.name'|trans }}</h4>
-                                <p>{{ 'testimonials.client1.role'|trans }} - {{ 'testimonials.client1.company'|trans }}</p>
+                        {% else %}
+                            <!-- Static Fallbacks -->
+                            <div class="testimonial-card scroll-animate slide-left">
+                                <div class="testimonial-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <p class="testimonial-quote">"{{ 'testimonials.client1.text'|trans }}"</p>
+                                <div class="testimonial-client">
+                                    <img src="/images/client1.jpg" alt="{{ 'testimonials.client1.name'|trans }}" class="client-avatar">
+                                    <div class="client-meta">
+                                        <h4>{{ 'testimonials.client1.name'|trans }}</h4>
+                                        <p>{{ 'testimonials.client1.role'|trans }} - {{ 'testimonials.client1.company'|trans }}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="testimonial-card scroll-animate slide-top">
-                        <div class="testimonial-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="testimonial-quote">"{{ 'testimonials.client2.text'|trans }}"</p>
-                        <div class="testimonial-client">
-                            <img src="/images/client2.jpg" alt="{{ 'testimonials.client2.name'|trans }}" class="client-avatar">
-                            <div class="client-meta">
-                                <h4>{{ 'testimonials.client2.name'|trans }}</h4>
-                                <p>{{ 'testimonials.client2.role'|trans }} - {{ 'testimonials.client2.company'|trans }}</p>
+                            <div class="testimonial-card scroll-animate slide-top">
+                                <div class="testimonial-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <p class="testimonial-quote">"{{ 'testimonials.client2.text'|trans }}"</p>
+                                <div class="testimonial-client">
+                                    <img src="/images/client2.jpg" alt="{{ 'testimonials.client2.name'|trans }}" class="client-avatar">
+                                    <div class="client-meta">
+                                        <h4>{{ 'testimonials.client2.name'|trans }}</h4>
+                                        <p>{{ 'testimonials.client2.role'|trans }} - {{ 'testimonials.client2.company'|trans }}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="testimonial-card scroll-animate slide-right">
-                        <div class="testimonial-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="testimonial-quote">"{{ 'testimonials.client3.text'|trans }}"</p>
-                        <div class="testimonial-client">
-                            <img src="/images/client3.jpg" alt="{{ 'testimonials.client3.name'|trans }}" class="client-avatar">
-                            <div class="client-meta">
-                                <h4>{{ 'testimonials.client3.name'|trans }}</h4>
-                                <p>{{ 'testimonials.client3.role'|trans }} - {{ 'testimonials.client3.company'|trans }}</p>
+                            <div class="testimonial-card scroll-animate slide-right">
+                                <div class="testimonial-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <p class="testimonial-quote">"{{ 'testimonials.client3.text'|trans }}"</p>
+                                <div class="testimonial-client">
+                                    <img src="/images/client3.jpg" alt="{{ 'testimonials.client3.name'|trans }}" class="client-avatar">
+                                    <div class="client-meta">
+                                        <h4>{{ 'testimonials.client3.name'|trans }}</h4>
+                                        <p>{{ 'testimonials.client3.role'|trans }} - {{ 'testimonials.client3.company'|trans }}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                </div>
+
+                <div class="testimonials-slider-nav" style="display: none;">
+                    <button class="testimonials-prev-btn" type="button" aria-label="Depoimento Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="testimonials-dots"></div>
+                    <button class="testimonials-next-btn" type="button" aria-label="Próximo Depoimento"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
             </div>
         </div>
     </section>
@@ -658,7 +668,133 @@
             startAutoplay();
         }
 
-        document.addEventListener('turbo:load', initHeroSlider);
+        function initTestimonialsSlider() {
+            const container = document.querySelector('.testimonials-slider-container');
+            if (!container) return;
+
+            const track = container.querySelector('.testimonials-track');
+            if (!track) return;
+            const cards = Array.from(track.querySelectorAll('.testimonial-card'));
+            const carouselParent = container.closest('.testimonials-carousel');
+            const navWrapper = carouselParent ? carouselParent.querySelector('.testimonials-slider-nav') : null;
+            const dotsContainer = navWrapper ? navWrapper.querySelector('.testimonials-dots') : null;
+            const prevBtn = navWrapper ? navWrapper.querySelector('.testimonials-prev-btn') : null;
+            const nextBtn = navWrapper ? navWrapper.querySelector('.testimonials-next-btn') : null;
+
+            if (!cards.length) return;
+
+            let currentIndex = 0;
+            let timer = null;
+
+            function isMobile() {
+                return window.innerWidth < 768;
+            }
+
+            function getTotalPages() {
+                if (isMobile()) {
+                    return cards.length;
+                }
+                return cards.length > 3 ? Math.ceil(cards.length / 3) : 1;
+            }
+
+            function updateNav() {
+                const totalPages = getTotalPages();
+                if (totalPages <= 1) {
+                    if (navWrapper) navWrapper.style.display = 'none';
+                    track.style.transform = 'none';
+                    return;
+                }
+                if (navWrapper) navWrapper.style.display = 'flex';
+
+                if (dotsContainer) {
+                    dotsContainer.innerHTML = '';
+                    for (let i = 0; i < totalPages; i++) {
+                        const dot = document.createElement('span');
+                        dot.className = 'testimonial-dot' + (i === currentIndex ? ' active' : '');
+                        dot.addEventListener('click', () => goToPage(i));
+                        dotsContainer.appendChild(dot);
+                    }
+                }
+            }
+
+            function goToPage(pageIndex) {
+                const totalPages = getTotalPages();
+                if (totalPages <= 1) {
+                    track.style.transform = 'none';
+                    return;
+                }
+                currentIndex = (pageIndex + totalPages) % totalPages;
+
+                if (isMobile()) {
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                } else {
+                    const maxIndex = cards.length - 3;
+                    const targetIndex = Math.min(currentIndex * 3, maxIndex < 0 ? 0 : maxIndex);
+                    const cardWidth = cards[0].offsetWidth;
+                    const gap = 32; // 2rem
+                    track.style.transform = `translateX(-${targetIndex * (cardWidth + gap)}px)`;
+                }
+
+                updateNav();
+            }
+
+            function startAutoplay() {
+                stopAutoplay();
+                const totalPages = getTotalPages();
+                if (totalPages > 1) {
+                    timer = setInterval(() => {
+                        goToPage(currentIndex + 1);
+                    }, 5000);
+                }
+            }
+
+            function stopAutoplay() {
+                if (timer) {
+                    clearInterval(timer);
+                    timer = null;
+                }
+            }
+
+            if (prevBtn && !prevBtn.dataset.bound) {
+                prevBtn.dataset.bound = 'true';
+                prevBtn.addEventListener('click', () => {
+                    goToPage(currentIndex - 1);
+                    startAutoplay();
+                });
+            }
+            if (nextBtn && !nextBtn.dataset.bound) {
+                nextBtn.dataset.bound = 'true';
+                nextBtn.addEventListener('click', () => {
+                    goToPage(currentIndex + 1);
+                    startAutoplay();
+                });
+            }
+
+            carouselParent.addEventListener('mouseenter', stopAutoplay);
+            carouselParent.addEventListener('mouseleave', startAutoplay);
+
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    currentIndex = 0;
+                    goToPage(0);
+                    startAutoplay();
+                }, 150);
+            });
+
+            goToPage(0);
+            startAutoplay();
+        }
+
+        document.addEventListener('turbo:load', () => {
+            initHeroSlider();
+            initTestimonialsSlider();
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            initHeroSlider();
+            initTestimonialsSlider();
+        });
 
         function initContactForm() {
             const form = document.getElementById('quote-form');

@@ -57,3 +57,7 @@ vich_uploader:
             uri_prefix: /uploads/success_cases
             upload_destination: '%kernel.project_dir%/public/uploads/success_cases'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        megamenu:
+            uri_prefix: /uploads/megamenu
+            upload_destination: '%kernel.project_dir%/public/uploads/megamenu'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

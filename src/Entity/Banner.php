@@ -53,6 +53,12 @@ class Banner
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
 
+    #[Vich\UploadableField(mapping: 'banners', fileNameProperty: 'bgImageName')]
+    private ?File $bgImageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $bgImageName = null;
+
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
@@ -229,6 +235,17 @@ class Banner
     public function getImageFile(): ?File { return $this->imageFile; }
     public function setImageName(?string $v): void { $this->imageName = $v; }
     public function getImageName(): ?string { return $this->imageName; }
+
+    public function setBgImageFile(?File $file = null): void
+    {
+        $this->bgImageFile = $file;
+        if (null !== $file) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+    public function getBgImageFile(): ?File { return $this->bgImageFile; }
+    public function setBgImageName(?string $v): void { $this->bgImageName = $v; }
+    public function getBgImageName(): ?string { return $this->bgImageName; }
 
     public function getUpdatedAt(): ?\DateTimeImmutable { return $this->updatedAt; }
 

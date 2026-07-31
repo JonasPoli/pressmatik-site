@@ -1,0 +1,75 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ formTitle }}{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1 class="page-title">{{ formTitle }}</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400">
+        <a href="{{ path('app_admin_megamenu_index') }}" class="text-primary hover:underline">← Voltar para a listagem</a>
+    </p>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="space-y-6">
+    <div class="admin-card">
+        <h3 class="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-4">Informações do Bloco</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="wab-field">
+                <label class="wab-label">Título em Português</label>
+                <input type="text" name="titlePt" value="{{ item.titlePt }}" class="wab-input">
+            </div>
+            <div class="wab-field">
+                <label class="wab-label">Título em Inglês</label>
+                <input type="text" name="titleEn" value="{{ item.titleEn }}" class="wab-input">
+            </div>
+            <div class="wab-field">
+                <label class="wab-label">Título em Espanhol</label>
+                <input type="text" name="titleEs" value="{{ item.titleEs }}" class="wab-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-card">
+        <h3 class="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-4">Imagem de Capa da Categoria (MegaMenu)</h3>
+        
+        <div class="mb-4">
+            <label class="wab-label mb-2 block">Imagem Atual:</label>
+            <div class="relative max-w-sm rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 p-2">
+                <div class="megamenu-img-wrapper max-h-48 overflow-hidden rounded-lg">
+                    <img src="{{ item.imageUrl }}" alt="" class="w-full h-40 object-cover rounded-lg">
+                </div>
+            </div>
+            {% if item.imageName %}
+            <div class="mt-2">
+                <label class="inline-flex items-center gap-1.5 text-xs text-red-500 cursor-pointer">
+                    <input type="checkbox" name="deleteImage" value="1" class="rounded border-slate-300 text-red-600 focus:ring-red-500"> Resetar para a imagem padrão original
+                </label>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="wab-field">
+            <label class="wab-label">Upload de Nova Imagem</label>
+            <input type="file" name="imageFile" accept="image/*" class="wab-input">
+            <div class="mt-3 space-y-1 text-xs text-slate-500 dark:text-slate-400">
+                <p>
+                    <strong>Resolução indicada:</strong> 600 × 400 px (ou 800 × 500 px) &nbsp;|&nbsp; 
+                    <strong>Proporção recomendada:</strong> 3:2 ou 16:9 &nbsp;|&nbsp; 
+                    <strong>Formatos aceitos:</strong> WebP, JPG, PNG
+                </p>
+                <p class="text-amber-600 dark:text-amber-400 flex items-center gap-1.5 font-medium">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <strong>Efeito Aplicado:</strong> No site público, a imagem é exibida dentro da moldura arredondada do MegaMenu (<code>megamenu-img-wrapper</code>) com animação suave de zoom e efeito escurecido ao passar o mouse.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-end gap-3">
+        <a href="{{ path('app_admin_megamenu_index') }}" class="px-4 py-2 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">Cancelar</a>
+        <button type="submit" class="inline-flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+            <i class="fa-solid fa-save"></i> Salvar Imagem
+        </button>
+    </div>
+</form>
+{% endblock %}

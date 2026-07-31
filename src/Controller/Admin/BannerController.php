@@ -122,5 +122,15 @@ final class BannerController extends AbstractController
         if ($imageFile instanceof UploadedFile) {
             $item->setImageFile($imageFile);
         }
+
+        if ($data->get('deleteBgImage')) {
+            $item->setBgImageFile(null);
+            $item->setBgImageName(null);
+        }
+
+        $bgImageFile = $request->files->get('bgImageFile');
+        if ($bgImageFile instanceof UploadedFile) {
+            $item->setBgImageFile($bgImageFile);
+        }
     }
 }

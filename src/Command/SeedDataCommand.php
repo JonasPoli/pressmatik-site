@@ -24,6 +24,7 @@ use App\Entity\ClientLogo;
 use App\Entity\NewsCategory;
 use App\Entity\News;
 use App\Entity\Service;
+use App\Entity\MegaMenuCategory;
 use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -95,6 +96,7 @@ class SeedDataCommand extends Command
         $this->em->createQuery('DELETE FROM App\Entity\NewsCategory')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\ServiceImage')->execute();
         $this->em->createQuery('DELETE FROM App\Entity\Service')->execute();
+        $this->em->createQuery('DELETE FROM App\Entity\MegaMenuCategory')->execute();
         
         $io->text('Tabelas limpas com sucesso.');
 
@@ -168,6 +170,10 @@ class SeedDataCommand extends Command
         // 19. NEWS
         $io->section('19. Cadastrando Notícias');
         $this->seedNews($io);
+
+        // 20. MEGAMENU CATEGORIES
+        $io->section('20. Cadastrando Categorias do MegaMenu');
+        $this->seedMegaMenuCategories($io);
 
         $io->success('🎉 Seeding completo! Todos os dados inseridos com sucesso.');
         return Command::SUCCESS;
@@ -1416,6 +1422,67 @@ class SeedDataCommand extends Command
 
         $this->em->flush();
         $io->text(count($testimonies) . ' depoimentos inseridos.');
+    }
+
+    private function seedMegaMenuCategories(SymfonyStyle $io): void
+    {
+        $categories = [
+            [
+                'key' => 'hydraulic',
+                'titlePt' => 'Prensas Hidráulicas',
+                'titleEn' => 'Hydraulic Presses',
+                'titleEs' => 'Prensas Hidráulicas',
+                'defaultImg' => '/images/prensa-hidraulica-tipo-c-duplo-linha-st.png',
+                'position' => 0
+            ],
+            [
+                'key' => 'servo-hydraulic',
+                'titlePt' => 'Prensas Servo-Hidráulicas',
+                'titleEn' => 'Servo-Hydraulic Presses',
+                'titleEs' => 'Prensas Servo-Hidráulicas',
+                'defaultImg' => '/images/pmc-es.png',
+                'position' => 1
+            ],
+            [
+                'key' => 'mechanical',
+                'titlePt' => 'Prensas Mecânicas',
+                'titleEn' => 'Mechanical Presses',
+                'titleEs' => 'Prensas Mecánicas',
+                'defaultImg' => '/images/prensa-hidraulica-tipo-c-linha-st.png',
+                'position' => 2
+            ],
+            [
+                'key' => 'equipments',
+                'titlePt' => 'Máquinas e Equipamentos',
+                'titleEn' => 'Machinery & Equipment',
+                'titleEs' => 'Maquinaria y Equipos',
+                'defaultImg' => '/images/tipo-h.png',
+                'position' => 3
+            ],
+            [
+                'key' => 'parts',
+                'titlePt' => 'Peças e Acessórios',
+                'titleEn' => 'Parts & Accessories',
+                'titleEs' => 'Piezas y Accesorios',
+                'defaultImg' => '/images/especiais.png',
+                'position' => 4
+            ],
+        ];
+
+        foreach ($categories as $cat) {
+            $item = new MegaMenuCategory();
+            $item->setCategoryKey($cat['key']);
+            $item->setTitlePt($cat['titlePt']);
+            $item->setTitleEn($cat['titleEn']);
+            $item->setTitleEs($cat['titleEs']);
+            $item->setDefaultImagePath($cat['defaultImg']);
+            $item->setPosition($cat['position']);
+
+            $this->em->persist($item);
+        }
+
+        $this->em->flush();
+        $io->text(count($categories) . ' categorias do MegaMenu inicializadas.');
     }
 
     private function findFileRecursively(string $dir, string $targetFilename): ?string

@@ -141,6 +141,11 @@
             <span>Banners</span>
         </a>
 
+        <a {{nav_item_class('app_admin_megamenu')}} href="{{ path('app_admin_megamenu_index') }}">
+            <i class="fa-solid fa-table-cells-large" aria-hidden="true"></i>
+            <span>Imagens MegaMenu</span>
+        </a>
+
         <div class="sidebar-section-label">Produtos</div>
 
         <a {{nav_item_class('app_admin_tech_spec')}} href="{{ path('app_admin_tech_spec_index') }}">
@@ -360,9 +365,9 @@ function loadIconsFromStylesheets() {
         'helmet-safety', 'hand-fist', 'hand-back-fist', 'fingerprint', 'layer-group', 'border-all', 'table-cells',
 
         // Essentials & General
-        'house', 'star', 'heart', 'user', 'users', 'user-group', 'user-plus', 'user-minus', 'user-check', 'user-xmark',
+        'gem', 'diamond', 'house', 'star', 'heart', 'user', 'users', 'user-group', 'user-plus', 'user-minus', 'user-check', 'user-xmark',
         'building', 'landmark', 'school', 'graduation-cap', 'book', 'book-open', 'book-reader', 'chalkboard',
-        'chalkboard-user', 'university', 'award', 'trophy', 'medal', 'certificate', 'briefcase', 'briefcase-medical',
+        'chalkboard-user', 'university', 'award', 'trophy', 'medal', 'certificate', 'crown', 'ring', 'briefcase', 'briefcase-medical',
         'suitcase', 'folder', 'folder-open', 'folder-plus', 'folder-minus', 'folder-closed', 'file', 'file-lines',
         'file-pdf', 'file-word', 'file-excel', 'file-powerpoint', 'file-csv', 'file-code', 'file-zipper', 'file-image',
         'file-audio', 'file-video', 'file-signature', 'file-contract', 'file-invoice', 'file-invoice-dollar',

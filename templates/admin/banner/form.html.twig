@@ -80,7 +80,7 @@
     </div>
 
     <div class="admin-card">
-        <h3 class="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-4">Imagem do Banner</h3>
+        <h3 class="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-4">Imagem Principal do Produto/Máquina no Banner</h3>
         {% if item and item.imageName %}
         <div class="mb-3">
             <img src="/uploads/banners/{{ item.imageName }}" alt="" class="max-h-40 rounded bg-slate-100 p-2 border border-slate-200">
@@ -93,8 +93,34 @@
         {% endif %}
         <input type="file" name="imageFile" accept="image/*" class="wab-input" {% if item is null %}required{% endif %}>
         <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            <strong>Resolução indicada:</strong> 1920 × 700 px (ou 1920 × 800 px) &nbsp;|&nbsp; <strong>Proporção recomendada:</strong> 21:9 ou 16:9 &nbsp;|&nbsp; <strong>Proporções aceitas:</strong> Widescreen (16:9 a 21:9) &nbsp;|&nbsp; <strong>Formatos:</strong> WebP, JPG, PNG
+            <strong>Resolução indicada:</strong> 800 × 600 px ou fundo transparente PNG &nbsp;|&nbsp; <strong>Proporção recomendada:</strong> 4:3 ou recorte da máquina &nbsp;|&nbsp; <strong>Formatos:</strong> WebP, PNG, JPG
         </p>
+    </div>
+
+    <div class="admin-card">
+        <h3 class="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-4">Imagem de Fundo do Banner (Opcional)</h3>
+        {% if item and item.bgImageName %}
+        <div class="mb-3">
+            <img src="/uploads/banners/{{ item.bgImageName }}" alt="Fundo do Banner" class="max-h-40 rounded bg-slate-100 p-2 border border-slate-200 object-cover w-full max-w-lg">
+            <div class="mt-2">
+                <label class="inline-flex items-center gap-1.5 text-xs text-red-500 cursor-pointer">
+                    <input type="checkbox" name="deleteBgImage" value="1" class="rounded border-slate-300 text-red-600 focus:ring-red-500"> Remover imagem de fundo atual
+                </label>
+            </div>
+        </div>
+        {% endif %}
+        <input type="file" name="bgImageFile" accept="image/*" class="wab-input">
+        <div class="mt-2 space-y-1 text-xs text-slate-500 dark:text-slate-400">
+            <p>
+                <strong>Resolução indicada:</strong> 1920 × 1080 px (ou 1920 × 800 px) &nbsp;|&nbsp; 
+                <strong>Proporção recomendada:</strong> 16:9 ou 21:9 Widescreen &nbsp;|&nbsp; 
+                <strong>Formatos aceitos:</strong> WebP, JPG, PNG
+            </p>
+            <p class="text-amber-600 dark:text-amber-400 flex items-center gap-1.5 font-medium">
+                <i class="fa-solid fa-circle-info"></i>
+                <strong>Efeito Aplicado:</strong> Será aplicado automaticamente um filtro de escurecimento (overlay escuro) sobre esta imagem de fundo no site para assegurar o contraste e a perfeita legibilidade dos textos e títulos do banner.
+            </p>
+        </div>
     </div>
 
     <div class="flex justify-end gap-3">

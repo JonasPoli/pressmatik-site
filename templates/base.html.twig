@@ -51,20 +51,21 @@
                                 <div class="megamenu-container">
                                     <div class="megamenu-grid">
                                          {% set db_grouped = get_products_grouped() %}
+                                         {% set mm_cats = get_megamenu_categories() %}
                                          {% set grouped_cats = {
                                              'hydraulic': {
-                                                 'title': 'products_sec.hydraulic_presses'|trans,
-                                                 'img': '/images/prensa-hidraulica-tipo-c-duplo-linha-st.png',
+                                                 'title': mm_cats['hydraulic'].title(locale) ?? 'products_sec.hydraulic_presses'|trans,
+                                                 'img': mm_cats['hydraulic'].imageUrl ?? '/images/prensa-hidraulica-tipo-c-duplo-linha-st.png',
                                                  'products': db_grouped['hydraulic'] ?? []
                                              },
                                              'servo-hydraulic': {
-                                                 'title': 'products_sec.servo_presses'|trans,
-                                                 'img': '/images/pmc-es.png',
+                                                 'title': mm_cats['servo-hydraulic'].title(locale) ?? 'products_sec.servo_presses'|trans,
+                                                 'img': mm_cats['servo-hydraulic'].imageUrl ?? '/images/pmc-es.png',
                                                  'products': db_grouped['servo-hydraulic'] ?? []
                                              },
                                              'mechanical': {
-                                                 'title': 'Prensas Mecânicas',
-                                                 'img': '/images/prensa-hidraulica-tipo-c-linha-st.png',
+                                                 'title': mm_cats['mechanical'].title(locale) ?? 'Prensas Mecânicas',
+                                                 'img': mm_cats['mechanical'].imageUrl ?? '/images/prensa-hidraulica-tipo-c-linha-st.png',
                                                  'products': db_grouped['mechanical'] ?? []
                                              }
                                          } %}
@@ -89,9 +90,9 @@
                                          <!-- Col 4: Equipamentos -->
                                          <div class="megamenu-col">
                                              <div class="megamenu-img-wrapper">
-                                                 <img src="/images/tipo-h.png" alt="{{ 'products_sec.equipments'|trans }}" loading="lazy">
+                                                 <img src="{{ mm_cats['equipments'].imageUrl ?? '/images/tipo-h.png' }}" alt="{{ mm_cats['equipments'].title(locale) ?? 'products_sec.equipments'|trans }}" loading="lazy">
                                              </div>
-                                             <span class="megamenu-title">{{ 'products_sec.equipments'|trans }}</span>
+                                             <span class="megamenu-title">{{ mm_cats['equipments'].title(locale) ?? 'products_sec.equipments'|trans }}</span>
                                              <ul class="megamenu-links">
                                                  {% for prod in db_grouped['equipments'] ?? [] %}
                                                      <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}">{{ prod.getName(locale) }}</a></li>
@@ -101,9 +102,9 @@
                                          <!-- Col 5: Peças e Acessórios -->
                                          <div class="megamenu-col">
                                              <div class="megamenu-img-wrapper">
-                                                 <img src="/images/especiais.png" alt="{{ 'products_sec.parts'|trans }}" loading="lazy">
+                                                 <img src="{{ mm_cats['parts'].imageUrl ?? '/images/especiais.png' }}" alt="{{ mm_cats['parts'].title(locale) ?? 'products_sec.parts'|trans }}" loading="lazy">
                                              </div>
-                                             <span class="megamenu-title">{{ 'products_sec.parts'|trans }}</span>
+                                             <span class="megamenu-title">{{ mm_cats['parts'].title(locale) ?? 'products_sec.parts'|trans }}</span>
                                              <ul class="megamenu-links">
                                                  {% for prod in db_grouped['parts'] ?? [] %}
                                                      <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}">{{ prod.getName(locale) }}</a></li>
@@ -250,9 +251,12 @@
                     <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png" alt="Pressmatik" style="max-height: 50px; margin-bottom: 12px;">
                     <p>{{ 'footer.about'|trans }}</p>
                     <div class="footer-social-links">
-                        <a href="https://linkedin.com" target="_blank" class="footer-social-btn" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                        <a href="https://instagram.com" target="_blank" class="footer-social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="https://youtube.com" target="_blank" class="footer-social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/pressmatik/" target="_blank" rel="noopener" class="footer-social-btn" aria-label="LinkedIn" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/pressmatik_oficial" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCE7ZUUPzVg858f45I8nbByQ" target="_blank" rel="noopener" class="footer-social-btn" aria-label="YouTube" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="https://www.facebook.com/pressmatikprensaseequipamentos?_rdr" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://www.tiktok.com/@pressmatik?lang=pt-br" target="_blank" rel="noopener" class="footer-social-btn" aria-label="TikTok" title="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="https://linktr.ee/pressmatikoficial" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Linktree" title="Linktree"><i class="bi bi-tree-fill"></i></a>
                     </div>
                 </div>
                 
