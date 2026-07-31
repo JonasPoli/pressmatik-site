@@ -332,152 +332,119 @@ let _currentList = [];
 let _renderLimit = 180;
 let _renderedCount = 0;
 
-function getIconPrefix(iconName) {
-    const brands = [
-        'instagram', 'facebook', 'facebook-f', 'youtube', 'linkedin', 'linkedin-in', 'whatsapp', 'twitter', 'tiktok', 'github',
-        'google', 'apple', 'microsoft', 'android', 'amazon', 'wordpress', 'paypal', 'stripe',
-        'spotify', 'slack', 'discord', 'figma', 'sass', 'html5', 'css3', 'js', 'react', 'vue',
-        'angular', 'node', 'python', 'php', 'docker', 'git', 'aws', 'digital-ocean', 'cloudflare',
-        'stack-overflow', 'medium', 'vimeo', 'tumblr', 'pinterest', 'snapchat', 'reddit', 'quora',
-        'telegram', 'skype', 'zoom', 'trello', 'behance', 'dribbble', 'flickr', 'deviantart',
-        'steam', 'twitch', 'xbox', 'playstation', 'nintendo-switch', 'google-play', 'app-store'
-    ];
-    if (brands.includes(iconName) || brands.some(b => iconName.startsWith(b + '-'))) {
-        return 'fa-brands';
-    }
-    return 'fa-solid';
-}
-
 function loadIconsFromStylesheets() {
-    const iconSet = new Set();
-    const staticList = [
+    const curatedIcons = [
+        // Premium, Badges & Jewels
+        'fa-solid fa-gem', 'fa-solid fa-diamond', 'fa-regular fa-gem', 'fa-solid fa-crown', 'fa-solid fa-trophy',
+        'fa-solid fa-award', 'fa-solid fa-medal', 'fa-solid fa-certificate', 'fa-solid fa-star', 'fa-solid fa-star-half-stroke',
+        'fa-regular fa-star', 'fa-solid fa-ranking-star', 'fa-solid fa-ribbon',
+
         // Industrial, Machinery & Manufacturing (Pressmatik Core)
-        'industry', 'gears', 'gear', 'wrench', 'screwdriver-wrench', 'hammer', 'tools', 'bolt', 'bolt-lightning',
-        'fire', 'fire-flame-curved', 'gauge', 'gauge-high', 'gauge-simple', 'gauge-simple-high', 'microchip',
-        'robot', 'power-off', 'plug', 'plug-circle-bolt', 'plug-circle-check', 'truck-ramp-box', 'boxes-stacked',
-        'box', 'cube', 'cubes', 'dolly', 'warehouse', 'truck', 'truck-moving', 'truck-front', 'oil-can',
-        'atom', 'magnet', 'droplet', 'temperature-high', 'temperature-low', 'temperature-half', 'sliders',
-        'sliders-up', 'toggle-on', 'toggle-off', 'microscope', 'flask', 'flask-vial', 'compass-drafting',
-        'ruler-combined', 'ruler', 'tape', 'scissors', 'shield', 'shield-halved', 'shield-heart', 'shield-cat',
-        'triangle-exclamation', 'circle-exclamation', 'circle-check', 'square-check', 'stop', 'play', 'pause',
-        'rotate', 'arrows-rotate', 'rotate-right', 'rotate-left', 'arrows-spin', 'arrows-up-down', 'arrows-left-right',
-        'eye', 'eye-slash', 'lightbulb', 'computer', 'desktop', 'tv', 'solar-panel', 'wind', 'fan', 'fire-extinguisher',
-        'helmet-safety', 'hand-fist', 'hand-back-fist', 'fingerprint', 'layer-group', 'border-all', 'table-cells',
+        'fa-solid fa-industry', 'fa-solid fa-gears', 'fa-solid fa-gear', 'fa-solid fa-wrench', 'fa-solid fa-screwdriver-wrench',
+        'fa-solid fa-hammer', 'fa-solid fa-toolbox', 'fa-solid fa-bolt', 'fa-solid fa-bolt-lightning', 'fa-solid fa-fire',
+        'fa-solid fa-fire-flame-curved', 'fa-solid fa-gauge', 'fa-solid fa-gauge-high', 'fa-solid fa-gauge-simple',
+        'fa-solid fa-gauge-simple-high', 'fa-solid fa-microchip', 'fa-solid fa-robot', 'fa-solid fa-power-off',
+        'fa-solid fa-plug', 'fa-solid fa-plug-circle-bolt', 'fa-solid fa-plug-circle-check', 'fa-solid fa-truck-ramp-box',
+        'fa-solid fa-boxes-stacked', 'fa-solid fa-box', 'fa-solid fa-cube', 'fa-solid fa-cubes', 'fa-solid fa-dolly',
+        'fa-solid fa-warehouse', 'fa-solid fa-truck', 'fa-solid fa-truck-moving', 'fa-solid fa-truck-front',
+        'fa-solid fa-truck-fast', 'fa-solid fa-oil-can', 'fa-solid fa-atom', 'fa-solid fa-magnet', 'fa-solid fa-droplet',
+        'fa-solid fa-temperature-high', 'fa-solid fa-temperature-low', 'fa-solid fa-temperature-half', 'fa-solid fa-sliders',
+        'fa-solid fa-toggle-on', 'fa-solid fa-toggle-off', 'fa-solid fa-microscope', 'fa-solid fa-flask', 'fa-solid fa-flask-vial',
+        'fa-solid fa-compass-drafting', 'fa-solid fa-ruler-combined', 'fa-solid fa-ruler', 'fa-solid fa-tape',
+        'fa-solid fa-scissors', 'fa-solid fa-shield', 'fa-solid fa-shield-halved', 'fa-solid fa-shield-cat',
+        'fa-solid fa-triangle-exclamation', 'fa-solid fa-circle-exclamation', 'fa-solid fa-circle-check',
+        'fa-solid fa-square-check', 'fa-solid fa-stop', 'fa-solid fa-play', 'fa-solid fa-pause', 'fa-solid fa-rotate',
+        'fa-solid fa-arrows-rotate', 'fa-solid fa-rotate-right', 'fa-solid fa-rotate-left', 'fa-solid fa-arrows-spin',
+        'fa-solid fa-arrows-up-down', 'fa-solid fa-arrows-left-right', 'fa-solid fa-eye', 'fa-solid fa-eye-slash',
+        'fa-solid fa-lightbulb', 'fa-solid fa-computer', 'fa-solid fa-desktop', 'fa-solid fa-tv', 'fa-solid fa-solar-panel',
+        'fa-solid fa-wind', 'fa-solid fa-fan', 'fa-solid fa-fire-extinguisher', 'fa-solid fa-helmet-safety',
+        'fa-solid fa-hand-fist', 'fa-solid fa-fingerprint', 'fa-solid fa-layer-group', 'fa-solid fa-border-all',
+        'fa-solid fa-table-cells', 'fa-solid fa-headset', 'fa-solid fa-circle-nodes', 'fa-solid fa-diagram-project',
 
-        // Essentials & General
-        'gem', 'diamond', 'house', 'star', 'heart', 'user', 'users', 'user-group', 'user-plus', 'user-minus', 'user-check', 'user-xmark',
-        'building', 'landmark', 'school', 'graduation-cap', 'book', 'book-open', 'book-reader', 'chalkboard',
-        'chalkboard-user', 'university', 'award', 'trophy', 'medal', 'certificate', 'crown', 'ring', 'briefcase', 'briefcase-medical',
-        'suitcase', 'folder', 'folder-open', 'folder-plus', 'folder-minus', 'folder-closed', 'file', 'file-lines',
-        'file-pdf', 'file-word', 'file-excel', 'file-powerpoint', 'file-csv', 'file-code', 'file-zipper', 'file-image',
-        'file-audio', 'file-video', 'file-signature', 'file-contract', 'file-invoice', 'file-invoice-dollar',
-        'clipboard', 'clipboard-list', 'clipboard-check', 'clipboard-question', 'copy', 'paste', 'floppy-disk',
-        'pen', 'pencil', 'pen-nib', 'pen-fancy', 'pen-to-square', 'brush', 'palette', 'highlighter', 'paint-roller',
-        'eraser', 'search', 'magnifying-glass', 'magnifying-glass-plus', 'magnifying-glass-minus', 'filter',
-        'funnel-dollar', 'sort', 'sort-up', 'sort-down', 'bars', 'bars-staggered', 'bars-progress', 'list',
-        'list-ol', 'list-ul', 'table', 'table-columns', 'table-cells-large', 'ellipsis', 'ellipsis-vertical',
-        'check', 'check-double', 'check-to-slot', 'times', 'xmark', 'circle-xmark', 'ban',
-        'info', 'info-circle', 'circle-info', 'question', 'question-circle', 'circle-question', 'exclamation',
-        'exclamation-circle', 'key', 'key-skeleton', 'cog', 'cogs', 'screwdriver', 'trash', 'trash-can',
-        'trash-arrow-up', 'clock', 'clock-rotate-left', 'calendar', 'calendar-days', 'calendar-check', 'calendar-xmark',
-        'calendar-plus', 'calendar-minus', 'bell', 'bell-slash', 'comment', 'comments', 'comment-dots',
-        'comment-medical', 'comment-slash', 'envelope', 'envelope-open', 'envelope-circle-check', 'phone',
-        'phone-volume', 'phone-slash', 'mobile', 'mobile-screen', 'tablet', 'tablet-screen-button', 'laptop',
-        'server', 'database', 'cloud', 'cloud-arrow-up', 'cloud-arrow-down', 'wifi', 'signal',
-        'globe', 'compass', 'map', 'map-pin', 'location-dot', 'location-arrow', 'route', 'road', 'traffic-light',
-        'gas-pump', 'charging-station', 'battery-full', 'battery-three-quarters', 'battery-half',
-        'battery-quarter', 'battery-empty', 'leaf', 'tree', 'seedling', 'plant-wilt', 'sun', 'moon', 'cloud-sun',
-        'cloud-moon', 'umbrella', 'snowflake', 'water', 'glass-water', 'mug-hot', 'coffee', 'utensils',
-        'spoon', 'knife', 'burger', 'pizza-slice', 'apple-whole', 'cake-candles', 'gift', 'shop', 'shopping-bag',
-        'shopping-cart', 'bag-shopping', 'cart-shopping', 'tag', 'tags', 'ticket', 'ticket-simple', 'credit-card',
-        'wallet', 'coins', 'dollar-sign', 'euro-sign', 'sterling-sign', 'percent', 'percentage', 'receipt', 'invoice',
-        'car', 'bus', 'plane', 'ship', 'bicycle', 'motorcycle', 'truck-medical', 'train', 'subway',
-        'helicopter', 'anchor', 'flag', 'shapes', 'arrow-up', 'arrow-down', 'arrow-left', 'arrow-right',
-        'arrow-up-long', 'arrow-down-long', 'arrow-left-long', 'arrow-right-long', 'recycle', 'hourglass',
-        'hourglass-half', 'stopwatch', 'calculator', 'plus', 'minus', 'divide', 'equals',
-        
-        // Education & Cursos
-        'user-graduate', 'dna', 'brain', 'atom', 'globe-americas', 'globe-europe',
-        'globe-asia', 'map-location', 'laptop-code', 'terminal', 'code',
-        'puzzle-piece', 'gamepad', 'child', 'children', 'people-group', 'person-chalkboard',
-        'book-bookmark', 'bookmark', 'paperclip', 'hourglass-start', 'infinity',
-        'masks-theater', 'book-atlas', 'language', 'earth-americas', 'face-smile',
-        
-        // Negócios & Web
-        'cart-shopping', 'money-bill', 'money-bill-wave',
-        'money-bills', 'piggy-bank', 'bank', 'chart-line', 'chart-bar', 'chart-pie', 'chart-column',
-        'chart-area', 'tachometer-alt', 'handshake', 'handshake-simple', 'handshake-angle',
-        'people-arrows', 'user-tie', 'users-gear', 'address-book', 'address-card', 'signature',
-        'stamp', 'scale-balanced', 'gavel', 'file-invoice-dollar', 'vault',
-        
-        // Interface & Mídia
-        'image', 'images', 'photo-film', 'camera', 'camera-retro', 'video', 'video-slash', 'film',
-        'backward', 'forward', 'forward-step', 'backward-step',
-        'volume-high', 'volume-low', 'volume-mute', 'volume-xmark', 'microphone', 'microphone-lines',
-        'headphones', 'music', 'tv', 'radio', 'podcast', 'rss', 'newspaper', 'bullhorn',
-        'share-nodes', 'link', 'link-slash', 'arrow-up-right-from-square', 'circle-play', 'circle-pause',
-        'circle-stop', 'window-maximize', 'window-restore', 'window-close',
-        'chevron-up', 'chevron-down', 'chevron-left', 'chevron-right', 'caret-up', 'caret-down', 'caret-left',
-        'caret-right', 'arrow-rotate-left', 'arrow-rotate-right', 'magnifying-glass',
-        
-        // Saúde & Esporte
-        'heart-pulse', 'heartbeat', 'stethoscope', 'hospital', 'hospital-user',
-        'user-doctor', 'user-nurse', 'user-injured', 'kit-medical',
-        'pills', 'prescription-bottle', 'syringe', 'wheelchair', 'truck-medical', 'virus',
-        'virus-slash', 'microbe', 'lungs', 'spa', 'dumbbell', 'running',
-        'person-running', 'person-hiking', 'person-swimming', 'person-biking', 'person-walking',
-        'carrot', 'lemon', 'hand-holding-medical', 'weight-scale',
-        'football', 'basketball', 'baseball', 'soccer-ball', 'volleyball', 'golf-ball', 'bowling-ball',
-        'table-tennis-paddle-ball',
-        
-        // Setas & Navegação
-        'arrow-up-right', 'arrow-up-left', 'arrow-down-right',
-        'arrow-down-left', 'arrows-rotate', 'repeat', 'circle-arrow-up', 'circle-arrow-down', 'circle-arrow-left',
-        'circle-arrow-right', 'arrow-right-to-bracket', 'arrow-right-from-bracket', 'sign-in-alt', 'sign-out-alt',
-        'reply', 'share', 'map-location-dot', 'paper-plane',
-        
-        // Marcas & Redes
-        'instagram', 'facebook', 'facebook-f', 'youtube', 'linkedin', 'linkedin-in', 'whatsapp',
-        'twitter', 'tiktok', 'github', 'google', 'apple', 'microsoft', 'android', 'amazon',
-        'wordpress', 'paypal', 'stripe', 'spotify', 'slack', 'discord', 'figma', 'sass',
-        'html5', 'css3', 'js', 'react', 'vue', 'angular', 'node', 'python', 'php', 'docker',
-        'git', 'aws', 'digital-ocean', 'cloudflare', 'stack-overflow', 'medium', 'vimeo',
-        'tumblr', 'pinterest', 'snapchat', 'reddit', 'quora', 'telegram', 'skype', 'zoom',
-        'trello', 'behance', 'dribbble', 'flickr', 'deviantart', 'steam', 'twitch', 'xbox',
-        'playstation', 'nintendo-switch', 'google-play', 'app-store'
+        // Essentials & General UI
+        'fa-solid fa-house', 'fa-solid fa-user', 'fa-solid fa-users', 'fa-solid fa-user-group', 'fa-solid fa-user-plus',
+        'fa-solid fa-user-minus', 'fa-solid fa-user-check', 'fa-solid fa-user-xmark', 'fa-solid fa-user-gear',
+        'fa-solid fa-building', 'fa-solid fa-building-columns', 'fa-solid fa-landmark', 'fa-solid fa-school',
+        'fa-solid fa-graduation-cap', 'fa-solid fa-book', 'fa-solid fa-book-open', 'fa-solid fa-chalkboard',
+        'fa-solid fa-chalkboard-user', 'fa-solid fa-briefcase', 'fa-solid fa-briefcase-medical', 'fa-solid fa-suitcase',
+        'fa-solid fa-folder', 'fa-solid fa-folder-open', 'fa-solid fa-file', 'fa-solid fa-file-lines', 'fa-solid fa-file-pdf',
+        'fa-solid fa-file-word', 'fa-solid fa-file-excel', 'fa-solid fa-file-powerpoint', 'fa-solid fa-file-csv',
+        'fa-solid fa-file-code', 'fa-solid fa-file-zipper', 'fa-solid fa-file-image', 'fa-solid fa-file-audio',
+        'fa-solid fa-file-video', 'fa-solid fa-file-signature', 'fa-solid fa-file-contract', 'fa-solid fa-file-invoice',
+        'fa-solid fa-file-invoice-dollar', 'fa-solid fa-clipboard', 'fa-solid fa-clipboard-list', 'fa-solid fa-clipboard-check',
+        'fa-solid fa-copy', 'fa-solid fa-paste', 'fa-solid fa-floppy-disk', 'fa-solid fa-pen', 'fa-solid fa-pencil',
+        'fa-solid fa-pen-nib', 'fa-solid fa-pen-fancy', 'fa-solid fa-pen-to-square', 'fa-solid fa-brush', 'fa-solid fa-palette',
+        'fa-solid fa-highlighter', 'fa-solid fa-paint-roller', 'fa-solid fa-eraser', 'fa-solid fa-magnifying-glass',
+        'fa-solid fa-magnifying-glass-plus', 'fa-solid fa-magnifying-glass-minus', 'fa-solid fa-filter', 'fa-solid fa-funnel-dollar',
+        'fa-solid fa-sort', 'fa-solid fa-sort-up', 'fa-solid fa-sort-down', 'fa-solid fa-bars', 'fa-solid fa-bars-staggered',
+        'fa-solid fa-bars-progress', 'fa-solid fa-list', 'fa-solid fa-list-ol', 'fa-solid fa-list-ul', 'fa-solid fa-table',
+        'fa-solid fa-table-columns', 'fa-solid fa-ellipsis', 'fa-solid fa-ellipsis-vertical', 'fa-solid fa-check',
+        'fa-solid fa-check-double', 'fa-solid fa-xmark', 'fa-solid fa-circle-xmark', 'fa-solid fa-ban',
+        'fa-solid fa-circle-info', 'fa-solid fa-circle-question', 'fa-solid fa-circle-exclamation', 'fa-solid fa-key',
+        'fa-solid fa-lock', 'fa-solid fa-lock-open', 'fa-solid fa-trash', 'fa-solid fa-trash-can', 'fa-solid fa-clock',
+        'fa-solid fa-clock-rotate-left', 'fa-solid fa-calendar', 'fa-solid fa-calendar-days', 'fa-solid fa-calendar-check',
+        'fa-solid fa-calendar-xmark', 'fa-solid fa-calendar-plus', 'fa-solid fa-bell', 'fa-solid fa-comment',
+        'fa-solid fa-comments', 'fa-solid fa-comment-dots', 'fa-solid fa-envelope', 'fa-solid fa-envelope-open',
+        'fa-solid fa-phone', 'fa-solid fa-mobile-screen', 'fa-solid fa-laptop', 'fa-solid fa-server', 'fa-solid fa-database',
+        'fa-solid fa-cloud', 'fa-solid fa-cloud-arrow-up', 'fa-solid fa-cloud-arrow-down', 'fa-solid fa-wifi',
+        'fa-solid fa-signal', 'fa-solid fa-globe', 'fa-solid fa-compass', 'fa-solid fa-map', 'fa-solid fa-location-dot',
+        'fa-solid fa-location-arrow', 'fa-solid fa-route', 'fa-solid fa-road', 'fa-solid fa-leaf', 'fa-solid fa-tree',
+        'fa-solid fa-seedling', 'fa-solid fa-sun', 'fa-solid fa-moon', 'fa-solid fa-snowflake', 'fa-solid fa-droplet',
+        'fa-solid fa-mug-hot', 'fa-solid fa-utensils', 'fa-solid fa-cart-shopping', 'fa-solid fa-bag-shopping',
+        'fa-solid fa-tag', 'fa-solid fa-tags', 'fa-solid fa-credit-card', 'fa-solid fa-wallet', 'fa-solid fa-coins',
+        'fa-solid fa-dollar-sign', 'fa-solid fa-euro-sign', 'fa-solid fa-sterling-sign', 'fa-solid fa-yen-sign',
+        'fa-solid fa-brazilian-real-sign', 'fa-solid fa-percent', 'fa-solid fa-receipt', 'fa-solid fa-car', 'fa-solid fa-bus',
+        'fa-solid fa-plane', 'fa-solid fa-ship', 'fa-solid fa-bicycle', 'fa-solid fa-motorcycle', 'fa-solid fa-anchor',
+        'fa-solid fa-flag', 'fa-solid fa-shapes', 'fa-solid fa-recycle', 'fa-solid fa-hourglass-half', 'fa-solid fa-stopwatch',
+        'fa-solid fa-calculator', 'fa-solid fa-plus', 'fa-solid fa-minus', 'fa-solid fa-equals',
+
+        // Education & Knowledge
+        'fa-solid fa-user-graduate', 'fa-solid fa-dna', 'fa-solid fa-brain', 'fa-solid fa-globe-americas',
+        'fa-solid fa-laptop-code', 'fa-solid fa-terminal', 'fa-solid fa-code', 'fa-solid fa-puzzle-piece',
+        'fa-solid fa-gamepad', 'fa-solid fa-child', 'fa-solid fa-person-chalkboard', 'fa-solid fa-bookmark',
+        'fa-solid fa-paperclip', 'fa-solid fa-infinity', 'fa-solid fa-language', 'fa-solid fa-face-smile',
+
+        // Business & Finance
+        'fa-solid fa-money-bill', 'fa-solid fa-money-bill-wave', 'fa-solid fa-piggy-bank', 'fa-solid fa-landmark',
+        'fa-solid fa-chart-line', 'fa-solid fa-chart-bar', 'fa-solid fa-chart-pie', 'fa-solid fa-chart-column',
+        'fa-solid fa-chart-area', 'fa-solid fa-handshake', 'fa-solid fa-handshake-simple', 'fa-solid fa-user-tie',
+        'fa-solid fa-address-book', 'fa-solid fa-address-card', 'fa-solid fa-signature', 'fa-solid fa-stamp',
+        'fa-solid fa-scale-balanced', 'fa-solid fa-gavel', 'fa-solid fa-vault',
+
+        // Media & Interface
+        'fa-solid fa-image', 'fa-solid fa-images', 'fa-solid fa-camera', 'fa-solid fa-video', 'fa-solid fa-film',
+        'fa-solid fa-volume-high', 'fa-solid fa-volume-low', 'fa-solid fa-volume-xmark', 'fa-solid fa-microphone',
+        'fa-solid fa-headphones', 'fa-solid fa-music', 'fa-solid fa-tv', 'fa-solid fa-radio', 'fa-solid fa-podcast',
+        'fa-solid fa-rss', 'fa-solid fa-newspaper', 'fa-solid fa-bullhorn', 'fa-solid fa-share-nodes', 'fa-solid fa-link',
+        'fa-solid fa-arrow-up-right-from-square', 'fa-solid fa-circle-play', 'fa-solid fa-circle-pause', 'fa-solid fa-circle-stop',
+
+        // Health & Sports
+        'fa-solid fa-heart-pulse', 'fa-solid fa-stethoscope', 'fa-solid fa-hospital', 'fa-solid fa-user-doctor',
+        'fa-solid fa-user-nurse', 'fa-solid fa-kit-medical', 'fa-solid fa-pills', 'fa-solid fa-syringe',
+        'fa-solid fa-wheelchair', 'fa-solid fa-dumbbell', 'fa-solid fa-person-running', 'fa-solid fa-person-hiking',
+        'fa-solid fa-person-swimming', 'fa-solid fa-person-biking', 'fa-solid fa-person-walking',
+
+        // Arrows & Navigation
+        'fa-solid fa-arrow-up-right', 'fa-solid fa-arrow-up-left', 'fa-solid fa-arrow-down-right', 'fa-solid fa-arrow-down-left',
+        'fa-solid fa-chevron-up', 'fa-solid fa-chevron-down', 'fa-solid fa-chevron-left', 'fa-solid fa-chevron-right',
+        'fa-solid fa-caret-up', 'fa-solid fa-caret-down', 'fa-solid fa-caret-left', 'fa-solid fa-caret-right',
+        'fa-solid fa-arrow-rotate-left', 'fa-solid fa-arrow-rotate-right', 'fa-solid fa-repeat', 'fa-solid fa-paper-plane',
+
+        // Brands & Social
+        'fa-brands fa-linkedin', 'fa-brands fa-linkedin-in', 'fa-brands fa-instagram', 'fa-brands fa-youtube',
+        'fa-brands fa-facebook', 'fa-brands fa-facebook-f', 'fa-brands fa-tiktok', 'fa-brands fa-whatsapp',
+        'fa-brands fa-twitter', 'fa-brands fa-x-twitter', 'fa-brands fa-github', 'fa-brands fa-google',
+        'fa-brands fa-apple', 'fa-brands fa-microsoft', 'fa-brands fa-android', 'fa-brands fa-amazon',
+        'fa-brands fa-wordpress', 'fa-brands fa-paypal', 'fa-brands fa-stripe', 'fa-brands fa-spotify',
+        'fa-brands fa-slack', 'fa-brands fa-discord', 'fa-brands fa-figma', 'fa-brands fa-sass',
+        'fa-brands fa-html5', 'fa-brands fa-css3-alt', 'fa-brands fa-js', 'fa-brands fa-react',
+        'fa-brands fa-vuejs', 'fa-brands fa-angular', 'fa-brands fa-node-js', 'fa-brands fa-python',
+        'fa-brands fa-php', 'fa-brands fa-docker', 'fa-brands fa-git-alt', 'fa-brands fa-aws',
+        'fa-brands fa-cloudflare', 'fa-brands fa-stack-overflow', 'fa-brands fa-telegram', 'fa-brands fa-skype',
+        'fa-brands fa-zoom', 'fa-brands fa-trello', 'fa-brands fa-behance', 'fa-brands fa-dribbble'
     ];
-    
-    staticList.forEach(name => iconSet.add(name));
 
-    try {
-        for (let sheet of document.styleSheets) {
-            try {
-                if (sheet.href && (sheet.href.includes('font-awesome') || sheet.href.includes('all.min.css'))) {
-                    const rules = sheet.cssRules || sheet.rules;
-                    if (rules) {
-                        for (let rule of rules) {
-                            if (rule.selectorText) {
-                                const matches = rule.selectorText.match(/\.fa-([a-z0-9-]+)::before/g);
-                                if (matches) {
-                                    for (let match of matches) {
-                                        const iconName = match.replace(/^\.fa-/, '').replace(/::before/, '');
-                                        if (!['lg', '2xs', 'xs', 'sm', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl', '10xl', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x', 'fw', 'ul', 'li', 'border', 'pull-left', 'pull-right', 'spin', 'pulse', 'rotate-90', 'rotate-180', 'rotate-270', 'flip-horizontal', 'flip-vertical', 'flip-both', 'stack', 'stack-1x', 'stack-2x', 'inverse', 'solid', 'regular', 'light', 'thin', 'duotone', 'brands'].includes(iconName)) {
-                                            iconSet.add(iconName);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (e) {}
-        }
-    } catch (globalErr) {}
-
-    FA_ICONS = Array.from(iconSet).map(name => {
-        const prefix = getIconPrefix(name);
-        return `${prefix} fa-${name}`;
-    }).sort();
+    FA_ICONS = Array.from(new Set(curatedIcons)).sort();
 }
 
 function openIconPicker(inputId, previewId) {
@@ -525,24 +492,24 @@ function getCategorizedIcons(category) {
     return FA_ICONS.filter(ic => {
         const parts = ic.split(' ');
         const prefix = parts[0];
-        const name = parts[1].replace('fa-', '');
+        const name = (parts[1] || '').replace('fa-', '');
         
         if (category === 'brands') {
             return prefix === 'fa-brands';
         }
         
         if (category === 'edu') {
-            const keywords = ['graduation', 'book', 'school', 'teacher', 'university', 'college', 'pencil', 'pen', 'brain', 'microscope', 'flask', 'award', 'trophy', 'medal', 'calculator', 'ruler', 'certificate', 'shapes', 'palette', 'dna', 'atlas', 'language'];
+            const keywords = ['graduation', 'book', 'school', 'teacher', 'university', 'college', 'pencil', 'pen', 'brain', 'microscope', 'flask', 'award', 'trophy', 'medal', 'calculator', 'ruler', 'certificate', 'shapes', 'palette', 'dna', 'atlas', 'language', 'child', 'code', 'terminal'];
             return keywords.some(k => name.includes(k));
         }
         
         if (category === 'biz') {
-            const keywords = ['briefcase', 'building', 'store', 'shop', 'shopping', 'credit', 'wallet', 'piggy', 'bank', 'chart', 'tachometer', 'handshake', 'globe', 'server', 'database', 'cloud', 'wifi', 'shield', 'key', 'lock', 'envelope', 'phone', 'bell', 'dollar', 'euro', 'coin', 'receipt', 'invoice', 'vault', 'stamp', 'signature', 'industry', 'gear', 'wrench', 'tool', 'robot', 'bolt', 'box', 'truck', 'dolly', 'microchip'];
+            const keywords = ['gem', 'diamond', 'crown', 'briefcase', 'building', 'store', 'shop', 'shopping', 'credit', 'wallet', 'piggy', 'bank', 'chart', 'tachometer', 'handshake', 'globe', 'server', 'database', 'cloud', 'wifi', 'shield', 'key', 'lock', 'envelope', 'phone', 'bell', 'dollar', 'euro', 'sterling', 'yen', 'real', 'percent', 'coin', 'receipt', 'invoice', 'vault', 'stamp', 'signature', 'industry', 'gear', 'wrench', 'tool', 'robot', 'bolt', 'box', 'truck', 'dolly', 'microchip', 'scale', 'gavel'];
             return keywords.some(k => name.includes(k));
         }
         
         if (category === 'media') {
-            const keywords = ['image', 'photo', 'video', 'play', 'music', 'microphone', 'headphones', 'camera', 'film', 'gear', 'tool', 'wrench', 'hammer', 'trash', 'edit', 'check', 'times', 'info', 'question', 'exclamation', 'search', 'filter', 'sort', 'list', 'bars', 'ellipsis', 'clock', 'calendar'];
+            const keywords = ['image', 'photo', 'video', 'play', 'music', 'microphone', 'headphones', 'camera', 'film', 'trash', 'edit', 'check', 'xmark', 'info', 'question', 'exclamation', 'search', 'filter', 'sort', 'list', 'bars', 'ellipsis', 'clock', 'calendar', 'link', 'share', 'rss', 'newspaper', 'bullhorn', 'tv'];
             return keywords.some(k => name.includes(k));
         }
         
