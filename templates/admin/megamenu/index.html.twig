@@ -8,6 +8,9 @@
         <h1 class="page-title">Imagens do MegaMenu</h1>
         <p class="text-sm text-slate-500 dark:text-slate-400">Gerenciamento das imagens de capa para as categorias do menu superior (MegaMenu)</p>
     </div>
+    <a href="{{ path('app_admin_megamenu_seed') }}" class="btn-primary text-xs flex items-center gap-2">
+        <i class="fa-solid fa-rotate"></i> Inicializar Categorias Padrão
+    </a>
 </div>
 
 <div class="admin-card">
@@ -43,7 +46,12 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="4" class="py-8 text-center text-slate-500">Nenhuma categoria cadastrada.</td>
+                    <td colspan="4" class="py-8 text-center text-slate-500">
+                        <p class="mb-3">Nenhuma categoria cadastrada.</p>
+                        <a href="{{ path('app_admin_megamenu_seed') }}" class="btn-primary inline-flex items-center gap-2 text-xs">
+                            <i class="fa-solid fa-rotate"></i> Carregar 5 Categorias Padrão Agora
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
