@@ -13,6 +13,55 @@
     </a>
 </div>
 
+<div class="admin-card mb-6">
+    <h2 class="text-base font-semibold text-slate-800 dark:text-white mb-2 flex items-center gap-2">
+        <i class="fa-solid fa-video text-primary"></i> Vídeo de Background — Seção "Soluções em Serviços"
+    </h2>
+    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">
+        Envie um arquivo de vídeo (ex: MP4, WebM) ou insira a URL de um vídeo para o plano de fundo da seção de Serviços na home page.
+    </p>
+
+    <form method="post" action="{{ path('app_admin_service_video_bg') }}" enctype="multipart/form-data" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    Upload de Vídeo Local (.mp4, .webm, .ogg)
+                </label>
+                <input type="file" name="videoFile" accept="video/mp4,video/webm,video/ogg,video/quicktime" class="block w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 dark:file:bg-primary/20 dark:file:text-white">
+                {% if header.videoName %}
+                    <div class="mt-2 flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300">
+                            <i class="fa-solid fa-file-video"></i> Arquivo ativo: {{ header.videoName }}
+                        </span>
+                        <label class="inline-flex items-center gap-1 text-red-600 dark:text-red-400 cursor-pointer">
+                            <input type="checkbox" name="removeVideoFile" value="1" class="rounded border-slate-300 text-red-600 focus:ring-red-500">
+                            Remover arquivo enviado
+                        </label>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    URL do Vídeo (externa ou relativa)
+                </label>
+                <input type="text" name="videoUrl" value="{{ header.videoUrl }}" placeholder="https://exemplo.com/meu-video.mp4 ou /images/service-bg.mp4" class="w-full px-3 py-2 text-xs border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent">
+                <span class="text-[11px] text-slate-400 block mt-1">Usado caso nenhum arquivo de upload esteja ativo. Fallback padrão: <code>/images/service-bg.mp4</code>.</span>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-medium text-slate-600 dark:text-slate-400">Vídeo ativo na Home:</span>
+                <code class="text-xs bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded text-primary">{{ header.activeVideoUrl }}</code>
+            </div>
+            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-xs font-medium">
+                <i class="fa-solid fa-floppy-disk"></i> Salvar Vídeo de Background
+            </button>
+        </div>
+    </form>
+</div>
+
 <div class="admin-card">
     {% if items|length == 0 %}
         <p class="text-sm text-slate-500 dark:text-slate-400 py-8 text-center">Nenhum serviço cadastrado ainda.</p>

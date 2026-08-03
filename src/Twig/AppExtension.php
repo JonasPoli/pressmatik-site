@@ -21,6 +21,7 @@ class AppExtension extends AbstractExtension
         private readonly BannerRepository $bannerRepo,
         private readonly DifferentialRepository $differentialRepo,
         private readonly \App\Repository\MegaMenuCategoryRepository $megaMenuRepo,
+        private readonly \App\Repository\ServiceHeaderRepository $serviceHeaderRepo,
     ) {}
 
     public function getFunctions(): array
@@ -33,6 +34,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('get_active_banners', [$this, 'getActiveBanners']),
             new TwigFunction('get_active_differentials', [$this, 'getActiveDifferentials']),
             new TwigFunction('get_megamenu_categories', [$this, 'getMegaMenuCategories']),
+            new TwigFunction('get_service_video_url', [$this, 'getServiceVideoUrl']),
         ];
     }
 
@@ -105,5 +107,10 @@ class AppExtension extends AbstractExtension
             $indexed[$item->getCategoryKey()] = $item;
         }
         return $indexed;
+    }
+
+    public function getServiceVideoUrl(): string
+    {
+        return $this->serviceHeaderRepo->findOrCreate()->getActiveVideoUrl();
     }
 }

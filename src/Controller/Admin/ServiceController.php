@@ -4,8 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\Service;
 use App\Entity\ServiceImage;
+use App\Entity\ServiceHeader;
 use App\Repository\ServiceRepository;
 use App\Repository\ServiceImageRepository;
+use App\Repository\ServiceHeaderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -22,6 +24,7 @@ final class ServiceController extends AbstractController
         private readonly EntityManagerInterface $em,
         private readonly ServiceRepository $repo,
         private readonly ServiceImageRepository $imageRepo,
+        private readonly ServiceHeaderRepository $headerRepo,
     ) {}
 
     #[Route('', name: 'app_admin_service_index', methods: ['GET'])]
@@ -29,6 +32,7 @@ final class ServiceController extends AbstractController
     {
         return $this->render('admin/service/index.html.twig', [
             'items' => $this->repo->findAllOrdered(),
+            'header' => $this->headerRepo->findOrCreate(),
         ]);
     }
 
@@ -199,5 +203,29 @@ final class ServiceController extends AbstractController
         if ($imageFile instanceof UploadedFile) {
             $item->setImageFile($imageFile);
         }
+    }
+
+    #[Route('/video-bg', name: 'app_admin_service_video_bg', methods: ['POST'])]
+    public function updateVideoBg(Request $request): Response
+    {
+        $header = $this->headerRepo->findOrCreate();
+
+        $videoUrl = trim($request->request->get('videoUrl', ''));
+        $header->setVideoUrl($videoUrl ?: null);
+
+        if ($request->request->get('removeVideoFile')) {
+            $header->setVideoFile(null);
+            $header->setVideoName(null);
+        }
+
+        $videoFile = $request->files->get('videoFile');
+        if ($videoFile instanceof UploadedFile) {
+            $header->setVideoFile($videoFile);
+        }
+
+        $this->em->flush();
+
+        $this->addFlash('success', 'Vídeo de background da seção Soluções em Serviços atualizado com sucesso!');
+        return $this->redirectToRoute('app_admin_service_index');
     }
 }
