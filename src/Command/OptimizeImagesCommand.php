@@ -32,7 +32,6 @@ class OptimizeImagesCommand extends Command
         $io->title('Optimizing Site Images for Google PageSpeed');
 
         $directories = [
-            $this->projectDir . '/public/images',
             $this->projectDir . '/public/uploads',
         ];
 
