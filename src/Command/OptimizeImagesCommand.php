@@ -48,22 +48,34 @@ class OptimizeImagesCommand extends Command
             $filePath = $file->getRealPath();
             $originalSize = $file->getSize();
 
-            // Set max dimensions based on path
-            $maxWidth = 1200;
-            $maxHeight = 1200;
+            // Set max dimensions and quality based on path for minimal payload
+            $maxWidth = 800;
+            $maxHeight = 800;
+            $quality = 75;
 
             if (str_contains($filePath, 'banners')) {
                 $maxWidth = 960;
-                $maxHeight = 800;
-            } elseif (str_contains($filePath, 'megamenu') || str_contains($filePath, 'logos') || str_contains($filePath, 'clients') || str_contains($filePath, 'suppliers')) {
-                $maxWidth = 480;
-                $maxHeight = 400;
-            } elseif (str_contains($filePath, 'services') || str_contains($filePath, 'about')) {
-                $maxWidth = 800;
-                $maxHeight = 700;
+                $maxHeight = 640;
+                $quality = 72;
+            } elseif (str_contains($filePath, 'megamenu')) {
+                $maxWidth = 320;
+                $maxHeight = 240;
+                $quality = 70;
+            } elseif (str_contains($filePath, 'services')) {
+                $maxWidth = 400;
+                $maxHeight = 280;
+                $quality = 70;
+            } elseif (str_contains($filePath, 'about')) {
+                $maxWidth = 500;
+                $maxHeight = 500;
+                $quality = 70;
+            } elseif (str_contains($filePath, 'logos') || str_contains($filePath, 'clients') || str_contains($filePath, 'suppliers')) {
+                $maxWidth = 240;
+                $maxHeight = 100;
+                $quality = 75;
             }
 
-            $success = $this->imageOptimizer->optimize($filePath, $maxWidth, $maxHeight, 78);
+            $success = $this->imageOptimizer->optimize($filePath, $maxWidth, $maxHeight, $quality);
 
             if ($success) {
                 clearstatcache(true, $filePath);

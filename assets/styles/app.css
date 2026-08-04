@@ -376,7 +376,7 @@ wa-button[variant="primary"]::part(label) {
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, rgba(11, 15, 23, 0.94) 30%, rgba(18, 24, 38, 0.65)), 
-                url('/images/hero-bg.jpg') center/cover no-repeat;
+                url('/images/hero-bg.webp') center/cover no-repeat;
     pointer-events: none;
     z-index: 1;
 }
