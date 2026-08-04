@@ -1545,11 +1545,21 @@ wa-button[variant="primary"]::part(label) {
 
 .client-logo-item {
     color: var(--color-text-secondary);
-    opacity: 0.35;
+    opacity: 0.85;
     transition: var(--transition-smooth);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    height: 50px;
+    padding: 0 0.5rem;
+}
+
+.client-logo-item img {
+    max-height: 45px;
+    max-width: 130px;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(1.1);
+    transition: var(--transition-smooth);
 }
 
 .client-logo-item svg {
@@ -1558,8 +1568,23 @@ wa-button[variant="primary"]::part(label) {
 }
 
 .client-logo-item:hover {
-    opacity: 0.95;
+    opacity: 1;
+    transform: scale(1.06);
     color: var(--color-accent-red);
+}
+
+.client-logo-item:hover img {
+    filter: grayscale(0%) brightness(1);
+}
+
+.dark-theme .client-logo-item img,
+[data-theme="dark"] .client-logo-item img {
+    filter: grayscale(100%) brightness(1.4);
+}
+
+.dark-theme .client-logo-item:hover img,
+[data-theme="dark"] .client-logo-item:hover img {
+    filter: grayscale(0%) brightness(1.1);
 }
 
 /* Contact Section & Form */
