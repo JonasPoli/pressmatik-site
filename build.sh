@@ -37,12 +37,12 @@ export APP_DEBUG=0
 
 # Reescrever .env.local garantindo prod (remove APP_ENV=dev anterior)
 if [ -f ".env.local" ]; then
-    sed -i '/^APP_ENV=/d' .env.local 2>/dev/null || sed -i '' '/^APP_ENV=/d' .env.local
-    sed -i '/^APP_DEBUG=/d' .env.local 2>/dev/null || sed -i '' '/^APP_DEBUG=/d' .env.local
+    grep -v "^APP_ENV=" .env.local | grep -v "^APP_DEBUG=" > .env.local.tmp 2>/dev/null || true
+    mv .env.local.tmp .env.local
 fi
 
 printf "APP_ENV=prod\nAPP_DEBUG=0\n" >> .env.local
-echo -e "${GREEN}--> APP_ENV=prod configurado${NC}"
+echo -e "${GREEN}--> APP_ENV=prod configurado em .env.local${NC}"
 
 # ─────────────────────────────────────────────────────────────────────
 # 0. Instalar dependências (--no-dev para prod)

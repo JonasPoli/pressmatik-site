@@ -33,7 +33,7 @@
                                 {% if loop.first %}
                                 <h1 class="hero-title">{{ item.getTitle(locale) }}</h1>
                                 {% else %}
-                                <p class="hero-title" role="heading" aria-level="1">{{ item.getTitle(locale) }}</p>
+                                <h2 class="hero-title">{{ item.getTitle(locale) }}</h2>
                                 {% endif %}
                                 <p class="hero-subtitle">{{ item.getSubtitle(locale) }}</p>
                                 <div class="hero-buttons">
@@ -453,7 +453,7 @@
                                 </div>
                                 <p class="testimonial-quote">"{{ 'testimonials.client1.text'|trans }}"</p>
                                 <div class="testimonial-client">
-                                    <img src="/images/client1.jpg" alt="{{ 'testimonials.client1.name'|trans }}" class="client-avatar">
+                                    <img src="/images/client1.webp" alt="{{ 'testimonials.client1.name'|trans }}" width="56" height="56" class="client-avatar" loading="lazy" decoding="async">
                                     <div class="client-meta">
                                         <h3 class="testimonial-author-name">{{ 'testimonials.client1.name'|trans }}</h3>
                                         <p>{{ 'testimonials.client1.role'|trans }} - {{ 'testimonials.client1.company'|trans }}</p>
@@ -471,7 +471,7 @@
                                 </div>
                                 <p class="testimonial-quote">"{{ 'testimonials.client2.text'|trans }}"</p>
                                 <div class="testimonial-client">
-                                    <img src="/images/client2.jpg" alt="{{ 'testimonials.client2.name'|trans }}" class="client-avatar">
+                                    <img src="/images/client2.webp" alt="{{ 'testimonials.client2.name'|trans }}" width="56" height="56" class="client-avatar" loading="lazy" decoding="async">
                                     <div class="client-meta">
                                         <h3 class="testimonial-author-name">{{ 'testimonials.client2.name'|trans }}</h3>
                                         <p>{{ 'testimonials.client2.role'|trans }} - {{ 'testimonials.client2.company'|trans }}</p>
@@ -489,7 +489,7 @@
                                 </div>
                                 <p class="testimonial-quote">"{{ 'testimonials.client3.text'|trans }}"</p>
                                 <div class="testimonial-client">
-                                    <img src="/images/client3.jpg" alt="{{ 'testimonials.client3.name'|trans }}" class="client-avatar">
+                                    <img src="/images/client3.webp" alt="{{ 'testimonials.client3.name'|trans }}" width="56" height="56" class="client-avatar" loading="lazy" decoding="async">
                                     <div class="client-meta">
                                         <h3 class="testimonial-author-name">{{ 'testimonials.client3.name'|trans }}</h3>
                                         <p>{{ 'testimonials.client3.role'|trans }} - {{ 'testimonials.client3.company'|trans }}</p>
@@ -514,12 +514,12 @@
         <div class="container">
             <div class="clients-grid scroll-animate slide-top" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3rem;">
                 {% for item in clientLogos %}
-                    <span class="client-logo-item" aria-label="{{ item.name }}" style="display: flex; align-items: center; justify-content: center; height: 50px;">
+                    <div class="client-logo-item" style="display: flex; align-items: center; justify-content: center; height: 50px;">
                         <img src="{{ ('/uploads/clients/' ~ item.imageName)|webp }}" alt="{{ item.name }}" width="130" height="45" loading="lazy" decoding="async" style="max-height: 45px; max-width: 130px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;">
-                    </span>
+                    </div>
                 {% else %}
                     <!-- Static Fallbacks -->
-                    <span class="client-logo-item" aria-label="Schuler">
+                    <div class="client-logo-item">
                         <svg viewBox="0 0 140 30" xmlns="http://www.w3.org/2000/svg" style="height: 30px;">
                             <path d="M5 16.5 C5 13.5 8 12.5 12 12.5 C16 12.5 18.5 13.5 18.5 16.5 H14 C14 15.5 13 15 11.5 15 C10 15 9 15.5 9 16.5 C9 17.5 10 18 12.5 18.5 C15.5 19 19 20 19 23 C19 26 15.5 27.5 11.5 27.5 C7.5 27.5 5 26 5 23 H9.5 C9.5 24 11 25 12.5 25 C14 25 14.5 24.5 14.5 23.5 C14.5 22.5 13.5 22 11 21.5 C8 21 5 19.5 5 16.5 Z M23 6 H27.5 V12 H36 V6 H40.5 V20 H36 V15.5 H27.5 V20 H23 V6 Z M45 6 H49.5 V15 C49.5 17 50.5 18 52.5 18 C54.5 18 55.5 17 55.5 15 V6 H60 V15 C60 19 57.5 20.5 52.5 20.5 C47.5 20.5 45 19 45 15 V6 Z M64 6 H68.5 V16.5 H76 V20 H64 V6 Z M80 6 H91 V9.5 H84.5 V11.2 H90 V14.2 H84.5 V16.5 H91 V20 H80 V6 Z M95 6 H103.5 C107.5 6 109.5 7.5 109.5 10 C109.5 12 108.5 13.2 106.5 13.5 L110.5 20 H105.5 L102 14.5 H99.5 V20 H95 V6 Z M99.5 9.5 H103 C104 9.5 105 10 105 10.8 C105 11.6 104 12 103 12 H99.5 V9.5 Z" />
                         </svg>
@@ -598,22 +598,22 @@
                 <h3>{{ 'cta.quote_now'|trans }}</h3>
                 <form id="quote-form" data-turbo="false">
                     <div class="form-group">
-                        <wa-input id="form-name" type="text" label="{{ 'contact_form.name'|trans }}" placeholder="Ex: João Silva" required></wa-input>
+                        <wa-input id="form-name" type="text" label="{{ 'contact_form.name'|trans }}" aria-label="{{ 'contact_form.name'|trans }}" placeholder="Ex: João Silva" required></wa-input>
                     </div>
                     <div class="form-group">
-                        <wa-input id="form-email" type="email" label="{{ 'contact_form.email'|trans }}" placeholder="nome@suaempresa.com.br" required></wa-input>
+                        <wa-input id="form-email" type="email" label="{{ 'contact_form.email'|trans }}" aria-label="{{ 'contact_form.email'|trans }}" placeholder="nome@suaempresa.com.br" required></wa-input>
                     </div>
                     <div class="form-group">
-                        <wa-input id="form-phone" type="tel" label="{{ 'contact_form.phone'|trans }}" placeholder="(16) 99999-9999" required></wa-input>
+                        <wa-input id="form-phone" type="tel" label="{{ 'contact_form.phone'|trans }}" aria-label="{{ 'contact_form.phone'|trans }}" placeholder="(16) 99999-9999" required></wa-input>
                     </div>
                     <div class="form-group">
-                        <wa-input id="form-cnpj" type="text" label="CPF / CNPJ" placeholder="Digite apenas números (11 ou 14 dígitos)" required></wa-input>
+                        <wa-input id="form-cnpj" type="text" label="CPF / CNPJ" aria-label="CPF / CNPJ" placeholder="Digite apenas números (11 ou 14 dígitos)" required></wa-input>
                     </div>
                     <div class="form-group">
-                        <wa-input id="form-product" type="text" label="{{ 'contact_form.product_interest'|trans }}" placeholder="Ex: PMC-ST 60 Toneladas"></wa-input>
+                        <wa-input id="form-product" type="text" label="{{ 'contact_form.product_interest'|trans }}" aria-label="{{ 'contact_form.product_interest'|trans }}" placeholder="Ex: PMC-ST 60 Toneladas"></wa-input>
                     </div>
                     <div class="form-group">
-                        <wa-textarea id="form-message" label="{{ 'contact_form.message'|trans }}" placeholder="Descreva os requisitos técnicos da prensa..."></wa-textarea>
+                        <wa-textarea id="form-message" label="{{ 'contact_form.message'|trans }}" aria-label="{{ 'contact_form.message'|trans }}" placeholder="Descreva os requisitos técnicos da prensa..."></wa-textarea>
                     </div>
                     <wa-button id="form-submit-btn" type="submit" variant="brand" style="width: 100%;">
                         {{ 'cta.submit'|trans }}

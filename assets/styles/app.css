@@ -9,7 +9,7 @@
     --color-border-focus: #cbd5e1;   /* Focused border */
     
     --color-text-primary: #0f172a;   /* Slate 900 for high-contrast primary text */
-    --color-text-secondary: #5D5C5E; /* User grey #5D5C5E for secondary text */
+    --color-text-secondary: #475569; /* Slate 600 for high-contrast secondary text (7.3:1 contrast ratio) */
     
     --color-accent-grey: #5D5C5E;    /* Grey details */
     --color-accent-red: #D51C23;     /* User red #D51C23 for accents & primary CTA */
@@ -672,6 +672,13 @@ wa-button[variant="primary"]::part(label) {
     letter-spacing: 0.25em;
     margin-bottom: 1rem;
     display: block;
+}
+
+.hero-section .section-title-tag,
+.services-video-section .section-title-tag,
+.dark-theme .section-title-tag,
+[data-theme="dark"] .section-title-tag {
+    color: #f87171;
 }
 
 .section-title {

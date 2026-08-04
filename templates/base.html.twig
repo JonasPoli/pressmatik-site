@@ -39,20 +39,20 @@
         <link rel="preconnect" href="https://cdnjs.cloudflare.com">
         <link rel="preconnect" href="https://ka-f.webawesome.com">
 
-        {# Web Fonts with font-display: swap - preconnect already defined above #}
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        {# Web Fonts - non-blocking #}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" media="print" onload="this.media='all'">
         <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap"></noscript>
 
-        {# Web Awesome CDN Stylesheet - load async, components below fold #}
-        <link rel="preload" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        {# Web Awesome CDN Stylesheet - non-blocking #}
+        <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css" media="print" onload="this.media='all'">
         <noscript><link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css"></noscript>
 
-        {# Bootstrap Icons - load async (non-critical, icons only) #}
-        <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        {# Bootstrap Icons - non-blocking #}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" media="print" onload="this.media='all'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></noscript>
 
-        {# Font Awesome - load async (non-critical, icons only) #}
-        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" referrerpolicy="no-referrer">
+        {# Font Awesome - non-blocking #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" crossorigin="anonymous" referrerpolicy="no-referrer">
         <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
 
         {# Global CSS Variables and Styles #}
@@ -239,13 +239,13 @@
         </header>
 
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu-overlay" onclick="closeMobileMenu();"></div>
+        <div id="mobile-menu-overlay" onclick="closeMobileMenu();" role="presentation" aria-hidden="true"></div>
 
         <!-- Mobile Navigation Panel -->
         <div id="mobile-menu-drawer">
             <div class="mobile-nav-header">
                 <span>Menu</span>
-                <button onclick="closeMobileMenu();" aria-label="Fechar menu">
+                <button type="button" onclick="closeMobileMenu();" aria-label="Fechar menu">
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
@@ -387,7 +387,7 @@
                             <i class="bi bi-whatsapp" style="margin-right: 4px;"></i>{{ 'footer.whatsapp'|trans }}
                         </a>
                     </p>
-                    <p style="font-size: 0.85rem; color: var(--color-accent-red); font-weight: 500;">
+                    <p style="font-size: 0.85rem; color: #f87171; font-weight: 500;">
                         {{ 'footer.email'|trans }}
                     </p>
                 </div>
