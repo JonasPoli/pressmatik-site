@@ -197,9 +197,12 @@
             </div>
 
             <div class="wab-field mt-4">
-                <label class="wab-label">Código do Vídeo YouTube</label>
-                <input type="text" name="youtubeVideoCode" value="{{ item ? item.youtubeVideoCode : '' }}" class="wab-input" placeholder="Ex: dQw4w9WgXcQ">
-                <p class="text-[10px] text-slate-400 mt-1">Insira apenas o código final do vídeo (ex: v=CODIGO).</p>
+                <label class="wab-label">Código ou URL do Vídeo YouTube</label>
+                <input type="text" name="youtubeVideoCode" value="{{ item ? item.youtubeVideoCode : '' }}" class="wab-input" placeholder="Ex: dQw4w9WgXcQ ou https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+                    Insira apenas o ID final do vídeo (ex: <code>dQw4w9WgXcQ</code>) ou a URL completa do YouTube.<br>
+                    <span class="text-emerald-600 dark:text-emerald-400 font-medium">⚡ Dica PageSpeed:</span> O player é incorporado de forma assíncrona (lazy loading) para manter alta performance no Google PageSpeed.
+                </p>
             </div>
 
             <div class="border-t border-slate-200 dark:border-slate-700 pt-4 mt-6 space-y-4">

@@ -720,7 +720,23 @@
    VÍDEOS
    ═══════════════════════════════════════════════════════════════════════ #}
 <div class="admin-card mb-6">
-    <h2 class="admin-card-title mb-4"><i class="fa-solid fa-video mr-2"></i>Vídeos</h2>
+    <div class="flex items-center justify-between mb-2">
+        <h2 class="admin-card-title"><i class="fa-solid fa-video mr-2"></i>Vídeos do Produto</h2>
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">
+            <i class="fa-solid fa-bolt text-amber-500"></i> PageSpeed Optimized
+        </span>
+    </div>
+
+    <!-- Guia de Especificações de Vídeo de Produto -->
+    <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 mb-4 text-xs">
+        <div class="font-semibold text-slate-700 dark:text-slate-200 mb-1 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-info text-blue-500"></i> Especificações de Desempenho:
+        </div>
+        <ul class="list-disc list-inside space-y-0.5 text-slate-500 dark:text-slate-400 text-[11px]">
+            <li><strong>Recomendação Principal:</strong> Utilize links do <strong>YouTube</strong> (ex: <code>https://www.youtube.com/watch?v=CODIGO</code>). O site aplica carregamento assíncrono (lazy loading) automaticamente sem prejudicar a nota do PageSpeed.</li>
+            <li><strong>Se usar URL direta MP4:</strong> Resolução <strong>1080p (16:9)</strong>, Codec <strong>H.264 / AAC</strong>, tamanho máximo <strong>15 MB</strong>.</li>
+        </ul>
+    </div>
 
     {% if videos|length > 0 %}
     <div class="space-y-2 mb-4">
