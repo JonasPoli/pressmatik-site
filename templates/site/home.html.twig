@@ -514,8 +514,8 @@
         <div class="container">
             <div class="clients-grid scroll-animate slide-top" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3rem;">
                 {% for item in clientLogos %}
-                    <div class="client-logo-item" style="display: flex; align-items: center; justify-content: center; height: 50px;">
-                        <img src="{{ ('/uploads/clients/' ~ item.imageName)|webp }}" alt="{{ item.name }}" width="130" height="45" loading="lazy" decoding="async" style="max-height: 45px; max-width: 130px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;">
+                    <div class="client-logo-item">
+                        <img src="{{ ('/uploads/clients/' ~ item.imageName)|webp }}" alt="{{ item.name }}" width="130" height="45" loading="lazy" decoding="async">
                     </div>
                 {% else %}
                     <!-- Static Fallbacks -->
