@@ -76,13 +76,13 @@
                 <div class="product-action-buttons">
                     {% set active_pdf = activeSubproduct ? activeSubproduct.getPdfForLocale(locale) : null %}
                     {% if active_pdf %}
-                        <wa-button variant="brand" size="large" href="/uploads/products/{{ active_pdf }}" download target="_blank">
+                        <wa-button variant="brand" size="l" href="/uploads/products/{{ active_pdf }}" download target="_blank">
                             <i class="fa-solid fa-file-pdf" style="margin-right: 8px;"></i>
                             {{ 'cta.download_catalog'|trans }}
                         </wa-button>
                     {% endif %}
                     
-                    <wa-button variant="neutral" outline size="large" href="#quote-product-form" onclick="document.getElementById('p-model').value = '{{ activeSubproduct ? activeSubproduct.model|lower : '' }}';">
+                    <wa-button variant="neutral" outline size="l" href="#quote-product-form" onclick="document.getElementById('p-model').value = '{{ activeSubproduct ? activeSubproduct.model|lower : '' }}';">
                         <i class="fa-solid fa-envelope" style="margin-right: 8px;"></i>
                         {{ 'product_detail.quote_product'|trans }}
                     </wa-button>
@@ -469,12 +469,12 @@
                         
                         <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; align-items: center;">
                             {% if is_active %}
-                                <wa-button variant="brand" size="small" href="#quote-product-form" onclick="document.getElementById('p-model').value = '{{ sub.model|lower }}';">
+                                <wa-button variant="brand" size="s" href="#quote-product-form" onclick="document.getElementById('p-model').value = '{{ sub.model|lower }}';">
                                     {{ 'cta.quote_now'|trans }}
                                 </wa-button>
                                 <span style="font-size: 0.75rem; color: var(--color-accent-red); font-weight: 700; text-transform: uppercase; margin-left: auto; letter-spacing: 0.5px;">Atual</span>
                             {% else %}
-                                <wa-button variant="neutral" size="small" outline href="{{ path('app_product_detail', {'_locale': locale, 'slug': product.slug, 'model': sub.model}) }}">
+                                <wa-button variant="neutral" size="s" outline href="{{ path('app_product_detail', {'_locale': locale, 'slug': product.slug, 'model': sub.model}) }}">
                                     {{ 'cta.learn_more'|trans }}
                                 </wa-button>
                             {% endif %}

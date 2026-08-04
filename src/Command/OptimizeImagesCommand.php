@@ -54,14 +54,17 @@ class OptimizeImagesCommand extends Command
             $maxHeight = 1200;
 
             if (str_contains($filePath, 'banners')) {
-                $maxWidth = 1600;
+                $maxWidth = 960;
+                $maxHeight = 800;
             } elseif (str_contains($filePath, 'megamenu') || str_contains($filePath, 'logos') || str_contains($filePath, 'clients') || str_contains($filePath, 'suppliers')) {
-                $maxWidth = 600;
+                $maxWidth = 480;
+                $maxHeight = 400;
             } elseif (str_contains($filePath, 'services') || str_contains($filePath, 'about')) {
-                $maxWidth = 900;
+                $maxWidth = 800;
+                $maxHeight = 700;
             }
 
-            $success = $this->imageOptimizer->optimize($filePath, $maxWidth, $maxHeight, 82);
+            $success = $this->imageOptimizer->optimize($filePath, $maxWidth, $maxHeight, 78);
 
             if ($success) {
                 clearstatcache(true, $filePath);

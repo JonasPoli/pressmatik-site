@@ -37,10 +37,10 @@
                                 {% endif %}
                                 <p class="hero-subtitle">{{ item.getSubtitle(locale) }}</p>
                                 <div class="hero-buttons">
-                                    <wa-button variant="brand" size="large" href="{{ item.getButtonUrl() ?: '#contact' }}">
+                                    <wa-button variant="brand" size="l" href="{{ item.getButtonUrl() ?: '#contact' }}">
                                         {{ item.getButtonText(locale) ?: 'cta.quote_now'|trans }}
                                     </wa-button>
-                                    <wa-button variant="neutral" size="large" outline href="#about">
+                                    <wa-button variant="neutral" size="l" outline href="#about">
                                         {{ 'cta.learn_more'|trans }}
                                     </wa-button>
                                 </div>
@@ -70,10 +70,10 @@
                             <h1 class="hero-title">{{ 'banner.title'|trans }}</h1>
                             <p class="hero-subtitle">{{ 'banner.subtitle'|trans }}</p>
                             <div class="hero-buttons">
-                                <wa-button variant="brand" size="large" href="#contact">
+                                <wa-button variant="brand" size="l" href="#contact">
                                     {{ 'cta.quote_now'|trans }}
                                 </wa-button>
-                                <wa-button variant="neutral" size="large" outline href="#about">
+                                <wa-button variant="neutral" size="l" outline href="#about">
                                     {{ 'cta.learn_more'|trans }}
                                 </wa-button>
                             </div>
@@ -233,7 +233,7 @@
                                             {% else %}
                                                 <span class="product-specs-badge">{{ 'product_detail.tag'|trans }}</span>
                                             {% endif %}
-                                            <wa-button variant="brand" size="small" href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}">
+                                            <wa-button variant="brand" size="s" href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}">
                                                 {{ 'cta.learn_more'|trans }}
                                             </wa-button>
                                         </div>
