@@ -346,7 +346,7 @@
                 </div>
                 
                 <div class="footer-links-col">
-                    <h4>{{ 'menu.products'|trans }}</h4>
+                    <h3 class="footer-col-title">{{ 'menu.products'|trans }}</h3>
                     <ul>
                         <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-tipo-c'}) }}">{{ 'catalog.hydraulic.tipo_c.name'|trans }}</a></li>
                         <li><a href="{{ path('app_product_detail', {'_locale': locale, 'slug': 'prensas-hidraulicas-4-colunas'}) }}">{{ 'catalog.hydraulic.colunas.name'|trans }}</a></li>
@@ -356,7 +356,7 @@
                 </div>
                 
                 <div class="footer-links-col">
-                    <h4>{{ 'menu.services'|trans }}</h4>
+                    <h3 class="footer-col-title">{{ 'menu.services'|trans }}</h3>
                     <ul>
                         {% set active_services = get_active_services() %}
                         {% for serv in active_services %}
@@ -370,7 +370,7 @@
                 </div>
                 
                 <div class="footer-links-col">
-                    <h4>{{ 'footer.address_title'|trans }}</h4>
+                    <h3 class="footer-col-title">{{ 'footer.address_title'|trans }}</h3>
                     <p style="font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.5rem; color: var(--color-text-secondary);">
                         {{ 'footer.address_factory'|trans }}
                     </p>

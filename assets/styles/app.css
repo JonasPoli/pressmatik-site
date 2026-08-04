@@ -759,7 +759,7 @@ wa-button[variant="primary"]::part(label) {
     transform: rotate(5deg) scale(1.05);
 }
 
-.bullet-text h4 {
+.bullet-text h3, .bullet-text h4 {
     font-size: 1.1rem;
     margin-bottom: 0.25rem;
     font-weight: 700;
@@ -1511,7 +1511,7 @@ wa-button[variant="primary"]::part(label) {
     object-fit: cover;
 }
 
-.client-meta h4 {
+.client-meta h3, .client-meta h4 {
     font-size: 1.1rem;
     font-weight: 700;
 }
@@ -1596,7 +1596,7 @@ wa-button[variant="primary"]::part(label) {
     margin-top: 0.25rem;
 }
 
-.contact-item-text h4 {
+.contact-item-text h3, .contact-item-text h4 {
     font-size: 1.1rem;
     margin-bottom: 0.35rem;
     font-weight: 700;
@@ -1807,12 +1807,13 @@ wa-option::part(base):hover, wa-option[checked]::part(base) {
     color: #8a99ad;
 }
 
-.footer-links-col h4 {
+.footer-links-col h3, .footer-links-col h4 {
     font-size: 1rem;
     color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 1.75rem;
+    font-weight: 600;
 }
 
 .footer-links-col ul {

@@ -140,7 +140,7 @@
                                         <i class="{{ adv_icon ?: 'fa-solid fa-shield-halved' }}"></i>
                                     </div>
                                     <div class="bullet-text">
-                                        <h4>{{ adv_title }}</h4>
+                                        <h3 class="about-bullet-title">{{ adv_title }}</h3>
                                         <p>{{ adv_desc }}</p>
                                     </div>
                                 </div>
@@ -152,7 +152,7 @@
                                 <i class="fa-solid fa-shield-halved"></i>
                             </div>
                             <div class="bullet-text">
-                                <h4>Segurança Avançada (NR12)</h4>
+                                <h3 class="about-bullet-title">Segurança Avançada (NR12)</h3>
                                 <p>Sistemas eletro-hidráulicos monitorados redundantes e cortinas ópticas integradas.</p>
                             </div>
                         </div>
@@ -436,7 +436,7 @@
                                         </div>
                                     {% endif %}
                                     <div class="client-meta">
-                                        <h4>{{ item.name }}</h4>
+                                        <h3 class="testimonial-author-name">{{ item.name }}</h3>
                                         <p>{{ item.getRole(locale) }} - {{ item.company }}</p>
                                     </div>
                                 </div>
@@ -455,7 +455,7 @@
                                 <div class="testimonial-client">
                                     <img src="/images/client1.jpg" alt="{{ 'testimonials.client1.name'|trans }}" class="client-avatar">
                                     <div class="client-meta">
-                                        <h4>{{ 'testimonials.client1.name'|trans }}</h4>
+                                        <h3 class="testimonial-author-name">{{ 'testimonials.client1.name'|trans }}</h3>
                                         <p>{{ 'testimonials.client1.role'|trans }} - {{ 'testimonials.client1.company'|trans }}</p>
                                     </div>
                                 </div>
@@ -473,7 +473,7 @@
                                 <div class="testimonial-client">
                                     <img src="/images/client2.jpg" alt="{{ 'testimonials.client2.name'|trans }}" class="client-avatar">
                                     <div class="client-meta">
-                                        <h4>{{ 'testimonials.client2.name'|trans }}</h4>
+                                        <h3 class="testimonial-author-name">{{ 'testimonials.client2.name'|trans }}</h3>
                                         <p>{{ 'testimonials.client2.role'|trans }} - {{ 'testimonials.client2.company'|trans }}</p>
                                     </div>
                                 </div>
@@ -491,7 +491,7 @@
                                 <div class="testimonial-client">
                                     <img src="/images/client3.jpg" alt="{{ 'testimonials.client3.name'|trans }}" class="client-avatar">
                                     <div class="client-meta">
-                                        <h4>{{ 'testimonials.client3.name'|trans }}</h4>
+                                        <h3 class="testimonial-author-name">{{ 'testimonials.client3.name'|trans }}</h3>
                                         <p>{{ 'testimonials.client3.role'|trans }} - {{ 'testimonials.client3.company'|trans }}</p>
                                     </div>
                                 </div>
@@ -566,7 +566,7 @@
                     <div class="contact-item">
                         <i class="bi bi-geo-alt contact-item-icon"></i>
                         <div class="contact-item-text">
-                            <h4>{{ 'footer.address_title'|trans }}</h4>
+                            <h3 class="contact-detail-label">{{ 'footer.address_title'|trans }}</h3>
                             <p>{{ 'footer.address_factory'|trans }}</p>
                         </div>
                     </div>
@@ -574,7 +574,7 @@
                     <div class="contact-item">
                         <i class="bi bi-telephone contact-item-icon"></i>
                         <div class="contact-item-text">
-                            <h4>{{ 'menu.contact'|trans }}</h4>
+                            <h3 class="contact-detail-label">{{ 'menu.contact'|trans }}</h3>
                             <p>{{ 'footer.phone'|trans }}</p>
                         </div>
                     </div>
@@ -582,7 +582,7 @@
                     <div class="contact-item">
                         <i class="bi bi-envelope contact-item-icon"></i>
                         <div class="contact-item-text">
-                            <h4>E-mail Comercial</h4>
+                            <h3 class="contact-detail-label">E-mail Comercial</h3>
                             <p>{{ 'footer.email'|trans }}</p>
                         </div>
                     </div>
