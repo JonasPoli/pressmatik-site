@@ -20,7 +20,7 @@
 
 {% block body %}
     <!-- Hero Banner Section (Premium Two-Column Slider Layout) -->
-    <section class="hero-section">
+    <section class="hero-section" aria-label="Banner principal Pressmatik">
         <div class="hero-grid-overlay"></div>
         
         <div class="hero-slider">
@@ -103,16 +103,16 @@
             <button class="hero-prev-btn" type="button" aria-label="Slide anterior"><i class="fa-solid fa-chevron-left"></i></button>
             <button class="hero-next-btn" type="button" aria-label="Próximo slide"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
-        <div class="hero-slider-dots">
+        <div class="hero-slider-dots" role="tablist" aria-label="Navegação do slider">
             {% for item in banners %}
-                <span class="hero-dot {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}" role="button" aria-label="Ir para o slide {{ loop.index }}"></span>
+                <button class="hero-dot {% if loop.first %}active{% endif %}" type="button" data-index="{{ loop.index0 }}" role="tab" aria-selected="{% if loop.first %}true{% else %}false{% endif %}" aria-label="Ir para o slide {{ loop.index }}"></button>
             {% endfor %}
         </div>
         {% endif %}
     </section>
 
     <!-- Quem Somos (About Us) Section with Image Collage and Bullet Grid -->
-    <section id="about" class="section-padding about-section">
+    <section id="about" class="section-padding about-section" aria-label="Quem somos - Sobre a Pressmatik">
         <div class="container about-grid">
             <div class="about-collage scroll-animate slide-left">
                 <div class="collage-container">
@@ -167,7 +167,7 @@
     </section>
 
     <!-- Diferenciais Técnicos Section -->
-    <section class="section-padding">
+    <section class="section-padding" aria-label="Diferenciais técnicos Pressmatik">
         <div class="container">
             <div class="section-header scroll-animate slide-top">
                 <span class="section-title-tag">{{ 'differentials.tag'|trans }}</span>
@@ -197,7 +197,7 @@
     </section>
 
     <!-- Grade de Destaque de Produtos Section -->
-    <section id="products" class="section-padding products-section">
+    <section id="products" class="section-padding products-section" aria-label="Linha de produtos Pressmatik">
         <div class="container">
             <div class="section-header scroll-animate slide-top">
                 <span class="section-title-tag">{{ 'products_sec.tag'|trans }}</span>
@@ -248,7 +248,7 @@
     </section>
 
     <!-- Seção de Serviços Section with Video Background -->
-    <section id="services" class="section-padding services-video-section">
+    <section id="services" class="section-padding services-video-section" aria-label="Serviços Pressmatik">
         <div class="video-bg-container">
             <video autoplay loop muted playsinline preload="none" class="video-bg" aria-label="Vídeo institucional Pressmatik" aria-hidden="true">
                 <source src="{{ get_service_video_url() }}" type="video/mp4">
@@ -325,7 +325,7 @@
     </section>
 
     <!-- Seção de Notícias & Eventos (Blog) -->
-    <section id="news" class="section-padding news-section">
+    <section id="news" class="section-padding news-section" aria-label="Notícias e eventos Pressmatik">
         <div class="container">
             <div class="section-header scroll-animate slide-top">
                 <span class="section-title-tag">{{ 'news.tag'|trans }}</span>
@@ -407,7 +407,7 @@
     </section>
 
     <!-- Depoimentos (Testimonials) Section -->
-    <section class="section-padding testimonials-section">
+    <section class="section-padding testimonials-section" aria-label="Depoimentos de clientes Pressmatik">
         <div class="container">
             <div class="section-header scroll-animate slide-top">
                 <span class="section-title-tag">{{ 'testimonials.tag'|trans }}</span>
@@ -510,7 +510,7 @@
     </section>
 
     <!-- Clientes (Logos) Section -->
-    <section class="clients-section">
+    <section class="clients-section" aria-label="Clientes e parceiros Pressmatik">
         <div class="container">
             <div class="clients-grid scroll-animate slide-top" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3rem;">
                 {% for item in clientLogos %}
@@ -642,12 +642,18 @@
 
             function showSlide(index) {
                 slides[currentIndex].classList.remove('active');
-                if (dots[currentIndex]) dots[currentIndex].classList.remove('active');
+                if (dots[currentIndex]) {
+                    dots[currentIndex].classList.remove('active');
+                    dots[currentIndex].setAttribute('aria-selected', 'false');
+                }
 
                 currentIndex = (index + slides.length) % slides.length;
 
                 slides[currentIndex].classList.add('active');
-                if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+                if (dots[currentIndex]) {
+                    dots[currentIndex].classList.add('active');
+                    dots[currentIndex].setAttribute('aria-selected', 'true');
+                }
             }
 
             function startAutoplay() {

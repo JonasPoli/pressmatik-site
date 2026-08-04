@@ -2541,6 +2541,61 @@ wa-tab[active]::part(base) {
     }
 }
 
+/* ── Mobile Extra Small (<480px) ────────────────────────────────── */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .hero-slide {
+        padding: 5rem 0 4rem;
+    }
+
+    .hero-visual {
+        display: none; /* ocultar imagem em mobile muito pequeno para melhorar LCP */
+    }
+
+    .hero-slider-nav {
+        padding: 0 1rem;
+    }
+
+    .hero-prev-btn,
+    .hero-next-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .section-padding {
+        padding: 3.5rem 0;
+    }
+
+    .hero-buttons wa-button {
+        font-size: 0.875rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* hero-dot agora é button — resetar estilos padrão do botão */
+.hero-dot {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
 /* Megamenu Styles */
 .nav-item-dropdown {
     position: static;
