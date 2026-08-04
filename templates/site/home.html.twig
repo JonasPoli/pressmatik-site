@@ -4,6 +4,20 @@
 {% block title %}Pressmatik - {{ 'banner.title'|trans }}{% endblock %}
 {% block meta_description %}{{ 'banner.subtitle'|trans }} | Fabricante de Prensas Hidráulicas, Servo-Hidráulicas e Mecânicas.{% endblock %}
 
+{% block preload_lcp %}
+    {# Preload the first banner (LCP image) for faster rendering #}
+    {% if banners|length > 0 %}
+        {% set firstBanner = banners|first %}
+        {% if firstBanner.getImageName() %}
+        <link rel="preload" as="image" href="{{ ('/uploads/banners/' ~ firstBanner.getImageName())|webp }}" fetchpriority="high">
+        {% else %}
+        <link rel="preload" as="image" href="/images/prensa-hidraulica-tipo-c-linha-st.webp" fetchpriority="high">
+        {% endif %}
+    {% else %}
+        <link rel="preload" as="image" href="/images/prensa-hidraulica-tipo-c-linha-st.webp" fetchpriority="high">
+    {% endif %}
+{% endblock %}
+
 {% block body %}
     <!-- Hero Banner Section (Premium Two-Column Slider Layout) -->
     <section class="hero-section">
@@ -16,7 +30,11 @@
                         <div class="container hero-grid">
                             <div class="hero-content">
                                 <span class="section-title-tag">PRESSMATIK</span>
+                                {% if loop.first %}
                                 <h1 class="hero-title">{{ item.getTitle(locale) }}</h1>
+                                {% else %}
+                                <p class="hero-title" role="heading" aria-level="1">{{ item.getTitle(locale) }}</p>
+                                {% endif %}
                                 <p class="hero-subtitle">{{ item.getSubtitle(locale) }}</p>
                                 <div class="hero-buttons">
                                     <wa-button variant="brand" size="large" href="{{ item.getButtonUrl() ?: '#contact' }}">
@@ -30,7 +48,7 @@
                             
                             <div class="hero-visual">
                                 <div class="hero-image-frame">
-                                    <img src="{% if item.getImageName() %}{{ ('/uploads/banners/' ~ item.getImageName())|webp }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ item.getTitle(locale) ?: 'Prensa Hidráulica Pressmatik' }}" width="600" height="500" class="hero-main-img" fetchpriority="high" decoding="async">
+                                    <img src="{% if item.getImageName() %}{{ ('/uploads/banners/' ~ item.getImageName())|webp }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ item.getTitle(locale) ?: 'Prensa Hidráulica Pressmatik' }}" width="600" height="500" class="hero-main-img" {% if loop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
                                     <div class="hero-badge badge-top">
                                         <span class="badge-num">{{ item.getBadgeTopNum(locale) ?: '25-315' }}</span>
                                         <span class="badge-lbl">{{ item.getBadgeTopLabel(locale) ?: 'Toneladas' }}</span>
@@ -232,7 +250,7 @@
     <!-- Seção de Serviços Section with Video Background -->
     <section id="services" class="section-padding services-video-section">
         <div class="video-bg-container">
-            <video autoplay loop muted playsinline preload="none" class="video-bg">
+            <video autoplay loop muted playsinline preload="none" class="video-bg" aria-label="Vídeo institucional Pressmatik" aria-hidden="true">
                 <source src="{{ get_service_video_url() }}" type="video/mp4">
             </video>
             <div class="video-bg-overlay"></div>
@@ -411,7 +429,7 @@
                                 <p class="testimonial-quote">"{{ item.getText(locale) }}"</p>
                                 <div class="testimonial-client">
                                     {% if item.imageName %}
-                                        <img src="/uploads/testimonies/{{ item.imageName }}" alt="{{ item.name }}" class="client-avatar">
+                                        <img src="{{ ('/uploads/testimonies/' ~ item.imageName)|webp }}" alt="Foto de {{ item.name }}" width="56" height="56" class="client-avatar" loading="lazy" decoding="async">
                                     {% else %}
                                         <div class="client-avatar" style="background: linear-gradient(135deg,#4f8ef7,#a855f7); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size: 14px;">
                                             {{ item.name|first|upper }}
@@ -497,7 +515,7 @@
             <div class="clients-grid scroll-animate slide-top" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3rem;">
                 {% for item in clientLogos %}
                     <span class="client-logo-item" aria-label="{{ item.name }}" style="display: flex; align-items: center; justify-content: center; height: 50px;">
-                        <img src="/uploads/clients/{{ item.imageName }}" alt="{{ item.name }}" width="130" height="45" loading="lazy" decoding="async" style="max-height: 45px; max-width: 130px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;">
+                        <img src="{{ ('/uploads/clients/' ~ item.imageName)|webp }}" alt="{{ item.name }}" width="130" height="45" loading="lazy" decoding="async" style="max-height: 45px; max-width: 130px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;">
                     </span>
                 {% else %}
                     <!-- Static Fallbacks -->

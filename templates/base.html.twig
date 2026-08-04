@@ -11,10 +11,10 @@
         
         {# Canonical URL & Multilingual Hreflang #}
         <link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}">
-        <link rel="alternate" hreflang="pt" href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'pt'})) }}">
-        <link rel="alternate" hreflang="en" href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'en'})) }}">
-        <link rel="alternate" hreflang="es" href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'es'})) }}">
-        <link rel="alternate" hreflang="x-default" href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'pt'})) }}">
+        <link rel="alternate" hreflang="pt" href="{{ app.request.schemeAndHttpHost ~ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'pt'})) }}">
+        <link rel="alternate" hreflang="en" href="{{ app.request.schemeAndHttpHost ~ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'en'})) }}">
+        <link rel="alternate" hreflang="es" href="{{ app.request.schemeAndHttpHost ~ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'es'})) }}">
+        <link rel="alternate" hreflang="x-default" href="{{ app.request.schemeAndHttpHost ~ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'pt'})) }}">
 
         {# OpenGraph & Twitter Social Meta Tags #}
         <meta property="og:locale" content="{{ app.request.locale == 'pt' ? 'pt_BR' : (app.request.locale == 'es' ? 'es_ES' : 'en_US') }}">
@@ -39,22 +39,27 @@
         <link rel="preconnect" href="https://cdnjs.cloudflare.com">
         <link rel="preconnect" href="https://ka-f.webawesome.com">
 
-        {# Web Fonts with font-display: swap #}
+        {# Web Fonts with font-display: swap - preconnect already defined above #}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap">
 
-        {# Web Awesome CDN Stylesheet #}
+        {# Web Awesome CDN Stylesheet - critical for layout #}
         <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css" />
 
-        {# Bootstrap Icons CDN #}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        {# Bootstrap Icons - load async (non-critical, icons only) #}
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></noscript>
 
-        {# Font Awesome for Industrial Icons #}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {# Font Awesome - load async (non-critical, icons only) #}
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
 
         {# Global CSS Variables and Styles #}
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% endblock %}
+
+        {# Preload LCP image hint - overridden per page when needed #}
+        {% block preload_lcp %}{% endblock %}
 
         {# Web Awesome Loader Script #}
         <script type="module" src="https://ka-f.webawesome.com/webawesome@3.9.0/webawesome.loader.js" defer></script>
@@ -113,8 +118,8 @@
         <header class="site-header">
             <div class="container header-container">
                 <a href="{{ path('app_home', {'_locale': locale}) }}" class="logo-link" aria-label="Pressmatik Página Inicial">
-                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_ORIGINAL.png" alt="Pressmatik Logo" width="220" height="48" class="logo-image logo-light" decoding="async">
-                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png" alt="Pressmatik Logo" width="220" height="48" class="logo-image logo-dark" decoding="async">
+                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_ORIGINAL.png" alt="Pressmatik Logo" width="220" height="48" class="logo-image logo-light" fetchpriority="high" decoding="async">
+                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png" alt="Pressmatik Logo" width="220" height="48" class="logo-image logo-dark" loading="lazy" decoding="async">
                 </a>
                 
                 <nav aria-label="Menu Principal">
@@ -257,7 +262,7 @@
                         {'title': 'products_sec.parts'|trans, 'products': db_grouped['parts'] ?? []}
                     ] %}
                     <li>
-                        <button type="button" class="mobile-nav-link mobile-nav-accordion-trigger" onclick="this.classList.toggle('open'); var panel = this.nextElementSibling; panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + 'px';" style="width: 100%; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font: inherit; color: inherit;">
+                        <button type="button" class="mobile-nav-link mobile-nav-accordion-trigger" aria-label="Expandir menu de Produtos" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); this.classList.toggle('open'); var panel = this.nextElementSibling; panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + 'px';" style="width: 100%; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font: inherit; color: inherit;">
                             {{ 'menu.products'|trans }}
                             <i class="bi bi-chevron-down" style="font-size: 0.75rem; transition: transform 0.3s ease;"></i>
                         </button>
@@ -318,7 +323,7 @@
         </main>
 
         <!-- Floating WhatsApp Button -->
-        <a href="https://wa.me/5516997704156?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20as%20prensas%20Pressmatik." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contato direto via WhatsApp Pressmatik">
+        <a href="https://wa.me/5516997704156?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20as%20prensas%20Pressmatik." class="whatsapp-float" target="_blank" rel="noopener noreferrer nofollow" aria-label="Contato direto via WhatsApp Pressmatik">
             <i class="bi bi-whatsapp"></i>
         </a>
 
