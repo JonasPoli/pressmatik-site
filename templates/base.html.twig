@@ -43,8 +43,9 @@
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap"></noscript>
 
-        {# Web Awesome CDN Stylesheet - critical for layout #}
-        <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css" />
+        {# Web Awesome CDN Stylesheet - load async, components below fold #}
+        <link rel="preload" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css"></noscript>
 
         {# Bootstrap Icons - load async (non-critical, icons only) #}
         <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
