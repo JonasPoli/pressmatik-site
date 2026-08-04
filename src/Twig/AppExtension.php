@@ -42,7 +42,28 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFilter('role_label', [$this, 'roleLabel']),
+            new TwigFilter('webp', [$this, 'toWebp']),
         ];
+    }
+
+    public function toWebp(?string $path): string
+    {
+        if (!$path) {
+            return '';
+        }
+        
+        $webpPath = (string) preg_replace('/\.(png|jpg|jpeg)$/i', '.webp', $path);
+        
+        // If absolute path from root domain or relative to public
+        $cleanPath = '/' . ltrim($webpPath, '/');
+        $projectDir = dirname(__DIR__, 2);
+        $realWebpPath = $projectDir . '/public' . $cleanPath;
+        
+        if (file_exists($realWebpPath)) {
+            return $webpPath;
+        }
+        
+        return $path;
     }
 
     public function navItemClass(string $routePrefix): string

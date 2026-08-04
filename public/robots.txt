@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /login
+Disallow: /logout
+
+Sitemap: https://pressmatik.wab.com.br/sitemap.xml

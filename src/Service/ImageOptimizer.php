@@ -77,23 +77,15 @@ class ImageOptimizer
             $height
         );
 
-        // Save back to file
+        // Save back to original format and generate WebP sibling
         $saved = false;
         switch ($type) {
             case IMAGETYPE_JPEG:
                 $saved = imagejpeg($dstImage, $filePath, $quality);
                 break;
             case IMAGETYPE_PNG:
-                // Convert PNG to WebP or compress PNG level 9
-                // If cwebp or GD imagewebp is available and we want maximum compression:
-                if (function_exists('imagewebp') && filesize($filePath) > 100 * 1024) {
-                    // Try converting heavy PNG to compressed PNG with palette/pngquant or GD imagepng
-                    imagesavealpha($dstImage, true);
-                    $saved = imagepng($dstImage, $filePath, 9);
-                } else {
-                    imagesavealpha($dstImage, true);
-                    $saved = imagepng($dstImage, $filePath, 9);
-                }
+                imagesavealpha($dstImage, true);
+                $saved = imagepng($dstImage, $filePath, 9);
                 break;
             case IMAGETYPE_WEBP:
                 if (function_exists('imagewebp')) {
@@ -102,14 +94,14 @@ class ImageOptimizer
                 break;
         }
 
+        // Always generate WebP version if imagewebp is available
+        if (function_exists('imagewebp') && $type !== IMAGETYPE_WEBP) {
+            $webpPath = pathinfo($filePath, PATHINFO_DIRNAME) . '/' . pathinfo($filePath, PATHINFO_FILENAME) . '.webp';
+            @imagewebp($dstImage, $webpPath, $quality);
+        }
+
         imagedestroy($srcImage);
         imagedestroy($dstImage);
-
-        // If cwebp is available on the OS and image is > 100KB, run cwebp/convert optimization if needed
-        if ($saved && is_executable('/usr/local/bin/cwebp') && ($type === IMAGETYPE_PNG || $type === IMAGETYPE_JPEG) && filesize($filePath) > 150 * 1024) {
-            $webpPath = pathinfo($filePath, PATHINFO_DIRNAME) . '/' . pathinfo($filePath, PATHINFO_FILENAME) . '.webp';
-            exec(sprintf('/usr/local/bin/cwebp -q %d %s -o %s 2>&1', $quality, escapeshellarg($filePath), escapeshellarg($webpPath)));
-        }
 
         return $saved;
     }

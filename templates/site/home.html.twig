@@ -30,7 +30,7 @@
                             
                             <div class="hero-visual">
                                 <div class="hero-image-frame">
-                                    <img src="{% if item.getImageName() %}/uploads/banners/{{ item.getImageName() }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ item.getTitle(locale) ?: 'Prensa Hidráulica Pressmatik' }}" width="600" height="500" class="hero-main-img" fetchpriority="high" decoding="async">
+                                    <img src="{% if item.getImageName() %}{{ ('/uploads/banners/' ~ item.getImageName())|webp }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ item.getTitle(locale) ?: 'Prensa Hidráulica Pressmatik' }}" width="600" height="500" class="hero-main-img" fetchpriority="high" decoding="async">
                                     <div class="hero-badge badge-top">
                                         <span class="badge-num">{{ item.getBadgeTopNum(locale) ?: '25-315' }}</span>
                                         <span class="badge-lbl">{{ item.getBadgeTopLabel(locale) ?: 'Toneladas' }}</span>
@@ -100,7 +100,7 @@
                 <div class="collage-container">
                     <div class="collage-shape"></div>
                     <div class="collage-img-main-frame">
-                        <img src="{% if about and about.getHomeImageName() %}/uploads/about/{{ about.getHomeImageName() }}{% else %}/images/about-img.webp{% endif %}" alt="Fabricação de Prensas Hidráulicas Pressmatik" width="550" height="400" class="collage-img-main" loading="lazy" decoding="async">
+                        <img src="{% if about and about.getHomeImageName() %}{{ ('/uploads/about/' ~ about.getHomeImageName())|webp }}{% else %}/images/about-img.webp{% endif %}" alt="Fabricação de Prensas Hidráulicas Pressmatik" width="550" height="400" class="collage-img-main" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@
                                         {% if prod.defaultSubproduct and prod.defaultSubproduct.imageName %}
                                             {% set productImg = prod.defaultSubproduct.imageName %}
                                         {% endif %}
-                                        <img src="{% if productImg %}/uploads/products/{{ productImg }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ prod.getName(locale) }}" width="400" height="300" loading="lazy" decoding="async">
+                                        <img src="{% if productImg %}{{ ('/uploads/products/' ~ productImg)|webp }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ prod.getName(locale) }}" width="400" height="300" loading="lazy" decoding="async">
                                     </div>
                                     <div class="product-tab-info">
                                         <h3>{{ prod.getName(locale) }}</h3>
@@ -232,7 +232,7 @@
     <!-- Seção de Serviços Section with Video Background -->
     <section id="services" class="section-padding services-video-section">
         <div class="video-bg-container">
-            <video autoplay loop muted playsinline preload="metadata" class="video-bg">
+            <video autoplay loop muted playsinline preload="none" class="video-bg">
                 <source src="{{ get_service_video_url() }}" type="video/mp4">
             </video>
             <div class="video-bg-overlay"></div>
@@ -248,7 +248,7 @@
                 {% for item in services %}
                     <div class="service-card scroll-animate {% if loop.index0 % 3 == 0 %}slide-left{% elseif loop.index0 % 3 == 1 %}slide-top{% else %}slide-right{% endif %}">
                         <div class="service-img-container">
-                            <img src="/uploads/services/{{ item.imageName }}" alt="{{ item.getTitle(locale) }}" width="400" height="280" class="service-img" loading="lazy" decoding="async">
+                            <img src="{{ ('/uploads/services/' ~ item.imageName)|webp }}" alt="{{ item.getTitle(locale) }}" width="400" height="280" class="service-img" loading="lazy" decoding="async">
                             <div class="service-icon-floating">
                                 <i class="bi {% if loop.index0 % 3 == 0 %}bi-wrench{% elseif loop.index0 % 3 == 1 %}bi-arrow-repeat{% else %}bi-exclamation-triangle{% endif %}"></i>
                             </div>
@@ -322,7 +322,7 @@
                     <div class="news-card scroll-animate {% if loop.index0 % 3 == 0 %}slide-left{% elseif loop.index0 % 3 == 1 %}slide-top{% else %}slide-right{% endif %}">
                         <div class="news-img-container">
                             {% if item.imageName %}
-                                <img src="/uploads/news/{{ item.imageName }}" alt="{{ item.getImageAlt(locale) ?: item.getTitle(locale) }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
+                                <img src="{{ ('/uploads/news/' ~ item.imageName)|webp }}" alt="{{ item.getImageAlt(locale) ?: item.getTitle(locale) }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
                             {% else %}
                                 <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #1a1f2c; color: var(--color-text-secondary);">
                                     <i class="bi bi-image" style="font-size: 2.5rem;"></i>
