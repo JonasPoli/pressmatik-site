@@ -107,9 +107,9 @@
             <button class="hero-prev-btn" type="button" aria-label="Slide anterior"><i class="fa-solid fa-chevron-left"></i></button>
             <button class="hero-next-btn" type="button" aria-label="Próximo slide"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
-        <div class="hero-slider-dots" role="tablist" aria-label="Navegação do slider">
+        <div class="hero-slider-dots" aria-label="Navegação do slider">
             {% for item in banners %}
-                <button class="hero-dot {% if loop.first %}active{% endif %}" type="button" data-index="{{ loop.index0 }}" role="tab" aria-selected="{% if loop.first %}true{% else %}false{% endif %}" aria-label="Ir para o slide {{ loop.index }}"></button>
+                <button class="hero-dot {% if loop.first %}active{% endif %}" type="button" data-index="{{ loop.index0 }}" aria-label="Ir para o slide {{ loop.index }}"></button>
             {% endfor %}
         </div>
         {% endif %}
@@ -602,21 +602,27 @@
                 <h3>{{ 'cta.quote_now'|trans }}</h3>
                 <form id="quote-form" data-turbo="false">
                     <div class="form-group">
+                        <label for="form-name" class="sr-only">{{ 'contact_form.name'|trans }}</label>
                         <wa-input id="form-name" type="text" label="{{ 'contact_form.name'|trans }}" aria-label="{{ 'contact_form.name'|trans }}" placeholder="Ex: João Silva" required></wa-input>
                     </div>
                     <div class="form-group">
+                        <label for="form-email" class="sr-only">{{ 'contact_form.email'|trans }}</label>
                         <wa-input id="form-email" type="email" label="{{ 'contact_form.email'|trans }}" aria-label="{{ 'contact_form.email'|trans }}" placeholder="nome@suaempresa.com.br" required></wa-input>
                     </div>
                     <div class="form-group">
+                        <label for="form-phone" class="sr-only">{{ 'contact_form.phone'|trans }}</label>
                         <wa-input id="form-phone" type="tel" label="{{ 'contact_form.phone'|trans }}" aria-label="{{ 'contact_form.phone'|trans }}" placeholder="(16) 99999-9999" required></wa-input>
                     </div>
                     <div class="form-group">
+                        <label for="form-cnpj" class="sr-only">CPF / CNPJ</label>
                         <wa-input id="form-cnpj" type="text" label="CPF / CNPJ" aria-label="CPF / CNPJ" placeholder="Digite apenas números (11 ou 14 dígitos)" required></wa-input>
                     </div>
                     <div class="form-group">
+                        <label for="form-product" class="sr-only">{{ 'contact_form.product_interest'|trans }}</label>
                         <wa-input id="form-product" type="text" label="{{ 'contact_form.product_interest'|trans }}" aria-label="{{ 'contact_form.product_interest'|trans }}" placeholder="Ex: PMC-ST 60 Toneladas"></wa-input>
                     </div>
                     <div class="form-group">
+                        <label for="form-message" class="sr-only">{{ 'contact_form.message'|trans }}</label>
                         <wa-textarea id="form-message" label="{{ 'contact_form.message'|trans }}" aria-label="{{ 'contact_form.message'|trans }}" placeholder="Descreva os requisitos técnicos da prensa..."></wa-textarea>
                     </div>
                     <wa-button id="form-submit-btn" type="submit" variant="brand" style="width: 100%;">
@@ -648,7 +654,6 @@
                 slides[currentIndex].classList.remove('active');
                 if (dots[currentIndex]) {
                     dots[currentIndex].classList.remove('active');
-                    dots[currentIndex].setAttribute('aria-selected', 'false');
                 }
 
                 currentIndex = (index + slides.length) % slides.length;
@@ -669,7 +674,6 @@
                 nextSlide.classList.add('active');
                 if (dots[currentIndex]) {
                     dots[currentIndex].classList.add('active');
-                    dots[currentIndex].setAttribute('aria-selected', 'true');
                 }
             }
 
