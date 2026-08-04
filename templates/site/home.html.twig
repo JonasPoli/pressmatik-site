@@ -30,7 +30,7 @@
                             
                             <div class="hero-visual">
                                 <div class="hero-image-frame">
-                                    <img src="{% if item.getImageName() %}/uploads/banners/{{ item.getImageName() }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ item.getTitle(locale) ?: 'Prensa Hidráulica Pressmatik' }}" width="600" height="500" class="hero-main-img" fetchpriority="high" decoding="async">
+                                    <img src="{% if item.getImageName() %}/uploads/banners/{{ item.getImageName() }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ item.getTitle(locale) ?: 'Prensa Hidráulica Pressmatik' }}" width="600" height="500" class="hero-main-img" fetchpriority="high" decoding="async">
                                     <div class="hero-badge badge-top">
                                         <span class="badge-num">{{ item.getBadgeTopNum(locale) ?: '25-315' }}</span>
                                         <span class="badge-lbl">{{ item.getBadgeTopLabel(locale) ?: 'Toneladas' }}</span>
@@ -63,7 +63,7 @@
                         
                         <div class="hero-visual">
                             <div class="hero-image-frame">
-                                <img src="/images/prensa-hidraulica-tipo-c-linha-st.png" alt="Prensa Hidráulica Tipo C Linha ST Pressmatik" width="600" height="500" class="hero-main-img" fetchpriority="high" decoding="async">
+                                <img src="/images/prensa-hidraulica-tipo-c-linha-st.webp" alt="Prensa Hidráulica Tipo C Linha ST Pressmatik" width="600" height="500" class="hero-main-img" fetchpriority="high" decoding="async">
                                 <div class="hero-badge badge-top">
                                     <span class="badge-num">25-315</span>
                                     <span class="badge-lbl">Toneladas</span>
@@ -100,7 +100,7 @@
                 <div class="collage-container">
                     <div class="collage-shape"></div>
                     <div class="collage-img-main-frame">
-                        <img src="{% if about and about.getHomeImageName() %}/uploads/about/{{ about.getHomeImageName() }}{% else %}/images/about-img.png{% endif %}" alt="Fabricação de Prensas Hidráulicas Pressmatik" width="550" height="400" class="collage-img-main" loading="lazy" decoding="async">
+                        <img src="{% if about and about.getHomeImageName() %}/uploads/about/{{ about.getHomeImageName() }}{% else %}/images/about-img.webp{% endif %}" alt="Fabricação de Prensas Hidráulicas Pressmatik" width="550" height="400" class="collage-img-main" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@
                                         {% if prod.defaultSubproduct and prod.defaultSubproduct.imageName %}
                                             {% set productImg = prod.defaultSubproduct.imageName %}
                                         {% endif %}
-                                        <img src="{% if productImg %}/uploads/products/{{ productImg }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ prod.getName(locale) }}" width="400" height="300" loading="lazy" decoding="async">
+                                        <img src="{% if productImg %}/uploads/products/{{ productImg }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ prod.getName(locale) }}" width="400" height="300" loading="lazy" decoding="async">
                                     </div>
                                     <div class="product-tab-info">
                                         <h3>{{ prod.getName(locale) }}</h3>
@@ -262,7 +262,7 @@
                 {% else %}
                     <div class="service-card scroll-animate slide-left">
                         <div class="service-img-container">
-                            <img src="/images/service-maintenance.png" alt="Manutenção de Prensas" width="400" height="280" class="service-img" loading="lazy" decoding="async">
+                            <img src="/images/service-maintenance.webp" alt="Manutenção de Prensas" width="400" height="280" class="service-img" loading="lazy" decoding="async">
                             <div class="service-icon-floating">
                                 <i class="bi bi-wrench"></i>
                             </div>
@@ -276,7 +276,7 @@
 
                     <div class="service-card scroll-animate slide-top">
                         <div class="service-img-container">
-                            <img src="/images/service-retrofit.png" alt="Retrofit de Prensas" width="400" height="280" class="service-img" loading="lazy" decoding="async">
+                            <img src="/images/service-retrofit.webp" alt="Retrofit de Prensas" width="400" height="280" class="service-img" loading="lazy" decoding="async">
                             <div class="service-icon-floating">
                                 <i class="bi bi-arrow-repeat"></i>
                             </div>
@@ -290,7 +290,7 @@
 
                     <div class="service-card scroll-animate slide-right">
                         <div class="service-img-container">
-                            <img src="/images/service-safety.png" alt="Adequação NR12" width="400" height="280" class="service-img" loading="lazy" decoding="async">
+                            <img src="/images/service-safety.webp" alt="Adequação NR12" width="400" height="280" class="service-img" loading="lazy" decoding="async">
                             <div class="service-icon-floating">
                                 <i class="bi bi-exclamation-triangle"></i>
                             </div>
@@ -342,7 +342,7 @@
                     <!-- Card 1 -->
                     <div class="news-card scroll-animate slide-left">
                         <div class="news-img-container">
-                            <img src="/images/news-exhibition1.png" alt="{{ 'news.items.0.title'|trans }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
+                            <img src="/images/news-exhibition1.webp" alt="{{ 'news.items.0.title'|trans }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
                             <div class="news-date-badge">
                                 {{ 'news.items.0.date'|trans }}
                             </div>
@@ -357,7 +357,7 @@
                     <!-- Card 2 -->
                     <div class="news-card scroll-animate slide-top">
                         <div class="news-img-container">
-                            <img src="/images/news-seminar.png" alt="{{ 'news.items.1.title'|trans }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
+                            <img src="/images/news-seminar.webp" alt="{{ 'news.items.1.title'|trans }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
                             <div class="news-date-badge">
                                 {{ 'news.items.1.date'|trans }}
                             </div>
@@ -372,7 +372,7 @@
                     <!-- Card 3 -->
                     <div class="news-card scroll-animate slide-right">
                         <div class="news-img-container">
-                            <img src="/images/news-hannover.png" alt="{{ 'news.items.2.title'|trans }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
+                            <img src="/images/news-hannover.webp" alt="{{ 'news.items.2.title'|trans }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
                             <div class="news-date-badge">
                                 {{ 'news.items.2.date'|trans }}
                             </div>

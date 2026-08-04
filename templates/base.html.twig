@@ -133,7 +133,7 @@
                                          {% set grouped_cats = {
                                              'hydraulic': {
                                                  'title': mm_cats['hydraulic'].title(locale) ?? 'products_sec.hydraulic_presses'|trans,
-                                                 'img': mm_cats['hydraulic'].imageUrl ?? '/images/prensa-hidraulica-tipo-c-duplo-linha-st.png',
+                                                 'img': mm_cats['hydraulic'].imageUrl ?? '/images/prensa-hidraulica-tipo-c-duplo-linha-st.webp',
                                                  'products': db_grouped['hydraulic'] ?? []
                                              },
                                              'servo-hydraulic': {
@@ -143,7 +143,7 @@
                                              },
                                              'mechanical': {
                                                  'title': mm_cats['mechanical'].title(locale) ?? 'Prensas Mecânicas',
-                                                 'img': mm_cats['mechanical'].imageUrl ?? '/images/prensa-hidraulica-tipo-c-linha-st.png',
+                                                 'img': mm_cats['mechanical'].imageUrl ?? '/images/prensa-hidraulica-tipo-c-linha-st.webp',
                                                  'products': db_grouped['mechanical'] ?? []
                                              }
                                          } %}
@@ -168,7 +168,7 @@
                                          <!-- Col 4: Equipamentos -->
                                          <div class="megamenu-col">
                                              <div class="megamenu-img-wrapper">
-                                                 <img src="{{ mm_cats['equipments'].imageUrl ?? '/images/tipo-h.png' }}" alt="{{ mm_cats['equipments'].title(locale) ?? 'products_sec.equipments'|trans }}" width="160" height="120" loading="lazy" decoding="async">
+                                                 <img src="{{ mm_cats['equipments'].imageUrl ?? '/images/tipo-h.webp' }}" alt="{{ mm_cats['equipments'].title(locale) ?? 'products_sec.equipments'|trans }}" width="160" height="120" loading="lazy" decoding="async">
                                              </div>
                                              <span class="megamenu-title">{{ mm_cats['equipments'].title(locale) ?? 'products_sec.equipments'|trans }}</span>
                                              <ul class="megamenu-links">
@@ -180,7 +180,7 @@
                                          <!-- Col 5: Peças e Acessórios -->
                                          <div class="megamenu-col">
                                              <div class="megamenu-img-wrapper">
-                                                 <img src="{{ mm_cats['parts'].imageUrl ?? '/images/especiais.png' }}" alt="{{ mm_cats['parts'].title(locale) ?? 'products_sec.parts'|trans }}" width="160" height="120" loading="lazy" decoding="async">
+                                                 <img src="{{ mm_cats['parts'].imageUrl ?? '/images/especiais.webp' }}" alt="{{ mm_cats['parts'].title(locale) ?? 'products_sec.parts'|trans }}" width="160" height="120" loading="lazy" decoding="async">
                                              </div>
                                              <span class="megamenu-title">{{ mm_cats['parts'].title(locale) ?? 'products_sec.parts'|trans }}</span>
                                              <ul class="megamenu-links">
