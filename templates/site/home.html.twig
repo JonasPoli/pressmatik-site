@@ -26,7 +26,7 @@
         <div class="hero-slider">
             {% if banners|length > 0 %}
                 {% for item in banners %}
-                    <div class="hero-slide {% if loop.first %}active{% endif %}" {% if item.getBgImageName() %}style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.65)), url('/uploads/banners/{{ item.getBgImageName() }}'); background-size: cover; background-position: center;"{% endif %}>
+                    <div class="hero-slide {% if loop.first %}active{% endif %}" {% if item.getBgImageName() %}{% if loop.first %}style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.65)), url('/uploads/banners/{{ item.getBgImageName() }}'); background-size: cover; background-position: center;"{% else %}data-bg="linear-gradient(to right, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.65)), url('/uploads/banners/{{ item.getBgImageName() }}')"{% endif %}{% endif %}>
                         <div class="container hero-grid">
                             <div class="hero-content">
                                 <span class="section-title-tag">PRESSMATIK</span>
@@ -48,7 +48,11 @@
                             
                             <div class="hero-visual">
                                 <div class="hero-image-frame">
-                                    <img src="{% if item.getImageName() %}{{ ('/uploads/banners/' ~ item.getImageName())|webp }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ item.getTitle(locale) ?: 'Prensa Hidráulica Pressmatik' }}" width="600" height="500" class="hero-main-img" {% if loop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+                                    {% if loop.first %}
+                                        <img src="{% if item.getImageName() %}{{ ('/uploads/banners/' ~ item.getImageName())|webp }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ item.getTitle(locale) ?: 'Prensa Hidráulica Pressmatik' }}" width="600" height="500" class="hero-main-img" fetchpriority="high" decoding="async">
+                                    {% else %}
+                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 500'%3E%3C/svg%3E" data-src="{% if item.getImageName() %}{{ ('/uploads/banners/' ~ item.getImageName())|webp }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{{ item.getTitle(locale) ?: 'Prensa Hidráulica Pressmatik' }}" width="600" height="500" class="hero-main-img" loading="lazy" decoding="async">
+                                    {% endif %}
                                     <div class="hero-badge badge-top">
                                         <span class="badge-num">{{ item.getBadgeTopNum(locale) ?: '25-315' }}</span>
                                         <span class="badge-lbl">{{ item.getBadgeTopLabel(locale) ?: 'Toneladas' }}</span>
@@ -649,7 +653,20 @@
 
                 currentIndex = (index + slides.length) % slides.length;
 
-                slides[currentIndex].classList.add('active');
+                const nextSlide = slides[currentIndex];
+                if (nextSlide.dataset.bg) {
+                    nextSlide.style.backgroundImage = nextSlide.dataset.bg;
+                    nextSlide.style.backgroundSize = 'cover';
+                    nextSlide.style.backgroundPosition = 'center';
+                    delete nextSlide.dataset.bg;
+                }
+                const lazyImg = nextSlide.querySelector('img[data-src]');
+                if (lazyImg) {
+                    lazyImg.src = lazyImg.dataset.src;
+                    lazyImg.removeAttribute('data-src');
+                }
+
+                nextSlide.classList.add('active');
                 if (dots[currentIndex]) {
                     dots[currentIndex].classList.add('active');
                     dots[currentIndex].setAttribute('aria-selected', 'true');
