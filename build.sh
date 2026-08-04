@@ -72,20 +72,9 @@ echo -e "${GREEN}--> Otimizando imagens (WebP)...${NC}"
 APP_ENV=prod $PHP_BIN bin/console app:optimize-images --env=prod
 
 # ─────────────────────────────────────────────────────────────────────
-# 3. Compilar CSS (minificado)
+# 3. Compilar CSS minificado (Tailwind)
 # ─────────────────────────────────────────────────────────────────────
-echo -e "${GREEN}--> Minificando app.css...${NC}"
-$PHP_BIN -r "
-\$file = 'assets/styles/app.css';
-if (file_exists(\$file)) {
-    \$css = file_get_contents(\$file);
-    \$min = preg_replace('/\/\*[\s\S]*?\*\//', '', \$css);
-    \$min = preg_replace('/\s+/', ' ', \$min);
-    \$min = preg_replace('/\s*([{}:;,])\s*/', '$1', \$min);
-    \$min = str_replace(';}', '}', \$min);
-    file_put_contents(\$file, trim(\$min));
-}
-"
+echo -e "${GREEN}--> Compilando CSS...${NC}"
 APP_ENV=prod $PHP_BIN bin/console tailwind:build --minify
 
 # ─────────────────────────────────────────────────────────────────────
