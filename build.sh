@@ -51,18 +51,20 @@ fi
 echo -e "${GREEN}--> Recompilando Tailwind CSS...${NC}"
 $PHP_BIN bin/console tailwind:build
 
-# 4. Compilar Assets (Asset Mapper)
+# 4. Otimizar e Converter Imagens (public/images e public/uploads para WebP)
+echo -e "${GREEN}--> Otimizando imagens e gerando versões WebP...${NC}"
+$PHP_BIN bin/console app:optimize-images
+
+# 5. Compilar Assets (Asset Mapper)
 echo -e "${GREEN}--> Compilando AssetMap...${NC}"
 $PHP_BIN bin/console asset-map:compile
 
-# 5. Limpar Logs
+# 6. Limpar Logs
 echo -e "${GREEN}--> Limpando logs...${NC}"
 rm -rf var/log/*
 
-echo -e "${BLUE}==> Limpeza concluída com sucesso!${NC}"
-
-
 $PHP_BIN bin/console tailwind:build --minify
 $PHP_BIN bin/console asset-map:compile
-
 $PHP_BIN bin/console liip:imagine:cache:remove
+
+echo -e "${BLUE}==> Limpeza e otimização concluídas com sucesso!${NC}"
