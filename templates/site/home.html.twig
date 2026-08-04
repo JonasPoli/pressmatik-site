@@ -2,6 +2,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Pressmatik - {{ 'banner.title'|trans }}{% endblock %}
+{% block meta_description %}{{ 'banner.subtitle'|trans }} | Fabricante de Prensas Hidráulicas, Servo-Hidráulicas e Mecânicas.{% endblock %}
 
 {% block body %}
     <!-- Hero Banner Section (Premium Two-Column Slider Layout) -->
@@ -29,7 +30,7 @@
                             
                             <div class="hero-visual">
                                 <div class="hero-image-frame">
-                                    <img src="{% if item.getImageName() %}/uploads/banners/{{ item.getImageName() }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="" class="hero-main-img" fetchpriority="high" decoding="async">
+                                    <img src="{% if item.getImageName() %}/uploads/banners/{{ item.getImageName() }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ item.getTitle(locale) ?: 'Prensa Hidráulica Pressmatik' }}" width="600" height="500" class="hero-main-img" fetchpriority="high" decoding="async">
                                     <div class="hero-badge badge-top">
                                         <span class="badge-num">{{ item.getBadgeTopNum(locale) ?: '25-315' }}</span>
                                         <span class="badge-lbl">{{ item.getBadgeTopLabel(locale) ?: 'Toneladas' }}</span>
@@ -62,7 +63,7 @@
                         
                         <div class="hero-visual">
                             <div class="hero-image-frame">
-                                <img src="/images/prensa-hidraulica-tipo-c-linha-st.png" alt="" class="hero-main-img">
+                                <img src="/images/prensa-hidraulica-tipo-c-linha-st.png" alt="Prensa Hidráulica Tipo C Linha ST Pressmatik" width="600" height="500" class="hero-main-img" fetchpriority="high" decoding="async">
                                 <div class="hero-badge badge-top">
                                     <span class="badge-num">25-315</span>
                                     <span class="badge-lbl">Toneladas</span>
@@ -81,12 +82,12 @@
         <!-- Slider Controls -->
         {% if banners|length > 1 %}
         <div class="hero-slider-nav">
-            <button class="hero-prev-btn" type="button"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="hero-next-btn" type="button"><i class="fa-solid fa-chevron-right"></i></button>
+            <button class="hero-prev-btn" type="button" aria-label="Slide anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="hero-next-btn" type="button" aria-label="Próximo slide"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
         <div class="hero-slider-dots">
             {% for item in banners %}
-                <span class="hero-dot {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}"></span>
+                <span class="hero-dot {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}" role="button" aria-label="Ir para o slide {{ loop.index }}"></span>
             {% endfor %}
         </div>
         {% endif %}
@@ -99,7 +100,7 @@
                 <div class="collage-container">
                     <div class="collage-shape"></div>
                     <div class="collage-img-main-frame">
-                        <img src="{% if about and about.getHomeImageName() %}/uploads/about/{{ about.getHomeImageName() }}{% else %}/images/about-img.png{% endif %}" alt="Premium Hydraulic Press Manufacturing" class="collage-img-main">
+                        <img src="{% if about and about.getHomeImageName() %}/uploads/about/{{ about.getHomeImageName() }}{% else %}/images/about-img.png{% endif %}" alt="Fabricação de Prensas Hidráulicas Pressmatik" width="550" height="400" class="collage-img-main" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -203,7 +204,7 @@
                                         {% if prod.defaultSubproduct and prod.defaultSubproduct.imageName %}
                                             {% set productImg = prod.defaultSubproduct.imageName %}
                                         {% endif %}
-                                        <img src="{% if productImg %}/uploads/products/{{ productImg }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ prod.getName(locale) }}" loading="lazy">
+                                        <img src="{% if productImg %}/uploads/products/{{ productImg }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ prod.getName(locale) }}" width="400" height="300" loading="lazy" decoding="async">
                                     </div>
                                     <div class="product-tab-info">
                                         <h3>{{ prod.getName(locale) }}</h3>
@@ -247,7 +248,7 @@
                 {% for item in services %}
                     <div class="service-card scroll-animate {% if loop.index0 % 3 == 0 %}slide-left{% elseif loop.index0 % 3 == 1 %}slide-top{% else %}slide-right{% endif %}">
                         <div class="service-img-container">
-                            <img src="/uploads/services/{{ item.imageName }}" alt="{{ item.getTitle(locale) }}" class="service-img" loading="lazy">
+                            <img src="/uploads/services/{{ item.imageName }}" alt="{{ item.getTitle(locale) }}" width="400" height="280" class="service-img" loading="lazy" decoding="async">
                             <div class="service-icon-floating">
                                 <i class="bi {% if loop.index0 % 3 == 0 %}bi-wrench{% elseif loop.index0 % 3 == 1 %}bi-arrow-repeat{% else %}bi-exclamation-triangle{% endif %}"></i>
                             </div>
@@ -261,7 +262,7 @@
                 {% else %}
                     <div class="service-card scroll-animate slide-left">
                         <div class="service-img-container">
-                            <img src="/images/service-maintenance.png" alt="Manutenção de Prensas" class="service-img" loading="lazy">
+                            <img src="/images/service-maintenance.png" alt="Manutenção de Prensas" width="400" height="280" class="service-img" loading="lazy" decoding="async">
                             <div class="service-icon-floating">
                                 <i class="bi bi-wrench"></i>
                             </div>
@@ -275,7 +276,7 @@
 
                     <div class="service-card scroll-animate slide-top">
                         <div class="service-img-container">
-                            <img src="/images/service-retrofit.png" alt="Retrofit de Prensas" class="service-img" loading="lazy">
+                            <img src="/images/service-retrofit.png" alt="Retrofit de Prensas" width="400" height="280" class="service-img" loading="lazy" decoding="async">
                             <div class="service-icon-floating">
                                 <i class="bi bi-arrow-repeat"></i>
                             </div>
@@ -289,7 +290,7 @@
 
                     <div class="service-card scroll-animate slide-right">
                         <div class="service-img-container">
-                            <img src="/images/service-safety.png" alt="Adequação NR12" class="service-img" loading="lazy">
+                            <img src="/images/service-safety.png" alt="Adequação NR12" width="400" height="280" class="service-img" loading="lazy" decoding="async">
                             <div class="service-icon-floating">
                                 <i class="bi bi-exclamation-triangle"></i>
                             </div>
@@ -321,7 +322,7 @@
                     <div class="news-card scroll-animate {% if loop.index0 % 3 == 0 %}slide-left{% elseif loop.index0 % 3 == 1 %}slide-top{% else %}slide-right{% endif %}">
                         <div class="news-img-container">
                             {% if item.imageName %}
-                                <img src="/uploads/news/{{ item.imageName }}" alt="{{ item.getImageAlt(locale) ?: item.getTitle(locale) }}" class="news-img" loading="lazy">
+                                <img src="/uploads/news/{{ item.imageName }}" alt="{{ item.getImageAlt(locale) ?: item.getTitle(locale) }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
                             {% else %}
                                 <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #1a1f2c; color: var(--color-text-secondary);">
                                     <i class="bi bi-image" style="font-size: 2.5rem;"></i>
@@ -341,7 +342,7 @@
                     <!-- Card 1 -->
                     <div class="news-card scroll-animate slide-left">
                         <div class="news-img-container">
-                            <img src="/images/news-exhibition1.png" alt="{{ 'news.items.0.title'|trans }}" class="news-img" loading="lazy">
+                            <img src="/images/news-exhibition1.png" alt="{{ 'news.items.0.title'|trans }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
                             <div class="news-date-badge">
                                 {{ 'news.items.0.date'|trans }}
                             </div>
@@ -356,7 +357,7 @@
                     <!-- Card 2 -->
                     <div class="news-card scroll-animate slide-top">
                         <div class="news-img-container">
-                            <img src="/images/news-seminar.png" alt="{{ 'news.items.1.title'|trans }}" class="news-img" loading="lazy">
+                            <img src="/images/news-seminar.png" alt="{{ 'news.items.1.title'|trans }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
                             <div class="news-date-badge">
                                 {{ 'news.items.1.date'|trans }}
                             </div>
@@ -371,7 +372,7 @@
                     <!-- Card 3 -->
                     <div class="news-card scroll-animate slide-right">
                         <div class="news-img-container">
-                            <img src="/images/news-hannover.png" alt="{{ 'news.items.2.title'|trans }}" class="news-img" loading="lazy">
+                            <img src="/images/news-hannover.png" alt="{{ 'news.items.2.title'|trans }}" width="380" height="240" class="news-img" loading="lazy" decoding="async">
                             <div class="news-date-badge">
                                 {{ 'news.items.2.date'|trans }}
                             </div>
@@ -496,7 +497,7 @@
             <div class="clients-grid scroll-animate slide-top" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3rem;">
                 {% for item in clientLogos %}
                     <span class="client-logo-item" aria-label="{{ item.name }}" style="display: flex; align-items: center; justify-content: center; height: 50px;">
-                        <img src="/uploads/clients/{{ item.imageName }}" alt="{{ item.name }}" style="max-height: 45px; max-width: 130px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;">
+                        <img src="/uploads/clients/{{ item.imageName }}" alt="{{ item.name }}" width="130" height="45" loading="lazy" decoding="async" style="max-height: 45px; max-width: 130px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;">
                     </span>
                 {% else %}
                     <!-- Static Fallbacks -->
@@ -571,7 +572,7 @@
 
                 <!-- Google Map -->
                 <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3704.126178620653!2d-48.15148342472135!3d-21.814055180039055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8f3ca207bffe5%3A0x8f549c30f9c2e200!2sPressmatik%20Prensas%20e%20Equipamentos%20Hidr%C3%A1ulicos!5e0!3m2!1spt-BR!2sbr!4v1782507981053!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3704.126178620653!2d-48.15148342472135!3d-21.814055180039055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8f3ca207bffe5%3A0x8f549c30f9c2e200!2sPressmatik%20Prensas%20e%20Equipamentos%20Hidr%C3%A1ulicos!5e0!3m2!1spt-BR!2sbr!4v1782507981053!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" title="Mapa de Localização Pressmatik em Araraquara SP" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                 </div>
             </div>
 

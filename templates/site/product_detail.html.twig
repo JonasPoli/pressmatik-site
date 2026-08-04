@@ -3,6 +3,42 @@
 
 {% block title %}Pressmatik - {% if activeSubproduct %}{{ activeSubproduct.model }} {{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}{% endblock %}
 
+{% block meta_description %}{% if activeSubproduct %}{{ activeSubproduct.getDescription(locale) }}{% else %}{{ product.getDescription(locale) }}{% endif %}{% endblock %}
+
+{% block og_title %}Pressmatik - {% if activeSubproduct %}{{ activeSubproduct.model }} {{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}{% endblock %}
+{% block og_description %}{% if activeSubproduct %}{{ activeSubproduct.getDescription(locale) }}{% else %}{{ product.getDescription(locale) }}{% endif %}{% endblock %}
+{% block og_image %}{% if activeSubproduct and activeSubproduct.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/products/{{ activeSubproduct.imageName }}{% elseif product.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/products/{{ product.imageName }}{% else %}{{ super() }}{% endif %}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "{% if activeSubproduct %}{{ activeSubproduct.model }} - {{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}",
+        "image": [
+            "{% if activeSubproduct and activeSubproduct.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/products/{{ activeSubproduct.imageName }}{% elseif product.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/products/{{ product.imageName }}{% else %}{{ app.request.schemeAndHttpHost }}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}"
+        ],
+        "description": "{% if activeSubproduct %}{{ activeSubproduct.getDescription(locale) }}{% else %}{{ product.getDescription(locale) }}{% endif %}",
+        "brand": {
+            "@type": "Brand",
+            "name": "Pressmatik"
+        },
+        "category": "Prensas Industriais",
+        "offers": {
+            "@type": "Offer",
+            "url": "{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}",
+            "priceCurrency": "BRL",
+            "availability": "https://schema.org/InStock",
+            "seller": {
+                "@type": "Organization",
+                "name": "Pressmatik"
+            }
+        }
+    }
+    </script>
+{% endblock %}
+
 {% block body %}
     <div class="container product-detail-layout">
         <!-- Breadcrumbs -->
@@ -23,7 +59,7 @@
         <!-- Product Introduction (Above the Fold) -->
         <div class="product-intro-grid">
             <div class="product-gallery scroll-animate slide-left" style="display: flex; align-items: center; justify-content: center; background: var(--color-surface-dark); border-radius: 12px; border: 1px solid var(--color-border); padding: 2rem;">
-                <img src="{% if activeSubproduct and activeSubproduct.imageName %}/uploads/products/{{ activeSubproduct.imageName }}{% elseif product.imageName %}/uploads/products/{{ product.imageName }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{% if activeSubproduct %}{{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}" style="max-width: 100%; max-height: 400px; object-fit: contain; display: block; margin: auto;">
+                <img src="{% if activeSubproduct and activeSubproduct.imageName %}/uploads/products/{{ activeSubproduct.imageName }}{% elseif product.imageName %}/uploads/products/{{ product.imageName }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{% if activeSubproduct %}{{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}" width="600" height="400" style="max-width: 100%; max-height: 400px; object-fit: contain; display: block; margin: auto;" fetchpriority="high" decoding="async">
             </div>
             
             <div class="product-meta-panel scroll-animate slide-right">

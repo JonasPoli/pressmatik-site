@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ about.getTitle(locale) ?: 'Quem Somos' }} - Pressmatik{% endblock %}
+{% block title %}{{ about ? (about.getTitle(locale) ?: 'Quem Somos') : 'Quem Somos' }} - Pressmatik{% endblock %}
+{% block meta_description %}{{ about ? (about.getSubtitle(locale) ?: 'Conheça a história e tradição da Pressmatik na fabricação de prensas hidráulicas e equipamentos industriais.') : 'Conheça a história e tradição da Pressmatik.' }}{% endblock %}
+{% block og_title %}{{ about ? (about.getTitle(locale) ?: 'Quem Somos') : 'Quem Somos' }} - Pressmatik{% endblock %}
+{% block og_description %}{{ about ? (about.getSubtitle(locale) ?: 'Conheça a história e tradição da Pressmatik.') : 'Conheça a história da Pressmatik.' }}{% endblock %}
 
 {% block body %}
 {% set locale = app.request.locale %}

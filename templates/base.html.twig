@@ -4,13 +4,48 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Pressmatik - Prensas Hidráulicas{% endblock %}</title>
-        <link rel="icon" href="/images/logo.png">
+        <title>{% block title %}Pressmatik - Prensas Hidráulicas e Equipamentos Industriais{% endblock %}</title>
+        <meta name="description" content="{% block meta_description %}A Pressmatik é líder na fabricação de prensas hidráulicas, servo-hidráulicas, mecânicas, automação industrial e serviços de manutenção NR12.{% endblock %}">
+        <meta name="keywords" content="{% block meta_keywords %}prensas hidraulicas, prensas servo hidraulicas, prensas mecanicas, automacao industrial, alimentadores servo, nr12, retrofitting prensas, pressmatik{% endblock %}">
+        <meta name="robots" content="index, follow">
         
+        {# Canonical URL & Multilingual Hreflang #}
+        <link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}">
+        <link rel="alternate" hreflang="pt" href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'pt'})) }}">
+        <link rel="alternate" hreflang="en" href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'en'})) }}">
+        <link rel="alternate" hreflang="es" href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'es'})) }}">
+        <link rel="alternate" hreflang="x-default" href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'pt'})) }}">
+
+        {# OpenGraph & Twitter Social Meta Tags #}
+        <meta property="og:locale" content="{{ app.request.locale == 'pt' ? 'pt_BR' : (app.request.locale == 'es' ? 'es_ES' : 'en_US') }}">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Pressmatik">
+        <meta property="og:title" content="{% block og_title %}Pressmatik - Prensas Hidráulicas e Equipamentos Industriais{% endblock %}">
+        <meta property="og:description" content="{% block og_description %}Soluções de alta precisão em prensas hidráulicas, servo-hidráulicas e automação industrial.{% endblock %}">
+        <meta property="og:image" content="{% block og_image %}{{ app.request.schemeAndHttpHost }}/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png{% endblock %}">
+        <meta property="og:url" content="{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{% block twitter_title %}Pressmatik - Prensas Hidráulicas{% endblock %}">
+        <meta name="twitter:description" content="{% block twitter_description %}Soluções de alta precisão em prensas hidráulicas, servo-hidráulicas e automação industrial.{% endblock %}">
+        <meta name="twitter:image" content="{% block twitter_image %}{{ app.request.schemeAndHttpHost }}/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png{% endblock %}">
+
+        <link rel="icon" href="/images/logo.png" type="image/png">
+        
+        {# Performance DNS Preconnect Hints #}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net">
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+        <link rel="preconnect" href="https://ka-f.webawesome.com">
+
+        {# Web Fonts with font-display: swap #}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap">
+
         {# Web Awesome CDN Stylesheet #}
         <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css" />
 
-        {# Bootstrap Icons CDN (100% Reliable Icon Solution) #}
+        {# Bootstrap Icons CDN #}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
         {# Font Awesome for Industrial Icons #}
@@ -22,11 +57,54 @@
         {% endblock %}
 
         {# Web Awesome Loader Script #}
-        <script type="module" src="https://ka-f.webawesome.com/webawesome@3.9.0/webawesome.loader.js"></script>
+        <script type="module" src="https://ka-f.webawesome.com/webawesome@3.9.0/webawesome.loader.js" defer></script>
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+
+        {# Schema.org Structured Data (JSON-LD) #}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Organization",
+                    "@id": "{{ app.request.schemeAndHttpHost }}/#organization",
+                    "name": "Pressmatik Prensas e Equipamentos",
+                    "url": "{{ app.request.schemeAndHttpHost }}",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "{{ app.request.schemeAndHttpHost }}/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png",
+                        "caption": "Pressmatik Logo"
+                    },
+                    "sameAs": [
+                        "https://www.linkedin.com/company/pressmatik/",
+                        "https://www.instagram.com/pressmatik_oficial",
+                        "https://www.youtube.com/channel/UCE7ZUUPzVg858f45I8nbByQ",
+                        "https://www.facebook.com/pressmatikprensaseequipamentos"
+                    ],
+                    "contactPoint": {
+                        "@type": "ContactPoint",
+                        "telephone": "+55-16-3014-8368",
+                        "contactType": "sales",
+                        "areaServed": "BR",
+                        "availableLanguage": ["Portuguese", "English", "Spanish"]
+                    }
+                },
+                {
+                    "@type": "WebSite",
+                    "@id": "{{ app.request.schemeAndHttpHost }}/#website",
+                    "url": "{{ app.request.schemeAndHttpHost }}",
+                    "name": "Pressmatik",
+                    "publisher": {
+                        "@id": "{{ app.request.schemeAndHttpHost }}/#organization"
+                    },
+                    "inLanguage": "{{ app.request.locale }}"
+                }
+            ]
+        }
+        </script>
     </head>
     <body>
         {% set locale = app.request.locale %}
@@ -34,17 +112,17 @@
         <!-- Header (Cabeçalho) -->
         <header class="site-header">
             <div class="container header-container">
-                <a href="{{ path('app_home', {'_locale': locale}) }}" class="logo-link">
-                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_ORIGINAL.png" alt="Pressmatik Logo" class="logo-image logo-light">
-                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png" alt="Pressmatik Logo" class="logo-image logo-dark">
+                <a href="{{ path('app_home', {'_locale': locale}) }}" class="logo-link" aria-label="Pressmatik Página Inicial">
+                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_ORIGINAL.png" alt="Pressmatik Logo" width="220" height="48" class="logo-image logo-light" decoding="async">
+                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png" alt="Pressmatik Logo" width="220" height="48" class="logo-image logo-dark" decoding="async">
                 </a>
                 
-                <nav>
+                <nav aria-label="Menu Principal">
                     <ul class="nav-menu">
                         <li><a href="{{ path('app_home', {'_locale': locale}) }}" class="nav-link">{{ 'menu.home'|trans }}</a></li>
                         <li><a href="{{ path('app_about_us', {'_locale': locale}) }}" class="nav-link">{{ 'menu.company'|trans }}</a></li>
                         <li class="nav-item-dropdown">
-                            <a href="#" class="nav-link dropdown-trigger-mega">
+                            <a href="#" class="nav-link dropdown-trigger-mega" aria-expanded="false" aria-label="Produtos Pressmatik">
                                 {{ 'menu.products'|trans }} <span class="dropdown-caret">▼</span>
                             </a>
                             <div class="megamenu-panel">
@@ -73,7 +151,7 @@
                                          {% for cat_id, cat_info in grouped_cats %}
                                              <div class="megamenu-col">
                                                  <div class="megamenu-img-wrapper">
-                                                     <img src="{{ cat_info.img }}" alt="{{ cat_info.title }}" loading="lazy">
+                                                     <img src="{{ cat_info.img }}" alt="{{ cat_info.title }}" width="160" height="120" loading="lazy" decoding="async">
                                                  </div>
                                                  <span class="megamenu-title">{{ cat_info.title }}</span>
                                                  <ul class="megamenu-links">
@@ -90,7 +168,7 @@
                                          <!-- Col 4: Equipamentos -->
                                          <div class="megamenu-col">
                                              <div class="megamenu-img-wrapper">
-                                                 <img src="{{ mm_cats['equipments'].imageUrl ?? '/images/tipo-h.png' }}" alt="{{ mm_cats['equipments'].title(locale) ?? 'products_sec.equipments'|trans }}" loading="lazy">
+                                                 <img src="{{ mm_cats['equipments'].imageUrl ?? '/images/tipo-h.png' }}" alt="{{ mm_cats['equipments'].title(locale) ?? 'products_sec.equipments'|trans }}" width="160" height="120" loading="lazy" decoding="async">
                                              </div>
                                              <span class="megamenu-title">{{ mm_cats['equipments'].title(locale) ?? 'products_sec.equipments'|trans }}</span>
                                              <ul class="megamenu-links">
@@ -102,7 +180,7 @@
                                          <!-- Col 5: Peças e Acessórios -->
                                          <div class="megamenu-col">
                                              <div class="megamenu-img-wrapper">
-                                                 <img src="{{ mm_cats['parts'].imageUrl ?? '/images/especiais.png' }}" alt="{{ mm_cats['parts'].title(locale) ?? 'products_sec.parts'|trans }}" loading="lazy">
+                                                 <img src="{{ mm_cats['parts'].imageUrl ?? '/images/especiais.png' }}" alt="{{ mm_cats['parts'].title(locale) ?? 'products_sec.parts'|trans }}" width="160" height="120" loading="lazy" decoding="async">
                                              </div>
                                              <span class="megamenu-title">{{ mm_cats['parts'].title(locale) ?? 'products_sec.parts'|trans }}</span>
                                              <ul class="megamenu-links">
@@ -124,7 +202,7 @@
                 <div class="header-actions">
                     <!-- Seletor de Idioma (Language switcher) using custom CSS dropdown -->
                     <div class="lang-selector">
-                        <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+                        <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Selecionar idioma">
                             <i class="bi bi-globe" style="color: var(--color-accent-red); margin-right: 4px;"></i>
                             <span>{{ locale|upper }}</span>
                             <span class="dropdown-caret">▼</span>
@@ -137,7 +215,7 @@
                     </div>
 
                     <!-- Theme Toggle Button -->
-                    <wa-button id="theme-toggle" variant="text" size="medium" style="color: var(--color-text-primary); margin-right: 8px;">
+                    <wa-button id="theme-toggle" variant="text" size="medium" aria-label="Alternar tema claro ou escuro" style="color: var(--color-text-primary); margin-right: 8px;">
                         <i id="theme-toggle-icon" class="bi bi-moon" style="color: var(--color-accent-red); font-size: 1.2rem;"></i>
                     </wa-button>
                     
@@ -146,7 +224,7 @@
                     </wa-button>
 
                     <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Abrir menu">
+                    <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Abrir menu de navegação">
                         <i class="bi bi-list"></i>
                     </button>
                 </div>
@@ -240,7 +318,7 @@
         </main>
 
         <!-- Floating WhatsApp Button -->
-        <a href="https://wa.me/5516997704156?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20as%20prensas%20Pressmatik." class="whatsapp-float" target="_blank" aria-label="WhatsApp Link">
+        <a href="https://wa.me/5516997704156?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20as%20prensas%20Pressmatik." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contato direto via WhatsApp Pressmatik">
             <i class="bi bi-whatsapp"></i>
         </a>
 
@@ -248,15 +326,15 @@
         <footer class="site-footer">
             <div class="container footer-grid">
                 <div class="footer-brand">
-                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png" alt="Pressmatik" style="max-height: 50px; margin-bottom: 12px;">
+                    <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.png" alt="Pressmatik Logo Rodapé" width="200" height="46" loading="lazy" decoding="async" style="max-height: 50px; margin-bottom: 12px;">
                     <p>{{ 'footer.about'|trans }}</p>
                     <div class="footer-social-links">
-                        <a href="https://www.linkedin.com/company/pressmatik/" target="_blank" rel="noopener" class="footer-social-btn" aria-label="LinkedIn" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                        <a href="https://www.instagram.com/pressmatik_oficial" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="https://www.youtube.com/channel/UCE7ZUUPzVg858f45I8nbByQ" target="_blank" rel="noopener" class="footer-social-btn" aria-label="YouTube" title="YouTube"><i class="bi bi-youtube"></i></a>
-                        <a href="https://www.facebook.com/pressmatikprensaseequipamentos?_rdr" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="https://www.tiktok.com/@pressmatik?lang=pt-br" target="_blank" rel="noopener" class="footer-social-btn" aria-label="TikTok" title="TikTok"><i class="bi bi-tiktok"></i></a>
-                        <a href="https://linktr.ee/pressmatikoficial" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Linktree" title="Linktree"><i class="bi bi-tree-fill"></i></a>
+                        <a href="https://www.linkedin.com/company/pressmatik/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Pressmatik no LinkedIn" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/pressmatik_oficial" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Pressmatik no Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCE7ZUUPzVg858f45I8nbByQ" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Inscreva-se no canal do YouTube da Pressmatik" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="https://www.facebook.com/pressmatikprensaseequipamentos?_rdr" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Curta a página da Pressmatik no Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://www.tiktok.com/@pressmatik?lang=pt-br" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Pressmatik no TikTok" title="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="https://linktr.ee/pressmatikoficial" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Acesse todos os links da Pressmatik no Linktree" title="Linktree"><i class="bi bi-tree-fill"></i></a>
                     </div>
                 </div>
                 
