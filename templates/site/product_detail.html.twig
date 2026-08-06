@@ -7,7 +7,7 @@
 
 {% block og_title %}Pressmatik - {% if activeSubproduct %}{{ activeSubproduct.model }} {{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}{% endblock %}
 {% block og_description %}{% if activeSubproduct %}{{ activeSubproduct.getDescription(locale) }}{% else %}{{ product.getDescription(locale) }}{% endif %}{% endblock %}
-{% block og_image %}{% if activeSubproduct and activeSubproduct.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/products/{{ activeSubproduct.imageName }}{% elseif product.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/products/{{ product.imageName }}{% else %}{{ super() }}{% endif %}{% endblock %}
+{% block og_image %}{% if activeSubproduct and activeSubproduct.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/products/{{ activeSubproduct.imageName }}{% elseif product.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/products/{{ product.imageName }}{% else %}{{ parent() }}{% endif %}{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}

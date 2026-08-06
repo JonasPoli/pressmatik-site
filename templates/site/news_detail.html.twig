@@ -4,7 +4,7 @@
 {% block meta_description %}{{ item.getSeoDescription(locale) ?: (item.getShortDescription(locale) ?: item.getTitle(locale)) }}{% endblock %}
 {% block og_title %}{{ item.getTitle(locale) }} - Pressmatik{% endblock %}
 {% block og_description %}{{ item.getShortDescription(locale) ?: item.getTitle(locale) }}{% endblock %}
-{% block og_image %}{% if item.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/news/{{ item.imageName }}{% else %}{{ super() }}{% endif %}{% endblock %}
+{% block og_image %}{% if item.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/news/{{ item.imageName }}{% else %}{{ parent() }}{% endif %}{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
