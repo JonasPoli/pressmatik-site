@@ -34,18 +34,21 @@ class ImageUploadOptimizerListener
         if ($mime && str_starts_with($mime, 'image/')) {
             // Determine max dimensions based on mapping context
             $mappingName = $mapping->getMappingName();
-            $maxWidth = 1200;
-            $maxHeight = 1200;
+            $maxWidth = 800;
+            $maxHeight = 800;
+            $quality = 75;
 
             if (str_contains($mappingName, 'banner')) {
                 $maxWidth = 1600;
                 $maxHeight = 1200;
+                $quality = 75;
             } elseif (str_contains($mappingName, 'megamenu') || str_contains($mappingName, 'logo') || str_contains($mappingName, 'supplier') || str_contains($mappingName, 'client')) {
                 $maxWidth = 600;
                 $maxHeight = 600;
+                $quality = 75;
             }
 
-            $this->imageOptimizer->optimize($filePath, $maxWidth, $maxHeight, 82);
+            $this->imageOptimizer->optimize($filePath, $maxWidth, $maxHeight, $quality);
         }
     }
 }
