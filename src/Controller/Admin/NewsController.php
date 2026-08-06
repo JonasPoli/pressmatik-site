@@ -184,7 +184,11 @@ final class NewsController extends AbstractController
 
         $dateStr = $data->get('date');
         if ($dateStr) {
-            $item->setDate(new \DateTime($dateStr));
+            try {
+                $item->setDate(new \DateTime($dateStr));
+            } catch (\Exception $e) {
+                // Ignore invalid date strings to avoid crash
+            }
         }
 
         // Generate slugs
@@ -198,27 +202,31 @@ final class NewsController extends AbstractController
         $item->setSlugEs($slugEs);
 
         // Manage categories relation
-        // Remove existing relations
-        foreach ($item->getCategories() as $cat) {
+        // Remove existing relations using toArray() to avoid mutating collection during loop
+        foreach ($item->getCategories()->toArray() as $cat) {
             $item->removeCategory($cat);
         }
         // Add new relations
-        $catIds = $data->all('categories') ?: [];
-        foreach ($catIds as $catId) {
-            $cat = $this->categoryRepo->find($catId);
-            if ($cat) {
-                $item->addCategory($cat);
+        $catIds = $data->all('categories') ?: ($request->request->all()['categories'] ?? []);
+        if (is_array($catIds)) {
+            foreach ($catIds as $catId) {
+                $cat = $this->categoryRepo->find($catId);
+                if ($cat) {
+                    $item->addCategory($cat);
+                }
             }
         }
 
         if ($data->get('deleteImage')) {
             $item->setImageFile(null);
             $item->setImageName(null);
+            $item->setUpdatedAt(new \DateTimeImmutable());
         }
 
         $imageFile = $request->files->get('imageFile');
         if ($imageFile instanceof UploadedFile) {
             $item->setImageFile($imageFile);
+            $item->setUpdatedAt(new \DateTimeImmutable());
         }
     }
 }
