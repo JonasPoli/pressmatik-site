@@ -33,7 +33,7 @@ class ImageUploadOptimizerListener
         $mime = mime_content_type($filePath);
         if ($mime && str_starts_with($mime, 'image/')) {
             // Determine max dimensions based on mapping context
-            $mappingName = $mapping->getName();
+            $mappingName = $mapping->getMappingName();
             $maxWidth = 1200;
             $maxHeight = 1200;
 
