@@ -71,6 +71,7 @@ class NewsImage
     public function getImageName(): ?string { return $this->imageName; }
 
     public function getUpdatedAt(): ?\DateTimeImmutable { return $this->updatedAt; }
+    public function setUpdatedAt(?\DateTimeImmutable $v): static { $this->updatedAt = $v; return $this; }
 
     public function getCaptionPt(): ?string { return $this->captionPt; }
     public function setCaptionPt(?string $v): static { $this->captionPt = $v; return $this; }
