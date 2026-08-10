@@ -2526,7 +2526,12 @@ wa-tab[active]::part(base) {
     }
 
     .hero-slide {
-        padding: 6rem 0 4rem;
+        padding: 7rem 0 5.5rem;
+        min-height: 500px;
+    }
+
+    .hero-slider-dots {
+        bottom: 1.25rem;
     }
     
     .hero-grid {
@@ -2605,7 +2610,12 @@ wa-tab[active]::part(base) {
     }
 
     .hero-slide {
-        padding: 5rem 0 4rem;
+        padding: 6.5rem 0 5rem;
+        min-height: 480px;
+    }
+
+    .hero-slider-dots {
+        bottom: 1rem;
     }
 
     .hero-visual {
