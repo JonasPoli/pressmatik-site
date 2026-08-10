@@ -81,6 +81,8 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 body {
@@ -89,6 +91,9 @@ body {
     font-family: var(--font-sans);
     line-height: 1.6;
     overflow-x: hidden;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
     transition: background-color 0.4s, color 0.4s;
     /* Subtle dot grid matrix overlay for industrial look */
     background-image: radial-gradient(rgba(93, 92, 94, 0.04) 1px, transparent 1px);
@@ -2479,6 +2484,16 @@ wa-tab[active]::part(base) {
 }
 
 @media (max-width: 768px) {
+    /* Prevent horizontal entrance animation overflow on mobile */
+    .scroll-animate.slide-left,
+    .scroll-animate.slide-right {
+        transform: translateY(30px);
+    }
+
+    .hero-slide .hero-visual {
+        transform: translateY(20px);
+    }
+
     .mobile-menu-btn {
         display: inline-flex;
     }
