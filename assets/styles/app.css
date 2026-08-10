@@ -2521,8 +2521,12 @@ wa-tab[active]::part(base) {
     }
     
     .hero-section {
-        padding: 6rem 0 3rem 0;
+        padding: 0;
         min-height: auto;
+    }
+
+    .hero-slide {
+        padding: 6rem 0 4rem;
     }
     
     .hero-grid {
