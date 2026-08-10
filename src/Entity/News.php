@@ -243,6 +243,7 @@ class News
     public function getImageName(): ?string { return $this->imageName; }
 
     public function getUpdatedAt(): ?\DateTimeImmutable { return $this->updatedAt; }
+    public function setUpdatedAt(?\DateTimeImmutable $v): static { $this->updatedAt = $v; return $this; }
 
     public function getSlugPt(): ?string { return $this->slugPt; }
     public function setSlugPt(?string $v): static { $this->slugPt = $v; return $this; }

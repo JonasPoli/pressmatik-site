@@ -10,10 +10,11 @@
     </p>
 </div>
 
-<div class="grid grid-cols-1 xl:grid-cols-3 gap-6" x-data="{ tab: 'pt' }">
-    <!-- Main Form Column -->
-    <div class="xl:col-span-2 space-y-6">
-        <form method="post" enctype="multipart/form-data" class="space-y-6">
+<!-- Main News Form wrapping both content column and sidebar -->
+<form method="post" enctype="multipart/form-data" class="space-y-6">
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6" x-data="{ tab: 'pt' }">
+        <!-- Main Form Column -->
+        <div class="xl:col-span-2 space-y-6">
             <div class="admin-card">
                 <div class="flex gap-2 mb-6 border-b border-slate-200 dark:border-slate-700 pb-2">
                     <button type="button" @click="tab='pt'" :class="tab==='pt' ? 'text-primary font-semibold border-b-2 border-primary' : 'text-slate-500'" class="px-4 py-2 text-sm">🇧🇷 PT</button>
@@ -60,183 +61,162 @@
                 </div>
                 {% endfor %}
             </div>
+        </div>
 
-            <!-- News Gallery (only if item is already created) -->
-            {% if item %}
+        <!-- Sidebar Settings Column -->
+        <div class="space-y-6">
             <div class="admin-card">
-                <h3 class="text-base font-semibold text-slate-800 dark:text-slate-200 mb-4">Galeria de Fotos (Slider com Legendas)</h3>
+                <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-4">Configurações Gerais</h3>
                 
-                <!-- Upload form inside the gallery section -->
-                <div class="p-4 border border-dashed border-slate-300 dark:border-slate-700 rounded-lg mb-6 bg-slate-50 dark:bg-slate-800/40">
-                    <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Adicionar Nova Imagem à Galeria</h4>
-                    <div class="space-y-4" x-data="{ galleryTab: 'pt' }">
-                        <div class="wab-field">
-                            <label class="wab-label">Arquivo de Imagem</label>
-                            <input type="file" form="galleryForm" name="galleryFile" accept="image/*" class="wab-input" required>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                                <strong>Resolução indicada:</strong> 1200 × 800 px (ou 1200 × 675 px) &nbsp;|&nbsp; <strong>Proporção recomendada:</strong> 4:3 ou 16:9 &nbsp;|&nbsp; <strong>Formatos:</strong> JPG, WebP, PNG
-                            </p>
-                        </div>
-                        
-                        <div class="flex gap-2 border-b border-slate-200 dark:border-slate-700 pb-1">
-                            <button type="button" @click="galleryTab='pt'" :class="galleryTab==='pt' ? 'text-primary font-semibold border-b border-primary' : 'text-slate-500'" class="px-2 py-1 text-xs">🇧🇷 PT</button>
-                            <button type="button" @click="galleryTab='en'" :class="galleryTab==='en' ? 'text-primary font-semibold border-b border-primary' : 'text-slate-500'" class="px-2 py-1 text-xs">🇺🇸 EN</button>
-                            <button type="button" @click="galleryTab='es'" :class="galleryTab==='es' ? 'text-primary font-semibold border-b border-primary' : 'text-slate-500'" class="px-2 py-1 text-xs">🇪🇸 ES</button>
-                        </div>
-
-                        {% for lang in ['pt', 'en', 'es'] %}
-                        <div x-show="galleryTab==='{{ lang }}'">
-                            <div class="wab-field">
-                                <label class="wab-label">Legenda ({{ lang|upper }})</label>
-                                <input type="text" form="galleryForm" name="caption{{ lang|capitalize }}" class="wab-input" placeholder="Legenda da imagem...">
-                            </div>
-                        </div>
-                        {% endfor %}
-                        
-                        <div class="flex justify-end pt-2">
-                            <button type="submit" form="galleryForm" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded text-xs font-medium flex items-center gap-1">
-                                <i class="fa-solid fa-cloud-arrow-up"></i> Upload Imagem
-                            </button>
-                        </div>
-                    </div>
+                <div class="wab-field">
+                    <label class="wab-label">Data de Publicação</label>
+                    <input type="date" name="date" value="{{ item and item.date ? item.date|date('Y-m-d') : 'now'|date('Y-m-d') }}" class="wab-input" required style="display: block; width: 100%;">
                 </div>
 
-                <!-- Existing gallery images table/list with drag reorder -->
-                {% if item.images|length == 0 %}
-                    <p class="text-xs text-slate-500 dark:text-slate-400 py-4 text-center">Nenhuma imagem na galeria ainda.</p>
-                {% else %}
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-xs text-left">
-                            <thead>
-                                <tr class="border-b border-slate-200 dark:border-slate-700 text-slate-500 uppercase tracking-wider text-[10px]">
-                                    <th class="py-2 px-3">Ordem</th>
-                                    <th class="py-2 px-3">Imagem</th>
-                                    <th class="py-2 px-3">Legenda (PT)</th>
-                                    <th class="py-2 px-3 text-right">Ação</th>
-                                </tr>
-                            </thead>
-                            <tbody id="gallery-tbody">
-                                {% for img in item.images|sort((a, b) => a.position <=> b.position) %}
-                                <tr class="border-b border-slate-100 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800/20" data-id="{{ img.id }}">
-                                    <td class="py-2 px-3 cursor-move text-slate-500"><i class="fa-solid fa-grip-vertical mr-1 text-slate-400"></i>{{ img.position }}</td>
-                                    <td class="py-2 px-3">
-                                        <img src="/uploads/gallery/{{ img.imageName }}" alt="" class="w-16 h-10 object-cover rounded border border-slate-200">
-                                    </td>
-                                    <td class="py-2 px-3 font-medium text-slate-800 dark:text-slate-300">{{ img.captionPt ?: 'Sem legenda' }}</td>
-                                    <td class="py-2 px-3 text-right">
-                                        <form method="post" action="{{ path('app_admin_news_gallery_delete', {imageId: img.id}) }}" onsubmit="return confirm('Excluir esta imagem?')">
-                                            <input type="hidden" name="_token" value="{{ csrf_token('delete_gallery' ~ img.id) }}">
-                                            <button type="submit" class="text-red-500 hover:text-red-700" title="Excluir da galeria">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                {% endif %}
-            </div>
-            {% endif %}
-
-            <div class="flex justify-end gap-3">
-                <a href="{{ path('app_admin_news_index') }}" class="px-4 py-2 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">Cancelar</a>
-                <button type="submit" class="inline-flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
-                    <i class="fa-solid fa-save"></i> Salvar Notícia
-                </button>
-            </div>
-        </form>
-        
-        <!-- Separate Form for Gallery Upload to prevent mixing requests -->
-        {% if item %}
-        <form id="galleryForm" method="post" action="{{ path('app_admin_news_gallery_add', {id: item.id}) }}" enctype="multipart/form-data" style="display:none;"></form>
-        {% endif %}
-    </div>
-
-    <!-- Sidebar Settings Column -->
-    <div class="space-y-6">
-        <div class="admin-card">
-            <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-4">Configurações Gerais</h3>
-            
-            <div class="wab-field">
-                <label class="wab-label">Data de Publicação</label>
-                <input type="date" name="date" value="{{ item and item.date ? item.date|date('Y-m-d') : 'now'|date('Y-m-d') }}" class="wab-input" required form="mainForm" style="display: block; width: 100%;">
-            </div>
-
-            <div class="wab-field mt-4">
-                <label class="wab-label">Categorias</label>
-                <div class="space-y-2 mt-2 max-h-48 overflow-y-auto border border-slate-200 dark:border-slate-700 rounded-lg p-3 bg-slate-50 dark:bg-slate-800/40">
-                    {% for cat in categories %}
-                    <label class="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
-                        <input type="checkbox" name="categories[]" value="{{ cat.id }}" {% if item and item.categories.contains(cat) %}checked{% endif %} class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4">
-                        <span>{{ cat.namePt }}</span>
-                    </label>
-                    {% else %}
-                    <p class="text-xs text-slate-400">Nenhuma categoria cadastrada.</p>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <div class="wab-field mt-6">
-                <label class="wab-label">Imagem de Capa</label>
-                {% if item and item.imageName %}
-                <div class="mb-2">
-                    <img src="/uploads/news/{{ item.imageName }}" alt="" class="max-h-32 rounded-lg object-cover w-full">
-                    <div class="mt-2">
-                        <label class="inline-flex items-center gap-1.5 text-xs text-red-500 cursor-pointer">
-                            <input type="checkbox" name="deleteImage" value="1" class="rounded border-slate-300 text-red-600 focus:ring-red-500" form="mainForm"> Remover imagem atual
+                <div class="wab-field mt-4">
+                    <label class="wab-label">Categorias</label>
+                    <div class="space-y-2 mt-2 max-h-48 overflow-y-auto border border-slate-200 dark:border-slate-700 rounded-lg p-3 bg-slate-50 dark:bg-slate-800/40">
+                        {% for cat in categories %}
+                        <label class="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
+                            <input type="checkbox" name="categories[]" value="{{ cat.id }}" {% if item and item.categories.contains(cat) %}checked{% endif %} class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4">
+                            <span>{{ cat.namePt }}</span>
                         </label>
+                        {% else %}
+                        <p class="text-xs text-slate-400">Nenhuma categoria cadastrada.</p>
+                        {% endfor %}
                     </div>
                 </div>
-                {% endif %}
-                <input type="file" name="imageFile" accept="image/*" class="wab-input">
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    <strong>Resolução indicada:</strong> 1200 × 675 px &nbsp;|&nbsp; <strong>Proporção recomendada:</strong> 16:9 &nbsp;|&nbsp; <strong>Formatos:</strong> JPG, WebP, PNG
-                </p>
-            </div>
 
-            <div class="wab-field mt-4">
-                <label class="wab-label">Código ou URL do Vídeo YouTube</label>
-                <input type="text" name="youtubeVideoCode" value="{{ item ? item.youtubeVideoCode : '' }}" class="wab-input" placeholder="Ex: dQw4w9WgXcQ ou https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                    Insira apenas o ID final do vídeo (ex: <code>dQw4w9WgXcQ</code>) ou a URL completa do YouTube.<br>
-                    <span class="text-emerald-600 dark:text-emerald-400 font-medium">⚡ Dica PageSpeed:</span> O player é incorporado de forma assíncrona (lazy loading) para manter alta performance no Google PageSpeed.
-                </p>
-            </div>
-
-            <div class="border-t border-slate-200 dark:border-slate-700 pt-4 mt-6 space-y-4">
-                <div class="flex items-center gap-2">
-                    <input type="checkbox" id="isActive" name="isActive" value="1" {% if item is null or item.isActive %}checked{% endif %} class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4">
-                    <label for="isActive" class="text-sm font-medium text-slate-700 dark:text-slate-300">Ativa (exibe no site)</label>
+                <div class="wab-field mt-6">
+                    <label class="wab-label">Imagem de Capa</label>
+                    {% if item and item.imageName %}
+                    <div class="mb-2">
+                        <img src="/uploads/news/{{ item.imageName }}" alt="" class="max-h-32 rounded-lg object-cover w-full">
+                        <div class="mt-2">
+                            <label class="inline-flex items-center gap-1.5 text-xs text-red-500 cursor-pointer">
+                                <input type="checkbox" name="deleteImage" value="1" class="rounded border-slate-300 text-red-600 focus:ring-red-500"> Remover imagem atual
+                            </label>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <input type="file" name="imageFile" accept="image/*" class="wab-input">
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                        <strong>Resolução indicada:</strong> 1200 × 675 px &nbsp;|&nbsp; <strong>Proporção recomendada:</strong> 16:9 &nbsp;|&nbsp; <strong>Formatos:</strong> JPG, WebP, PNG
+                    </p>
                 </div>
-                <div class="flex items-center gap-2">
-                    <input type="checkbox" id="isHighlighted" name="isHighlighted" value="1" {% if item and item.isHighlighted %}checked{% endif %} class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4">
-                    <label for="isHighlighted" class="text-sm font-medium text-slate-700 dark:text-slate-300">Destaque na home</label>
+
+                <div class="wab-field mt-4">
+                    <label class="wab-label">Código ou URL do Vídeo YouTube</label>
+                    <input type="text" name="youtubeVideoCode" value="{{ item ? item.youtubeVideoCode : '' }}" class="wab-input" placeholder="Ex: dQw4w9WgXcQ ou https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+                        Insira apenas o ID final do vídeo (ex: <code>dQw4w9WgXcQ</code>) ou a URL completa do YouTube.<br>
+                        <span class="text-emerald-600 dark:text-emerald-400 font-medium">⚡ Dica PageSpeed:</span> O player é incorporado de forma assíncrona (lazy loading) para manter alta performance no Google PageSpeed.
+                    </p>
+                </div>
+
+                <div class="border-t border-slate-200 dark:border-slate-700 pt-4 mt-6 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="isActive" name="isActive" value="1" {% if item is null or item.isActive %}checked{% endif %} class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4">
+                        <label for="isActive" class="text-sm font-medium text-slate-700 dark:text-slate-300">Ativa (exibe no site)</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="isHighlighted" name="isHighlighted" value="1" {% if item and item.isHighlighted %}checked{% endif %} class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4">
+                        <label for="isHighlighted" class="text-sm font-medium text-slate-700 dark:text-slate-300">Destaque na home</label>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Wire form fields from sidebar to mainForm -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Bind all inputs inside settings sidebar to the main form
-    const mainForm = document.querySelector('form[enctype="multipart/form-data"]');
-    if (mainForm) {
-        mainForm.id = 'mainForm';
-        
-        // Find everything in the sidebar and make sure it has form="mainForm"
-        const sidebarInputs = document.querySelectorAll('.xl\\:grid-cols-3 input, .xl\\:grid-cols-3 select, .xl\\:grid-cols-3 textarea');
-        sidebarInputs.forEach(el => {
-            if (el.form === null && el.id !== 'galleryForm' && el.closest('#galleryForm') === null && el.closest('#galleryForm') === null) {
-                el.setAttribute('form', 'mainForm');
-            }
-        });
-    }
-});
-</script>
+    <!-- Form Action Buttons -->
+    <div class="flex justify-end gap-3 mt-6">
+        <a href="{{ path('app_admin_news_index') }}" class="px-4 py-2 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">Cancelar</a>
+        <button type="submit" class="inline-flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+            <i class="fa-solid fa-save"></i> Salvar Notícia
+        </button>
+    </div>
+</form>
+
+<!-- News Gallery (only if item is already created) -->
+{% if item %}
+<div class="mt-8 admin-card">
+    <h3 class="text-base font-semibold text-slate-800 dark:text-slate-200 mb-4">Galeria de Fotos (Slider com Legendas)</h3>
+    
+    <!-- Upload form inside the gallery section -->
+    <form method="post" action="{{ path('app_admin_news_gallery_add', {id: item.id}) }}" enctype="multipart/form-data">
+        <div class="p-4 border border-dashed border-slate-300 dark:border-slate-700 rounded-lg mb-6 bg-slate-50 dark:bg-slate-800/40">
+            <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Adicionar Nova Imagem à Galeria</h4>
+            <div class="space-y-4" x-data="{ galleryTab: 'pt' }">
+                <div class="wab-field">
+                    <label class="wab-label">Arquivo de Imagem</label>
+                    <input type="file" name="galleryFile" accept="image/*" class="wab-input" required>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                        <strong>Resolução indicada:</strong> 1200 × 800 px (ou 1200 × 675 px) &nbsp;|&nbsp; <strong>Proporção recomendada:</strong> 4:3 ou 16:9 &nbsp;|&nbsp; <strong>Formatos:</strong> JPG, WebP, PNG
+                    </p>
+                </div>
+                
+                <div class="flex gap-2 border-b border-slate-200 dark:border-slate-700 pb-1">
+                    <button type="button" @click="galleryTab='pt'" :class="galleryTab==='pt' ? 'text-primary font-semibold border-b border-primary' : 'text-slate-500'" class="px-2 py-1 text-xs">🇧🇷 PT</button>
+                    <button type="button" @click="galleryTab='en'" :class="galleryTab==='en' ? 'text-primary font-semibold border-b border-primary' : 'text-slate-500'" class="px-2 py-1 text-xs">🇺🇸 EN</button>
+                    <button type="button" @click="galleryTab='es'" :class="galleryTab==='es' ? 'text-primary font-semibold border-b border-primary' : 'text-slate-500'" class="px-2 py-1 text-xs">🇪🇸 ES</button>
+                </div>
+
+                {% for lang in ['pt', 'en', 'es'] %}
+                <div x-show="galleryTab==='{{ lang }}'">
+                    <div class="wab-field">
+                        <label class="wab-label">Legenda ({{ lang|upper }})</label>
+                        <input type="text" name="caption{{ lang|capitalize }}" class="wab-input" placeholder="Legenda da imagem...">
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <div class="flex justify-end pt-2">
+                    <button type="submit" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded text-xs font-medium flex items-center gap-1">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload Imagem
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Existing gallery images table/list with drag reorder -->
+    {% if item.images|length == 0 %}
+        <p class="text-xs text-slate-500 dark:text-slate-400 py-4 text-center">Nenhuma imagem na galeria ainda.</p>
+    {% else %}
+        <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left">
+                <thead>
+                    <tr class="border-b border-slate-200 dark:border-slate-700 text-slate-500 uppercase tracking-wider text-[10px]">
+                        <th class="py-2 px-3">Ordem</th>
+                        <th class="py-2 px-3">Imagem</th>
+                        <th class="py-2 px-3">Legenda (PT)</th>
+                        <th class="py-2 px-3 text-right">Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="gallery-tbody">
+                    {% for img in item.images|sort((a, b) => a.position <=> b.position) %}
+                    <tr class="border-b border-slate-100 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800/20" data-id="{{ img.id }}">
+                        <td class="py-2 px-3 cursor-move text-slate-500"><i class="fa-solid fa-grip-vertical mr-1 text-slate-400"></i>{{ img.position }}</td>
+                        <td class="py-2 px-3">
+                            <img src="/uploads/gallery/{{ img.imageName }}" alt="" class="w-16 h-10 object-cover rounded border border-slate-200">
+                        </td>
+                        <td class="py-2 px-3 font-medium text-slate-800 dark:text-slate-300">{{ img.captionPt ?: 'Sem legenda' }}</td>
+                        <td class="py-2 px-3 text-right">
+                            <form method="post" action="{{ path('app_admin_news_gallery_delete', {imageId: img.id}) }}" onsubmit="return confirm('Excluir esta imagem?')" class="inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete_gallery' ~ img.id) }}">
+                                <button type="submit" class="text-red-500 hover:text-red-700" title="Excluir da galeria">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+{% endif %}
 
 {% if item %}
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
