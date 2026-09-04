@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'privacy_policy.title'|trans }} - Pressmatik{% endblock %}
+{% block meta_description %}{{ 'privacy_policy.meta_desc'|trans }}{% endblock %}
+{% block og_title %}{{ 'privacy_policy.title'|trans }} - Pressmatik{% endblock %}
+{% block og_description %}{{ 'privacy_policy.meta_desc'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="container product-detail-layout" style="margin-top: 3rem; margin-bottom: 6rem; max-width: 960px;">
+        <!-- Breadcrumbs -->
+        <nav aria-label="{{ 'aria.main_nav'|trans }}" class="breadcrumbs scroll-animate slide-left" style="margin-bottom: 2rem;">
+            <a href="{{ path('app_home', {'_locale': locale}) }}">{{ 'menu.home'|trans }}</a>
+            <span>/</span>
+            <span style="color: var(--color-accent-red);">{{ 'privacy_policy.title'|trans }}</span>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="section-header scroll-animate slide-top" style="margin-bottom: 3.5rem; text-align: left;">
+            <span class="section-title-tag">{{ 'footer.privacy_policy'|trans }}</span>
+            <h1 class="section-title" style="font-size: 2.5rem; margin-top: 0.5rem; color: var(--color-text-primary);">
+                {{ 'privacy_policy.title'|trans }}
+            </h1>
+            <p class="section-desc" style="max-width: 850px; color: var(--color-text-secondary); margin-top: 1rem; font-size: 1.05rem; line-height: 1.7;">
+                {{ 'privacy_policy.intro'|trans }}
+            </p>
+        </div>
+
+        <!-- Policy Content Card -->
+        <article class="scroll-animate slide-top" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 16px; padding: 3rem; box-shadow: var(--shadow-card-subtle);">
+            <div style="display: flex; flex-direction: column; gap: 2.5rem; color: var(--color-text-primary); line-height: 1.8; font-size: 1rem;">
+                <section>
+                    <h2 style="font-size: 1.35rem; font-family: var(--font-heading); color: var(--color-text-primary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-shield-lock" style="color: var(--color-accent-red);"></i>
+                        {{ 'privacy_policy.s1_title'|trans }}
+                    </h2>
+                    <p style="color: var(--color-text-secondary); margin: 0;">
+                        {{ 'privacy_policy.s1_text'|trans }}
+                    </p>
+                </section>
+
+                <div style="border-top: 1px solid var(--color-border);"></div>
+
+                <section>
+                    <h2 style="font-size: 1.35rem; font-family: var(--font-heading); color: var(--color-text-primary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-bullseye" style="color: var(--color-accent-red);"></i>
+                        {{ 'privacy_policy.s2_title'|trans }}
+                    </h2>
+                    <p style="color: var(--color-text-secondary); margin: 0;">
+                        {{ 'privacy_policy.s2_text'|trans }}
+                    </p>
+                </section>
+
+                <div style="border-top: 1px solid var(--color-border);"></div>
+
+                <section>
+                    <h2 style="font-size: 1.35rem; font-family: var(--font-heading); color: var(--color-text-primary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-server" style="color: var(--color-accent-red);"></i>
+                        {{ 'privacy_policy.s3_title'|trans }}
+                    </h2>
+                    <p style="color: var(--color-text-secondary); margin: 0;">
+                        {{ 'privacy_policy.s3_text'|trans }}
+                    </p>
+                </section>
+
+                <div style="border-top: 1px solid var(--color-border);"></div>
+
+                <section>
+                    <h2 style="font-size: 1.35rem; font-family: var(--font-heading); color: var(--color-text-primary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-sliders" style="color: var(--color-accent-red);"></i>
+                        {{ 'privacy_policy.s4_title'|trans }}
+                    </h2>
+                    <p style="color: var(--color-text-secondary); margin: 0;">
+                        {{ 'privacy_policy.s4_text'|trans }}
+                    </p>
+                </section>
+
+                <div style="border-top: 1px solid var(--color-border);"></div>
+
+                <section>
+                    <h2 style="font-size: 1.35rem; font-family: var(--font-heading); color: var(--color-text-primary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-person-check" style="color: var(--color-accent-red);"></i>
+                        {{ 'privacy_policy.s5_title'|trans }}
+                    </h2>
+                    <p style="color: var(--color-text-secondary); margin: 0;">
+                        {{ 'privacy_policy.s5_text'|trans }}
+                    </p>
+                </section>
+
+                <div style="border-top: 1px solid var(--color-border);"></div>
+
+                <section>
+                    <h2 style="font-size: 1.35rem; font-family: var(--font-heading); color: var(--color-text-primary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-envelope-at" style="color: var(--color-accent-red);"></i>
+                        {{ 'privacy_policy.s6_title'|trans }}
+                    </h2>
+                    <p style="color: var(--color-text-secondary); margin: 0;">
+                        {{ 'privacy_policy.s6_text'|trans }}
+                    </p>
+                </section>
+            </div>
+
+            <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px dashed var(--color-border); font-size: 0.85rem; color: var(--color-text-secondary); display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 1rem;">
+                <span>{{ 'privacy_policy.last_updated'|trans }}</span>
+                <a href="{{ path('app_terms_of_use', {'_locale': locale}) }}" style="color: var(--color-accent-red); text-decoration: none; font-weight: 600;">
+                    {{ 'footer.terms_of_service'|trans }} &rarr;
+                </a>
+            </div>
+        </article>
+    </div>
+{% endblock %}
