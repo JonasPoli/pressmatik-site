@@ -203,14 +203,54 @@ class SiteController extends AbstractController
         ]);
     }
 
+    #[Route('/{_locale}/politica-de-privacidade', name: 'app_privacy_policy', requirements: ['_locale' => 'pt|en|es'])]
+    public function privacyPolicy(string $_locale): Response
+    {
+        return $this->render('site/privacy_policy.html.twig', [
+            'locale' => $_locale,
+            'catalog' => $this->catalogService->getCatalog(),
+        ]);
+    }
+
+    #[Route('/{_locale}/termos-de-uso', name: 'app_terms_of_use', requirements: ['_locale' => 'pt|en|es'])]
+    public function termsOfUse(string $_locale): Response
+    {
+        return $this->render('site/terms_of_use.html.twig', [
+            'locale' => $_locale,
+            'catalog' => $this->catalogService->getCatalog(),
+        ]);
+    }
+
     #[Route('/{_locale}/contato-enviar', name: 'app_contact_submit', methods: ['POST'], requirements: ['_locale' => 'pt|en|es'])]
     public function contactSubmit(
         Request $request,
+        string $_locale,
         EntityManagerInterface $em,
         \Symfony\Component\Mailer\MailerInterface $mailer,
-        \Psr\Log\LoggerInterface $logger
+        \Psr\Log\LoggerInterface $logger,
+        \Symfony\Contracts\Translation\TranslatorInterface $translator,
+        \Symfony\Component\RateLimiter\RateLimiterFactoryInterface $contactFormLimiter
     ): Response {
+        // Proteção contra abuso via Rate Limiting (5 envios / 10 min por IP)
+        $limiter = $contactFormLimiter->create($request->getClientIp());
+        if (false === $limiter->consume(1)->isAccepted()) {
+            return $this->json([
+                'success' => false,
+                'message' => $translator->trans('contact_form.val_rate_limit', [], 'messages', $_locale),
+            ], Response::HTTP_TOO_MANY_REQUESTS);
+        }
+
         $data = json_decode($request->getContent(), true) ?: $request->request->all();
+
+        // Proteção anti-spam via Honeypot invisível
+        $website = trim((string)($data['website'] ?? ''));
+        if ($website !== '') {
+            // Robô detectado: simula sucesso silenciosamente sem enviar e-mail nem gravar dados
+            return $this->json([
+                'success' => true,
+                'message' => $translator->trans('contact_form.val_success', [], 'messages', $_locale),
+            ]);
+        }
 
         $name = trim((string)($data['name'] ?? ''));
         $email = trim((string)($data['email'] ?? ''));
@@ -225,29 +265,74 @@ class SiteController extends AbstractController
 
         // Validação de campos obrigatórios
         if (mb_strlen($name) < 3) {
-            return $this->json(['success' => false, 'message' => 'Por favor, informe seu nome completo (mínimo 3 caracteres).'], Response::HTTP_BAD_REQUEST);
+            return $this->json([
+                'success' => false,
+                'message' => $translator->trans('contact_form.val_name', [], 'messages', $_locale)
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return $this->json(['success' => false, 'message' => 'Por favor, informe um endereço de e-mail válido (ex: nome@empresa.com.br).'], Response::HTTP_BAD_REQUEST);
+            return $this->json([
+                'success' => false,
+                'message' => $translator->trans('contact_form.val_email', [], 'messages', $_locale)
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         $phoneDigits = preg_replace('/[^\d]/', '', $phone);
         if (strlen($phoneDigits) < 8) {
-            return $this->json(['success' => false, 'message' => 'Por favor, informe um número de telefone/WhatsApp válido com DDD.'], Response::HTTP_BAD_REQUEST);
+            return $this->json([
+                'success' => false,
+                'message' => $translator->trans('contact_form.val_phone', [], 'messages', $_locale)
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         // Validação de CPF ou CNPJ
-        if (strlen($cpfCnpjDigits) === 11) {
-            if (!$this->validateCPF($cpfCnpjDigits)) {
-                return $this->json(['success' => false, 'message' => 'O CPF informado é inválido. Verifique os dígitos.'], Response::HTTP_BAD_REQUEST);
+        // Em PT: obrigatório. Em EN/ES: opcional (se informado, valida dígitos)
+        if ($_locale === 'pt') {
+            if (empty($cpfCnpjDigits)) {
+                return $this->json([
+                    'success' => false,
+                    'message' => $translator->trans('contact_form.val_cpf_cnpj_required', [], 'messages', $_locale)
+                ], Response::HTTP_BAD_REQUEST);
             }
-        } elseif (strlen($cpfCnpjDigits) === 14) {
-            if (!$this->validateCNPJ($cpfCnpjDigits)) {
-                return $this->json(['success' => false, 'message' => 'O CNPJ informado é inválido. Verifique os dígitos.'], Response::HTTP_BAD_REQUEST);
+
+            if (strlen($cpfCnpjDigits) === 11) {
+                if (!$this->validateCPF($cpfCnpjDigits)) {
+                    return $this->json([
+                        'success' => false,
+                        'message' => $translator->trans('contact_form.val_cpf_invalid', [], 'messages', $_locale)
+                    ], Response::HTTP_BAD_REQUEST);
+                }
+            } elseif (strlen($cpfCnpjDigits) === 14) {
+                if (!$this->validateCNPJ($cpfCnpjDigits)) {
+                    return $this->json([
+                        'success' => false,
+                        'message' => $translator->trans('contact_form.val_cnpj_invalid', [], 'messages', $_locale)
+                    ], Response::HTTP_BAD_REQUEST);
+                }
+            } else {
+                return $this->json([
+                    'success' => false,
+                    'message' => $translator->trans('contact_form.val_cpf_cnpj_invalid', [], 'messages', $_locale)
+                ], Response::HTTP_BAD_REQUEST);
             }
         } else {
-            return $this->json(['success' => false, 'message' => 'Por favor, informe um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.'], Response::HTTP_BAD_REQUEST);
+            // Em EN e ES: apenas valida se houver dígitos informados no formato brasileiro
+            if (strlen($cpfCnpjDigits) === 11) {
+                if (!$this->validateCPF($cpfCnpjDigits)) {
+                    return $this->json([
+                        'success' => false,
+                        'message' => $translator->trans('contact_form.val_cpf_invalid', [], 'messages', $_locale)
+                    ], Response::HTTP_BAD_REQUEST);
+                }
+            } elseif (strlen($cpfCnpjDigits) === 14) {
+                if (!$this->validateCNPJ($cpfCnpjDigits)) {
+                    return $this->json([
+                        'success' => false,
+                        'message' => $translator->trans('contact_form.val_cnpj_invalid', [], 'messages', $_locale)
+                    ], Response::HTTP_BAD_REQUEST);
+                }
+            }
         }
 
         // 1. Tenta enviar o e-mail via WMailer PRIMEIRO
@@ -263,10 +348,11 @@ class SiteController extends AbstractController
             $subject = ($type === 'quote' ? '[Cotação Site] ' : '[Contato Site] ') . ($productInterest ?: $name);
 
             $emailText = "Nova mensagem recebida pelo site Pressmatik:\n\n"
+                . "• Idioma: " . strtoupper($_locale) . "\n"
                 . "• Nome: " . $name . "\n"
                 . "• E-mail: " . $email . "\n"
                 . "• Telefone: " . ($phone ?: 'Não informado') . "\n"
-                . "• CPF/CNPJ: " . ($cpfCnpjDigits ?: 'Não informado') . "\n"
+                . "• CPF/CNPJ: " . ($cpfCnpjRaw ?: 'Não informado') . "\n"
                 . "• Empresa: " . ($company ?: 'Não informada') . "\n"
                 . "• Produto/Interesse: " . ($productInterest ?: 'Não especificado') . "\n"
                 . "• Tipo: " . ($type === 'quote' ? 'Solicitação de Cotação' : 'Mensagem de Contato') . "\n\n"
@@ -294,7 +380,7 @@ class SiteController extends AbstractController
 
             return $this->json([
                 'success' => false,
-                'message' => 'Não foi possível entregar o e-mail de contato no momento. A mensagem não foi registrada. Tente novamente ou entre em contato via WhatsApp.'
+                'message' => $translator->trans('contact_form.val_server_error', [], 'messages', $_locale)
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -303,7 +389,7 @@ class SiteController extends AbstractController
         $msg->setName($name);
         $msg->setEmail($email);
         $msg->setPhone($phone);
-        $msg->setCpfCnpj($cpfCnpjDigits);
+        $msg->setCpfCnpj($cpfCnpjDigits ?: ($cpfCnpjRaw ?: null));
         $msg->setCompany($company);
         $msg->setProductInterest($productInterest);
         $msg->setMessage($message);
@@ -315,7 +401,7 @@ class SiteController extends AbstractController
 
         return $this->json([
             'success' => true,
-            'message' => 'Sua mensagem foi enviada por e-mail e gravada com sucesso! Nossa equipe entrará em contato em breve.'
+            'message' => $translator->trans('contact_form.val_success', [], 'messages', $_locale)
         ]);
     }
 

@@ -74,10 +74,6 @@ class Product
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Subproduct $defaultSubproduct = null;
 
-    /** @var Collection<int, ProductSize> */
-    #[ORM\OneToMany(targetEntity: ProductSize::class, mappedBy: 'product', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[ORM\OrderBy(['position' => 'ASC'])]
-    private Collection $sizes;
 
     /** @var Collection<int, ProductConfigItem> */
     #[ORM\OneToMany(targetEntity: ProductConfigItem::class, mappedBy: 'product', cascade: ['persist', 'remove'], orphanRemoval: true)]
@@ -90,7 +86,6 @@ class Product
     public function __construct()
     {
         $this->subproducts = new ArrayCollection();
-        $this->sizes = new ArrayCollection();
         $this->configItems = new ArrayCollection();
         $this->videos = new ArrayCollection();
     }
@@ -192,8 +187,6 @@ class Product
     public function getDefaultSubproduct(): ?Subproduct { return $this->defaultSubproduct; }
     public function setDefaultSubproduct(?Subproduct $v): static { $this->defaultSubproduct = $v; return $this; }
 
-    /** @return Collection<int, ProductSize> */
-    public function getSizes(): Collection { return $this->sizes; }
 
     /** @return Collection<int, ProductConfigItem> */
     public function getConfigItems(): Collection { return $this->configItems; }
