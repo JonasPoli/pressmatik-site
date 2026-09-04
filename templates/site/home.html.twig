@@ -104,8 +104,8 @@
         <!-- Slider Controls -->
         {% if banners|length > 1 %}
         <div class="hero-slider-nav">
-            <button class="hero-prev-btn" type="button" aria-label="Slide anterior"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="hero-next-btn" type="button" aria-label="Próximo slide"><i class="fa-solid fa-chevron-right"></i></button>
+            <button class="hero-prev-btn" type="button" aria-label="Slide anterior"><i class="bi bi-chevron-left"></i></button>
+            <button class="hero-next-btn" type="button" aria-label="Próximo slide"><i class="bi bi-chevron-right"></i></button>
         </div>
         <div class="hero-slider-dots" aria-label="Navegação do slider">
             {% for item in banners %}
@@ -141,7 +141,7 @@
                             {% if adv_title %}
                                 <div class="about-bullet-item">
                                     <div class="bullet-icon-wrapper">
-                                        <i class="{{ adv_icon ?: 'fa-solid fa-shield-halved' }}"></i>
+                                        <i class="{{ adv_icon ?: 'bi bi-shield-check' }}"></i>
                                     </div>
                                     <div class="bullet-text">
                                         <h3 class="about-bullet-title">{{ adv_title }}</h3>
@@ -153,7 +153,7 @@
                     {% else %}
                         <div class="about-bullet-item">
                             <div class="bullet-icon-wrapper">
-                                <i class="fa-solid fa-shield-halved"></i>
+                                <i class="bi bi-shield-check"></i>
                             </div>
                             <div class="bullet-text">
                                 <h3 class="about-bullet-title">Segurança Avançada (NR12)</h3>
@@ -182,7 +182,7 @@
                 {% for diff in differentials %}
                     <div class="diff-card scroll-animate {% if loop.index0 % 3 == 0 %}slide-left{% elseif loop.index0 % 3 == 1 %}slide-top{% else %}slide-right{% endif %}">
                         <div class="diff-card-icon-wrapper">
-                            <i class="{{ diff.icon ?: 'fa-solid fa-star' }}"></i>
+                            <i class="{{ diff.icon ?: 'bi bi-star-fill' }}"></i>
                         </div>
                         <h3>{{ diff.getTitle(locale) }}</h3>
                         <p>{{ diff.getDescription(locale) }}</p>
@@ -190,7 +190,7 @@
                 {% else %}
                     <div class="diff-card scroll-animate slide-left">
                         <div class="diff-card-icon-wrapper">
-                            <i class="fa-solid fa-shield-halved"></i>
+                            <i class="bi bi-shield-check"></i>
                         </div>
                         <h3>{{ 'differentials.safety.title'|trans }}</h3>
                         <p>{{ 'differentials.safety.desc'|trans }}</p>
@@ -254,9 +254,7 @@
     <!-- Seção de Serviços Section with Video Background -->
     <section id="services" class="section-padding services-video-section" aria-label="Serviços Pressmatik">
         <div class="video-bg-container">
-            <video autoplay loop muted playsinline preload="none" class="video-bg" aria-label="Vídeo institucional Pressmatik" aria-hidden="true">
-                <source src="{{ get_service_video_url() }}" type="video/mp4">
-            </video>
+            <video loop muted playsinline preload="none" class="video-bg lazy-video" data-src="{{ get_service_video_url() }}" aria-label="Vídeo institucional Pressmatik" aria-hidden="true"></video>
             <div class="video-bg-overlay"></div>
         </div>
 
@@ -505,9 +503,9 @@
                 </div>
 
                 <div class="testimonials-slider-nav" style="display: none;">
-                    <button class="testimonials-prev-btn" type="button" aria-label="Depoimento Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="testimonials-prev-btn" type="button" aria-label="Depoimento Anterior"><i class="bi bi-chevron-left"></i></button>
                     <div class="testimonials-dots"></div>
-                    <button class="testimonials-next-btn" type="button" aria-label="Próximo Depoimento"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="testimonials-next-btn" type="button" aria-label="Próximo Depoimento"><i class="bi bi-chevron-right"></i></button>
                 </div>
             </div>
         </div>
@@ -934,17 +932,17 @@
                     statusMsg.style.backgroundColor = '#def7ec';
                     statusMsg.style.color = '#03543f';
                     statusMsg.style.border = '1px solid #bcf0da';
-                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-check" style="margin-right: 8px;"></i>' + msg;
+                    statusMsg.innerHTML = '<i class="bi bi-check-circle-fill" style="margin-right: 8px;"></i>' + msg;
                 } else if (type === 'warning') {
                     statusMsg.style.backgroundColor = '#feecdc';
                     statusMsg.style.color = '#9a3412';
                     statusMsg.style.border = '1px solid #fbd5d5';
-                    statusMsg.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="margin-right: 8px;"></i>' + msg;
+                    statusMsg.innerHTML = '<i class="bi bi-exclamation-triangle-fill" style="margin-right: 8px;"></i>' + msg;
                 } else {
                     statusMsg.style.backgroundColor = '#fde8e8';
                     statusMsg.style.color = '#9b1c1c';
                     statusMsg.style.border = '1px solid #f8b4b4';
-                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>' + msg;
+                    statusMsg.innerHTML = '<i class="bi bi-exclamation-circle-fill" style="margin-right: 8px;"></i>' + msg;
                 }
                 statusMsg.style.display = 'block';
                 statusMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });

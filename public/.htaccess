@@ -8,6 +8,139 @@ DirectoryIndex index.php
     Options -MultiViews
 </IfModule>
 
+# ------------------------------------------------------------------------------
+# 1. Compression (GZIP / Deflate)
+# ------------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+    # Force compression for mangled headers
+    <IfModule mod_setenvif.c>
+        <IfModule mod_headers.c>
+            SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+            RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+        </IfModule>
+    </IfModule>
+
+    # Compress all text and font resources
+    AddOutputFilterByType DEFLATE application/atom+xml \
+                                  application/javascript \
+                                  application/json \
+                                  application/ld+json \
+                                  application/manifest+json \
+                                  application/rss+xml \
+                                  application/vnd.geo+json \
+                                  application/vnd.ms-fontobject \
+                                  application/x-font-ttf \
+                                  application/x-javascript \
+                                  application/x-web-app-manifest+json \
+                                  application/xhtml+xml \
+                                  application/xml \
+                                  font/collection \
+                                  font/eot \
+                                  font/opentype \
+                                  font/otf \
+                                  font/ttf \
+                                  font/woff \
+                                  font/woff2 \
+                                  image/bmp \
+                                  image/svg+xml \
+                                  image/vnd.microsoft.icon \
+                                  image/x-icon \
+                                  text/cache-manifest \
+                                  text/calendar \
+                                  text/css \
+                                  text/csv \
+                                  text/html \
+                                  text/javascript \
+                                  text/markdown \
+                                  text/plain \
+                                  text/vcard \
+                                  text/vnd.rim.location.xloc \
+                                  text/vtt \
+                                  text/x-component \
+                                  text/x-cross-domain-policy \
+                                  text/xml
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# 2. Browser Caching & Expiration (mod_expires)
+# ------------------------------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    # CSS & JavaScript
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType application/x-javascript "access plus 1 year"
+
+    # Images
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/avif "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType image/vnd.microsoft.icon "access plus 1 year"
+
+    # Fonts
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/eot "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+
+    # Media (Audio / Video)
+    ExpiresByType video/mp4 "access plus 1 month"
+    ExpiresByType video/webm "access plus 1 month"
+    ExpiresByType audio/ogg "access plus 1 month"
+
+    # Dynamic / Data
+    ExpiresByType application/json "access plus 0 seconds"
+    ExpiresByType application/ld+json "access plus 0 seconds"
+    ExpiresByType application/xml "access plus 0 seconds"
+    ExpiresByType text/xml "access plus 0 seconds"
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# 3. Cache-Control & Security Headers (mod_headers)
+# ------------------------------------------------------------------------------
+<IfModule mod_headers.c>
+    # 1 year immutable cache for versioned assets
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # 1 year cache for static media and fonts
+    <FilesMatch "\.(webp|avif|jpg|jpeg|png|gif|svg|ico|woff|woff2|ttf|eot)$">
+        Header set Cache-Control "public, max-age=31536000, stale-while-revalidate=86400"
+    </FilesMatch>
+
+    # Media
+    <FilesMatch "\.(mp4|webm|ogv)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+
+    # Security Headers
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Allow CORS for Web Fonts
+    <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font\.css|css)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# 4. Routing & Front Controller
+# ------------------------------------------------------------------------------
 <IfModule mod_rewrite.c>
     RewriteEngine On
 

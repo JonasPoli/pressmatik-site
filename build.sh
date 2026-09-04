@@ -83,6 +83,18 @@ APP_ENV=prod $PHP_BIN bin/console tailwind:build --minify
 echo -e "${GREEN}--> Compilando assets...${NC}"
 APP_ENV=prod $PHP_BIN bin/console asset-map:compile
 
+echo -e "${GREEN}--> Minificando CSS compilado...${NC}"
+$PHP_BIN -r '
+foreach (glob("public/assets/styles/*.css") as $file) {
+    $css = file_get_contents($file);
+    $css = preg_replace("!/\*.*?\*/!s", "", $css);
+    $css = preg_replace("/\s+/", " ", $css);
+    $css = preg_replace("/\s*([\{\}:;,>~+])\s*/", "$1", $css);
+    $css = str_replace(";}", "}", $css);
+    file_put_contents($file, trim($css));
+}
+'
+
 # ─────────────────────────────────────────────────────────────────────
 # 5. Limpar cache de miniaturas
 # ─────────────────────────────────────────────────────────────────────
