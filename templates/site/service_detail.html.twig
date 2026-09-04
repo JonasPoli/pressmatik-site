@@ -5,6 +5,14 @@
 {% block og_title %}{{ item.getTitle(locale) }} - {{ 'menu.services'|trans }} - Pressmatik{% endblock %}
 {% block og_description %}{{ item.getShortDescription(locale) ?: (item.getDescription(locale)|length > 160 ? item.getDescription(locale)|slice(0, 157) ~ '...' : item.getDescription(locale)) }}{% endblock %}
 
+{% block webawesome_assets %}
+    <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css" media="print" onload="this.media='all'">
+{% endblock %}
+
+{% block webawesome_scripts %}
+    <script type="module" src="https://ka-f.webawesome.com/webawesome@3.9.0/webawesome.loader.js" defer></script>
+{% endblock %}
+
 {% block body %}
     <div class="container product-detail-layout" style="margin-top: 3rem; margin-bottom: 6rem; max-width: 900px;">
         <!-- Breadcrumbs -->

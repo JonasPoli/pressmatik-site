@@ -2,15 +2,15 @@
     "controllers": {
         "@symfony/ux-turbo": {
             "turbo-core": {
-                "enabled": true,
-                "fetch": "eager",
+                "enabled": false,
+                "fetch": "lazy",
                 "autoimport": {
                     "@symfony/ux-turbo/dist/mercure_stream_source_element.js": true
                 }
             },
             "mercure-turbo-stream": {
                 "enabled": false,
-                "fetch": "eager"
+                "fetch": "lazy"
             }
         }
     },

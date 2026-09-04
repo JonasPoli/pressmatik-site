@@ -5,13 +5,14 @@
 {% block meta_description %}{{ 'banner.subtitle'|trans }} | Fabricante de Prensas Hidráulicas, Servo-Hidráulicas e Mecânicas.{% endblock %}
 
 {% block preload_lcp %}
-    {# Preload the first banner (LCP image) for faster rendering #}
+    {# Preload the first banner background and product image for instantaneous LCP #}
     {% if banners|length > 0 %}
         {% set firstBanner = banners|first %}
+        {% if firstBanner.getBgImageName() %}
+        <link rel="preload" as="image" href="{{ ('/uploads/banners/' ~ firstBanner.getBgImageName())|webp }}" fetchpriority="high">
+        {% endif %}
         {% if firstBanner.getImageName() %}
         <link rel="preload" as="image" href="{{ ('/uploads/banners/' ~ firstBanner.getImageName())|webp }}" fetchpriority="high">
-        {% else %}
-        <link rel="preload" as="image" href="/images/prensa-hidraulica-tipo-c-linha-st.webp" fetchpriority="high">
         {% endif %}
     {% else %}
         <link rel="preload" as="image" href="/images/prensa-hidraulica-tipo-c-linha-st.webp" fetchpriority="high">
@@ -37,12 +38,12 @@
                                 {% endif %}
                                 <p class="hero-subtitle">{{ item.getSubtitle(locale) }}</p>
                                 <div class="hero-buttons">
-                                    <wa-button variant="brand" size="l" href="{{ item.getButtonUrl() ?: '#contact' }}">
+                                    <a href="{{ item.getButtonUrl() ?: '#contact' }}" class="hero-btn hero-btn-brand">
                                         {{ item.getButtonText(locale) ?: 'cta.quote_now'|trans }}
-                                    </wa-button>
-                                    <wa-button variant="neutral" size="l" outline href="#about">
+                                    </a>
+                                    <a href="#about" class="hero-btn hero-btn-outline">
                                         {{ 'cta.learn_more'|trans }}
-                                    </wa-button>
+                                    </a>
                                 </div>
                             </div>
                             
@@ -74,12 +75,12 @@
                             <h1 class="hero-title">{{ 'banner.title'|trans }}</h1>
                             <p class="hero-subtitle">{{ 'banner.subtitle'|trans }}</p>
                             <div class="hero-buttons">
-                                <wa-button variant="brand" size="l" href="#contact">
+                                <a href="#contact" class="hero-btn hero-btn-brand">
                                     {{ 'cta.quote_now'|trans }}
-                                </wa-button>
-                                <wa-button variant="neutral" size="l" outline href="#about">
+                                </a>
+                                <a href="#about" class="hero-btn hero-btn-outline">
                                     {{ 'cta.learn_more'|trans }}
-                                </wa-button>
+                                </a>
                             </div>
                         </div>
                         
@@ -163,9 +164,9 @@
                     {% endif %}
                 </div>
                 
-                <wa-button variant="neutral" outline href="{{ path('app_about_us', {'_locale': locale}) }}" style="margin-top: 1.5rem;">
+                <a href="{{ path('app_about_us', {'_locale': locale}) }}" class="hero-btn hero-btn-outline" style="margin-top: 1.5rem; display: inline-flex;">
                     {{ 'menu.company'|trans }}
-                </wa-button>
+                </a>
             </div>
         </div>
     </section>
@@ -209,15 +210,17 @@
             </div>
 
             {% set db_grouped = get_products_grouped() %}
-            <wa-tab-group class="products-tab-group scroll-animate slide-top">
-                <wa-tab slot="nav" panel="hydraulic">{{ 'products_sec.hydraulic_presses'|trans }}</wa-tab>
-                <wa-tab slot="nav" panel="servo-hydraulic">{{ 'products_sec.servo_presses'|trans }}</wa-tab>
-                <wa-tab slot="nav" panel="mechanical">{{ 'products_sec.mechanical_presses'|trans }}</wa-tab>
-                <wa-tab slot="nav" panel="equipments">{{ 'products_sec.equipments'|trans }}</wa-tab>
-                <wa-tab slot="nav" panel="parts">{{ 'products_sec.parts'|trans }}</wa-tab>
+            <div class="native-tabs-container scroll-animate slide-top" id="products-tab-container">
+                <div class="native-tabs-nav" role="tablist" aria-label="{{ 'products_sec.title'|trans }}">
+                    <button type="button" class="native-tab-btn active" role="tab" aria-selected="true" aria-controls="tab-panel-hydraulic" id="tab-btn-hydraulic" data-target="hydraulic">{{ 'products_sec.hydraulic_presses'|trans }}</button>
+                    <button type="button" class="native-tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-servo-hydraulic" id="tab-btn-servo-hydraulic" data-target="servo-hydraulic">{{ 'products_sec.servo_presses'|trans }}</button>
+                    <button type="button" class="native-tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-mechanical" id="tab-btn-mechanical" data-target="mechanical">{{ 'products_sec.mechanical_presses'|trans }}</button>
+                    <button type="button" class="native-tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-equipments" id="tab-btn-equipments" data-target="equipments">{{ 'products_sec.equipments'|trans }}</button>
+                    <button type="button" class="native-tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-parts" id="tab-btn-parts" data-target="parts">{{ 'products_sec.parts'|trans }}</button>
+                </div>
 
                 {% for cat in ['hydraulic', 'servo-hydraulic', 'mechanical', 'equipments', 'parts'] %}
-                    <wa-tab-panel name="{{ cat }}">
+                    <div class="native-tab-panel {% if loop.first %}active{% endif %}" id="tab-panel-{{ cat }}" role="tabpanel" aria-labelledby="tab-btn-{{ cat }}">
                         <div class="products-tab-grid">
                             {% for prod in db_grouped[cat] ?? [] %}
                                 <div class="product-tab-card">
@@ -237,17 +240,17 @@
                                             {% else %}
                                                 <span class="product-specs-badge">{{ 'product_detail.tag'|trans }}</span>
                                             {% endif %}
-                                            <wa-button variant="brand" size="s" href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}">
+                                            <a href="{{ path('app_product_detail', {'_locale': locale, 'slug': prod.slug}) }}" class="btn-product-learn-more">
                                                 {{ 'cta.learn_more'|trans }}
-                                            </wa-button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             {% endfor %}
                         </div>
-                    </wa-tab-panel>
+                    </div>
                 {% endfor %}
-            </wa-tab-group>
+            </div>
         </div>
     </section>
 
@@ -276,7 +279,7 @@
                         <div class="service-card-content">
                             <h3>{{ item.getTitle(locale) }}</h3>
                             <p>{{ item.getShortDescription(locale) }}</p>
-                            <wa-button variant="text" href="{{ path('app_service_detail', {'_locale': locale, 'slug': item.getSlug(locale)}) }}" style="padding: 0; display: inline-block; color: #ffffff;">{{ 'cta.learn_more'|trans }} →</wa-button>
+                            <a href="{{ path('app_service_detail', {'_locale': locale, 'slug': item.getSlug(locale)}) }}" class="service-text-link">{{ 'cta.learn_more'|trans }} →</a>
                         </div>
                     </div>
                 {% else %}
@@ -290,7 +293,7 @@
                         <div class="service-card-content">
                             <h3>{{ 'services_sec.maintenance.title'|trans }}</h3>
                             <p>{{ 'services_sec.maintenance.desc'|trans }}</p>
-                            <wa-button variant="text" href="#contact" style="padding: 0; display: inline-block; color: #ffffff;">{{ 'cta.quote_now'|trans }} →</wa-button>
+                            <a href="#contact" class="service-text-link">{{ 'cta.quote_now'|trans }} →</a>
                         </div>
                     </div>
 
@@ -304,7 +307,7 @@
                         <div class="service-card-content">
                             <h3>{{ 'services_sec.refit.title'|trans }}</h3>
                             <p>{{ 'services_sec.refit.desc'|trans }}</p>
-                            <wa-button variant="text" href="#contact" style="padding: 0; display: inline-block; color: #ffffff;">{{ 'cta.quote_now'|trans }} →</wa-button>
+                            <a href="#contact" class="service-text-link">{{ 'cta.quote_now'|trans }} →</a>
                         </div>
                     </div>
 
@@ -318,7 +321,7 @@
                         <div class="service-card-content">
                             <h3>{{ 'services_sec.nr12.title'|trans }}</h3>
                             <p>{{ 'services_sec.nr12.desc'|trans }}</p>
-                            <wa-button variant="text" href="#contact" style="padding: 0; display: inline-block; color: #ffffff;">{{ 'cta.quote_now'|trans }} →</wa-button>
+                            <a href="#contact" class="service-text-link">{{ 'cta.quote_now'|trans }} →</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -604,33 +607,33 @@
                         <input type="text" name="website" id="form-website" tabindex="-1" autocomplete="off">
                     </div>
 
-                    <div class="form-group">
-                        <label for="form-name" class="sr-only">{{ 'contact_form.name'|trans }}</label>
-                        <wa-input id="form-name" type="text" label="{{ 'contact_form.name'|trans }}" aria-label="{{ 'contact_form.name'|trans }}" placeholder="{{ 'contact_form.name_placeholder'|trans }}" required></wa-input>
+                    <div class="native-form-group">
+                        <label for="form-name" class="native-form-label">{{ 'contact_form.name'|trans }}</label>
+                        <input id="form-name" type="text" class="native-form-control" aria-label="{{ 'contact_form.name'|trans }}" placeholder="{{ 'contact_form.name_placeholder'|trans }}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="form-email" class="sr-only">{{ 'contact_form.email'|trans }}</label>
-                        <wa-input id="form-email" type="email" label="{{ 'contact_form.email'|trans }}" aria-label="{{ 'contact_form.email'|trans }}" placeholder="{{ 'contact_form.email_placeholder'|trans }}" required></wa-input>
+                    <div class="native-form-group">
+                        <label for="form-email" class="native-form-label">{{ 'contact_form.email'|trans }}</label>
+                        <input id="form-email" type="email" class="native-form-control" aria-label="{{ 'contact_form.email'|trans }}" placeholder="{{ 'contact_form.email_placeholder'|trans }}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="form-phone" class="sr-only">{{ 'contact_form.phone'|trans }}</label>
-                        <wa-input id="form-phone" type="tel" label="{{ 'contact_form.phone'|trans }}" aria-label="{{ 'contact_form.phone'|trans }}" placeholder="{{ 'contact_form.phone_placeholder'|trans }}" required></wa-input>
+                    <div class="native-form-group">
+                        <label for="form-phone" class="native-form-label">{{ 'contact_form.phone'|trans }}</label>
+                        <input id="form-phone" type="tel" class="native-form-control" aria-label="{{ 'contact_form.phone'|trans }}" placeholder="{{ 'contact_form.phone_placeholder'|trans }}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="form-cnpj" class="sr-only">{{ 'contact_form.cpf_cnpj_label'|trans }}</label>
-                        <wa-input id="form-cnpj" type="text" label="{{ 'contact_form.cpf_cnpj_label'|trans }}" aria-label="{{ 'contact_form.cpf_cnpj_label'|trans }}" placeholder="{{ 'contact_form.cpf_cnpj_placeholder'|trans }}" {% if locale == 'pt' %}required{% endif %}></wa-input>
+                    <div class="native-form-group">
+                        <label for="form-cnpj" class="native-form-label">{{ 'contact_form.cpf_cnpj_label'|trans }}</label>
+                        <input id="form-cnpj" type="text" class="native-form-control" aria-label="{{ 'contact_form.cpf_cnpj_label'|trans }}" placeholder="{{ 'contact_form.cpf_cnpj_placeholder'|trans }}" {% if locale == 'pt' %}required{% endif %}>
                     </div>
-                    <div class="form-group">
-                        <label for="form-product" class="sr-only">{{ 'contact_form.product_interest'|trans }}</label>
-                        <wa-input id="form-product" type="text" label="{{ 'contact_form.product_interest'|trans }}" aria-label="{{ 'contact_form.product_interest'|trans }}" placeholder="{{ 'contact_form.product_placeholder'|trans }}"></wa-input>
+                    <div class="native-form-group">
+                        <label for="form-product" class="native-form-label">{{ 'contact_form.product_interest'|trans }}</label>
+                        <input id="form-product" type="text" class="native-form-control" aria-label="{{ 'contact_form.product_interest'|trans }}" placeholder="{{ 'contact_form.product_placeholder'|trans }}">
                     </div>
-                    <div class="form-group">
-                        <label for="form-message" class="sr-only">{{ 'contact_form.message'|trans }}</label>
-                        <wa-textarea id="form-message" label="{{ 'contact_form.message'|trans }}" aria-label="{{ 'contact_form.message'|trans }}" placeholder="{{ 'contact_form.message_placeholder'|trans }}"></wa-textarea>
+                    <div class="native-form-group">
+                        <label for="form-message" class="native-form-label">{{ 'contact_form.message'|trans }}</label>
+                        <textarea id="form-message" class="native-form-control" rows="4" aria-label="{{ 'contact_form.message'|trans }}" placeholder="{{ 'contact_form.message_placeholder'|trans }}"></textarea>
                     </div>
-                    <wa-button id="form-submit-btn" type="submit" variant="brand" style="width: 100%;">
+                    <button id="form-submit-btn" type="submit" class="btn-form-submit">
                         {{ 'cta.submit'|trans }}
-                    </wa-button>
+                    </button>
                     <p style="font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.75rem; line-height: 1.4; text-align: center;">
                         {{ 'contact_form.privacy_notice_prefix'|trans }}
                         <a href="{{ path('app_privacy_policy', {'_locale': locale}) }}" style="color: var(--color-accent-red); text-decoration: underline;">{{ 'contact_form.privacy_policy_link'|trans }}</a>.
@@ -1063,7 +1066,7 @@
                     if (resData.success) {
                         const statusType = resData.mail_sent === false ? 'warning' : 'success';
                         showStatus(statusType, resData.message);
-                        form.querySelectorAll('wa-input, wa-textarea, wa-select').forEach(el => { el.value = ''; });
+                        form.reset();
                     } else {
                         showStatus('error', resData.message);
                     }
@@ -1076,16 +1079,34 @@
 
             // Listen for native form submit
             form.addEventListener('submit', handleFormSubmit);
+        }
 
-            // Listen for click on wa-button (Web Component may not trigger native form submit)
-            submitBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                handleFormSubmit(e);
+        // Native Tabs Interactivity
+        function initProductTabs() {
+            const tabButtons = document.querySelectorAll('.native-tab-btn');
+            const tabPanels = document.querySelectorAll('.native-tab-panel');
+            if (!tabButtons.length) return;
+
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-target');
+                    tabButtons.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-selected', 'false');
+                    });
+                    tabPanels.forEach(p => p.classList.remove('active'));
+
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-selected', 'true');
+                    const targetPanel = document.getElementById('tab-panel-' + target);
+                    if (targetPanel) {
+                        targetPanel.classList.add('active');
+                    }
+                });
             });
         }
 
-        document.addEventListener('DOMContentLoaded', () => { initHeroSlider(); initContactForm(); });
-        document.addEventListener('turbo:load', () => { initHeroSlider(); initContactForm(); });
+        document.addEventListener('DOMContentLoaded', () => { initHeroSlider(); initContactForm(); initProductTabs(); });
+        document.addEventListener('turbo:load', () => { initHeroSlider(); initContactForm(); initProductTabs(); });
     </script>
 {% endblock %}

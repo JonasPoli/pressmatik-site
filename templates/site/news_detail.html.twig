@@ -6,6 +6,14 @@
 {% block og_description %}{{ item.getShortDescription(locale) ?: item.getTitle(locale) }}{% endblock %}
 {% block og_image %}{% if item.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/news/{{ item.imageName }}{% else %}{{ parent() }}{% endif %}{% endblock %}
 
+{% block webawesome_assets %}
+    <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css" media="print" onload="this.media='all'">
+{% endblock %}
+
+{% block webawesome_scripts %}
+    <script type="module" src="https://ka-f.webawesome.com/webawesome@3.9.0/webawesome.loader.js" defer></script>
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
     <script type="application/ld+json">

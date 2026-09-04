@@ -48,7 +48,7 @@
     --font-heading: 'Outfit', sans-serif;
 
     /* Transitions */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* Dark Theme Overrides */
@@ -408,7 +408,7 @@ wa-button[variant="primary"]::part(label) {
     grid-area: 1 / 1 / 2 / 2;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     display: flex;
     align-items: center;
     padding: 10rem 0;
@@ -420,31 +420,39 @@ wa-button[variant="primary"]::part(label) {
     z-index: 3;
 }
 
-/* Stagger elements animations inside active slide */
-.hero-slide .hero-content > * {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+/* First slide renders immediately without animation delay for optimal FCP and LCP */
+.hero-slide:first-child,
+.hero-slide:first-child.active {
+    opacity: 1;
+    visibility: visible;
+}
+.hero-slide:first-child .hero-content > *,
+.hero-slide:first-child .hero-visual {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    transition-delay: 0s !important;
 }
 
-.hero-slide.active .hero-content > * {
+/* Transitions for slider navigation on subsequent slides */
+.hero-slide:not(:first-child) .hero-content > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.hero-slide:not(:first-child).active .hero-content > * {
     opacity: 1;
     transform: translateY(0);
 }
 
-.hero-slide.active .hero-content .section-title-tag { transition-delay: 0.1s; }
-.hero-slide.active .hero-content .hero-title { transition-delay: 0.25s; }
-.hero-slide.active .hero-content .hero-subtitle { transition-delay: 0.4s; }
-.hero-slide.active .hero-content .hero-buttons { transition-delay: 0.55s; }
-
-.hero-slide .hero-visual {
+.hero-slide:not(:first-child) .hero-visual {
     opacity: 0;
     transform: translateX(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    transition-delay: 0.3s;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
-.hero-slide.active .hero-visual {
+.hero-slide:not(:first-child).active .hero-visual {
     opacity: 1;
     transform: translateX(0);
 }
@@ -556,6 +564,91 @@ wa-button[variant="primary"]::part(label) {
     display: flex;
     gap: 1.25rem;
     flex-wrap: wrap;
+}
+
+/* Native High-Performance Hero & Header Buttons */
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    line-height: 1.25;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: 0.3px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+}
+
+.hero-btn-brand {
+    background-color: var(--color-accent-red);
+    color: #ffffff !important;
+    border-color: var(--color-accent-red);
+    box-shadow: 0 4px 15px rgba(213, 28, 35, 0.35);
+}
+
+.hero-btn-brand:hover {
+    background-color: var(--color-accent-red-hover);
+    border-color: var(--color-accent-red-hover);
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(213, 28, 35, 0.5);
+}
+
+.hero-btn-outline {
+    background-color: transparent;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.65);
+}
+
+.hero-btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: #ffffff;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+.btn-header-contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: 6px;
+    background-color: var(--color-accent-red);
+    color: #ffffff !important;
+    text-decoration: none;
+    border: 1px solid var(--color-accent-red);
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-header-contact:hover {
+    background-color: var(--color-accent-red-hover);
+    border-color: var(--color-accent-red-hover);
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+.service-text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.service-text-link:hover {
+    color: var(--color-accent-red) !important;
+    transform: translateX(3px);
 }
 
 /* Hero always has a dark bg — force the outline button to be always white */
@@ -2499,6 +2592,7 @@ wa-tab[active]::part(base) {
     }
 
     .header-actions wa-button[variant="brand"],
+    .header-actions .btn-header-contact,
     .header-actions .lang-selector,
     #theme-toggle {
         display: none !important;
@@ -2762,6 +2856,143 @@ wa-tab[active]::part(base) {
 .megamenu-links li a:hover {
     color: var(--color-accent-red);
     padding-left: 5px;
+}
+
+/* Native Lightweight Products Tab Switcher */
+.native-tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--color-border);
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 3.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.native-tab-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    font-family: var(--font-heading);
+}
+
+.native-tab-btn:hover {
+    color: var(--color-text-primary);
+}
+
+.native-tab-btn.active {
+    color: var(--color-accent-red);
+    border-bottom-color: var(--color-accent-red);
+}
+
+.native-tab-panel {
+    display: none;
+}
+
+.native-tab-panel.active {
+    display: block;
+}
+
+.btn-product-learn-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background-color: var(--color-accent-red);
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-product-learn-more:hover {
+    background-color: var(--color-accent-red-hover);
+    transform: translateY(-1px);
+}
+
+/* Native High-Performance Form Controls */
+.native-form-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.native-form-label {
+    display: block;
+    color: var(--color-text-primary);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.native-form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-surface-dark);
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dark-theme .native-form-control,
+[data-theme="dark"] .native-form-control {
+    background-color: var(--color-surface-dark);
+    border-color: #2d3748;
+}
+
+.native-form-control:focus {
+    outline: none;
+    border-color: var(--color-accent-red);
+    box-shadow: 0 0 0 3px rgba(213, 28, 35, 0.15);
+}
+
+.native-form-control::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 0.7;
+}
+
+.native-form-textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.btn-form-submit {
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    background-color: var(--color-accent-red);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(213, 28, 35, 0.35);
+}
+
+.btn-form-submit:hover {
+    background-color: var(--color-accent-red-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(213, 28, 35, 0.5);
 }
 
 /* Homepage Product Tabs Styles */
