@@ -122,17 +122,17 @@
         <!-- Header (Cabeçalho) -->
         <header class="site-header">
             <div class="container header-container">
-                <a href="{{ path('app_home', {'_locale': locale}) }}" class="logo-link" aria-label="Pressmatik Página Inicial">
+                <a href="{{ path('app_home', {'_locale': locale}) }}" class="logo-link" aria-label="{{ 'aria.home_link'|trans }}">
                     <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_ORIGINAL.webp" alt="Pressmatik Logo" width="220" height="48" class="logo-image logo-light" fetchpriority="high" decoding="async">
                     <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.webp" alt="Pressmatik Logo" width="220" height="48" class="logo-image logo-dark" loading="lazy" decoding="async">
                 </a>
                 
-                <nav aria-label="Menu Principal">
+                <nav aria-label="{{ 'aria.main_nav'|trans }}">
                     <ul class="nav-menu">
                         <li><a href="{{ path('app_home', {'_locale': locale}) }}" class="nav-link">{{ 'menu.home'|trans }}</a></li>
                         <li><a href="{{ path('app_about_us', {'_locale': locale}) }}" class="nav-link">{{ 'menu.company'|trans }}</a></li>
                         <li class="nav-item-dropdown">
-                            <a href="#" class="nav-link dropdown-trigger-mega" aria-expanded="false" aria-label="Produtos Pressmatik">
+                            <a href="#" class="nav-link dropdown-trigger-mega" aria-expanded="false" aria-label="{{ 'aria.products_menu'|trans }}">
                                 {{ 'menu.products'|trans }} <span class="dropdown-caret">▼</span>
                             </a>
                             <div class="megamenu-panel">
@@ -152,7 +152,7 @@
                                                  'products': db_grouped['servo-hydraulic'] ?? []
                                              },
                                              'mechanical': {
-                                                 'title': mm_cats['mechanical'].title(locale) ?? 'Prensas Mecânicas',
+                                                 'title': mm_cats['mechanical'].title(locale) ?? 'products_sec.mechanical_presses'|trans,
                                                  'img': mm_cats['mechanical'].imageUrl ?? '/images/prensa-hidraulica-tipo-c-linha-st.webp',
                                                  'products': db_grouped['mechanical'] ?? []
                                              }
@@ -212,7 +212,7 @@
                 <div class="header-actions">
                     <!-- Seletor de Idioma (Language switcher) using custom CSS dropdown -->
                     <div class="lang-selector">
-                        <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Idioma: {{ locale|upper }}">
+                        <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'menu.language'|trans }}: {{ locale|upper }}">
                             <i class="bi bi-globe" style="color: var(--color-accent-red); margin-right: 4px;"></i>
                             <span>{{ locale|upper }}</span>
                             <span class="dropdown-caret">▼</span>
@@ -225,7 +225,7 @@
                     </div>
 
                     <!-- Theme Toggle Button -->
-                    <button id="theme-toggle" type="button" aria-label="Alternar tema claro ou escuro" style="background: transparent; border: none; cursor: pointer; padding: 6px 10px; color: var(--color-text-primary); margin-right: 8px; display: inline-flex; align-items: center; justify-content: center;">
+                    <button id="theme-toggle" type="button" aria-label="{{ 'theme.toggle'|trans }}" style="background: transparent; border: none; cursor: pointer; padding: 6px 10px; color: var(--color-text-primary); margin-right: 8px; display: inline-flex; align-items: center; justify-content: center;">
                         <i id="theme-toggle-icon" class="bi bi-moon" style="color: var(--color-accent-red); font-size: 1.2rem;"></i>
                     </button>
                     
@@ -234,7 +234,7 @@
                     </wa-button>
 
                     <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Abrir menu de navegação">
+                    <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="{{ 'menu.open_menu'|trans }}">
                         <i class="bi bi-list"></i>
                     </button>
                 </div>
@@ -247,8 +247,8 @@
         <!-- Mobile Navigation Panel -->
         <div id="mobile-menu-drawer">
             <div class="mobile-nav-header">
-                <span>Menu</span>
-                <button type="button" onclick="closeMobileMenu();" aria-label="Fechar menu">
+                <span>{{ 'menu.menu_label'|trans }}</span>
+                <button type="button" onclick="closeMobileMenu();" aria-label="{{ 'menu.close_menu'|trans }}">
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
@@ -262,12 +262,12 @@
                     {% set grouped_cats_mobile = [
                         {'title': 'products_sec.hydraulic_presses'|trans, 'products': db_grouped['hydraulic'] ?? []},
                         {'title': 'products_sec.servo_presses'|trans, 'products': db_grouped['servo-hydraulic'] ?? []},
-                        {'title': 'Prensas Mecânicas', 'products': db_grouped['mechanical'] ?? []},
+                        {'title': 'products_sec.mechanical_presses'|trans, 'products': db_grouped['mechanical'] ?? []},
                         {'title': 'products_sec.equipments'|trans, 'products': db_grouped['equipments'] ?? []},
                         {'title': 'products_sec.parts'|trans, 'products': db_grouped['parts'] ?? []}
                     ] %}
                     <li>
-                        <button type="button" class="mobile-nav-link mobile-nav-accordion-trigger" aria-label="Expandir menu de Produtos" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); this.classList.toggle('open'); var panel = this.nextElementSibling; panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + 'px';" style="width: 100%; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font: inherit; color: inherit;">
+                        <button type="button" class="mobile-nav-link mobile-nav-accordion-trigger" aria-label="{{ 'menu.expand_products'|trans }}" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); this.classList.toggle('open'); var panel = this.nextElementSibling; panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + 'px';" style="width: 100%; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font: inherit; color: inherit;">
                             {{ 'menu.products'|trans }}
                             <i class="bi bi-chevron-down" style="font-size: 0.75rem; transition: transform 0.3s ease;"></i>
                         </button>
@@ -302,7 +302,7 @@
                 <div class="mobile-nav-divider"></div>
 
                 <div class="mobile-nav-actions">
-                    <p class="mobile-lang-label">Idioma:</p>
+                    <p class="mobile-lang-label">{{ 'menu.language'|trans }}:</p>
                     <div class="mobile-lang-btns">
                         <a href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'pt'})) }}" class="mobile-lang-btn">PT</a>
                         <a href="{{ path(app.request.attributes.get('_route') ?: 'app_home', (app.request.attributes.get('_route_params') ?: [])|merge(app.request.query.all)|merge({'_locale': 'en'})) }}" class="mobile-lang-btn">EN</a>
@@ -314,9 +314,9 @@
 
                     <div class="mobile-nav-divider"></div>
 
-                    <button id="mobile-theme-toggle" class="mobile-theme-btn" aria-label="Alternar tema">
+                    <button id="mobile-theme-toggle" class="mobile-theme-btn" aria-label="{{ 'theme.toggle'|trans }}">
                         <i id="mobile-theme-icon" class="bi bi-moon"></i>
-                        <span id="mobile-theme-label">Tema escuro</span>
+                        <span id="mobile-theme-label" data-theme-light="{{ 'theme.light'|trans }}" data-theme-dark="{{ 'theme.dark'|trans }}">{{ 'theme.dark'|trans }}</span>
                     </button>
                 </div>
             </div>
@@ -328,7 +328,7 @@
         </main>
 
         <!-- Floating WhatsApp Button -->
-        <a href="https://wa.me/5516997704156?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20as%20prensas%20Pressmatik." class="whatsapp-float" target="_blank" rel="noopener noreferrer nofollow" aria-label="Contato direto via WhatsApp Pressmatik">
+        <a href="https://wa.me/5516997704156?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20as%20prensas%20Pressmatik." class="whatsapp-float" target="_blank" rel="noopener noreferrer nofollow" aria-label="{{ 'aria.whatsapp'|trans }}">
             <i class="bi bi-whatsapp"></i>
         </a>
 
@@ -339,12 +339,12 @@
                     <img src="/images/logos/PRESSMATIK_LOGO2_HORIZONTAL_SEGMENTOBASE_VERMELHO.webp" alt="Pressmatik Logo Rodapé" width="200" height="46" loading="lazy" decoding="async" style="max-height: 50px; margin-bottom: 12px;">
                     <p>{{ 'footer.about'|trans }}</p>
                     <div class="footer-social-links">
-                        <a href="https://www.linkedin.com/company/pressmatik/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Pressmatik no LinkedIn" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                        <a href="https://www.instagram.com/pressmatik_oficial" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Pressmatik no Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="https://www.youtube.com/channel/UCE7ZUUPzVg858f45I8nbByQ" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Inscreva-se no canal do YouTube da Pressmatik" title="YouTube"><i class="bi bi-youtube"></i></a>
-                        <a href="https://www.facebook.com/pressmatikprensaseequipamentos?_rdr" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Curta a página da Pressmatik no Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="https://www.tiktok.com/@pressmatik?lang=pt-br" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Siga a Pressmatik no TikTok" title="TikTok"><i class="bi bi-tiktok"></i></a>
-                        <a href="https://linktr.ee/pressmatikoficial" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Acesse todos os links da Pressmatik no Linktree" title="Linktree"><i class="bi bi-tree-fill"></i></a>
+                        <a href="https://www.linkedin.com/company/pressmatik/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="{{ 'aria.linkedin'|trans }}" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/pressmatik_oficial" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="{{ 'aria.instagram'|trans }}" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCE7ZUUPzVg858f45I8nbByQ" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="{{ 'aria.youtube'|trans }}" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="https://www.facebook.com/pressmatikprensaseequipamentos?_rdr" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="{{ 'aria.facebook'|trans }}" title="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://www.tiktok.com/@pressmatik?lang=pt-br" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="{{ 'aria.tiktok'|trans }}" title="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="https://linktr.ee/pressmatikoficial" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="{{ 'aria.linktree'|trans }}" title="Linktree"><i class="bi bi-tree-fill"></i></a>
                     </div>
                 </div>
                 
@@ -401,8 +401,8 @@
                     {{ 'footer.rights'|trans }}
                 </div>
                 <div class="footer-bottom-links">
-                    <a href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}">{{ 'footer.privacy_policy'|trans({}, 'messages', locale)|default('Privacy Policy') }}</a>
-                    <a href="{{ path('app_home', {'_locale': locale}) ~ '#contact' }}">{{ 'footer.terms_of_service'|trans({}, 'messages', locale)|default('Terms of Service') }}</a>
+                    <a href="{{ path('app_privacy_policy', {'_locale': locale}) }}">{{ 'footer.privacy_policy'|trans({}, 'messages', locale) }}</a>
+                    <a href="{{ path('app_terms_of_use', {'_locale': locale}) }}">{{ 'footer.terms_of_service'|trans({}, 'messages', locale) }}</a>
                 </div>
             </div>
         </footer>
@@ -432,7 +432,11 @@
                 function applyThemeIcons(isDark) {
                     if (icon) icon.className = isDark ? 'bi bi-sun' : 'bi bi-moon';
                     if (mobileThemeIcon) mobileThemeIcon.className = isDark ? 'bi bi-sun' : 'bi bi-moon';
-                    if (mobileThemeLabel) mobileThemeLabel.textContent = isDark ? 'Tema claro' : 'Tema escuro';
+                    if (mobileThemeLabel) {
+                        const lightText = mobileThemeLabel.getAttribute('data-theme-light') || 'Tema claro';
+                        const darkText = mobileThemeLabel.getAttribute('data-theme-dark') || 'Tema escuro';
+                        mobileThemeLabel.textContent = isDark ? lightText : darkText;
+                    }
                 }
 
                 // Shared function to toggle theme

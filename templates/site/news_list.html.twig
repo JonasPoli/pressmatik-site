@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Notícias & Eventos - Pressmatik{% endblock %}
-{% block meta_description %}Acompanhe as últimas notícias, inovações tecnológicas, feiras industriais e artigos sobre prensas hidráulicas da Pressmatik.{% endblock %}
-{% block og_title %}Notícias & Eventos - Pressmatik{% endblock %}
-{% block og_description %}Acompanhe as últimas notícias, inovações tecnológicas e feiras industriais da Pressmatik.{% endblock %}
+{% block title %}{{ 'news.title'|trans }} - Pressmatik{% endblock %}
+{% block meta_description %}{{ 'news.meta_desc'|trans }}{% endblock %}
+{% block og_title %}{{ 'news.title'|trans }} - Pressmatik{% endblock %}
+{% block og_description %}{{ 'news.meta_desc'|trans }}{% endblock %}
 
 {% block body %}
     <div class="container product-detail-layout" style="margin-top: 3rem; margin-bottom: 6rem;">
@@ -18,7 +18,7 @@
             <span class="section-title-tag">{{ 'news.tag'|trans }}</span>
             <h1 class="section-title" style="font-size: 2.5rem; margin-top: 0.5rem; color: var(--color-text-primary);">{{ 'news.title'|trans }}</h1>
             <p class="section-desc" style="max-width: 700px; color: var(--color-text-secondary); margin-top: 1rem;">
-                Acompanhe as últimas inovações tecnológicas, feiras industriais e novidades da Pressmatik.
+                {{ 'news.subtitle'|trans }}
             </p>
         </div>
 
@@ -29,7 +29,7 @@
                class="filter-badge {% if activeCategory is null %}active{% endif %}"
                style="text-decoration: none; padding: 0.5rem 1.25rem; border-radius: 30px; font-size: 0.85rem; font-weight: 600; transition: all 0.3s ease;
                       {% if activeCategory is null %}background: var(--color-accent-red); color: #fff;{% else %}background: var(--color-surface-dark); color: var(--color-text-secondary); border: 1px solid var(--color-border);{% endif %}">
-                Todas
+                {{ 'news.all_categories'|trans }}
             </a>
             {% for cat in categories %}
                 {% set is_active = (activeCategory and activeCategory.id == cat.id) %}
@@ -47,7 +47,7 @@
         {% if newsItems|length == 0 %}
             <div class="scroll-animate slide-top" style="text-align: center; padding: 4rem 2rem; background: var(--color-surface-dark); border-radius: 16px; border: 1px solid var(--color-border);">
                 <i class="bi bi-newspaper" style="font-size: 3rem; color: var(--color-text-secondary); display: block; margin-bottom: 1.5rem;"></i>
-                <p style="color: var(--color-text-secondary); font-size: 1.1rem;">Nenhuma notícia encontrada para esta seleção.</p>
+                <p style="color: var(--color-text-secondary); font-size: 1.1rem;">{{ 'news.empty'|trans }}</p>
             </div>
         {% else %}
             <div class="news-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;">

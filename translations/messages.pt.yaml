@@ -1,581 +1,676 @@
-# translations/messages.pt.yaml
 menu:
-  home: "Início"
-  company: "Empresa"
-  products: "Produtos"
-  services: "Serviços"
-  applications: "Aplicações"
-  blog: "Blog"
-  contact: "Contato"
-  quote: "Solicitar Orçamento"
-
+  home: Início
+  company: Empresa
+  products: Produtos
+  services: Serviços
+  applications: Aplicações
+  blog: Blog
+  contact: Contato
+  quote: 'Solicitar Orçamento'
+  language: Idioma
+  menu_label: Menu
+  close_menu: 'Fechar menu'
+  open_menu: 'Abrir menu de navegação'
+  expand_products: 'Expandir menu de Produtos'
 cta:
-  whatsapp: "Fale Conosco no WhatsApp"
-  quote_now: "Orçamento Rápido"
-  learn_more: "Saiba Mais"
-  download_catalog: "Baixar Catálogo Técnico (PDF)"
-  send_email: "Enviar E-mail"
-  submit: "Enviar Solicitação"
-
+  whatsapp: 'Fale Conosco no WhatsApp'
+  quote_now: 'Orçamento Rápido'
+  learn_more: 'Saiba Mais'
+  download_catalog: 'Baixar Catálogo Técnico (PDF)'
+  send_email: 'Enviar E-mail'
+  submit: 'Enviar Solicitação'
 banner:
-  tag: "Líder em Prensas Industriais"
-  title: "Prensas Hidráulicas de Alta Performance e Tecnologia Industrial"
-  subtitle: "Soluções robustas, seguras (NR12) e de alta produtividade para a indústria metal-mecânica moderna."
-
+  tag: 'Líder em Prensas Industriais'
+  title: 'Prensas Hidráulicas de Alta Performance e Tecnologia Industrial'
+  subtitle: 'Soluções robustas, seguras (NR12) e de alta produtividade para a indústria metal-mecânica moderna.'
 about:
-  tag: "Engenharia de Confiança"
-  title: "Quem Somos"
-  text: "A Pressmatik é líder no desenvolvimento de prensas hidráulicas e servo-hidráulicas industriais pesadas. Nossas soluções aliam engenharia avançada, segurança rígida em conformidade com as normas NR10 e NR12, e o uso de componentes globais de ponta para entregar máxima eficiência energética e produtividade sem vazamentos ou lentidão."
-  advantages_tag: "Diferenciais"
-  advantages_title: "Por que escolher a Pressmatik?"
-  mission: "Missão"
-  vision: "Visão"
-  values: "Valores"
-  gallery_tag: "Galeria"
-  gallery_title: "Nossa Estrutura"
-  timeline_tag: "Trajetória"
-  timeline_title: "Nossa História"
-  governance_tag: "Governança"
-  governance_title: "Estrutura Organizacional"
-  partnerships_tag: "Parcerias"
-  success_cases_title: "Cases de Sucesso"
-  standards_tag: "Padrões"
-  quality_certifications_title: "Certificações de Qualidade"
-  partners_tag: "Parceiros"
-  world_class_components_title: "Componentes de Classe Mundial"
-  world_class_components_desc: "Utilizamos exclusivamente componentes dos líderes globais em automação, hidráulica e segurança para garantir a confiabilidade dos nossos equipamentos."
-  clients_tag: "Clientes"
-  who_trusts_pressmatik_title: "Quem Confia na Pressmatik"
-  who_trusts_pressmatik_desc: "Temos orgulho de fornecer soluções para grandes indústrias nacionais e multinacionais do setor automotivo, metalmecânico, estampagem e borracha."
-
+  tag: 'Engenharia de Confiança'
+  title: 'Quem Somos'
+  text: 'A Pressmatik é líder no desenvolvimento de prensas hidráulicas e servo-hidráulicas industriais pesadas. Nossas soluções aliam engenharia avançada, segurança rígida em conformidade com as normas NR10 e NR12, e o uso de componentes globais de ponta para entregar máxima eficiência energética e produtividade sem vazamentos ou lentidão.'
+  advantages_tag: Diferenciais
+  advantages_title: 'Por que escolher a Pressmatik?'
+  mission: Missão
+  vision: Visão
+  values: Valores
+  gallery_tag: Galeria
+  gallery_title: 'Nossa Estrutura'
+  timeline_tag: Trajetória
+  timeline_title: 'Nossa História'
+  governance_tag: Governança
+  governance_title: 'Estrutura Organizacional'
+  partnerships_tag: Parcerias
+  success_cases_title: 'Cases de Sucesso'
+  standards_tag: Padrões
+  quality_certifications_title: 'Certificações de Qualidade'
+  partners_tag: Parceiros
+  world_class_components_title: 'Componentes de Classe Mundial'
+  world_class_components_desc: 'Utilizamos exclusivamente componentes dos líderes globais em automação, hidráulica e segurança para garantir a confiabilidade dos nossos equipamentos.'
+  clients_tag: Clientes
+  who_trusts_pressmatik_title: 'Quem Confia na Pressmatik'
+  who_trusts_pressmatik_desc: 'Temos orgulho de fornecer soluções para grandes indústrias nacionais e multinacionais do setor automotivo, metalmecânico, estampagem e borracha.'
 differentials:
-  tag: "Diferenciais"
-  title: "Diferenciais Técnicos"
+  tag: Diferenciais
+  title: 'Diferenciais Técnicos'
   safety:
-    title: "Segurança Total (NR10 & NR12)"
-    desc: "Sistemas projetados de fábrica sob estrita conformidade de segurança para proteção total dos operadores."
+    title: 'Segurança Total (NR10 & NR12)'
+    desc: 'Sistemas projetados de fábrica sob estrita conformidade de segurança para proteção total dos operadores.'
   components:
-    title: "Componentes Premium"
-    desc: "Integração com tecnologia de líderes mundiais como Bosch Rexroth, Siemens e Weg."
+    title: 'Componentes Premium'
+    desc: 'Integração com tecnologia de líderes mundiais como Bosch Rexroth, Siemens e Weg.'
   performance:
-    title: "Alta Performance e Durabilidade"
-    desc: "Substituição eficiente de tecnologia mecânica antiga por sistemas servo-hidráulicos de setup rápido."
-
+    title: 'Alta Performance e Durabilidade'
+    desc: 'Substituição eficiente de tecnologia mecânica antiga por sistemas servo-hidráulicos de setup rápido.'
 products_sec:
-  tag: "Catálogo"
-  title: "Nossos Produtos"
-  hydraulic_presses: "Prensas Hidráulicas"
-  hydraulic_presses_desc: "Modelos Tipo C, Tipo C Duplo, 4 Colunas e Tipo H para operações severas."
-  servo_presses: "Prensas Servo-Hidráulicas"
-  servo_presses_desc: "Tecnologia com servo-bombas, máxima precisão e economia de energia."
-  equipments: "Equipamentos"
-  equipments_desc: "Unidades de força, cilindros normatizados e plataformas sob medida."
-  parts: "Peças e Acessórios"
-  parts_desc: "Componentes de reposição hidráulicos e eletroeletrônicos."
-
+  tag: Catálogo
+  title: 'Nossos Produtos'
+  hydraulic_presses: 'Prensas Hidráulicas'
+  hydraulic_presses_desc: 'Modelos Tipo C, Tipo C Duplo, 4 Colunas e Tipo H para operações severas.'
+  servo_presses: 'Prensas Servo-Hidráulicas'
+  servo_presses_desc: 'Tecnologia com servo-bombas, máxima precisão e economia de energia.'
+  equipments: Equipamentos
+  equipments_desc: 'Unidades de força, cilindros normatizados e plataformas sob medida.'
+  parts: 'Peças e Acessórios'
+  parts_desc: 'Componentes de reposição hidráulicos e eletroeletrônicos.'
+  mechanical_presses: 'Prensas Mecânicas'
+  mechanical_presses_desc: 'Prensas mecânicas de manivela, alta velocidade e precisão para estampagem contínua.'
 services_sec:
-  tag: "Soluções"
-  title: "Soluções em Serviços"
+  tag: Soluções
+  title: 'Soluções em Serviços'
   maintenance:
-    title: "Manutenção Corretiva e Preventiva"
-    desc: "Equipe especializada pronta para garantir a máxima disponibilidade do seu parque fabril."
+    title: 'Manutenção Corretiva e Preventiva'
+    desc: 'Equipe especializada pronta para garantir a máxima disponibilidade do seu parque fabril.'
   refit:
-    title: "Reforma e Modernização (Retrofit)"
-    desc: "Atualização tecnológica de prensas antigas, otimizando velocidade e automação."
+    title: 'Reforma e Modernização (Retrofit)'
+    desc: 'Atualização tecnológica de prensas antigas, otimizando velocidade e automação.'
   nr12:
-    title: "Adequação Técnica à NR12"
-    desc: "Projetos completos de segurança e laudos técnicos para conformidade legal."
-
+    title: 'Adequação Técnica à NR12'
+    desc: 'Projetos completos de segurança e laudos técnicos para conformidade legal.'
+  industrial_service: 'Serviço Industrial'
+  photo_gallery: 'Galeria de Fotos do Serviço'
+  request_quote_service_title: 'Solicite um Orçamento para este Serviço'
+  request_quote_service_desc: 'Nossa equipe de engenharia e assistência técnica especializada está à disposição para atender à sua demanda industrial com agilidade e máxima competência.'
+  contact_us: 'Entrar em Contato'
 testimonials:
-  tag: "Sucesso Comprovado"
-  title: "O que dizem nossos clientes"
+  tag: 'Sucesso Comprovado'
+  title: 'O que dizem nossos clientes'
   client1:
-    name: "Eng. Ricardo M. Souza"
-    role: "Diretor de Operações"
-    company: "Metalúrgica Paulista S.A."
-    text: "As prensas servo-hidráulicas da Pressmatik revolucionaram nossa linha. O tempo de setup foi reduzido pela metade e o consumo de energia caiu drasticamente. Suporte técnico exemplar!"
+    name: 'Eng. Ricardo M. Souza'
+    role: 'Diretor de Operações'
+    company: 'Metalúrgica Paulista S.A.'
+    text: 'As prensas servo-hidráulicas da Pressmatik revolucionaram nossa linha. O tempo de setup foi reduzido pela metade e o consumo de energia caiu drasticamente. Suporte técnico exemplar!'
   client2:
-    name: "Mariana Silva"
-    role: "Gerente de Engenharia"
-    company: "AutoParts Brasil"
-    text: "Equipamento extremamente robusto e de altíssima precisão. O projeto de conformidade com a NR12 nos deu total segurança. Recomendo fortemente."
+    name: 'Mariana Silva'
+    role: 'Gerente de Engenharia'
+    company: 'AutoParts Brasil'
+    text: 'Equipamento extremamente robusto e de altíssima precisão. O projeto de conformidade com a NR12 nos deu total segurança. Recomendo fortemente.'
   client3:
-    name: "Carlos H. Ferreira"
-    role: "Coordenador de Produção"
-    company: "Fundição Sul Ltda."
-    text: "A assistência técnica da Pressmatik é nota 10. Precisamos de uma manutenção emergencial em uma prensa de 160 toneladas e a equipe resolveu em poucas horas. Parabéns pelo comprometimento."
-
+    name: 'Carlos H. Ferreira'
+    role: 'Coordenador de Produção'
+    company: 'Fundição Sul Ltda.'
+    text: 'A assistência técnica da Pressmatik é nota 10. Precisamos de uma manutenção emergencial em uma prensa de 160 toneladas e a equipe resolveu em poucas horas. Parabéns pelo comprometimento.'
 clients:
-  title: "Quem Confia em Nossa Tecnologia"
-
+  title: 'Quem Confia em Nossa Tecnologia'
 contact_form:
-  tag: "Canais de Atendimento"
-  title: "Fale com nossos especialistas"
-  name: "Nome Completo"
-  email: "E-mail Corporativo"
-  phone: "Telefone / Celular"
-  message: "Como podemos ajudar sua empresa?"
-  success: "Mensagem enviada com sucesso! Entraremos em contato em até 24 horas."
-  product_interest: "Produto de interesse"
-  commercial_heading: "Comercial"
-  request_quote_heading: "Solicitar Cotação para PMC-ST"
-  request_quote_desc: "Preencha os dados abaixo e nosso engenheiro de vendas responsável enviará a proposta com as especificações selecionadas."
-  selected_model: "Modelo Selecionado"
-  ton_unit: "Toneladas"
-
+  tag: 'Canais de Atendimento'
+  title: 'Fale com nossos especialistas'
+  name: 'Nome Completo'
+  email: 'E-mail Corporativo'
+  phone: 'Telefone / Celular'
+  message: 'Como podemos ajudar sua empresa?'
+  success: 'Mensagem enviada com sucesso! Entraremos em contato em até 24 horas.'
+  product_interest: 'Produto de interesse'
+  commercial_heading: Comercial
+  request_quote_heading: 'Solicitar Cotação para PMC-ST'
+  request_quote_desc: 'Preencha os dados abaixo e nosso engenheiro de vendas responsável enviará a proposta com as especificações selecionadas.'
+  selected_model: 'Modelo Selecionado'
+  ton_unit: Toneladas
+  cpf_cnpj_label: 'CPF / CNPJ'
+  cpf_cnpj_placeholder: 'Digite apenas números (11 ou 14 dígitos)'
+  name_placeholder: 'Ex: João Silva'
+  email_placeholder: nome@suaempresa.com.br
+  phone_placeholder: '(16) 99999-9999'
+  product_placeholder: 'Ex: PMC-ST 60 Toneladas'
+  message_placeholder: 'Descreva os requisitos técnicos da prensa...'
+  quote_name_placeholder: 'Ex: Engenharia Mecânica Ltda'
+  quote_email_placeholder: comercial@suaempresa.com
+  quote_message_placeholder: 'Especificações adicionais (ex: profundidade da garganta customizada, almofada de estampagem, etc.)'
+  privacy_notice_prefix: 'Os dados informados serão utilizados para responder à sua solicitação. Consulte nossa'
+  privacy_policy_link: 'Política de Privacidade'
+  val_name: 'Por favor, informe seu nome completo (mínimo 3 caracteres).'
+  val_email: 'Por favor, informe um endereço de e-mail válido (ex: nome@empresa.com.br).'
+  val_phone: 'Por favor, informe um número de telefone/WhatsApp válido com DDD.'
+  val_cpf_cnpj_required: 'Por favor, informe o CPF ou CNPJ.'
+  val_cpf_invalid: 'O CPF informado é inválido. Verifique os dígitos.'
+  val_cnpj_invalid: 'O CNPJ informado é inválido. Verifique os dígitos.'
+  val_cpf_cnpj_invalid: 'Por favor, informe um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.'
+  val_server_error: 'Não foi possível entregar o e-mail de contato no momento. A mensagem não foi registrada. Tente novamente ou entre em contato via WhatsApp.'
+  val_success: 'Sua mensagem foi enviada por e-mail e gravada com sucesso! Nossa equipe entrará em contato em breve.'
+  val_rate_limit: 'Muitas tentativas de envio em um curto período. Por favor, aguarde alguns minutos antes de tentar novamente.'
+  val_conn_error: 'Erro de conexão com o servidor. Tente novamente.'
 footer:
-  about: "A Pressmatik é referência nacional na fabricação de prensas industriais pesadas de alta performance, focando em segurança, robustez e inovação contínua."
-  address_title: "Nossas Instalações"
-  address_factory: "Av. Caibar Schutel, 123 - Jardim Aeroporto, Araraquara - SP, 14808-362"
-  address_office: ""
-  phone: "Telefone: (16) 3014-8368"
-  whatsapp: "WhatsApp: (16) 99770-4156"
-  email: "E-mail: comercial@pressmatik.com.br"
-  rights: "© Copyright 2010-2026 Pressmatik. Todos os direitos reservados."
-
+  about: 'A Pressmatik é referência nacional na fabricação de prensas industriais pesadas de alta performance, focando em segurança, robustez e inovação contínua.'
+  address_title: 'Nossas Instalações'
+  address_factory: 'Av. Caibar Schutel, 123 - Jardim Aeroporto, Araraquara - SP, 14808-362'
+  address_office: ''
+  phone: 'Telefone: (16) 3014-8368'
+  whatsapp: 'WhatsApp: (16) 99770-4156'
+  email: 'E-mail: comercial@pressmatik.com.br'
+  rights: '© Copyright 2010-2026 Pressmatik. Todos os direitos reservados.'
+  privacy_policy: 'Política de Privacidade'
+  terms_of_service: 'Termos de Uso'
 product_detail:
-  tag: "Equipamento Pesado"
-  breadcrumbs: "Produtos > Prensas Hidráulicas > Tipo C > Modelo PMC-ST"
-  title: "Prensa de Garganta Profunda de Manivela Única com Estrutura em C"
-  subtitle: "Série PMC-ST - Capacidade de 25 a 160 Toneladas"
-  short_desc: "A série PMC-ST de prensas de garganta profunda foi projetada especialmente para aplicações de estampagem de telas e malhas. A distância do centro do martelo até a estrutura (profundidade da garganta) pode ser totalmente personalizada conforme as necessidades da fábrica. Pode ser integrada a alimentadores servo-motores de chapa para automatização e aumento de produtividade."
-  specs_tag: "DIMENSÕES & ENGENHARIA"
-  specs_title: "Parâmetros Técnicos"
-  specs_desc: "Tabela comparativa de especificações técnicas, capacidades e dimensões dos modelos."
-  features_title: "Características Técnicas"
-  config_title: "Configurações Padrão & Opcionais"
-  videos_title: "Vídeos em Operação"
-  quote_product: "Solicitar Orçamento deste Modelo"
-  spec_name: "Especificação"
-  spec_unit: "Unidade"
-  spec_capacity: "Capacidade da Prensa"
-  spec_stroke: "Curso do Martelo"
-  spec_speed: "Golpes por Minuto (SPM)"
-  spec_die_height: "Altura Máxima de Molde"
-  spec_motor: "Potência do Motor Principal"
-  spec_weight: "Peso da Prensa"
-  tons: "Toneladas"
-  bolster_size: "Mesa de Trabalho (Bolster Size)"
-  throat_depth: "Profundidade de Garganta (Throat Depth)"
-  footnote: "* Nota: Os valores entre parênteses indicam a especificação para curso reduzido (alta velocidade). A profundidade da garganta (Slide center to machine distance) é totalmente personalizável conforme necessidade do cliente."
-  std_items: "Itens de Série (Standard)"
-  opt_items: "Itens Opcionais (Optional)"
+  tag: 'Equipamento Pesado'
+  breadcrumbs: 'Produtos > Prensas Hidráulicas > Tipo C > Modelo PMC-ST'
+  title: 'Prensa de Garganta Profunda de Manivela Única com Estrutura em C'
+  subtitle: 'Série PMC-ST - Capacidade de 25 a 160 Toneladas'
+  short_desc: 'A série PMC-ST de prensas de garganta profunda foi projetada especialmente para aplicações de estampagem de telas e malhas. A distância do centro do martelo até a estrutura (profundidade da garganta) pode ser totalmente personalizada conforme as necessidades da fábrica. Pode ser integrada a alimentadores servo-motores de chapa para automatização e aumento de produtividade.'
+  specs_tag: 'DIMENSÕES & ENGENHARIA'
+  specs_title: 'Parâmetros Técnicos'
+  specs_desc: 'Tabela comparativa de especificações técnicas, capacidades e dimensões dos modelos.'
+  features_title: 'Características Técnicas'
+  config_title: 'Configurações Padrão & Opcionais'
+  videos_title: 'Vídeos em Operação'
+  quote_product: 'Solicitar Orçamento deste Modelo'
+  spec_name: Especificação
+  spec_unit: Unidade
+  spec_capacity: 'Capacidade da Prensa'
+  spec_stroke: 'Curso do Martelo'
+  spec_speed: 'Golpes por Minuto (SPM)'
+  spec_die_height: 'Altura Máxima de Molde'
+  spec_motor: 'Potência do Motor Principal'
+  spec_weight: 'Peso da Prensa'
+  tons: Toneladas
+  bolster_size: 'Mesa de Trabalho (Bolster Size)'
+  throat_depth: 'Profundidade de Garganta (Throat Depth)'
+  footnote: '* Nota: Os valores entre parênteses indicam a especificação para curso reduzido (alta velocidade). A profundidade da garganta (Slide center to machine distance) é totalmente personalizável conforme necessidade do cliente.'
+  std_items: 'Itens de Série (Standard)'
+  opt_items: 'Itens Opcionais (Optional)'
   features_list:
-    - "Estrutura robusta em monobloco de aço para minimizar deflexões e garantir alta precisão."
-    - "Freio e embreagem pneumática seca OMPI para maior vida útil e torque constante."
-    - "Guia de martelo de 6 pontos com processo de têmpera e retificação, reduzindo o desgaste."
-    - "Eixo virabrequim forjado em liga 42CrMo com resistência 1.3 vezes superior ao aço comum e maior vida útil."
-    - "Bucha de bronze fosforoso de estanho ZQSn10-1 com resistência 1.5 vezes maior que o latão comum BC6."
-    - "Dispositivo de proteção contra sobrecarga hidráulica altamente sensível para proteger a prensa e as ferramentas."
-    - "Construída sob a rigorosa norma de precisão JIS Classe 1."
-    - "Almofada de estampagem opcional (Die Cushion) para maior flexibilidade de processos."
+    - 'Estrutura robusta em monobloco de aço para minimizar deflexões e garantir alta precisão.'
+    - 'Freio e embreagem pneumática seca OMPI para maior vida útil e torque constante.'
+    - 'Guia de martelo de 6 pontos com processo de têmpera e retificação, reduzindo o desgaste.'
+    - 'Eixo virabrequim forjado em liga 42CrMo com resistência 1.3 vezes superior ao aço comum e maior vida útil.'
+    - 'Bucha de bronze fosforoso de estanho ZQSn10-1 com resistência 1.5 vezes maior que o latão comum BC6.'
+    - 'Dispositivo de proteção contra sobrecarga hidráulica altamente sensível para proteger a prensa e as ferramentas.'
+    - 'Construída sob a rigorosa norma de precisão JIS Classe 1.'
+    - 'Almofada de estampagem opcional (Die Cushion) para maior flexibilidade de processos.'
   std:
-    - "Dispositivo de proteção contra sobrecarga hidráulica"
-    - "Dispositivo de ajuste manual do martelo (abaixo de PMC-60)"
-    - "Dispositivo de ajuste motorizado do martelo (a partir de PMC-80)"
-    - "Motor de velocidade variável com inversor de frequência"
-    - "Indicador mecânico de altura de molde (abaixo de PMC-60)"
-    - "Indicador digital de altura de molde (a partir de PMC-80)"
-    - "Dispositivo balanceador do martelo e ferramentas de estampagem"
-    - "Controlador de came rotativo"
-    - "Indicador de ângulo do virabrequim"
-    - "Contador eletromagnético"
-    - "Conector de fonte de ar comprimido"
-    - "Dispositivo de proteção contra queda de segundo estágio"
-    - "Dispositivo de sopro de ar automático"
-    - "Sapatas amortecedoras mecânicas antivibratórias"
-    - "Interface reservada para detecção de falha de alimentação"
-    - "Ferramentas de manutenção e caixa de ferramentas inclusas"
-    - "Dispositivo de reversão do motor principal"
-    - "Cortina óptica de segurança (Barreira de luz)"
-    - "Tomada elétrica auxiliar"
-    - "Dispositivo de lubrificação elétrica automática a graxa"
-    - "Painel touch screen IHM com pré-diagnósticos e ajustes"
-    - "Console de controle bimanual móvel tipo T"
-    - "Iluminação de LED para a área do molde"
+    - 'Dispositivo de proteção contra sobrecarga hidráulica'
+    - 'Dispositivo de ajuste manual do martelo (abaixo de PMC-60)'
+    - 'Dispositivo de ajuste motorizado do martelo (a partir de PMC-80)'
+    - 'Motor de velocidade variável com inversor de frequência'
+    - 'Indicador mecânico de altura de molde (abaixo de PMC-60)'
+    - 'Indicador digital de altura de molde (a partir de PMC-80)'
+    - 'Dispositivo balanceador do martelo e ferramentas de estampagem'
+    - 'Controlador de came rotativo'
+    - 'Indicador de ângulo do virabrequim'
+    - 'Contador eletromagnético'
+    - 'Conector de fonte de ar comprimido'
+    - 'Dispositivo de proteção contra queda de segundo estágio'
+    - 'Dispositivo de sopro de ar automático'
+    - 'Sapatas amortecedoras mecânicas antivibratórias'
+    - 'Interface reservada para detecção de falha de alimentação'
+    - 'Ferramentas de manutenção e caixa de ferramentas inclusas'
+    - 'Dispositivo de reversão do motor principal'
+    - 'Cortina óptica de segurança (Barreira de luz)'
+    - 'Tomada elétrica auxiliar'
+    - 'Dispositivo de lubrificação elétrica automática a graxa'
+    - 'Painel touch screen IHM com pré-diagnósticos e ajustes'
+    - 'Console de controle bimanual móvel tipo T'
+    - 'Iluminação de LED para a área do molde'
   opt:
-    - "Customização total conforme requisitos específicos do cliente"
-    - "Almofada de estampagem integrada (Die Cushion)"
-    - "Dispositivo elétrico de ajuste de altura de molde para PMC-60"
-    - "Sistema de Troca Rápida de Moldes (QDC - Quick Die Change)"
-    - "Dispositivo extrator de peças integrado ao martelo (Knockout)"
-    - "Sistema Turnkey completo com linha de alimentação de bobina e automação"
-    - "Console bimanual fixo de operação integrado à estrutura"
-    - "Lubrificação automática por circulação contínua de óleo (PMC-80+)"
-    - "Embreagem pneumática úmida (Wet Clutch) de alta rotação"
-    - "Isoladores e amortecedores pneumáticos antivibração de alta performance"
-    - "Monitor digital de tonelagem em tempo real (Tonnage Monitor)"
-    - "Pedal de acionamento de segurança auxiliar"
-  spec_mode: "Modo"
-  spec_rated_tonnage_point: "Ponto de Tonelagem Nominal"
-  spec_slide_adjustment: "Ajuste do Martelo"
-  spec_slide_size: "Dimensões do Martelo (Slide Size)"
-  spec_platform_floor: "Distância Mesa ao Piso"
-  spec_shank_hole: "Furo da Haste (Shank Hole)"
-  spec_adjust_device: "Tipo de Ajuste do Martelo"
-  spec_air_pressure: "Pressão de Ar"
-  spec_accuracy_grade: "Grau de Precisão"
-  spec_dimension: "Dimensões Externas (L*W*H)"
-  spec_die_cushion_capacity: "Capacidade da Almofada"
-  spec_die_cushion_stroke: "Curso da Almofada"
-  spec_die_cushion_area: "Área Útil da Almofada"
-  overview_heading: "Destaques Tecnológicos & Engenharia de Precisão"
-  overview_text: "A série PMC-ST de prensas de garganta profunda foi projetada especialmente para atender às mais rigorosas demandas de estampagem, dobra e conformação de chapas, com especial destaque para a perfuração de telas e malhas metálicas (screen mesh). Com engenharia avançada e componentes certificados, a linha PMC-ST combina alto desempenho, baixo desgaste e confiabilidade incomparável no chão de fábrica."
-  overview_security_title: "Segurança Avançada"
-  overview_security_desc: "Cortinas de luz, bloco manifold de segurança de categoria 4 e calço mecânico monitorado de fábrica."
-  overview_siemens_title: "Automação Siemens"
-  overview_siemens_desc: "Controle lógico programável e painel Touch IHM Siemens para facilidade de parametrização e setup."
-  overview_bosch_title: "Sistemas Bosch Rexroth"
-  overview_bosch_desc: "Hidráulica avançada com bloco manifold, bombas de alta pressão e válvulas proporcionais Rexroth."
-  overview_premium_title: "Estrutura Premium"
-  overview_premium_desc: "Fabricadas em chapa estrutural de aço carbono soldada e normalizada para assegurar estabilidade dimensional."
-  key_features_heading: "Principais Diferenciais do Projeto"
-  feature_detail_1_title: "Estrutura Integrada Monobloco"
-  feature_detail_1_desc: "Chapas de aço estrutural de alta resistência soldadas em monobloco pesado, com alívio térmico de tensões internas. Esse projeto minimiza a deformação estrutural (deflexão lateral) sob carga máxima de estampagem, garantindo a precisão das peças e a integridade dos estampos."
-  feature_detail_2_title: "Eixo Virabrequim em Liga 42CrMo"
-  feature_detail_2_desc: "Virabrequim forjado a partir de liga nobre de cromo-molibdênio 42CrMo, usinado com precisão absoluta. Oferece resistência mecânica 1.3 vezes superior ao aço convencional #45, assegurando torque constante e alta resistência à fadiga."
-  feature_detail_3_title: "Guiamento Prismático de 6 Pontos"
-  feature_detail_3_desc: "O martelo conta com sistema de guias prismáticas lineares de 6 pontos com processo exclusivo de têmpera e retificação de precisão (Quenching & Grinding). Reduz drasticamente o atrito e o desgaste do conjunto, operando sob o rigoroso padrão de precisão JIS Classe 1."
-  feature_detail_4_title: "Controle & Integração Avançados"
-  feature_detail_4_desc: "Painel eletrônico touch screen baseado na plataforma Siemens de automação industrial. Facilita o controle de ciclos de trabalho, sincronização automática com alimentadores e desbobinadores (linhas turnkey) e diagnósticos preventivos integrados na tela."
-  subproducts_tag: "Modelos e Variações"
-  subproducts_title: "Subprodutos da Série PMC"
-  subproducts_desc: "A série PMC possui diversas configurações estruturais e dimensionais customizadas para diferentes processos industriais de conformação, rebarbação e montagem."
-  models_tag: "Modelos"
-  models_title: "Modelos Disponíveis"
-  models_desc: "Veja todas as variações construtivas e modelos de prensas desenvolvidos sob esta linha de produtos."
+    - 'Customização total conforme requisitos específicos do cliente'
+    - 'Almofada de estampagem integrada (Die Cushion)'
+    - 'Dispositivo elétrico de ajuste de altura de molde para PMC-60'
+    - 'Sistema de Troca Rápida de Moldes (QDC - Quick Die Change)'
+    - 'Dispositivo extrator de peças integrado ao martelo (Knockout)'
+    - 'Sistema Turnkey completo com linha de alimentação de bobina e automação'
+    - 'Console bimanual fixo de operação integrado à estrutura'
+    - 'Lubrificação automática por circulação contínua de óleo (PMC-80+)'
+    - 'Embreagem pneumática úmida (Wet Clutch) de alta rotação'
+    - 'Isoladores e amortecedores pneumáticos antivibração de alta performance'
+    - 'Monitor digital de tonelagem em tempo real (Tonnage Monitor)'
+    - 'Pedal de acionamento de segurança auxiliar'
+  spec_mode: Modo
+  spec_rated_tonnage_point: 'Ponto de Tonelagem Nominal'
+  spec_slide_adjustment: 'Ajuste do Martelo'
+  spec_slide_size: 'Dimensões do Martelo (Slide Size)'
+  spec_platform_floor: 'Distância Mesa ao Piso'
+  spec_shank_hole: 'Furo da Haste (Shank Hole)'
+  spec_adjust_device: 'Tipo de Ajuste do Martelo'
+  spec_air_pressure: 'Pressão de Ar'
+  spec_accuracy_grade: 'Grau de Precisão'
+  spec_dimension: 'Dimensões Externas (L*W*H)'
+  spec_die_cushion_capacity: 'Capacidade da Almofada'
+  spec_die_cushion_stroke: 'Curso da Almofada'
+  spec_die_cushion_area: 'Área Útil da Almofada'
+  overview_heading: 'Destaques Tecnológicos & Engenharia de Precisão'
+  overview_text: 'A série PMC-ST de prensas de garganta profunda foi projetada especialmente para atender às mais rigorosas demandas de estampagem, dobra e conformação de chapas, com especial destaque para a perfuração de telas e malhas metálicas (screen mesh). Com engenharia avançada e componentes certificados, a linha PMC-ST combina alto desempenho, baixo desgaste e confiabilidade incomparável no chão de fábrica.'
+  overview_security_title: 'Segurança Avançada'
+  overview_security_desc: 'Cortinas de luz, bloco manifold de segurança de categoria 4 e calço mecânico monitorado de fábrica.'
+  overview_siemens_title: 'Automação Siemens'
+  overview_siemens_desc: 'Controle lógico programável e painel Touch IHM Siemens para facilidade de parametrização e setup.'
+  overview_bosch_title: 'Sistemas Bosch Rexroth'
+  overview_bosch_desc: 'Hidráulica avançada com bloco manifold, bombas de alta pressão e válvulas proporcionais Rexroth.'
+  overview_premium_title: 'Estrutura Premium'
+  overview_premium_desc: 'Fabricadas em chapa estrutural de aço carbono soldada e normalizada para assegurar estabilidade dimensional.'
+  key_features_heading: 'Principais Diferenciais do Projeto'
+  feature_detail_1_title: 'Estrutura Integrada Monobloco'
+  feature_detail_1_desc: 'Chapas de aço estrutural de alta resistência soldadas em monobloco pesado, com alívio térmico de tensões internas. Esse projeto minimiza a deformação estrutural (deflexão lateral) sob carga máxima de estampagem, garantindo a precisão das peças e a integridade dos estampos.'
+  feature_detail_2_title: 'Eixo Virabrequim em Liga 42CrMo'
+  feature_detail_2_desc: 'Virabrequim forjado a partir de liga nobre de cromo-molibdênio 42CrMo, usinado com precisão absoluta. Oferece resistência mecânica 1.3 vezes superior ao aço convencional #45, assegurando torque constante e alta resistência à fadiga.'
+  feature_detail_3_title: 'Guiamento Prismático de 6 Pontos'
+  feature_detail_3_desc: 'O martelo conta com sistema de guias prismáticas lineares de 6 pontos com processo exclusivo de têmpera e retificação de precisão (Quenching & Grinding). Reduz drasticamente o atrito e o desgaste do conjunto, operando sob o rigoroso padrão de precisão JIS Classe 1.'
+  feature_detail_4_title: 'Controle & Integração Avançados'
+  feature_detail_4_desc: 'Painel eletrônico touch screen baseado na plataforma Siemens de automação industrial. Facilita o controle de ciclos de trabalho, sincronização automática com alimentadores e desbobinadores (linhas turnkey) e diagnósticos preventivos integrados na tela.'
+  subproducts_tag: 'Modelos e Variações'
+  subproducts_title: 'Subprodutos da Série PMC'
+  subproducts_desc: 'A série PMC possui diversas configurações estruturais e dimensionais customizadas para diferentes processos industriais de conformação, rebarbação e montagem.'
+  models_tag: Modelos
+  models_title: 'Modelos Disponíveis'
+  models_desc: 'Veja todas as variações construtivas e modelos de prensas desenvolvidos sob esta linha de produtos.'
   subproducts:
     st:
-      name: "PMC-ST Stander"
-      desc: "Modelo padrão ideal para operações gerais de estampagem, dobra e corte, montado sobre sapata rígida."
+      name: 'PMC-ST Stander'
+      desc: 'Modelo padrão ideal para operações gerais de estampagem, dobra e corte, montado sobre sapata rígida.'
     bc:
-      name: "PMC-BC Bancada"
-      desc: "Estrutura compacta para montagem sobre bancadas de trabalho, focada em operações de precisão em peças menores."
+      name: 'PMC-BC Bancada'
+      desc: 'Estrutura compacta para montagem sobre bancadas de trabalho, focada em operações de precisão em peças menores.'
     gt:
-      name: "PMC-GT Mesa Giratória"
-      desc: "Equipada com mesa indexadora giratória para processos automatizados de alta velocidade de carga e descarga de peças."
+      name: 'PMC-GT Mesa Giratória'
+      desc: 'Equipada com mesa indexadora giratória para processos automatizados de alta velocidade de carga e descarga de peças.'
     tr:
-      name: "PMC-TR Rebarbação e Calibração"
-      desc: "Projetada especificamente para a rebarbação de peças fundidas e calibração fina de componentes metálicos."
+      name: 'PMC-TR Rebarbação e Calibração'
+      desc: 'Projetada especificamente para a rebarbação de peças fundidas e calibração fina de componentes metálicos.'
     mt:
-      name: "PMC-MT Mesa Móvel"
-      desc: "Possui mesa de trabalho móvel/extraível para facilitar o setup e a carga de estampos e moldes pesados de forma segura."
+      name: 'PMC-MT Mesa Móvel'
+      desc: 'Possui mesa de trabalho móvel/extraível para facilitar o setup e a carga de estampos e moldes pesados de forma segura.'
     al:
-      name: "PMC-AL Alinhamento de Eixos"
-      desc: "Modelo especializado com mesa estendida e sistema de controle de precisão para endireitamento e alinhamento de barras e eixos."
+      name: 'PMC-AL Alinhamento de Eixos'
+      desc: 'Modelo especializado com mesa estendida e sistema de controle de precisão para endireitamento e alinhamento de barras e eixos.'
     hz:
-      name: "PMC-HZ Horizontal"
-      desc: "Prensa que opera no plano horizontal, ideal para processos de montagem por interferência, buchas e extrusão."
+      name: 'PMC-HZ Horizontal'
+      desc: 'Prensa que opera no plano horizontal, ideal para processos de montagem por interferência, buchas e extrusão.'
     es:
-      name: "PMC-ES Especial"
-      desc: "Projetos 100% sob medida com dimensões, cursos e automações personalizadas de acordo com as necessidades do cliente."
-
+      name: 'PMC-ES Especial'
+      desc: 'Projetos 100% sob medida com dimensões, cursos e automações personalizadas de acordo com as necessidades do cliente.'
+  current_model: Atual
+  videos_tag: Vídeos
+  videos_heading: 'Vídeos de Operação e Demonstração'
+  videos_desc: 'Assista aos nossos equipamentos em funcionamento e comprove a robustez, velocidade e silêncio operacional das nossas máquinas.'
 news:
-  tag: "Novidades & Eventos"
-  title: "Notícias da Pressmatik"
-  desc: "Acompanhe nossa participação em grandes feiras industriais e novidades tecnológicas do setor metal-mecânico."
-  read_more: "Ler Notícia Completa"
+  tag: 'Novidades & Eventos'
+  title: 'Notícias da Pressmatik'
+  desc: 'Acompanhe nossa participação em grandes feiras industriais e novidades tecnológicas do setor metal-mecânico.'
+  read_more: 'Ler Notícia Completa'
   items:
-    0:
-      title: "Pressmatik na Feira Mecânica 2026"
-      desc: "Apresentamos nossa nova linha de prensas industriais de alta precisão na maior feira de metalurgia da América Latina. O evento contou com demonstrações em tempo real."
-      date: "Maio, 2026"
-    1:
-      title: "Lançamento da Tecnologia Servo-Hidráulica na ExpoMetal"
-      desc: "Demonstramos soluções inovadoras de economia de energia e conformidade com a NR12. A nova tecnologia reduz o consumo de eletricidade em até 55%."
-      date: "Abril, 2026"
-    2:
-      title: "Expansão de Exportações na Hannover Messe"
-      desc: "Fortalecemos nossa presença global ao fechar parcerias estratégicas para fornecimento de prensas customizadas para o mercado europeu e norte-americano."
-      date: "Março, 2026"
-
+    -
+      title: 'Pressmatik na Feira Mecânica 2026'
+      desc: 'Apresentamos nossa nova linha de prensas industriais de alta precisão na maior feira de metalurgia da América Latina. O evento contou com demonstrações em tempo real.'
+      date: 'Maio, 2026'
+    -
+      title: 'Lançamento da Tecnologia Servo-Hidráulica na ExpoMetal'
+      desc: 'Demonstramos soluções inovadoras de economia de energia e conformidade com a NR12. A nova tecnologia reduz o consumo de eletricidade em até 55%.'
+      date: 'Abril, 2026'
+    -
+      title: 'Expansão de Exportações na Hannover Messe'
+      desc: 'Fortalecemos nossa presença global ao fechar parcerias estratégicas para fornecimento de prensas customizadas para o mercado europeu e norte-americano.'
+      date: 'Março, 2026'
+  meta_desc: 'Acompanhe as últimas notícias, inovações tecnológicas, feiras industriais e artigos sobre prensas hidráulicas da Pressmatik.'
+  subtitle: 'Acompanhe as últimas inovações tecnológicas, feiras industriais e novidades da Pressmatik.'
+  all_categories: Todas
+  empty: 'Nenhuma notícia encontrada para esta seleção.'
+  quick_read: 'Leitura rápida'
+  photo_gallery: 'Galeria de Fotos'
+  related_video: 'Vídeo Relacionado'
 catalog:
   common:
     special_project:
-      name: "Projeto Especial Sob Medida"
-      desc: "Desenvolvimento completo de projeto customizado para atender demandas específicas de fabricação."
+      name: 'Projeto Especial Sob Medida'
+      desc: 'Desenvolvimento completo de projeto customizado para atender demandas específicas de fabricação.'
   applications:
-    corte: "Corte"
-    dobra: "Dobra"
-    duplo_efeito: "Duplo Efeito"
-    estampagem: "Estampagem"
-    montagem: "Montagem"
-    progressivo: "Estampagem Progressiva"
-    rebarbacao: "Rebarbação"
-    repuxo: "Repuxo"
+    corte: Corte
+    dobra: Dobra
+    duplo_efeito: 'Duplo Efeito'
+    estampagem: Estampagem
+    montagem: Montagem
+    progressivo: 'Estampagem Progressiva'
+    rebarbacao: Rebarbação
+    repuxo: Repuxo
   hydraulic:
     tipo_c:
-      name: "Prensas Hidráulicas Tipo C"
-      desc: "Prensas de garganta profunda projetadas especialmente para estampagem, corte e conformação de chapas metálicas."
+      name: 'Prensas Hidráulicas Tipo C'
+      desc: 'Prensas de garganta profunda projetadas especialmente para estampagem, corte e conformação de chapas metálicas.'
       sub:
         pmc_st:
-          name: "PMC-ST Stander"
-          desc: "Modelo padrão ideal para operações gerais de estampagem, dobra e corte, montado sobre sapata rígida."
+          name: 'PMC-ST Stander'
+          desc: 'Modelo padrão ideal para operações gerais de estampagem, dobra e corte, montado sobre sapata rígida.'
         pmc_bc:
-          name: "PMC-BC Bancada"
-          desc: "Estrutura compacta para montagem sobre bancadas de trabalho, focada em operações de precisão em peças menores."
+          name: 'PMC-BC Bancada'
+          desc: 'Estrutura compacta para montagem sobre bancadas de trabalho, focada em operações de precisão em peças menores.'
         pmc_gt:
-          name: "PMC-GT Mesa Giratória"
-          desc: "Equipada com mesa indexadora giratória para processos automatizados de alta velocidade de carga e descarga de peças."
+          name: 'PMC-GT Mesa Giratória'
+          desc: 'Equipada com mesa indexadora giratória para processos automatizados de alta velocidade de carga e descarga de peças.'
         pmc_tr:
-          name: "PMC-TR Rebarbação e Calibração"
-          desc: "Projetada especificamente para a rebarbação de peças fundidas e calibração fina de componentes metálicos."
+          name: 'PMC-TR Rebarbação e Calibração'
+          desc: 'Projetada especificamente para a rebarbação de peças fundidas e calibração fina de componentes metálicos.'
         pmc_mt:
-          name: "PMC-MT Mesa Móvel"
-          desc: "Possui mesa de trabalho móvel/extraível para facilitar o setup e a carga de estampos e moldes pesados de forma segura."
+          name: 'PMC-MT Mesa Móvel'
+          desc: 'Possui mesa de trabalho móvel/extraível para facilitar o setup e a carga de estampos e moldes pesados de forma segura.'
         pmc_al:
-          name: "PMC-AL Alinhamento de Eixos"
-          desc: "Modelo especializado com mesa estendida e sistema de controle de precisão para endireitamento e alinhamento de barras e eixos."
+          name: 'PMC-AL Alinhamento de Eixos'
+          desc: 'Modelo especializado com mesa estendida e sistema de controle de precisão para endireitamento e alinhamento de barras e eixos.'
         pmc_hz:
-          name: "PMC-HZ Horizontal"
-          desc: "Prensa que opera no plano horizontal, ideal para processos de montagem por interferência, buchas e extrusão."
+          name: 'PMC-HZ Horizontal'
+          desc: 'Prensa que opera no plano horizontal, ideal para processos de montagem por interferência, buchas e extrusão.'
         pmc_es:
-          name: "PMC-ES Especial"
-          desc: "Projetos 100% sob medida com dimensões, cursos e automações personalizadas de acordo com as necessidades do cliente."
+          name: 'PMC-ES Especial'
+          desc: 'Projetos 100% sob medida com dimensões, cursos e automações personalizadas de acordo com as necessidades do cliente.'
     tipo_c_duplo:
-      name: "Prensas Hidráulicas Tipo C Duplo"
-      desc: "Estrutura robusta com cilindro duplo para maior estabilidade e precisão em grandes áreas de estampagem."
+      name: 'Prensas Hidráulicas Tipo C Duplo'
+      desc: 'Estrutura robusta com cilindro duplo para maior estabilidade e precisão em grandes áreas de estampagem.'
       sub:
         pmcd_st:
-          name: "PMCD-ST Stander"
-          desc: "Modelo com cilindro duplo montado sobre base estável, ideal para estampagem média."
+          name: 'PMCD-ST Stander'
+          desc: 'Modelo com cilindro duplo montado sobre base estável, ideal para estampagem média.'
         pmcd_gt:
-          name: "PMCD-GT Mesa Giratória"
-          desc: "Equipada com mesa giratória para alta produtividade em linhas de montagem."
+          name: 'PMCD-GT Mesa Giratória'
+          desc: 'Equipada com mesa giratória para alta produtividade em linhas de montagem.'
         pmcd_tr:
-          name: "PMCD-TR Rebarbação"
-          desc: "Excelente para acabamento de peças forjadas ou fundidas em ciclos repetitivos."
+          name: 'PMCD-TR Rebarbação'
+          desc: 'Excelente para acabamento de peças forjadas ou fundidas em ciclos repetitivos.'
         pmcd_mt:
-          name: "PMCD-MT Mesa Móvel"
-          desc: "Ideal para moldes pesados que exigem setup rápido e mesa de alimentação móvel."
+          name: 'PMCD-MT Mesa Móvel'
+          desc: 'Ideal para moldes pesados que exigem setup rápido e mesa de alimentação móvel.'
         pmcd_bc:
-          name: "PMCD-BC Bancada"
-          desc: "Versão compacta de cilindro duplo para maior precisão em bancadas industriais."
+          name: 'PMCD-BC Bancada'
+          desc: 'Versão compacta de cilindro duplo para maior precisão em bancadas industriais.'
         pmcd_es:
-          name: "PMCD-ES Especial"
-          desc: "Customizações de curso, mesa e velocidade conforme projeto específico."
+          name: 'PMCD-ES Especial'
+          desc: 'Customizações de curso, mesa e velocidade conforme projeto específico.'
     colunas:
-      name: "Prensas Hidráulicas 4 Colunas"
-      desc: "Máxima precisão de guiamento e distribuição uniforme de força para processos pesados e complexos."
+      name: 'Prensas Hidráulicas 4 Colunas'
+      desc: 'Máxima precisão de guiamento e distribuição uniforme de força para processos pesados e complexos.'
       sub:
         pm4c_st:
-          name: "PM4C-ST Simples e Duplo Efeito"
-          desc: "Prensa de 4 colunas versátil para estampagem profunda e conformação geral."
+          name: 'PM4C-ST Simples e Duplo Efeito'
+          desc: 'Prensa de 4 colunas versátil para estampagem profunda e conformação geral.'
         pm4c_rp:
-          name: "PM4C-RP Duplo e Triplo Efeito"
-          desc: "Especialmente projetada para fabricação de panelas e utensílios domésticos complexos."
+          name: 'PM4C-RP Duplo e Triplo Efeito'
+          desc: 'Especialmente projetada para fabricação de panelas e utensílios domésticos complexos.'
         pm4c_tr:
-          name: "PM4C-TR Rebarbação e Calibração"
-          desc: "Alta rigidez para calibração precisa de peças de segurança automotivas."
+          name: 'PM4C-TR Rebarbação e Calibração'
+          desc: 'Alta rigidez para calibração precisa de peças de segurança automotivas.'
         pm4c_ty:
-          name: "PM4C-TY Teste e Ajuste de Moldes"
-          desc: "Prensa de tryout equipada com controle micro-métrico de paralelismo e inclinação."
+          name: 'PM4C-TY Teste e Ajuste de Moldes'
+          desc: 'Prensa de tryout equipada com controle micro-métrico de paralelismo e inclinação.'
         pm4c_pd:
-          name: "PM4C-PD Pastilhadeira"
-          desc: "Compactação de pós metálicos, cerâmicos ou químicos de alta densidade."
+          name: 'PM4C-PD Pastilhadeira'
+          desc: 'Compactação de pós metálicos, cerâmicos ou químicos de alta densidade.'
         pmh4_ct:
-          name: "PMH4-CT Corte de Não Metálicos"
-          desc: "Alta velocidade com guias especiais para corte de borrachas, plásticos e compósitos."
+          name: 'PMH4-CT Corte de Não Metálicos'
+          desc: 'Alta velocidade com guias especiais para corte de borrachas, plásticos e compósitos.'
         pm4c_es:
-          name: "PM4C-ES Especial"
-          desc: "Projeto customizado com dimensões gigantescas e alta tonelagem sob demanda."
+          name: 'PM4C-ES Especial'
+          desc: 'Projeto customizado com dimensões gigantescas e alta tonelagem sob demanda.'
     tipo_h:
-      name: "Prensas Hidráulicas Tipo H"
-      desc: "Estrutura fechada em pórtico soldada com alta rigidez contra deflexão, ideal para conformação de alta tonelagem."
+      name: 'Prensas Hidráulicas Tipo H'
+      desc: 'Estrutura fechada em pórtico soldada com alta rigidez contra deflexão, ideal para conformação de alta tonelagem.'
       sub:
         pmh_st:
-          name: "PMH-ST Martelo Flutuante"
-          desc: "Amortecimento ativo de impacto de estampagem para maior vida útil das ferramentas."
+          name: 'PMH-ST Martelo Flutuante'
+          desc: 'Amortecimento ativo de impacto de estampagem para maior vida útil das ferramentas.'
         pmh_pr:
-          name: "PMH-PR 4 e 8 Pontos"
-          desc: "Guiamento prismático reforçado de alta precisão para estampos progressivos complexos."
+          name: 'PMH-PR 4 e 8 Pontos'
+          desc: 'Guiamento prismático reforçado de alta precisão para estampos progressivos complexos.'
         pmh_wk:
-          name: "PMH-WK Oficina"
-          desc: "Prensa versátil para manutenção geral, desmontagem de rolamentos e montagens diversas."
+          name: 'PMH-WK Oficina'
+          desc: 'Prensa versátil para manutenção geral, desmontagem de rolamentos e montagens diversas.'
         pmh_wp:
-          name: "PMH-WP Pórtico"
-          desc: "Mesa móvel com pórtico móvel para carregamento fácil de chapas de grandes dimensões."
+          name: 'PMH-WP Pórtico'
+          desc: 'Mesa móvel com pórtico móvel para carregamento fácil de chapas de grandes dimensões.'
         pmh_vb:
-          name: "PMH-VB Vulcanização"
-          desc: "Placas aquecidas controladas e ciclos de prensagem temporizados para borracha e polímeros."
+          name: 'PMH-VB Vulcanização'
+          desc: 'Placas aquecidas controladas e ciclos de prensagem temporizados para borracha e polímeros.'
         pmh_wt:
-          name: "PMH-WT Montagem de Pneus"
-          desc: "Projeto especializado para montagem e desmontagem rápida de pneus superelásticos industriais."
+          name: 'PMH-WT Montagem de Pneus'
+          desc: 'Projeto especializado para montagem e desmontagem rápida de pneus superelásticos industriais.'
         pmh_es:
-          name: "PMH-ES Especial"
-          desc: "Modelos sob medida para forjamento a quente, trefilação e grandes tonelagens."
+          name: 'PMH-ES Especial'
+          desc: 'Modelos sob medida para forjamento a quente, trefilação e grandes tonelagens.'
     especiais:
-      name: "Prensas Hidráulicas Especiais"
-      desc: "Desenvolvimento completo de prensas hidráulicas customizadas para qualquer aplicação industrial."
+      name: 'Prensas Hidráulicas Especiais'
+      desc: 'Desenvolvimento completo de prensas hidráulicas customizadas para qualquer aplicação industrial.'
   servo_hydraulic:
     bombas:
-      name: "Prensas Servo-Hidráulicas"
-      desc: "Eficiência energética superior e controle preciso de velocidade e pressão com tecnologia de servo bombas."
+      name: 'Prensas Servo-Hidráulicas'
+      desc: 'Eficiência energética superior e controle preciso de velocidade e pressão com tecnologia de servo bombas.'
       sub:
         servobombas:
-          name: "Servo Bombas Integradas"
-          desc: "Redução de até 60% no consumo de energia e ciclos otimizados para máxima produtividade."
+          name: 'Servo Bombas Integradas'
+          desc: 'Redução de até 60% no consumo de energia e ciclos otimizados para máxima produtividade.'
   mechanical:
     mecanicas:
-      name: "Prensas Mecânicas Excêntricas"
-      desc: "Prensas mecânicas de alta rigidez para estampagem rápida, corte progressivo e conformação geral."
+      name: 'Prensas Mecânicas Excêntricas'
+      desc: 'Prensas mecânicas de alta rigidez para estampagem rápida, corte progressivo e conformação geral.'
       sub:
         st_c_frame:
-          name: "Série ST C-Frame"
-          desc: "Prensas mecânicas C-Frame de manivela única altamente robustas e precisas."
+          name: 'Série ST C-Frame'
+          desc: 'Prensas mecânicas C-Frame de manivela única altamente robustas e precisas.'
         st_deep_throat:
-          name: "Série ST Garganta Profunda"
-          desc: "Prensas C-Frame com profundidade de garganta estendida para chapas largas."
+          name: 'Série ST Garganta Profunda'
+          desc: 'Prensas C-Frame com profundidade de garganta estendida para chapas largas.'
         stc:
-          name: "Série STC Duplo Martelo"
-          desc: "Prensas C-Frame de manivela dupla para estampos progressivos longos."
+          name: 'Série STC Duplo Martelo'
+          desc: 'Prensas C-Frame de manivela dupla para estampos progressivos longos.'
         stb:
-          name: "Série STB D-Frame"
-          desc: "Estrutura em pórtico D-Frame que reduz a deflexão angular e prolonga a vida útil do molde."
+          name: 'Série STB D-Frame'
+          desc: 'Estrutura em pórtico D-Frame que reduz a deflexão angular e prolonga a vida útil do molde.'
         stv:
-          name: "Série STV H-Frame"
-          desc: "Prensas H-Frame robustas de manivela única para estampagem de alta precisão."
+          name: 'Série STV H-Frame'
+          desc: 'Prensas H-Frame robustas de manivela única para estampagem de alta precisão.'
         std:
-          name: "Série STD Straight Side"
-          desc: "Prensas H-Frame Straight Side de um ponto de pressão para cargas pesadas."
+          name: 'Série STD Straight Side'
+          desc: 'Prensas H-Frame Straight Side de um ponto de pressão para cargas pesadas.'
         ste:
-          name: "Série STE Straight Side Dupla Manivela"
-          desc: "Prensas H-Frame com duas bielas de compressão para cargas excêntricas."
+          name: 'Série STE Straight Side Dupla Manivela'
+          desc: 'Prensas H-Frame com duas bielas de compressão para cargas excêntricas.'
         stf:
-          name: "Série STF Straight Side Link Motion"
-          desc: "Mecanismo link motion que desacelera o martelo na zona de trabalho para melhor acabamento."
+          name: 'Série STF Straight Side Link Motion'
+          desc: 'Mecanismo link motion que desacelera o martelo na zona de trabalho para melhor acabamento.'
         stn:
-          name: "Série STN Excêntrica"
-          desc: "Transmissão por engrenagens excêntricas para cursos longos e alta tonelagem constante."
+          name: 'Série STN Excêntrica'
+          desc: 'Transmissão por engrenagens excêntricas para cursos longos e alta tonelagem constante.'
     servo:
-      name: "Prensas Mecânicas Servo"
-      desc: "Tecnologia de servo acionamento direto que permite controle total da curva de curso, velocidade e tempo de parada."
+      name: 'Prensas Mecânicas Servo'
+      desc: 'Tecnologia de servo acionamento direto que permite controle total da curva de curso, velocidade e tempo de parada.'
       sub:
         sta:
-          name: "Série STA Servo C-Frame"
-          desc: "Servo prensa compacta tipo C para operações de flexibilidade extrema."
+          name: 'Série STA Servo C-Frame'
+          desc: 'Servo prensa compacta tipo C para operações de flexibilidade extrema.'
         stc:
-          name: "Série STC Servo Dupla Manivela"
-          desc: "Mesa ampla com dupla biela servo-acionada para estampos complexos."
+          name: 'Série STC Servo Dupla Manivela'
+          desc: 'Mesa ampla com dupla biela servo-acionada para estampos complexos.'
         std:
-          name: "Série STD Servo H-Frame"
-          desc: "Estrutura fechada com servo motor de alto torque para estampagem de precisão."
+          name: 'Série STD Servo H-Frame'
+          desc: 'Estrutura fechada com servo motor de alto torque para estampagem de precisão.'
         ste:
-          name: "Série STE Servo H-Frame Duplo"
-          desc: "Máxima rigidez e versatilidade em curvas de conformação programáveis."
+          name: 'Série STE Servo H-Frame Duplo'
+          desc: 'Máxima rigidez e versatilidade em curvas de conformação programáveis.'
     alta_velocidade:
-      name: "Prensas Mecânicas de Alta Velocidade"
-      desc: "Prensas ultra rápidas para laminação de motores elétricos, terminais eletrônicos e estampagem de alta produtividade."
+      name: 'Prensas Mecânicas de Alta Velocidade'
+      desc: 'Prensas ultra rápidas para laminação de motores elétricos, terminais eletrônicos e estampagem de alta produtividade.'
       sub:
         sts:
-          name: "Série STS Alta Velocidade Tipo C"
-          desc: "Alta velocidade de até 400 SPM para pequenas peças estampadas e terminais."
+          name: 'Série STS Alta Velocidade Tipo C'
+          desc: 'Alta velocidade de até 400 SPM para pequenas peças estampadas e terminais.'
         marx:
-          name: "Série MARX Knuckle Joint"
-          desc: "Mecanismo knuckle joint para alta velocidade com tempo de compressão estendido."
+          name: 'Série MARX Knuckle Joint'
+          desc: 'Mecanismo knuckle joint para alta velocidade com tempo de compressão estendido.'
         mdh:
-          name: "Série MDH H-Frame"
-          desc: "Guiamento dinâmico superpreciso para estampos progressivos rápidos."
+          name: 'Série MDH H-Frame'
+          desc: 'Guiamento dinâmico superpreciso para estampos progressivos rápidos.'
         ddh:
-          name: "Série DDH Laminação de Motores"
-          desc: "Projetada especificamente para produção rápida de rotores e estatores com paralelismo dinâmico."
+          name: 'Série DDH Laminação de Motores'
+          desc: 'Projetada especificamente para produção rápida de rotores e estatores com paralelismo dinâmico.'
   equipments:
     yokes:
-      name: "Equipamentos — Yokes"
-      desc: "Unidades hidráulicas portáteis e Yokes sob medida para rebitagem estrutural e puncionamento localizado."
+      name: 'Equipamentos — Yokes'
+      desc: 'Unidades hidráulicas portáteis e Yokes sob medida para rebitagem estrutural e puncionamento localizado.'
       sub:
         rebitagem:
-          name: "Yokes de Rebitagem"
-          desc: "Dispositivos compactos para rebitagem a frio e a quente de chassis e estruturas metálicas."
+          name: 'Yokes de Rebitagem'
+          desc: 'Dispositivos compactos para rebitagem a frio e a quente de chassis e estruturas metálicas.'
         puncionamento:
-          name: "Yokes de Puncionamento"
-          desc: "Puncionamento hidráulico portátil rápido para perfurações de alta precisão em campo."
+          name: 'Yokes de Puncionamento'
+          desc: 'Puncionamento hidráulico portátil rápido para perfurações de alta precisão em campo.'
         especiais:
-          name: "Yokes Especiais"
-          desc: "Configurações geométricas customizadas sob demanda para acesso a geometrias difíceis."
+          name: 'Yokes Especiais'
+          desc: 'Configurações geométricas customizadas sob demanda para acesso a geometrias difíceis.'
     unidades:
-      name: "Equipamentos — Unidades de Força"
-      desc: "Projetos completos de centrais hidráulicas sob medida de alto desempenho e confiabilidade."
+      name: 'Equipamentos — Unidades de Força'
+      desc: 'Projetos completos de centrais hidráulicas sob medida de alto desempenho e confiabilidade.'
       sub:
         mini:
-          name: "Unidades Mini"
-          desc: "Centrais compactas para aplicações de baixo fluxo e espaço reduzido."
+          name: 'Unidades Mini'
+          desc: 'Centrais compactas para aplicações de baixo fluxo e espaço reduzido.'
         stander:
-          name: "Unidades Stander"
-          desc: "Centrais hidráulicas industriais padrão com reservatório e blocos coletores normatizados."
+          name: 'Unidades Stander'
+          desc: 'Centrais hidráulicas industriais padrão com reservatório e blocos coletores normatizados.'
         especiais:
-          name: "Unidades Especiais"
-          desc: "Projetos sob medida de alta complexidade com sistemas de controle integrados."
+          name: 'Unidades Especiais'
+          desc: 'Projetos sob medida de alta complexidade com sistemas de controle integrados.'
     cilindros:
-      name: "Equipamentos — Cilindros Hidráulicos"
-      desc: "Cilindros hidráulicos normatizados e especiais de alta durabilidade e estanqueidade."
+      name: 'Equipamentos — Cilindros Hidráulicos'
+      desc: 'Cilindros hidráulicos normatizados e especiais de alta durabilidade e estanqueidade.'
       sub:
         normatizado:
-          name: "Cilindro Normatizado"
-          desc: "Fabricação sob normas ISO 6020 e NFPA para fácil intercambiabilidade e reposição rápida."
+          name: 'Cilindro Normatizado'
+          desc: 'Fabricação sob normas ISO 6020 e NFPA para fácil intercambiabilidade e reposição rápida.'
         especial:
-          name: "Cilindro Especial"
-          desc: "Cilindros telescópicos, de grande curso, alta pressão ou com transdutores de posição integrados."
+          name: 'Cilindro Especial'
+          desc: 'Cilindros telescópicos, de grande curso, alta pressão ou com transdutores de posição integrados.'
     transferencia:
-      name: "Equipamentos — Transferência e Filtração"
-      desc: "Carrinhos e unidades de filtração móveis para manutenção preventiva da qualidade do óleo."
+      name: 'Equipamentos — Transferência e Filtração'
+      desc: 'Carrinhos e unidades de filtração móveis para manutenção preventiva da qualidade do óleo.'
       sub:
         filtracao:
-          name: "Sistemas de Filtração Off-line"
-          desc: "Carrinhos compactos de diálise para filtragem absoluta de partículas e remoção de água do óleo."
+          name: 'Sistemas de Filtração Off-line'
+          desc: 'Carrinhos compactos de diálise para filtragem absoluta de partículas e remoção de água do óleo.'
     plataformas:
-      name: "Equipamentos — Plataformas"
-      desc: "Plataformas de carga e elevação hidráulica robustas para logística interna e alimentação de linhas."
+      name: 'Equipamentos — Plataformas'
+      desc: 'Plataformas de carga e elevação hidráulica robustas para logística interna e alimentação de linhas.'
       sub:
         plataformas:
-          name: "Plataformas Elevatórias Rígidas"
-          desc: "Sistemas pantográficos com válvulas de segurança antiqueda para movimentação segura de materiais pesados."
+          name: 'Plataformas Elevatórias Rígidas'
+          desc: 'Sistemas pantográficos com válvulas de segurança antiqueda para movimentação segura de materiais pesados.'
     tombadores:
-      name: "Equipamentos — Tombadores"
-      desc: "Tombadores de moldes e bobinas hidráulicos projetados para garantir segurança máxima no setup."
+      name: 'Equipamentos — Tombadores'
+      desc: 'Tombadores de moldes e bobinas hidráulicos projetados para garantir segurança máxima no setup.'
       sub:
         tombadores:
-          name: "Tombadores de Moldes 90°"
-          desc: "Equipamento seguro que elimina o risco de queda durante a rotação de moldes pesados de injeção ou estampos."
+          name: 'Tombadores de Moldes 90°'
+          desc: 'Equipamento seguro que elimina o risco de queda durante a rotação de moldes pesados de injeção ou estampos.'
     especiais:
-      name: "Equipamentos Especiais"
-      desc: "Desenvolvimento completo de maquinários especiais e células automatizadas sob demanda."
+      name: 'Equipamentos Especiais'
+      desc: 'Desenvolvimento completo de maquinários especiais e células automatizadas sob demanda.'
   parts:
     hidraulica:
-      name: "Peças — Hidráulica Industrial"
-      desc: "Componentes hidráulicos premium para reposição e manutenção de sistemas de alta pressão."
+      name: 'Peças — Hidráulica Industrial'
+      desc: 'Componentes hidráulicos premium para reposição e manutenção de sistemas de alta pressão.'
       sub:
         bombas:
-          name: "Bombas Hidráulicas"
-          desc: "Bombas de pistão axial, palhetas e engrenagens de marcas mundiais líderes."
+          name: 'Bombas Hidráulicas'
+          desc: 'Bombas de pistão axial, palhetas e engrenagens de marcas mundiais líderes.'
         valvulas:
-          name: "Válvulas de Pressão, Fluxo e Direcionais"
-          desc: "Válvulas eletrônicas proporcionais, direcionais e de segurança certificadas."
+          name: 'Válvulas de Pressão, Fluxo e Direcionais'
+          desc: 'Válvulas eletrônicas proporcionais, direcionais e de segurança certificadas.'
         vedacoes:
-          name: "Sistemas de Vedação Premium"
-          desc: "Kits de vedações de poliuretano e elastômeros para alta durabilidade e vazamento zero."
+          name: 'Sistemas de Vedação Premium'
+          desc: 'Kits de vedações de poliuretano e elastômeros para alta durabilidade e vazamento zero.'
         filtros:
-          name: "Elementos Filtrantes"
-          desc: "Filtros de retorno, pressão e sucção de alta eficiência absoluta."
+          name: 'Elementos Filtrantes'
+          desc: 'Filtros de retorno, pressão e sucção de alta eficiência absoluta.'
     eletro:
-      name: "Peças — Eletroeletrônica"
-      desc: "Componentes eletroeletrônicos e de automação para controle preciso de prensas."
+      name: 'Peças — Eletroeletrônica'
+      desc: 'Componentes eletroeletrônicos e de automação para controle preciso de prensas.'
       sub:
         automacao:
-          name: "Automação e CLPs"
-          desc: "Módulos de segurança, CPUs e cartões de I/O de última geração."
+          name: 'Automação e CLPs'
+          desc: 'Módulos de segurança, CPUs e cartões de I/O de última geração.'
         potencia:
-          name: "Potência e Comando"
-          desc: "Contatores, disjuntores motor, fontes de alimentação e painéis elétricos completos."
+          name: 'Potência e Comando'
+          desc: 'Contatores, disjuntores motor, fontes de alimentação e painéis elétricos completos.'
     acessorios:
-      name: "Peças — Acessórios Industriais"
-      desc: "Acessórios diversos para conformidade com normas e segurança industrial."
+      name: 'Peças — Acessórios Industriais'
+      desc: 'Acessórios diversos para conformidade com normas e segurança industrial.'
       sub:
         nr12:
-          name: "Acessórios NR12"
-          desc: "Válvulas de segurança de duplo corpo monitoradas, relés de segurança e sinalizadores."
+          name: 'Acessórios NR12'
+          desc: 'Válvulas de segurança de duplo corpo monitoradas, relés de segurança e sinalizadores.'
         diversos:
-          name: "Acessórios Diversos"
-          desc: "Manômetros, pressostatos, termostatos e sapatas antivibratórias."
-
-
+          name: 'Acessórios Diversos'
+          desc: 'Manômetros, pressostatos, termostatos e sapatas antivibratórias.'
+theme:
+  toggle: 'Alternar tema claro ou escuro'
+  dark: 'Tema escuro'
+  light: 'Tema claro'
+aria:
+  home_link: 'Pressmatik Página Inicial'
+  main_nav: 'Menu Principal'
+  products_menu: 'Produtos Pressmatik'
+  whatsapp: 'Contato direto via WhatsApp Pressmatik'
+  linkedin: 'Siga a Pressmatik no LinkedIn'
+  instagram: 'Siga a Pressmatik no Instagram'
+  youtube: 'Inscreva-se no canal do YouTube da Pressmatik'
+  facebook: 'Curta a página da Pressmatik no Facebook'
+  tiktok: 'Siga a Pressmatik no TikTok'
+  linktree: 'Acesse todos os links da Pressmatik no Linktree'
+  hero_section: 'Banner principal Pressmatik'
+  prev_slide: 'Slide anterior'
+  next_slide: 'Próximo slide'
+  slider_nav: 'Navegação do slider'
+  go_to_slide: 'Ir para o slide %slide%'
+  about_section: 'Quem somos - Sobre a Pressmatik'
+  differentials_section: 'Diferenciais técnicos Pressmatik'
+  products_section: 'Linha de produtos Pressmatik'
+  services_section: 'Serviços Pressmatik'
+  inst_video: 'Vídeo institucional Pressmatik'
+  news_section: 'Notícias e eventos Pressmatik'
+  testimonials_section: 'Depoimentos de clientes Pressmatik'
+  prev_testimonial: 'Depoimento Anterior'
+  next_testimonial: 'Próximo Depoimento'
+  clients_section: 'Clientes e parceiros Pressmatik'
+  map_title: 'Mapa de Localização Pressmatik em Araraquara SP'
+privacy_policy:
+  title: 'Política de Privacidade'
+  meta_desc: 'Conheça a Política de Privacidade da Pressmatik e como tratamos os seus dados com transparência e segurança.'
+  intro: 'A Pressmatik Prensas e Equipamentos Industriais preza pela privacidade, confidencialidade e segurança dos dados de seus clientes, parceiros e visitantes. Este documento esclarece as práticas de tratamento de informações coletadas por meio de nosso site.'
+  s1_title: '1. Informações Coletadas'
+  s1_text: 'Coletamos exclusivamente as informações fornecidas voluntariamente por você ao utilizar nossos canais de contato e formulários de solicitação de cotação técnica, tais como: nome completo, endereço de e-mail corporativo, telefone/WhatsApp, empresa, identificação fiscal (quando informada), produto de interesse e mensagens adicionais.'
+  s2_title: '2. Finalidade do Uso dos Dados'
+  s2_text: 'Os dados coletados destinam-se estritamente ao atendimento comercial e técnico de sua solicitação, envio de propostas de engenharia, esclarecimento de dúvidas sobre nossos equipamentos e prestação de suporte técnico pós-venda.'
+  s3_title: '3. Armazenamento e Segurança'
+  s3_text: 'Adotamos padrões rígidos de segurança da informação, com transmissão de dados criptografada via protocolo SSL/HTTPS. Seus dados são armazenados em ambiente seguro e sob controle estrito de acesso, não sendo comercializados, alugados ou compartilhados com terceiros para fins publicitários.'
+  s4_title: '4. Cookies e Tecnologias de Navegação'
+  s4_text: 'Nosso site utiliza cookies e armazenamento local exclusivamente para finalidades operacionais e de usabilidade, como a retenção de sua preferência de tema visual (claro/escuro) e garantia de segurança de sessão (tokens anti-CSRF). Não utilizamos cookies intrusivos de rastreamento publicitário de terceiros.'
+  s5_title: '5. Direitos do Titular'
+  s5_text: 'Em conformidade com a legislação de proteção de dados aplicável (Lei Geral de Proteção de Dados - LGPD), o titular dos dados tem o direito de solicitar a confirmação da existência de tratamento, o acesso aos dados, a correção de dados incompletos ou inexatos e a exclusão definitiva de seus dados de nossa base de contatos.'
+  s6_title: '6. Canal de Atendimento'
+  s6_text: 'Para exercer seus direitos de privacidade ou esclarecer qualquer dúvida referente a esta política, entre em contato com nossa equipe pelo e-mail comercial@pressmatik.com.br ou pelo telefone (16) 3014-8368.'
+  last_updated: 'Última atualização: Setembro de 2026.'
+terms_of_use:
+  title: 'Termos de Uso'
+  meta_desc: 'Termos e condições gerais de navegação e utilização do site da Pressmatik Prensas e Equipamentos Industriais.'
+  intro: 'Ao acessar e navegar no site da Pressmatik, o usuário declara concordar e aderir aos presentes Termos de Uso. Caso não concorde com qualquer uma das condições, recomendamos interromper a navegação.'
+  s1_title: '1. Finalidade do Site'
+  s1_text: 'O site da Pressmatik tem por finalidade a apresentação institucional da empresa, divulgação técnica de seu catálogo de prensas industriais, equipamentos e serviços de manutenção/adequação NR12, além de disponibilizar canais diretos para envio de solicitações de propostas comerciais.'
+  s2_title: '2. Propriedade Intelectual'
+  s2_text: 'Todos os conteúdos exibidos neste site — incluindo textos, especificações técnicas, fotografias, logotipos, diagramas e códigos-fonte — são de propriedade exclusiva da Pressmatik ou devidamente licenciados, sendo protegidos pela legislação de propriedade industrial e direitos autorais. É vedada qualquer reprodução, modificação ou redistribuição sem prévia autorização por escrito.'
+  s3_title: '3. Parâmetros e Especificações Técnicas'
+  s3_text: 'As especificações técnicas, tabelas dimensionais e capacidades apresentadas possuem caráter informativo. Devido à contínua evolução de nossos projetos de engenharia e às possibilidades de customização conforme a necessidade de cada cliente, os parâmetros finais devem ser sempre validados em proposta comercial formal emitida por nossos especialistas.'
+  s4_title: '4. Limitação de Responsabilidade'
+  s4_text: 'A Pressmatik emprega seus melhores esforços para assegurar a precisão e disponibilidade contínua das informações. Contudo, não se responsabiliza por eventuais interrupções técnicas temporárias, instabilidades de rede ou falhas decorrentes de fatores fora do controle razoável da empresa.'
+  s5_title: '5. Legislação Aplicável e Foro'
+  s5_text: 'Estes termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o Foro da Comarca de Araraquara, Estado de São Paulo, como competente para dirimir quaisquer controvérsias decorrentes da utilização deste site.'
+  last_updated: 'Última atualização: Setembro de 2026.'

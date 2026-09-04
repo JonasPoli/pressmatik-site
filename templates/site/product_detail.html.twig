@@ -391,10 +391,10 @@
         {% if productVideos is not empty %}
             <section class="product-videos-section scroll-animate slide-top" style="margin-top: 5rem; margin-bottom: 5rem; border-top: 1px solid var(--color-border); padding-top: 4rem;">
                 <div class="overview-header" style="margin-bottom: 3rem;">
-                    <span class="section-title-tag">Vídeos</span>
-                    <h2 style="font-size: 2.2rem; margin-top: 0.8rem; font-weight: 800; font-family: var(--font-heading);">Vídeos de Operação e Demonstração</h2>
+                    <span class="section-title-tag">{{ 'product_detail.videos_tag'|trans }}</span>
+                    <h2 style="font-size: 2.2rem; margin-top: 0.8rem; font-weight: 800; font-family: var(--font-heading);">{{ 'product_detail.videos_heading'|trans }}</h2>
                     <p style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.6; margin-top: 0.5rem; max-width: 900px;">
-                        Assista aos nossos equipamentos em funcionamento e comprove a robustez, velocidade e silêncio operacional das nossas máquinas.
+                        {{ 'product_detail.videos_desc'|trans }}
                     </p>
                 </div>
                 
@@ -472,7 +472,7 @@
                                 <wa-button variant="brand" size="s" href="#quote-product-form" onclick="document.getElementById('p-model').value = '{{ sub.model|lower }}';">
                                     {{ 'cta.quote_now'|trans }}
                                 </wa-button>
-                                <span style="font-size: 0.75rem; color: var(--color-accent-red); font-weight: 700; text-transform: uppercase; margin-left: auto; letter-spacing: 0.5px;">Atual</span>
+                                <span style="font-size: 0.75rem; color: var(--color-accent-red); font-weight: 700; text-transform: uppercase; margin-left: auto; letter-spacing: 0.5px;">{{ 'product_detail.current_model'|trans }}</span>
                             {% else %}
                                 <wa-button variant="neutral" size="s" outline href="{{ path('app_product_detail', {'_locale': locale, 'slug': product.slug, 'model': sub.model}) }}">
                                     {{ 'cta.learn_more'|trans }}
@@ -493,17 +493,22 @@
             </div>
             
             <form id="quote-product-form-element" data-turbo="false" style="max-width: 600px; margin: 0 auto;">
+                {# Campo honeypot invisivel contra spam bot #}
+                <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true" tabindex="-1">
+                    <input type="text" name="website" id="p-website" tabindex="-1" autocomplete="off">
+                </div>
+
                 <div class="form-group">
-                    <wa-input id="p-name" type="text" label="{{ 'contact_form.name'|trans }}" placeholder="Ex: Engenharia Mecânica Ltda" required></wa-input>
+                    <wa-input id="p-name" type="text" label="{{ 'contact_form.name'|trans }}" placeholder="{{ 'contact_form.quote_name_placeholder'|trans }}" required></wa-input>
                 </div>
                 <div class="form-group">
-                    <wa-input id="p-email" type="email" label="{{ 'contact_form.email'|trans }}" placeholder="comercial@suaempresa.com" required></wa-input>
+                    <wa-input id="p-email" type="email" label="{{ 'contact_form.email'|trans }}" placeholder="{{ 'contact_form.quote_email_placeholder'|trans }}" required></wa-input>
                 </div>
                 <div class="form-group">
-                    <wa-input id="p-phone" type="tel" label="{{ 'contact_form.phone'|trans }}" placeholder="(16) 99999-9999" required></wa-input>
+                    <wa-input id="p-phone" type="tel" label="{{ 'contact_form.phone'|trans }}" placeholder="{{ 'contact_form.phone_placeholder'|trans }}" required></wa-input>
                 </div>
                 <div class="form-group">
-                    <wa-input id="p-cnpj" type="text" label="CPF / CNPJ" placeholder="Digite apenas números (11 ou 14 dígitos)" required></wa-input>
+                    <wa-input id="p-cnpj" type="text" label="{{ 'contact_form.cpf_cnpj_label'|trans }}" placeholder="{{ 'contact_form.cpf_cnpj_placeholder'|trans }}" {% if locale == 'pt' %}required{% endif %}></wa-input>
                 </div>
                 <div class="form-group">
                     <wa-select id="p-model" label="{{ 'contact_form.selected_model'|trans }}" value="{{ activeSubproduct ? activeSubproduct.model|lower : '' }}">
@@ -513,12 +518,16 @@
                     </wa-select>
                 </div>
                 <div class="form-group">
-                    <wa-textarea id="p-message" label="{{ 'contact_form.message'|trans }}" placeholder="Especificações adicionais (ex: profundidade da garganta customizada, almofada de estampagem, etc.)"></wa-textarea>
+                    <wa-textarea id="p-message" label="{{ 'contact_form.message'|trans }}" placeholder="{{ 'contact_form.quote_message_placeholder'|trans }}"></wa-textarea>
                 </div>
                 
                 <wa-button id="p-submit-btn" type="submit" variant="brand" style="width: 100%;">
                     {{ 'cta.submit'|trans }}
                 </wa-button>
+                <p style="font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.75rem; line-height: 1.4; text-align: center;">
+                    {{ 'contact_form.privacy_notice_prefix'|trans }}
+                    <a href="{{ path('app_privacy_policy', {'_locale': locale}) }}" style="color: var(--color-accent-red); text-decoration: underline;">{{ 'contact_form.privacy_policy_link'|trans }}</a>.
+                </p>
                 <div id="p-status-message" style="margin-top: 1.5rem; padding: 1rem; border-radius: 8px; display: none;"></div>
             </form>
         </section>
@@ -658,43 +667,61 @@
                 }
 
                 if (!name || name.length < 3) {
-                    showStatus('error', 'Por favor, informe seu nome completo.');
+                    showStatus('error', '{{ 'contact_form.val_name'|trans }}');
                     return;
                 }
 
                 if (!email || !validateEmail(email)) {
-                    showStatus('error', 'Por favor, informe um endereço de e-mail válido (ex: nome@empresa.com.br).');
+                    showStatus('error', '{{ 'contact_form.val_email'|trans }}');
                     return;
                 }
 
                 const phoneDigits = phone.replace(/[^\d]+/g, '');
                 if (!phone || phoneDigits.length < 8) {
-                    showStatus('error', 'Por favor, informe um número de telefone/WhatsApp válido com DDD.');
+                    showStatus('error', '{{ 'contact_form.val_phone'|trans }}');
                     return;
                 }
 
-                if (!docVal) {
-                    showStatus('error', 'Por favor, informe o CPF ou CNPJ.');
-                    return;
-                }
+                const currentLocale = '{{ locale }}';
+                if (currentLocale === 'pt') {
+                    if (!docVal) {
+                        showStatus('error', '{{ 'contact_form.val_cpf_cnpj_required'|trans }}');
+                        return;
+                    }
 
-                if (docVal.length === 11) {
-                    if (!validateCPF(docVal)) {
-                        showStatus('error', 'O CPF informado é inválido. Verifique os dígitos.');
+                    if (docVal.length === 11) {
+                        if (!validateCPF(docVal)) {
+                            showStatus('error', '{{ 'contact_form.val_cpf_invalid'|trans }}');
+                            return;
+                        }
+                    } else if (docVal.length === 14) {
+                        if (!validateCNPJ(docVal)) {
+                            showStatus('error', '{{ 'contact_form.val_cnpj_invalid'|trans }}');
+                            return;
+                        }
+                    } else {
+                        showStatus('error', '{{ 'contact_form.val_cpf_cnpj_invalid'|trans }}');
                         return;
                     }
-                } else if (docVal.length === 14) {
-                    if (!validateCNPJ(docVal)) {
-                        showStatus('error', 'O CNPJ informado é inválido. Verifique os dígitos.');
-                        return;
+                } else if (docVal) {
+                    if (docVal.length === 11) {
+                        if (!validateCPF(docVal)) {
+                            showStatus('error', '{{ 'contact_form.val_cpf_invalid'|trans }}');
+                            return;
+                        }
+                    } else if (docVal.length === 14) {
+                        if (!validateCNPJ(docVal)) {
+                            showStatus('error', '{{ 'contact_form.val_cnpj_invalid'|trans }}');
+                            return;
+                        }
                     }
-                } else {
-                    showStatus('error', 'Insira um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.');
-                    return;
                 }
 
                 submitBtn.setAttribute('loading', '');
                 submitBtn.disabled = true;
+
+                const hpInput = document.getElementById('p-website');
+                const websiteVal = hpInput ? hpInput.value : '';
 
                 try {
                     const response = await fetch('{{ path('app_contact_submit', {'_locale': locale}) }}', {
@@ -711,6 +738,7 @@
                             product_interest: model.toUpperCase(),
                             product_slug: '{{ product.slug }}',
                             message,
+                            website: websiteVal,
                             type: 'quote'
                         })
                     });
@@ -724,12 +752,12 @@
                         showStatus(statusType, resData.message);
                         form.querySelectorAll('wa-input, wa-textarea').forEach(el => { el.value = ''; });
                     } else {
-                        showStatus('error', 'Ocorreu um erro: ' + resData.message);
+                        showStatus('error', resData.message);
                     }
                 } catch (error) {
                     submitBtn.removeAttribute('loading');
                     submitBtn.disabled = false;
-                    showStatus('error', 'Erro de conexão com o servidor. Tente novamente.');
+                    showStatus('error', '{{ 'contact_form.val_conn_error'|trans }}');
                 }
             }
 
