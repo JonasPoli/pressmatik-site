@@ -9,13 +9,6 @@
 {% block og_description %}{% if activeSubproduct %}{{ activeSubproduct.getDescription(locale) }}{% else %}{{ product.getDescription(locale) }}{% endif %}{% endblock %}
 {% block og_image %}{% if activeSubproduct and activeSubproduct.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/products/{{ activeSubproduct.imageName }}{% elseif product.imageName %}{{ app.request.schemeAndHttpHost }}/uploads/products/{{ product.imageName }}{% else %}{{ parent() }}{% endif %}{% endblock %}
 
-{% block fontawesome_assets %}
-    <style>
-        @font-face { font-family: "Font Awesome 6 Free"; font-display: swap; }
-        @font-face { font-family: "Font Awesome 6 Brands"; font-display: swap; }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" crossorigin="anonymous" referrerpolicy="no-referrer">
-{% endblock %}
 
 {% block webawesome_assets %}
     <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.9.0/styles/webawesome.css" media="print" onload="this.media='all'">
