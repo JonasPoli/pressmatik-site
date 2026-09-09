@@ -275,10 +275,10 @@
     <div id="icon-modal">
         <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e2e8f0;padding-bottom:.75rem">
             <div style="display:flex;align-items:center;gap:.6rem">
-                <i class="fa-solid fa-star text-primary" style="font-size:1.2rem;vertical-align:middle;filter:drop-shadow(0 0 8px rgba(213,28,35,0.4))"></i>
+                <i class="fa-solid fa-star text-primary" style="font-size:1.2rem;vertical-align:middle;filter:drop-shadow(0 0 8px rgba(var(--color-pressmatik-red-rgb),0.4))"></i>
                 <span style="font-weight:800;font-size:1.15rem;letter-spacing:-.01em">Escolher Ícone Font Awesome</span>
             </div>
-            <button type="button" onclick="closeIconPicker()" style="background:none;border:none;cursor:pointer;color:#64748b;font-size:1.4rem;display:flex;align-items:center;transition:color 0.2s" onmouseover="this.style.color='#D51C23'" onmouseout="this.style.color='#64748b'">✕</button>
+            <button type="button" onclick="closeIconPicker()" style="background:none;border:none;cursor:pointer;color:#64748b;font-size:1.4rem;display:flex;align-items:center;transition:color 0.2s" onmouseover="this.style.color='var(--color-pressmatik-red)'" onmouseout="this.style.color='#64748b'">✕</button>
         </div>
         <div class="icon-search-wrap">
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -297,7 +297,7 @@
         
         <!-- Live Preview Pane -->
         <div id="icon-preview-pane" style="display:flex;align-items:center;gap:1.25rem;padding:0.85rem 1.15rem;background:rgba(0,0,0,0.03);border:1px solid #e2e8f0;border-radius:14px;margin-top:0.25rem;min-height:68px;transition:all 0.2s ease">
-            <div id="icon-preview-pane-icon" style="font-size:2rem;width:48px;height:48px;background:rgba(213,28,35,0.1);border:1px solid rgba(213,28,35,0.25);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#D51C23;transition:all .18s ease">
+            <div id="icon-preview-pane-icon" style="font-size:2rem;width:48px;height:48px;background:rgba(var(--color-pressmatik-red-rgb),0.1);border:1px solid rgba(var(--color-pressmatik-red-rgb),0.25);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--color-pressmatik-red);transition:all .18s ease">
                 <i class="fa-solid fa-face-smile"></i>
             </div>
             <div style="display:flex;flex-direction:column;gap:0.2rem">
@@ -651,8 +651,8 @@ function previewIcon(cls) {
     paneDesc.innerText = `Ícone "${name}" • Tipo: ${type}`;
     
     paneIcon.style.transform = 'scale(1.1)';
-    paneIcon.style.borderColor = 'rgba(213, 28, 35, 0.5)';
-    paneIcon.style.boxShadow = '0 0 12px rgba(213, 28, 35, 0.25)';
+    paneIcon.style.borderColor = 'rgba(var(--color-pressmatik-red-rgb), 0.5)';
+    paneIcon.style.boxShadow = '0 0 12px rgba(var(--color-pressmatik-red-rgb), 0.25)';
 }
 
 function resetPanePreview() {
@@ -666,7 +666,7 @@ function resetPanePreview() {
     paneDesc.innerText = 'Passe o mouse sobre qualquer ícone da lista para ver os detalhes em tempo real';
     
     paneIcon.style.transform = 'scale(1)';
-    paneIcon.style.borderColor = 'rgba(213, 28, 35, 0.25)';
+    paneIcon.style.borderColor = 'rgba(var(--color-pressmatik-red-rgb), 0.25)';
     paneIcon.style.boxShadow = 'none';
 }
 

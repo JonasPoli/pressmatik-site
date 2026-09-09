@@ -13,10 +13,12 @@
    ═══════════════════════════════════════════════════════════════════════ #}
 <section class="about-hero" {% if about.bannerImageName %}style="background-image: url('{{ ('/uploads/about/' ~ about.bannerImageName)|webp }}');"{% endif %}>
     <div class="about-hero-overlay"></div>
-    <div class="container about-hero-content">
-        <span class="about-hero-tag">{{ 'about.tag'|trans }}</span>
-        <h1 class="about-hero-title">{{ about.getTitle(locale) ?: 'about.title'|trans }}</h1>
-        <p class="about-hero-subtitle">{{ about.getSubtitle(locale) }}</p>
+    <div class="container">
+        <div class="about-hero-content">
+            <span class="about-hero-tag">{{ 'about.tag'|trans }}</span>
+            <h1 class="about-hero-title">{{ about.getTitle(locale) ?: 'about.title'|trans }}</h1>
+            <p class="about-hero-subtitle">{{ about.getSubtitle(locale) }}</p>
+        </div>
     </div>
 </section>
 
@@ -131,7 +133,7 @@
             {% for item in timeline %}
                 <div class="timeline-row" style="display: flex; justify-content: {% if loop.index is odd %}flex-start{% else %}flex-end{% endif %}; position: relative; margin-bottom: 3rem; width: 100%;">
                     <!-- Timeline point -->
-                    <div style="position: absolute; width: 20px; height: 20px; background: var(--color-accent-red); border: 4px solid var(--color-bg-deep); border-radius: 50%; left: 50%; top: 25px; transform: translateX(-50%); z-index: 5; box-shadow: 0 0 0 4px rgba(213, 28, 35, 0.15);"></div>
+                    <div style="position: absolute; width: 20px; height: 20px; background: var(--color-accent-red); border: 4px solid var(--color-bg-deep); border-radius: 50%; left: 50%; top: 25px; transform: translateX(-50%); z-index: 5; box-shadow: 0 0 0 4px rgba(var(--color-pressmatik-red-rgb), 0.15);"></div>
                     
                     <div class="timeline-content-card scroll-animate {% if loop.index is odd %}slide-left{% else %}slide-right{% endif %}" style="width: 45%; background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 12px; padding: 2rem; box-shadow: var(--shadow-card-subtle);">
                         <span class="timeline-date" style="color: var(--color-accent-red); font-size: 1.5rem; font-weight: 800; font-family: var(--font-heading); display: block; margin-bottom: 0.5rem;">
@@ -161,7 +163,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
             {% for item in orgChart %}
                 <div class="org-card scroll-animate slide-top" style="background: var(--color-surface-dark); border: 1px solid var(--color-border); border-radius: 16px; padding: 2rem; text-align: center; box-shadow: var(--shadow-card-subtle); transition: transform 0.3s ease, border-color 0.3s ease;">
-                    <div style="width: 60px; height: 60px; background: rgba(213, 28, 35, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; color: var(--color-accent-red);">
+                    <div style="width: 60px; height: 60px; background: rgba(var(--color-pressmatik-red-rgb), 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; color: var(--color-accent-red);">
                         <i class="{{ item.icon ?: 'fa-solid fa-users-gear' }}" style="font-size: 1.5rem;"></i>
                     </div>
                     <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.5rem;">{{ item.getTitle(locale) }}</h3>
@@ -194,11 +196,11 @@
                             <i class="fa-solid fa-industry" style="font-size: 4rem; color: rgba(255,255,255,0.15);"></i>
                         {% endif %}
                         <div style="position: absolute; bottom: 1rem; left: 1rem; background: var(--color-accent-red); color: white; padding: 0.35rem 0.85rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">
-                            {{ case.clientIndustry }}
+                            {{ case.getClientIndustry(locale) }}
                         </div>
                     </div>
                     <div style="padding: 2rem;">
-                        <h4 style="color: var(--color-text-secondary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.5px;">{{ case.clientName }}</h4>
+                        <h4 style="color: var(--color-text-secondary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.5px;">{{ case.getClientName(locale) }}</h4>
                         <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 1rem; line-height: 1.4;">{{ case.getTitle(locale) }}</h3>
                         <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6;">{{ case.getDescription(locale) }}</p>
                     </div>

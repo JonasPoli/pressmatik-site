@@ -14,6 +14,7 @@ menu:
   expand_products: 'Expand Products menu'
 cta:
   whatsapp: 'Chat on WhatsApp'
+  whatsapp_msg: 'Hello, I would like more information about Pressmatik presses and equipment.'
   quote_now: 'Quick Quote'
   learn_more: 'Learn More'
   download_catalog: 'Download Technical Catalog (PDF)'
@@ -244,6 +245,8 @@ product_detail:
   spec_die_cushion_capacity: 'Die Cushion Capacity'
   spec_die_cushion_stroke: 'Die Cushion Stroke'
   spec_die_cushion_area: 'Die Cushion Active Area'
+  overview_title: 'Focus on Safety and Robustness'
+  overview_summary: 'Engineered under strict international standards, our machines combine reinforced steel frames with components from global leaders for maximum industrial productivity.'
   overview_heading: 'Technological Highlights & Precision Engineering'
   overview_text: 'The PMC-ST deep throat mechanical press series is engineered to meet the most demanding requirements of sheet metal forming, bending, and punching, specifically optimized for screen mesh perforation. Incorporating advanced design principles and high-grade components, the PMC-ST combines high productivity, low wear, and absolute reliability on the production floor.'
   overview_security_title: 'Advanced Safety'

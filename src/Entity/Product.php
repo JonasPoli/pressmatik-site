@@ -139,7 +139,21 @@ class Product
     public function getDescriptionEs(): ?string { return $this->descriptionEs; }
     public function setDescriptionEs(?string $v): static { $this->descriptionEs = $v; return $this; }
 
-    public function getTonnage(): ?string { return $this->tonnage; }
+    public function getTonnage(?string $locale = null): ?string
+    {
+        if ($this->tonnage === null) {
+            return null;
+        }
+        $lower = mb_strtolower(trim($this->tonnage));
+        if (in_array($lower, ['sob consulta', 'custom', 'on request', 'bajo consulta'], true)) {
+            return match ($locale) {
+                'en' => 'On request',
+                'es' => 'Bajo consulta',
+                default => 'Sob consulta',
+            };
+        }
+        return $this->tonnage;
+    }
     public function setTonnage(?string $v): static { $this->tonnage = $v; return $this; }
 
     public function setImageFile(?File $file = null): void

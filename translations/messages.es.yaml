@@ -14,6 +14,7 @@ menu:
   expand_products: 'Expandir menú de Productos'
 cta:
   whatsapp: 'Hablar por WhatsApp'
+  whatsapp_msg: 'Hola, me gustaría más información sobre las prensas y equipos de Pressmatik.'
   quote_now: 'Presupuesto Rápido'
   learn_more: 'Saber Más'
   download_catalog: 'Descargar Catálogo Técnico (PDF)'
@@ -244,6 +245,8 @@ product_detail:
   spec_die_cushion_capacity: 'Capacidad del Cojín de Matriz'
   spec_die_cushion_stroke: 'Carrera del Cojín de Matriz'
   spec_die_cushion_area: 'Área Activa del Cojín de Matriz'
+  overview_title: 'Enfoque en Seguridad y Robustez'
+  overview_summary: 'Diseñadas bajo estrictas normas internacionales, nuestras máquinas combinan estructuras de acero reforzado con componentes de líderes globales para una máxima productividad industrial.'
   overview_heading: 'Aspectos Tecnológicos Destacados e Ingeniería de Precisión'
   overview_text: 'La serie de prensas mecánicas de garganta profunda PMC-ST está diseñada para cumplir con los requisitos más exigentes de conformado, doblado y punzonado de chapas metálicas, optimizada específicamente para la perforación de mallas. Con principios de diseño avanzados y componentes certificados, la serie PMC-ST combina alta productividad, bajo desgaste y confiabilidad absoluta.'
   overview_security_title: 'Seguridad Avanzada'

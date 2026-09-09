@@ -14,6 +14,7 @@ menu:
   expand_products: 'Expandir menu de Produtos'
 cta:
   whatsapp: 'Fale Conosco no WhatsApp'
+  whatsapp_msg: 'Olá, gostaria de mais informações sobre as prensas e máquinas da Pressmatik.'
   quote_now: 'Orçamento Rápido'
   learn_more: 'Saiba Mais'
   download_catalog: 'Baixar Catálogo Técnico (PDF)'
@@ -244,6 +245,8 @@ product_detail:
   spec_die_cushion_capacity: 'Capacidade da Almofada'
   spec_die_cushion_stroke: 'Curso da Almofada'
   spec_die_cushion_area: 'Área Útil da Almofada'
+  overview_title: 'Foco em Segurança e Robustez'
+  overview_summary: 'Projetadas sob rígidas normas internacionais, nossas máquinas unem estrutura reforçada de aço com componentes de líderes globais para máxima produtividade industrial.'
   overview_heading: 'Destaques Tecnológicos & Engenharia de Precisão'
   overview_text: 'A série PMC-ST de prensas de garganta profunda foi projetada especialmente para atender às mais rigorosas demandas de estampagem, dobra e conformação de chapas, com especial destaque para a perfuração de telas e malhas metálicas (screen mesh). Com engenharia avançada e componentes certificados, a linha PMC-ST combina alto desempenho, baixo desgaste e confiabilidade incomparável no chão de fábrica.'
   overview_security_title: 'Segurança Avançada'

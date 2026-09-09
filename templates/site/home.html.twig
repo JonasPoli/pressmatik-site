@@ -104,14 +104,14 @@
 
         <!-- Slider Controls -->
         {% if banners|length > 1 %}
-        <div class="hero-slider-nav">
+        <div class="hero-slider-controls">
             <button class="hero-prev-btn" type="button" aria-label="{{ 'aria.prev_slide'|trans }}"><i class="bi bi-chevron-left"></i></button>
+            <div class="hero-slider-dots" aria-label="{{ 'aria.slider_nav'|trans }}">
+                {% for item in banners %}
+                    <button class="hero-dot {% if loop.first %}active{% endif %}" type="button" data-index="{{ loop.index0 }}" aria-label="{{ 'aria.go_to_slide'|trans({'%slide%': loop.index}) }}"></button>
+                {% endfor %}
+            </div>
             <button class="hero-next-btn" type="button" aria-label="{{ 'aria.next_slide'|trans }}"><i class="bi bi-chevron-right"></i></button>
-        </div>
-        <div class="hero-slider-dots" aria-label="{{ 'aria.slider_nav'|trans }}">
-            {% for item in banners %}
-                <button class="hero-dot {% if loop.first %}active{% endif %}" type="button" data-index="{{ loop.index0 }}" aria-label="{{ 'aria.go_to_slide'|trans({'%slide%': loop.index}) }}"></button>
-            {% endfor %}
         </div>
         {% endif %}
     </section>
@@ -164,7 +164,7 @@
                     {% endif %}
                 </div>
                 
-                <a href="{{ path('app_about_us', {'_locale': locale}) }}" class="hero-btn hero-btn-outline" style="margin-top: 1.5rem; display: inline-flex;">
+                <a href="{{ path('app_about_us', {'_locale': locale}) }}" class="about-btn-outline">
                     {{ 'menu.company'|trans }}
                 </a>
             </div>
@@ -236,7 +236,7 @@
                                         <p>{{ prod.getDescription(locale) }}</p>
                                         <div class="product-tab-footer">
                                             {% if prod.tonnage %}
-                                                <span class="product-specs-badge">{{ prod.tonnage }}</span>
+                                                <span class="product-specs-badge">{{ prod.getTonnage(locale) }}</span>
                                             {% else %}
                                                 <span class="product-specs-badge">{{ 'product_detail.tag'|trans }}</span>
                                             {% endif %}
@@ -648,7 +648,8 @@
     <script>
         function initHeroSlider() {
             const slider = document.querySelector('.hero-slider');
-            if (!slider) return;
+            if (!slider || slider.dataset.sliderInitialized === 'true') return;
+            slider.dataset.sliderInitialized = 'true';
 
             const slides = Array.from(slider.querySelectorAll('.hero-slide'));
             const dots = Array.from(document.querySelectorAll('.hero-dot'));
@@ -661,10 +662,11 @@
             let timer = null;
 
             function showSlide(index) {
-                slides[currentIndex].classList.remove('active');
-                if (dots[currentIndex]) {
-                    dots[currentIndex].classList.remove('active');
-                }
+                // Remove active class from all slides to strictly prevent overlap
+                slides.forEach((s, i) => {
+                    s.classList.remove('active');
+                    if (dots[i]) dots[i].classList.remove('active');
+                });
 
                 currentIndex = (index + slides.length) % slides.length;
 
@@ -721,12 +723,45 @@
                 });
             });
 
+            // Mobile touch swipe gesture support
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            slider.addEventListener('touchstart', (e) => {
+                if (e.touches && e.touches[0]) {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                }
+            }, { passive: true });
+
+            slider.addEventListener('touchend', (e) => {
+                if (e.changedTouches && e.changedTouches[0]) {
+                    const touchEndX = e.changedTouches[0].clientX;
+                    const touchEndY = e.changedTouches[0].clientY;
+                    const diffX = touchEndX - touchStartX;
+                    const diffY = touchEndY - touchStartY;
+
+                    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+                        if (diffX < 0) {
+                            showSlide(currentIndex + 1);
+                        } else {
+                            showSlide(currentIndex - 1);
+                        }
+                        startAutoplay();
+                    }
+                }
+            }, { passive: true });
+
+            slider.addEventListener('mouseenter', stopAutoplay);
+            slider.addEventListener('mouseleave', startAutoplay);
+
             startAutoplay();
         }
 
         function initTestimonialsSlider() {
             const container = document.querySelector('.testimonials-slider-container');
-            if (!container) return;
+            if (!container || container.dataset.sliderInitialized === 'true') return;
+            container.dataset.sliderInitialized = 'true';
 
             const track = container.querySelector('.testimonials-track');
             if (!track) return;
@@ -765,8 +800,10 @@
                 if (dotsContainer) {
                     dotsContainer.innerHTML = '';
                     for (let i = 0; i < totalPages; i++) {
-                        const dot = document.createElement('span');
+                        const dot = document.createElement('button');
+                        dot.type = 'button';
                         dot.className = 'testimonial-dot' + (i === currentIndex ? ' active' : '');
+                        dot.setAttribute('aria-label', 'Slide ' + (i + 1));
                         dot.addEventListener('click', () => goToPage(i));
                         dotsContainer.appendChild(dot);
                     }
@@ -842,15 +879,6 @@
             goToPage(0);
             startAutoplay();
         }
-
-        document.addEventListener('turbo:load', () => {
-            initHeroSlider();
-            initTestimonialsSlider();
-        });
-        document.addEventListener('DOMContentLoaded', () => {
-            initHeroSlider();
-            initTestimonialsSlider();
-        });
 
         function initContactForm() {
             const form = document.getElementById('quote-form');
@@ -1106,7 +1134,14 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', () => { initHeroSlider(); initContactForm(); initProductTabs(); });
-        document.addEventListener('turbo:load', () => { initHeroSlider(); initContactForm(); initProductTabs(); });
+        function initHomePage() {
+            initHeroSlider();
+            initTestimonialsSlider();
+            initContactForm();
+            initProductTabs();
+        }
+
+        document.addEventListener('DOMContentLoaded', initHomePage);
+        document.addEventListener('turbo:load', initHomePage);
     </script>
 {% endblock %}

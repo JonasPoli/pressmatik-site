@@ -8,9 +8,19 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#D51C23',
-          light: '#e53e3e',
-          dark: '#b91c1c',
+          DEFAULT: '#C51517',
+          light: '#d62426',
+          dark: '#a51012',
+        },
+        brand: {
+          DEFAULT: '#C51517',
+          light: '#d62426',
+          dark: '#a51012',
+        },
+        pressmatik: {
+          DEFAULT: '#C51517',
+          light: '#d62426',
+          dark: '#a51012',
         }
       }
     },

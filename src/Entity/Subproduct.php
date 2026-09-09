@@ -158,7 +158,80 @@ class Subproduct
     public function getDescriptionEs(): ?string { return $this->descriptionEs; }
     public function setDescriptionEs(?string $v): static { $this->descriptionEs = $v; return $this; }
 
-    public function getTag(): ?string { return $this->tag; }
+    public function getTag(?string $locale = null): ?string
+    {
+        if ($this->tag === null || $locale === null || $locale === 'en') {
+            return $this->tag;
+        }
+
+        $map = [
+            'pt' => [
+                'standard' => 'Padrão',
+                'compact' => 'Compacta',
+                'rotary' => 'Mesa Giratória',
+                'deflashing' => 'Rebarbação',
+                'heavy die' => 'Estampos Pesados',
+                'precision' => 'Alta Precisão',
+                'assembly' => 'Montagem',
+                'custom' => 'Especial',
+                'deep draw' => 'Repuxo Profundo',
+                'tryout' => 'Tryout / Ajuste',
+                'tablet' => 'Pastilha / Fricção',
+                'cutting' => 'Corte Fino',
+                'multi-point' => 'Multifusos',
+                'workshop' => 'Oficina',
+                'gantry' => 'Pórtico',
+                'vulcanization' => 'Vulcanização',
+                'tire' => 'Pneus',
+                'servo' => 'Servo',
+                'c-frame' => 'Tipo C',
+                'straight' => 'Colunas',
+                'high speed' => 'Alta Velocidade',
+                'riveting' => 'Rebitagem',
+                'punching' => 'Puncionamento',
+                'mini' => 'Mini',
+                'transfer' => 'Transferência',
+                'hydraulics' => 'Hidráulica',
+                'electronics' => 'Eletrônica',
+                'safety' => 'Segurança',
+                'misc' => 'Diversos',
+            ],
+            'es' => [
+                'standard' => 'Estándar',
+                'compact' => 'Compacta',
+                'rotary' => 'Mesa Giratoria',
+                'deflashing' => 'Desbarbado',
+                'heavy die' => 'Matrices Pesadas',
+                'precision' => 'Alta Precisión',
+                'assembly' => 'Ensamblaje',
+                'custom' => 'Especial',
+                'deep draw' => 'Embutición Profunda',
+                'tryout' => 'Tryout / Ajuste',
+                'tablet' => 'Pastilla / Fricción',
+                'cutting' => 'Corte Fino',
+                'multi-point' => 'Multipunto',
+                'workshop' => 'Taller',
+                'gantry' => 'Pórtico',
+                'vulcanization' => 'Vulcanización',
+                'tire' => 'Neumáticos',
+                'servo' => 'Servo',
+                'c-frame' => 'Tipo C',
+                'straight' => 'Columnas',
+                'high speed' => 'Alta Velocidad',
+                'riveting' => 'Remachado',
+                'punching' => 'Punzonado',
+                'mini' => 'Mini',
+                'transfer' => 'Transferencia',
+                'hydraulics' => 'Hidráulica',
+                'electronics' => 'Electrónica',
+                'safety' => 'Seguridad',
+                'misc' => 'Varios',
+            ],
+        ];
+
+        $clean = mb_strtolower(trim($this->tag));
+        return $map[$locale][$clean] ?? $this->tag;
+    }
     public function setTag(?string $v): static { $this->tag = $v; return $this; }
 
     public function setImageFile(?File $file = null): void

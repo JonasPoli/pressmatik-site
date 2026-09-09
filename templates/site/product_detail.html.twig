@@ -68,7 +68,7 @@
         <!-- Product Introduction (Above the Fold) -->
         <div class="product-intro-grid">
             <div class="product-gallery scroll-animate slide-left" style="display: flex; align-items: center; justify-content: center; background: var(--color-surface-dark); border-radius: 12px; border: 1px solid var(--color-border); padding: 2rem;">
-                <img src="{% if activeSubproduct and activeSubproduct.imageName %}{{ ('/uploads/products/' ~ activeSubproduct.imageName)|webp }}{% elseif product.imageName %}{{ ('/uploads/products/' ~ product.imageName)|webp }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{% if activeSubproduct %}{{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}" width="600" height="400" style="max-width: 100%; max-height: 400px; object-fit: contain; display: block; margin: auto;" fetchpriority="high" decoding="async">
+                <img src="{% if activeSubproduct and activeSubproduct.imageName %}{{ ('/uploads/products/' ~ activeSubproduct.imageName)|webp }}{% elseif product.imageName %}{{ ('/uploads/products/' ~ product.imageName)|webp }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.webp{% endif %}" alt="{% if activeSubproduct %}{{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}" width="600" height="400" style="max-width: 100%; max-height: 400px; object-fit: contain; display: block; margin: auto;" fetchpriority="high" decoding="async" onerror="this.onerror=null; this.src='/images/prensa-hidraulica-tipo-c-linha-st.webp';">
             </div>
             
             <div class="product-meta-panel scroll-animate slide-right">
@@ -76,7 +76,7 @@
                 <h1>{% if activeSubproduct %}{{ activeSubproduct.model }} - {{ activeSubproduct.getName(locale) }}{% else %}{{ product.getName(locale) }}{% endif %}</h1>
                 {% if product.tonnage %}
                     <div class="product-tonnage">
-                        {{ 'product_detail.spec_capacity'|trans }}: {{ product.tonnage }}
+                        {{ 'product_detail.spec_capacity'|trans }}: {{ product.getTonnage(locale) }}
                     </div>
                 {% endif %}
                 <p class="product-description">
@@ -105,9 +105,9 @@
         <section class="product-overview-section scroll-animate slide-top" style="margin-top: 6rem; margin-bottom: 6rem;">
             <div class="overview-header" style="margin-bottom: 3.5rem; text-align: left; max-width: 900px;">
                 <span class="section-title-tag">{{ 'product_detail.overview_heading'|trans }}</span>
-                <h2 style="font-size: 2.5rem; margin-top: 1rem; margin-bottom: 1.5rem; font-weight: 800; font-family: var(--font-heading);">Foco em Segurança e Robustez</h2>
+                <h2 style="font-size: 2.5rem; margin-top: 1rem; margin-bottom: 1.5rem; font-weight: 800; font-family: var(--font-heading);">{{ 'product_detail.overview_title'|trans }}</h2>
                 <p style="color: var(--color-text-secondary); font-size: 1.15rem; line-height: 1.8; margin: 0;">
-                    Projetadas sob rígidas normas internacionais, nossas máquinas unem estrutura reforçada de aço com componentes de líderes globais para máxima produtividade industrial.
+                    {{ 'product_detail.overview_summary'|trans }}
                 </p>
             </div>
 
@@ -183,10 +183,10 @@
                 <div class="applications-grid">
                     {% for app in activeSubproduct.applications %}
                         <div class="application-card">
-                            <div class="application-img-wrapper" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                                <img src="{% if app.imageName %}/uploads/applications/{{ app.imageName }}{% else %}/uploads/applications/corte.png{% endif %}" alt="{{ app.getName(locale) }}" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(1.2) contrast(1.1);">
+                            <div class="application-img-wrapper">
+                                <img src="{% if app.imageName %}/uploads/applications/{{ app.imageName }}{% else %}/uploads/applications/corte.png{% endif %}" alt="{{ app.getName(locale) }}" loading="lazy">
                             </div>
-                            <h4 style="text-align: center; margin: 0; color: var(--color-text-primary); font-size: 1rem; font-weight: 700;">{{ app.getName(locale) }}</h4>
+                            <h4 class="application-title">{{ app.getName(locale) }}</h4>
                         </div>
                     {% endfor %}
                 </div>
@@ -457,14 +457,14 @@
                 {% for sub in product.subproducts %}
                     {% set is_active = (activeSubproduct and sub.model == activeSubproduct.model) %}
                     <div class="subproduct-card scroll-animate slide-top {% if is_active %}active-subproduct{% endif %}"
-                         style="{% if is_active %}border: 2px solid var(--color-accent-red); box-shadow: 0 10px 25px rgba(213, 28, 35, 0.15); transform: translateY(-4px);{% endif %}">
+                         style="{% if is_active %}border: 2px solid var(--color-accent-red); box-shadow: 0 10px 25px rgba(var(--color-pressmatik-red-rgb), 0.15); transform: translateY(-4px);{% endif %}">
                         
                         {% if not is_active %}
                             <a href="{{ path('app_product_detail', {'_locale': locale, 'slug': product.slug, 'model': sub.model}) }}" class="subproduct-card-link" style="text-decoration: none; color: inherit; display: block;">
                         {% endif %}
                         
                         <div class="product-image-container" style="aspect-ratio: 16/11; border-radius: 8px; margin-bottom: 1.5rem; overflow: hidden; border: 1px solid var(--color-border);">
-                            <img src="{% if sub.imageName %}/uploads/products/{{ sub.imageName }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ sub.getName(locale) }}" loading="lazy" style="width: 100%; height: 100%; object-fit: contain; background: var(--color-surface-dark); padding: 0.5rem;">
+                            <img src="{% if sub.imageName %}/uploads/products/{{ sub.imageName }}{% else %}/images/prensa-hidraulica-tipo-c-linha-st.png{% endif %}" alt="{{ sub.getName(locale) }}" loading="lazy" style="width: 100%; height: 100%; object-fit: contain; background: var(--color-surface-dark); padding: 0.5rem;" onerror="this.onerror=null; this.src='/images/prensa-hidraulica-tipo-c-linha-st.png';">
                         </div>
                         <span class="subproduct-model">{{ sub.model }}</span>
                         <h4 style="margin-top: 0.5rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-text-primary);">{{ sub.getName(locale) }}</h4>
@@ -474,7 +474,7 @@
                         {% endif %}
                         
                         <p style="margin-top: 0.5rem; margin-bottom: 1rem; color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5;">{{ sub.getDescription(locale) }}</p>
-                        <span class="subproduct-tag-detail">{{ sub.tag }}</span>
+                        <span class="subproduct-tag-detail">{{ sub.getTag(locale) }}</span>
                         
                         <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; align-items: center;">
                             {% if is_active %}
