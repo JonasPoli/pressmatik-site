@@ -4,6 +4,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {# Google Analytics 4 - somente nos dominios de producao #}
+        {{ include('partials/_analytics.html.twig') }}
+
         <title>{% block title %}Pressmatik - Prensas Hidráulicas e Equipamentos Industriais{% endblock %}</title>
         <meta name="description" content="{% block meta_description %}A Pressmatik é líder na fabricação de prensas hidráulicas, servo-hidráulicas, mecânicas, automação industrial e serviços de manutenção NR12.{% endblock %}">
         <meta name="keywords" content="{% block meta_keywords %}prensas hidraulicas, prensas servo hidraulicas, prensas mecanicas, automacao industrial, alimentadores servo, nr12, retrofitting prensas, pressmatik{% endblock %}">

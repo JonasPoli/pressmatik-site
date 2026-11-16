@@ -15,13 +15,15 @@ use Symfony\Component\Routing\Attribute\Route;
  */
 class RobotsController extends AbstractController
 {
-    private const PRODUCTION_HOSTS = ['www.pressmatik.com.br', 'pressmatik.com.br'];
     private const SITEMAP_URL = 'https://www.pressmatik.com.br/sitemap.xml';
 
     #[Route('/robots.txt', name: 'app_robots')]
     public function robots(Request $request): Response
     {
-        $isProduction = in_array(strtolower($request->getHost()), self::PRODUCTION_HOSTS, true);
+        // Fonte unica dos dominios de producao: parametro app.production_hosts
+        // (config/services.yaml), tambem usado pelo partial do Google Analytics.
+        $productionHosts = (array) $this->getParameter('app.production_hosts');
+        $isProduction = in_array(strtolower($request->getHost()), $productionHosts, true);
 
         if ($isProduction) {
             $body = <<<TXT

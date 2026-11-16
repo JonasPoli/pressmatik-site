@@ -3,6 +3,8 @@ twig:
     form_themes: ['admin/form_theme.html.twig']
     globals:
         templateService: '@App\Service\TemplateService'
+        ga_measurement_id: '%app.ga_measurement_id%'
+        production_hosts: '%app.production_hosts%'
 
 when@test:
     twig:

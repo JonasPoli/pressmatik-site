@@ -4,6 +4,13 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    # Identificador de medicao do Google Analytics 4 (propriedade da Pressmatik)
+    app.ga_measurement_id: 'G-8T0TMDY7K4'
+    # Dominios canonicos de producao. Fora deles (homologacao em *.wab.com/*.wab.com.br
+    # e ambiente local) nao se carrega analytics nem se libera indexacao.
+    app.production_hosts:
+        - 'www.pressmatik.com.br'
+        - 'pressmatik.com.br'
 
 services:
     # default configuration for services in *this* file
