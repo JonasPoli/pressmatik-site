@@ -13,6 +13,9 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '{{ ga_measurement_id|e('js') }}');
+        {# Valor vem do parametro app.ga_measurement_id (codigo proprio, nao input
+           de usuario); sem |e('js') para o ID ficar legivel no HTML e poder ser
+           auditado pelas ferramentas do Google (Tag Assistant). #}
+        gtag('config', '{{ ga_measurement_id }}');
     </script>
 {% endif %}
